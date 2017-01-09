@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView igvHotel1;
     TextView txtvService;
     ImageView igvService;
+    ImageView igvPrChanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,46 +28,7 @@ public class MainActivity extends AppCompatActivity {
         igvHotel1 = (ImageView)findViewById(R.id.imageViewHotel1);
         txtvService = (TextView)findViewById(R.id.textViewService);
         igvService = (ImageView)findViewById(R.id.imageViewService);
-
-        btnWelcome2Hotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent welcome = new Intent(MainActivity.this,WelcomeActivity.class);
-                startActivity(welcome);
-            }
-        });
-
-        txtvWelcome.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus==true){
-                    TextView Tv = (TextView) findViewById(R.id.textViewWelcome);
-
-                    Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
-
-                    Tv.setTypeface(boldTypeface);
-                } else{
-
-                }
-            }
-        });
-
-        txtvWelcome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView Tv = (TextView) findViewById(R.id.textViewWelcome);
-
-                Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
-                Typeface normalTypeface = Typeface.defaultFromStyle(Typeface.NORMAL);
-
-                Tv.setTypeface(boldTypeface);
-
-                Intent welcome = new Intent(MainActivity.this,WelcomeActivity.class);
-                startActivity(welcome);
-
-                //Tv.setTypeface(normalTypeface);
-            }
-        });
+        igvPrChanel = (ImageView)findViewById(R.id.imageViewHotel2);
 
         igvHotel1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,18 +47,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        txtvService.setOnClickListener(new View.OnClickListener() {
+        igvPrChanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView Tv = (TextView) findViewById(R.id.textViewService);
+                TextView Tv = (TextView) findViewById(R.id.textView2);
 
                 Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
                 Typeface normalTypeface = Typeface.defaultFromStyle(Typeface.NORMAL);
 
                 Tv.setTypeface(boldTypeface);
 
-                Intent roomService = new Intent(MainActivity.this,RoomServicesActivity.class);
-                startActivity(roomService);
+                Intent prChl = new Intent(MainActivity.this,PrChanelActivity.class);
+                startActivity(prChl);
             }
         });
 

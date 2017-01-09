@@ -21,21 +21,6 @@ public class RoomServicesActivity extends AppCompatActivity {
         txtvFood = (TextView)findViewById(R.id.textViewFood);
         igvFood = (ImageView)findViewById(R.id.imageViewFood);
 
-        txtvFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView Tv = (TextView) findViewById(R.id.textViewFood);
-
-                Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
-                Typeface normalTypeface = Typeface.defaultFromStyle(Typeface.NORMAL);
-
-                Tv.setTypeface(boldTypeface);
-
-                Intent foodPage = new Intent(RoomServicesActivity.this,FoodsandDrinksActivity.class);
-                startActivity(foodPage);
-            }
-        });
-
         igvFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/backgr"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.FoodsandDrinksActivity">
 
     <LinearLayout
@@ -20,7 +21,18 @@
         <FrameLayout
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"></FrameLayout>
+            android:layout_gravity="center_vertical">
+            <ExpandableListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/simpleExpandableListView"
+                android:divider="#d7b5b5"
+                android:dividerHeight="1dp"
+                android:listSelector="#80666666"
+                android:childDivider="#def9de"
+                android:background="#fcfbfb">
+            </ExpandableListView>
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="860dp"
@@ -31,9 +43,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/gridView"
-                android:columnWidth="80dp"
+                android:columnWidth="200dp"
                 android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"/>
+                android:stretchMode="columnWidth"
+                android:drawSelectorOnTop="true"
+                android:focusable="true"
+                android:clickable="true"
+                android:scrollbars="vertical"
+                android:background="#f4e0e0"/>
 
         </FrameLayout>
     </LinearLayout>

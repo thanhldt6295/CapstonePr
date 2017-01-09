@@ -1,0 +1,58 @@
+{
+  "Foods": [
+    {
+      "type": "Breakfast",
+      "items": [
+        {
+          "name": "Meat"
+        },
+        {
+          "name": "Tamago"
+        },
+        {
+          "name": "Pho"
+        },
+        {
+          "name": "Soup"
+        }
+      ]
+    },
+    {
+      "type": "Lunch",
+      "items": [
+        {
+          "name": "Rice"
+        },
+        {
+          "name": "Rice1"
+        },
+        {
+          "name": "Rice2"
+        },
+        {
+          "name": "Rice3"
+        },
+        {
+          "name": "Noodles"
+        }
+      ]
+    },
+    {
+      "type": "Dinner",
+      "items": [
+        {
+          "name": "Rice6"
+        },
+        {
+          "name": "Rice7"
+        },
+        {
+          "name": "Rice8"
+        },
+        {
+          "name": "Bittet"
+        }
+      ]
+    }
+  ]
+}
