@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">HotelServiceTVBox</string>
+
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="dummy_button">USE</string>
+    <string name="dummy_content">WELCOME\nOUR HOTEL</string>
+    <string name="promotional_chanel">PROMOTIONAL CHANEL</string>
+    <string name="room_services">ROOM SERVICES</string>
+    <string name="virtual_shopping">VIRTUAL SHOPPING</string>
+    <string name="e_cards">E-CARDS</string>
+    <string name="survey">SURVEY</string>
+    <string name="view_bill">VIEW BILL</string>
+
+    <string-array name="header_titles">
+        <item>FOODS</item>
+        <item>BEVERAGES</item>
+    </string-array>
+
+    <string-array name="h1_items">
+        <item>BREAKFAST</item>
+        <item>LUNCH</item>
+        <item>DINNER</item>
+    </string-array>
+
+    <string-array name="h2_items">
+        <item>COFFEE</item>
+        <item>FRUIT JUICE</item>
+        <item>WINE</item>
+    </string-array>
+</resources>
