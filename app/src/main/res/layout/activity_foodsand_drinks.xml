@@ -50,7 +50,8 @@
                 android:focusable="true"
                 android:clickable="true"
                 android:scrollbars="vertical"
-                android:background="#f4e0e0"/>
+                android:background="#f4e0e0"
+                android:elevation="1dp" />
 
         </FrameLayout>
     </LinearLayout>
