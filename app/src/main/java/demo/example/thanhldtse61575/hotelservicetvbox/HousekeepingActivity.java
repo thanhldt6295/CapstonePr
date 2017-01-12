@@ -11,24 +11,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class HousekeepingActivity extends AppCompatActivity {
 
-    String[] titles = {"PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY"};
-    int[] images = {R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
-            R.drawable.img_ecard,R.drawable.img_billing, R.drawable.img_survey};
+    String[] titles = {"ROOM CLEANING", "LAUNDRY", "BATH EXTRAS", "BED EXTRAS", "ROOM EXTRAS"};
+    int[] images = {R.drawable.img_roomcleaning, R.drawable.img_laundry, R.drawable.img_bathextras,
+            R.drawable.img_bedextras, R.drawable.img_roomextras};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_housekeeping);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("Hotel Service TV Box");
+        abTitle.setText("HOUSEKEEPING");
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        MainAdapter ma = new MainAdapter(this, titles, images);
+        RoomServicesAdapter ma = new RoomServicesAdapter(this, titles, images);
         rv.setAdapter(ma);
     }
 

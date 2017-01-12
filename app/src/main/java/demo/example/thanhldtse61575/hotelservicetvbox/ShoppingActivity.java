@@ -5,31 +5,20 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-
-    String[] titles = {"PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY"};
-    int[] images = {R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
-            R.drawable.img_ecard,R.drawable.img_billing, R.drawable.img_survey};
+public class ShoppingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_shopping);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("Hotel Service TV Box");
-
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
-        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        MainAdapter ma = new MainAdapter(this, titles, images);
-        rv.setAdapter(ma);
+        abTitle.setText("SHOPPING");
     }
 
     @Override

@@ -2,13 +2,10 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
  * Created by ThanhLDTSE61575 on 1/10/2017.
@@ -28,7 +25,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainHolder> {
     @Override
     public MainHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.main_fragment, parent, false);
+                .inflate(R.layout.layout_holder, parent, false);
         MainHolder holder = new MainHolder(v);
         return holder;
     }
@@ -40,36 +37,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainHolder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                if(pos==0) {
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, PromotionalChanelActivity.class);
-                    c.startActivity(i);
+
+                switch(pos){
+                    case 0:
+                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
+                        break;
+                    case 1:
+                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+                        break;
+                    case 2:
+                        c.startActivity(new Intent(c, ShoppingActivity.class));
+                        break;
                 }
-                if(pos==1){
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, RoomServicesActivity.class);
-                    c.startActivity(i);
-                }
-                /*if(pos==2){
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, RoomServicesActivity.class);
-                    c.startActivity(i);
-                }
-                if(pos==3){
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, RoomServicesActivity.class);
-                    c.startActivity(i);
-                }
-                if(pos==4){
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, RoomServicesActivity.class);
-                    c.startActivity(i);
-                }
-                if(pos==5){
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, RoomServicesActivity.class);
-                    c.startActivity(i);
-                }*/
+
             }
         });
     }

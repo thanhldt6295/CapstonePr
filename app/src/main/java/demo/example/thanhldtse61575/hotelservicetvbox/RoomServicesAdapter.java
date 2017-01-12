@@ -6,12 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 /**
  * Created by ThanhLDTSE61575 on 1/11/2017.
  */
-public class RoomServicesAdapter extends RecyclerView.Adapter<RoomServicesHolder> {
+public class RoomServicesAdapter extends RecyclerView.Adapter<MainHolder> {
 
     Context c;
     String[] titles;
@@ -24,24 +23,30 @@ public class RoomServicesAdapter extends RecyclerView.Adapter<RoomServicesHolder
     }
 
     @Override
-    public RoomServicesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.room_services_fragment, parent, false);
-        RoomServicesHolder holder = new RoomServicesHolder(v);
+                .inflate(R.layout.layout_holder, parent, false);
+        MainHolder holder = new MainHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(RoomServicesHolder holder, int position) {
+    public void onBindViewHolder(MainHolder holder, int position) {
         holder.img.setImageResource(images[position]);
         holder.txt.setText(titles[position]);
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                if(pos==0) {
-                    Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(c, FoodsandDrinksActivity.class);
-                    c.startActivity(i);
+                switch (pos){
+                    case 0:
+                        c.startActivity(new Intent(c, FoodsBeveragesActivity.class));
+                        break;
+                    case 1:
+                        c.startActivity(new Intent(c, HousekeepingActivity.class));
+                        break;
+                    case 2:
+                        c.startActivity(new Intent(c, MaintenanceActivity.class));
+                        break;
                 }
             }
         });

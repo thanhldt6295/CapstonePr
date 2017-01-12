@@ -64,7 +64,7 @@ public class MenuAdapter extends BaseExpandableListAdapter {
         String title = (String) this.getGroup(groupPosition);
         if(convertView==null){
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.menuitem_layout,null);
+            convertView = layoutInflater.inflate(R.layout.layout_menuitem,null);
         }
         TextView textView = (TextView) convertView.findViewById(R.id.textViewFoodHead);
         textView.setTypeface(null, Typeface.BOLD);
@@ -77,7 +77,7 @@ public class MenuAdapter extends BaseExpandableListAdapter {
         String title = (String) this.getChild(groupPosition,childPosition);
         if(convertView==null){
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.childmenuitem_layout,null);
+            convertView = layoutInflater.inflate(R.layout.layout_childmenuitem,null);
         }
 
         TextView textView = (TextView) convertView.findViewById(R.id.textViewFoodType);

@@ -1,18 +1,24 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FoodsandDrinksActivity extends AppCompatActivity {
+public class FoodsBeveragesActivity extends AppCompatActivity {
 
     ExpandableListView expandableListView;
 
@@ -25,8 +31,11 @@ public class FoodsandDrinksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foodsand_drinks);
-        getSupportActionBar().setTitle("Foods and Beverages");
+        setContentView(R.layout.activity_foodsbeverages);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.layout_actionbar);
+        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        abTitle.setText("FOODS & BEVERAGES");
 
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
 
@@ -58,9 +67,29 @@ public class FoodsandDrinksActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(FoodsandDrinksActivity.this,itemList[position],Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodsBeveragesActivity.this,itemList[position],Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cart, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.cart:
+                startActivity(new Intent(this, OrderActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /*class LoadContentAsync extends AsyncTask<Void, Void, MainContentModel> {
