@@ -1,5 +1,6 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -12,12 +13,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,6 +49,30 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("FOODS & BEVERAGES");
+
+        // Datetime & Calendar
+        TextView txtDate;
+        txtDate = (TextView) findViewById(R.id.txtDate);
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        txtDate.setText(currentDateTimeString);
+
+        final Calendar myCalen = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalen.set(Calendar.YEAR, year);
+                myCalen.set(Calendar.MONTH, monthOfYear);
+                myCalen.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            }
+        };
+
+        txtDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(FoodsBeveragesActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                        myCalen.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         // Map
         btnOrder = (Button) findViewById(R.id.btnOrder);
