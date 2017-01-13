@@ -17,32 +17,6 @@
         android:layout_centerInParent="true"
         />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/black_overlay">
-
-        <TextView
-            android:text="ROOM ID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/roomid"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:layout_weight="1" />
-
-        <TextClock
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textClock"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
-
     <include layout="@layout/layout_roombar"/>
 
 </RelativeLayout>
