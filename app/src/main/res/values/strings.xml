@@ -2,7 +2,8 @@
     <string name="app_name">HotelServiceTVBox</string>
 
     <string name="title_activity_welcome">WelcomeActivity</string>
-    <string name="dummy_button">USE</string>
+    <string name="dummy_button">ENGLISH</string>
+    <string name="dummy_button2">VIETNAMESE</string>
     <string name="dummy_content">WELCOME\nOUR HOTEL</string>
     <string name="promotional_chanel">PROMOTIONAL CHANEL</string>
     <string name="room_services">ROOM SERVICES</string>
