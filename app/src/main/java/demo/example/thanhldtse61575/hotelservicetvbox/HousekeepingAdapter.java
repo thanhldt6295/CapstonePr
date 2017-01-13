@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by VULHSE61532 on 1/12/2017.
  */
 
-public class HousekeepingAdapter extends RecyclerView.Adapter<MainHolder>  {
+public class HousekeepingAdapter extends RecyclerView.Adapter<Holder>  {
     Context c;
     String[] titles;
     int[] images;
@@ -23,15 +23,15 @@ public class HousekeepingAdapter extends RecyclerView.Adapter<MainHolder>  {
     }
 
     @Override
-    public MainHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_holder, parent, false);
-        MainHolder holder = new MainHolder(v);
+        Holder holder = new Holder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(MainHolder holder, int position) {
+    public void onBindViewHolder(Holder holder, int position) {
         holder.img.setImageResource(images[position]);
         holder.txt.setText(titles[position]);
         holder.setItemClickListener(new ItemClickListener() {

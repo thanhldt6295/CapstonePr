@@ -11,20 +11,49 @@
     <string name="survey">SURVEY</string>
     <string name="view_bill">VIEW BILL</string>
 
-    <string-array name="header_titles">
+    <!-- Menu -->
+    <string-array name="menu_titles">
+        <item>PROMOTIONAL CHANEL</item>
+        <item>ROOM SERVICES</item>
+        <item>VIRTUAL SHOPPING</item>
+        <item>E-CARDS</item>
+        <item>SURVEY</item>
+        <item>VIEW BILL</item>
+    </string-array>
+
+    <!-- Foods and Drinks -->
+    <string-array name="food_header_titles">
         <item>FOODS</item>
         <item>BEVERAGES</item>
     </string-array>
 
-    <string-array name="h1_items">
+    <string-array name="food_h1_items">
         <item>BREAKFAST</item>
         <item>LUNCH</item>
         <item>DINNER</item>
     </string-array>
 
-    <string-array name="h2_items">
+    <string-array name="food_h2_items">
         <item>COFFEE</item>
         <item>FRUIT JUICE</item>
         <item>WINE</item>
+    </string-array>
+
+    <!-- Virtual Shopping -->
+    <string-array name="shopping_header_titles">
+        <item>SOURVENIR</item>
+        <item>PERSONAL</item>
+    </string-array>
+
+    <string-array name="shopping_h1_items">
+        <item>A</item>
+        <item>B</item>
+        <item>D</item>
+    </string-array>
+
+    <string-array name="shopping_h2_items">
+        <item>C</item>
+        <item>F</item>
+        <item>W</item>
     </string-array>
 </resources>

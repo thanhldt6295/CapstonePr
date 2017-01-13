@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by ThanhLDTSE61575 on 1/11/2017.
  */
-public class RoomServicesAdapter extends RecyclerView.Adapter<MainHolder> {
+public class RoomServicesAdapter extends RecyclerView.Adapter<Holder> {
 
     Context c;
     String[] titles;
@@ -23,15 +23,15 @@ public class RoomServicesAdapter extends RecyclerView.Adapter<MainHolder> {
     }
 
     @Override
-    public MainHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_holder, parent, false);
-        MainHolder holder = new MainHolder(v);
+        Holder holder = new Holder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(MainHolder holder, int position) {
+    public void onBindViewHolder(Holder holder, int position) {
         holder.img.setImageResource(images[position]);
         holder.txt.setText(titles[position]);
         holder.setItemClickListener(new ItemClickListener() {

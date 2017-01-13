@@ -11,14 +11,14 @@ import android.widget.TextView;
 /**
  * Created by ThanhLDTSE61575 on 1/9/2017.
  */
-public class GridAdapter extends BaseAdapter {
+public class ItemGridAdapter extends BaseAdapter {
 
     private int icons[];
     private String items[];
     private Context context;
     private LayoutInflater inflater;
 
-    public GridAdapter(Context context,int icons[], String items[]){
+    public ItemGridAdapter(Context context, int icons[], String items[]){
         this.context=context;
         this.icons=icons;
         this.items=items;
@@ -48,8 +48,8 @@ public class GridAdapter extends BaseAdapter {
             gridView = inflater.inflate(R.layout.layout_griditem,null);
         }
 
-        ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewFood1);
-        TextView item = (TextView) gridView.findViewById(R.id.textViewFoodName);
+        ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewGrid);
+        TextView item = (TextView) gridView.findViewById(R.id.textViewGrid);
 
         icon.setImageResource(icons[position]);
         item.setText(items[position]);

@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * Created by ThanhLDTSE61575 on 1/9/2017.
  */
-public class MenuAdapter extends BaseExpandableListAdapter {
+public class MenuListAdapter extends BaseExpandableListAdapter {
     private List<String> header_titles;
     private HashMap<String,List<String>> child_titles;
     private Context ctx;
-    MenuAdapter(Context ctx,List<String> header_titles,HashMap<String,List<String>> child_titles){
+    MenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,List<String>> child_titles){
         this.ctx=ctx;
         this.child_titles=child_titles;
         this.header_titles=header_titles;
@@ -64,9 +64,9 @@ public class MenuAdapter extends BaseExpandableListAdapter {
         String title = (String) this.getGroup(groupPosition);
         if(convertView==null){
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.layout_menuitem,null);
+            convertView = layoutInflater.inflate(R.layout.layout_headmenuitem,null);
         }
-        TextView textView = (TextView) convertView.findViewById(R.id.textViewFoodHead);
+        TextView textView = (TextView) convertView.findViewById(R.id.textViewHeadList);
         textView.setTypeface(null, Typeface.BOLD);
         textView.setText(title);
         return convertView;
@@ -80,7 +80,7 @@ public class MenuAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.layout_childmenuitem,null);
         }
 
-        TextView textView = (TextView) convertView.findViewById(R.id.textViewFoodType);
+        TextView textView = (TextView) convertView.findViewById(R.id.textViewChildList);
 
         textView.setText(title);
         return convertView;

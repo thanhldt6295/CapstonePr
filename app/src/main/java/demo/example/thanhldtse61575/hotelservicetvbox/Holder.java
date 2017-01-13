@@ -8,13 +8,13 @@ import android.widget.TextView;
 /**
  * Created by ThanhLDTSE61575 on 1/10/2017.
  */
-public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     ImageView img;
     TextView txt;
     ItemClickListener itemClickListener;
 
-    public MainHolder(View itemView) {
+    public Holder(View itemView) {
         super(itemView);
         img = (ImageView) itemView.findViewById(R.id.image);
         txt = (TextView) itemView.findViewById(R.id.title);
