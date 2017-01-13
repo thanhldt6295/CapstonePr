@@ -26,7 +26,8 @@ public class OrderActivity extends AppCompatActivity {
         // Datetime & Calendar
         TextView txtDate;
         txtDate = (TextView) findViewById(R.id.txtDate);
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        String currentDateTimeString = DateFormat.getTimeInstance().format(new Date()) + "  "
+                + DateFormat.getDateInstance().format(new Date());
         txtDate.setText(currentDateTimeString);
 
         final Calendar myCalen = Calendar.getInstance();
