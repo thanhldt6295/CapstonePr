@@ -31,9 +31,10 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
     String itemList[] = {"Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor",
             "Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor",};
 
-    int itemIcon[] = {R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h,
-            R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h,
-            R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.h};
+    int itemIcon[] = {R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo,
+            R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo,
+            R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo,
+            R.drawable.demo, R.drawable.demo, R.drawable.demo};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

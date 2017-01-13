@@ -30,9 +30,9 @@ public class ShoppingActivity extends AppCompatActivity {
 
     String itemList[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"};
 
-    int itemIcon[] = {R.drawable.hotel, R.drawable.h, R.drawable.hotel, R.drawable.h, R.drawable.h, R.drawable.h,
-            R.drawable.h, R.drawable.h, R.drawable.h, R.drawable.hotel, R.drawable.h, R.drawable.h, R.drawable.h,
-            R.drawable.hotelww};
+    int itemIcon[] = {R.drawable.demo, R.drawable.h, R.drawable.img, R.drawable.img, R.drawable.demo, R.drawable.h,
+            R.drawable.img, R.drawable.demo, R.drawable.demo, R.drawable.img, R.drawable.h, R.drawable.demo, R.drawable.img,
+            R.drawable.img};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
