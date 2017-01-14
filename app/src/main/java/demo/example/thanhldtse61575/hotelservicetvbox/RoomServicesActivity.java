@@ -33,11 +33,31 @@ public class RoomServicesActivity extends AppCompatActivity {
         abTitle.setText("ROOM SERVICES");
 
         // Datetime & Calendar
-        TextView txtDate;
+        final TextView txtDate;
         txtDate = (TextView) findViewById(R.id.txtDate);
-        String currentDateTimeString = DateFormat.getTimeInstance().format(new Date()) + "  "
+
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String currentDateTimeString = DateFormat.getTimeInstance().format(new Date()) + "  "
                                         + DateFormat.getDateInstance().format(new Date());
-        txtDate.setText(currentDateTimeString);
+                                txtDate.setText(currentDateTimeString);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t.start();
 
         final Calendar myCalen = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
