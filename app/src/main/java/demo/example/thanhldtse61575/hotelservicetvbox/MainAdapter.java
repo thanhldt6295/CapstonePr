@@ -48,6 +48,9 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                     case 2:
                         c.startActivity(new Intent(c, ShoppingActivity.class));
                         break;
+                    case 4:
+                        c.startActivity(new Intent(c, ViewBillActivity.class));
+                        break;
                 }
 
             }

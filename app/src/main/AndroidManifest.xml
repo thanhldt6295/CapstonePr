@@ -32,7 +32,8 @@
         <activity android:name=".HousekeepingActivity" />
         <activity android:name=".MaintenanceActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".ShoppingActivity"></activity>
+        <activity android:name=".ShoppingActivity" />
+        <activity android:name=".ViewBillActivity"></activity>
     </application>
 
 </manifest>
