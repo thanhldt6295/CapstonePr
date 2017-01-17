@@ -12,26 +12,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/roomid"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_medium"
             android:paddingLeft="5dp"
             android:layout_weight="1" />
-
-        <!-- <TextClock
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textClock"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:paddingRight="5dp"
-            android:layout_weight="1"
-            android:textAlignment="textEnd"/> -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtDate"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_medium"
             android:paddingRight="5dp"
             android:layout_weight="1"
             android:textAlignment="textEnd"/>
