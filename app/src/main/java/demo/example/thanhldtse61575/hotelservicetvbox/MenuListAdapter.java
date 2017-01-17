@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +75,7 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        String title = (String) this.getChild(groupPosition,childPosition);
+        final String title = (String) this.getChild(groupPosition,childPosition);
         if(convertView==null){
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.layout_childmenuitem,null);
@@ -83,6 +84,15 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
         TextView textView = (TextView) convertView.findViewById(R.id.textViewChildList);
 
         textView.setText(title);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(ctx, title, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return convertView;
     }
 
