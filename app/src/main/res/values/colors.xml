@@ -5,6 +5,8 @@
     <color name="colorAccent">#FFFFFF</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="dark_translucent">#504b4e4b</color>
+    <color name="light_translucent">#50797878</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="red">#FF0000</color>

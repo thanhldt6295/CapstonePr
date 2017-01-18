@@ -10,13 +10,6 @@
     android:background="@drawable/backgr"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
-
-    <include layout="@layout/layout_roombar"/>
+    <include layout="@layout/layout_slidemenu" />
 
 </RelativeLayout>

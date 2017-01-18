@@ -8,8 +8,8 @@
         android:layout_height="match_parent"
         android:text="BREAKFAST"
         android:id="@+id/textViewChildList"
-        android:textColor="#fffefe"
+        android:textColor="@color/white"
         android:textSize="16dp"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="@dimen/activity_vertical_margin"/>
 
 </LinearLayout>
