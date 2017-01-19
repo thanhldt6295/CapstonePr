@@ -3,6 +3,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.media.Image;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -30,6 +32,7 @@ public class ShoppingActivity extends AppCompatActivity{
     Button btnOrder;
     ExpandableListView expandableListView;
     GridView gridView;
+    ImageView detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,7 @@ public class ShoppingActivity extends AppCompatActivity{
         btnOrder = (Button) findViewById(R.id.btnOrder);
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
+        detail = (ImageView) findViewById(R.id.imageViewDetail);
 
         // Button effect
         btnOrder.setOnTouchListener(new View.OnTouchListener() {
@@ -133,7 +137,7 @@ public class ShoppingActivity extends AppCompatActivity{
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView);
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView, detail);
         expandableListView.setAdapter(menuAdapter);
     }
 

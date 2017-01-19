@@ -26,11 +26,13 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
     private HashMap<String,List<String>> child_titles;
     private Context ctx;
     private GridView grid;
-    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,List<String>> child_titles, GridView grid){
+    private ImageView detail;
+    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,List<String>> child_titles, GridView grid, ImageView detail){
         this.ctx=ctx;
         this.child_titles=child_titles;
         this.header_titles=header_titles;
         this.grid=grid;
+        this.detail=detail;
     }
 
     @Override
@@ -99,13 +101,17 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 if(groupPosition==0&childPosition==0){
                     String itemList[] = {"A", "B", "C", "D", "E", "F"};
                     int itemIcon[] = {R.drawable.img, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.img, R.drawable.demo};
-
                     ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
                     grid.setAdapter(adapter);
                     grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                            if(position==0) {
+                                detail.setImageResource(R.drawable.img);
+                            }
+                            if(position==1) {
+                                detail.setImageResource(R.drawable.demo);
+                            }
                         }
                     });
                 }
