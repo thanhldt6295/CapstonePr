@@ -61,5 +61,4 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
     public int getItemCount() {
         return titles.length;
     }
-
 }

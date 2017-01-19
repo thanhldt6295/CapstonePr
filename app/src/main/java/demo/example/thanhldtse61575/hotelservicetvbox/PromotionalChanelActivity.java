@@ -101,5 +101,4 @@ public class PromotionalChanelActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

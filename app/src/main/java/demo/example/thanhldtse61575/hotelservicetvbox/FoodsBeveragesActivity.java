@@ -33,14 +33,6 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
     ExpandableListView expandableListView;
     GridView gridView;
 
-    String itemList[] = {"Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor",
-            "Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor", "Rice", "Meat", "Honnor",};
-
-    int itemIcon[] = {R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo,
-            R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo,
-            R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo, R.drawable.demo,
-            R.drawable.demo, R.drawable.demo, R.drawable.demo};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,17 +135,8 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0),L1);
         ChildList.put(Headings.get(1),L2);
-        MenuListAdapter menuAdapter = new MenuListAdapter(this,Headings,ChildList);
+        MenuListAdapter menuAdapter = new MenuListAdapter(this,Headings,ChildList,gridView);
         expandableListView.setAdapter(menuAdapter);
-
-        ItemGridAdapter adapter = new ItemGridAdapter(this, itemIcon, itemList);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(FoodsBeveragesActivity.this,itemList[position],Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

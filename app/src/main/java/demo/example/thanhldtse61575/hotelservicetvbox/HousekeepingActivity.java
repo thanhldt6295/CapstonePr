@@ -102,5 +102,4 @@ public class HousekeepingActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

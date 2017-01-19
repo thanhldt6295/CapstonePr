@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
@@ -26,18 +27,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class ShoppingActivity extends AppCompatActivity {
+public class ShoppingActivity extends AppCompatActivity{
 
     // Declare
     Button btnOrder;
     ExpandableListView expandableListView;
     GridView gridView;
-
-    String itemList[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"};
-
-    int itemIcon[] = {R.drawable.demo, R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.demo, R.drawable.img,
-            R.drawable.img, R.drawable.demo, R.drawable.demo, R.drawable.img, R.drawable.demo, R.drawable.demo, R.drawable.img,
-            R.drawable.img};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,17 +136,8 @@ public class ShoppingActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        MenuListAdapter menuAdapter = new MenuListAdapter(this, Headings, ChildList);
+        MenuListAdapter menuAdapter = new MenuListAdapter(this, Headings, ChildList, gridView);
         expandableListView.setAdapter(menuAdapter);
-
-        ItemGridAdapter adapter = new ItemGridAdapter(this, itemIcon, itemList);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ShoppingActivity.this, itemList[position], Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

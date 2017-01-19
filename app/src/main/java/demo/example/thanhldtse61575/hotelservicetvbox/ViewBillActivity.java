@@ -38,13 +38,9 @@ public class ViewBillActivity extends AppCompatActivity {
         details.add(new OrderDetail("Mojito", "ROOM SERVICES/FOODS AND BEVERAGES/BEVERAGES", 45000, 2));
         details.add(new OrderDetail("Keychain", "SHOPPING/SOURVENIR", 20000, 1));
 
-
         ListView listView = (ListView) findViewById(R.id.detailsListView);
         ViewBillAdapter a = new ViewBillAdapter(this, details);
         listView.setAdapter(a);
-
-
-
 
         // Datetime & Calendar
         final TextView txtDate;

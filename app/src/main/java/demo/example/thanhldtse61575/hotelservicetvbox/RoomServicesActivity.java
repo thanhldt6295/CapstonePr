@@ -101,5 +101,4 @@ public class RoomServicesActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -1,11 +1,16 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +24,12 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
     private List<String> header_titles;
     private HashMap<String,List<String>> child_titles;
     private Context ctx;
-    MenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,List<String>> child_titles){
+    private GridView grid;
+    MenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,List<String>> child_titles, GridView grid){
         this.ctx=ctx;
         this.child_titles=child_titles;
         this.header_titles=header_titles;
+        this.grid=grid;
     }
 
     @Override
@@ -75,24 +82,34 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String title = (String) this.getChild(groupPosition,childPosition);
+        String title = (String) this.getChild(groupPosition,childPosition);
         if(convertView==null){
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.layout_childmenuitem,null);
         }
 
-        TextView textView = (TextView) convertView.findViewById(R.id.textViewChildList);
+        final TextView textView = (TextView) convertView.findViewById(R.id.textViewChildList);
 
         textView.setText(title);
 
+        final View finalConvertView = convertView;
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(ctx, title, Toast.LENGTH_SHORT).show();
+                String itemList[] = {"A", "B", "C", "D", "E", "F"};
+
+                int itemIcon[] = {R.drawable.demo, R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.demo, R.drawable.img};
+                ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
+                grid.setAdapter(adapter);
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        //Toast.makeText(MenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-
         return convertView;
     }
 
