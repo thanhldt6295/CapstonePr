@@ -11,14 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -136,7 +133,7 @@ public class ShoppingActivity extends AppCompatActivity{
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        MenuListAdapter menuAdapter = new MenuListAdapter(this, Headings, ChildList, gridView);
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView);
         expandableListView.setAdapter(menuAdapter);
     }
 
