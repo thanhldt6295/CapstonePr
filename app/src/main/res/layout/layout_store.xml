@@ -25,7 +25,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
+                    android:layout_weight="1"
                     android:background="@color/dark_translucent">
 
                     <ExpandableListView
@@ -46,38 +46,10 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5"
-                    android:background="@color/light_translucent"
-                    android:scrollbars="vertical">
+                    android:layout_weight="1">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/imageViewDetail"/>
-                    <NumberPicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txtQuantity"
-                        android:theme="">0</NumberPicker>
-
+                    <include layout="@layout/layout_storeitem" />
                 </FrameLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/activity_vertical_margin" />
-
-                <Button
-                    android:id="@+id/btnOrder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|top"
-                    android:background="@drawable/buttonstyles"
-                    android:minHeight="0dp"
-                    android:text="ORDER"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold" />
 
             </LinearLayout>
 
