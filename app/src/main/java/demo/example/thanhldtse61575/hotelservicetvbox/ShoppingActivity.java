@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -33,6 +34,9 @@ public class ShoppingActivity extends AppCompatActivity{
     ExpandableListView expandableListView;
     GridView gridView;
     ImageView detail;
+    Button btnMinus;
+    Button btnPlus;
+    EditText quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,9 @@ public class ShoppingActivity extends AppCompatActivity{
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
         detail = (ImageView) findViewById(R.id.imageViewDetail);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
+        btnPlus = (Button) findViewById(R.id.btnPlus);
+        quantity = (EditText) findViewById(R.id.txtQuantity);
 
         // Button effect
         btnOrder.setOnTouchListener(new View.OnTouchListener() {
@@ -115,6 +122,29 @@ public class ShoppingActivity extends AppCompatActivity{
                     }
                 }
                 return true;
+            }
+        });
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int n = Integer.parseInt(quantity.getText().toString());
+                if(n>1) {
+                    StringBuilder qty = new StringBuilder();
+                    qty.append(n-1);
+                    quantity.setText(qty);
+                }
+            }
+        });
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int n = Integer.parseInt(quantity.getText().toString());
+                if(n<100) {
+                    StringBuilder qty = new StringBuilder();
+                    qty.append(n+1);
+                    quantity.setText(qty);
+                }
             }
         });
 
