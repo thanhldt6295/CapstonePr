@@ -118,28 +118,28 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
             }
         });
 
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int n = Integer.parseInt(quantity.getText().toString());
-                if(n>1) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n-1);
-                    quantity.setText(qty);
-                }
-            }
-        });
-        btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int n = Integer.parseInt(quantity.getText().toString());
-                if(n<100) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n+1);
-                    quantity.setText(qty);
-                }
-            }
-        });
+//        btnMinus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int n = Integer.parseInt(quantity.getText().toString());
+//                if(n>1) {
+//                    StringBuilder qty = new StringBuilder();
+//                    qty.append(n-1);
+//                    quantity.setText(qty);
+//                }
+//            }
+//        });
+//        btnPlus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int n = Integer.parseInt(quantity.getText().toString());
+//                if(n<100) {
+//                    StringBuilder qty = new StringBuilder();
+//                    qty.append(n+1);
+//                    quantity.setText(qty);
+//                }
+//            }
+//        });
 
         // List
         List<String> Headings = new ArrayList<>();

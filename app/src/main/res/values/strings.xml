@@ -38,6 +38,7 @@
         <item>COFFEE</item>
         <item>FRUIT JUICE</item>
         <item>WINE</item>
+        <item>MOJITO</item>
     </string-array>
 
     <!-- Virtual Shopping -->
@@ -47,14 +48,17 @@
     </string-array>
 
     <string-array name="shopping_h1_items">
-        <item>A</item>
-        <item>B</item>
-        <item>D</item>
+        <item>DECORATIONS</item>
+        <item>KEYCHAINS</item>
+        <item>TOYS</item>
     </string-array>
 
     <string-array name="shopping_h2_items">
-        <item>C</item>
-        <item>F</item>
-        <item>W</item>
+        <item>HOUSEWARE</item>
+        <item>LIGHTERS</item>
+        <item>T-SHIRT</item>
+        <item>COAT</item>
+        <item>TROUSERS</item>
+        <item>UNDERWEAR</item>
     </string-array>
 </resources>
