@@ -19,11 +19,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Bill;
 
 public class ViewBillActivity extends AppCompatActivity {
 
-    List<OrderDetail> details = new ArrayList<>();
+    List<Bill> details = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,9 @@ public class ViewBillActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("MY BILLING");
 
-        details.add(new OrderDetail("Tuna Sandwich", "ROOM SERVICES/FOODS AND BEVERAGES/BREAKFAST", 80000, 1));
-        details.add(new OrderDetail("Mojito", "ROOM SERVICES/FOODS AND BEVERAGES/BEVERAGES", 45000, 2));
-        details.add(new OrderDetail("Keychain", "SHOPPING/SOURVENIR", 20000, 1));
+        details.add(new Bill("Tuna Sandwich", "ROOM SERVICES/FOODS AND BEVERAGES/BREAKFAST", 80000, 1));
+        details.add(new Bill("Mojito", "ROOM SERVICES/FOODS AND BEVERAGES/BEVERAGES", 45000, 2));
+        details.add(new Bill("Keychain", "SHOPPING/SOURVENIR", 20000, 1));
 
         ListView listView = (ListView) findViewById(R.id.detailsListView);
         ViewBillAdapter a = new ViewBillAdapter(this, details);

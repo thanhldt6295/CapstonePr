@@ -1,7 +1,6 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Bill;
 
 /**
  * Created by VULHSE61532 on 1/15/2017.
@@ -20,10 +19,10 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 public class ViewBillAdapter extends BaseAdapter {
 
     private Context c;
-    private List<OrderDetail> details;
+    private List<Bill> details;
     LayoutInflater layoutInflater;
 
-    public ViewBillAdapter(Context c, List<OrderDetail> details) {
+    public ViewBillAdapter(Context c, List<Bill> details) {
         this.c = c;
         this.details = details;
         layoutInflater = LayoutInflater.from(c);
@@ -39,7 +38,7 @@ public class ViewBillAdapter extends BaseAdapter {
     }
 
     @Override
-    public OrderDetail getItem(int position) {
+    public Bill getItem(int position) {
         return details.get(position);
     }
 
