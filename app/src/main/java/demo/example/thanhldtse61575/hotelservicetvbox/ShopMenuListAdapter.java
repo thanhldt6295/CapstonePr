@@ -1,6 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -15,8 +16,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Product;
 
 /**
  * Created by ThanhLDTSE61575 on 1/9/2017.
@@ -127,7 +132,8 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                     grid.setAdapter(adapter);
                     grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                            final ArrayList<Product> list = new ArrayList<Product>();
                             quantity.setText("1");
                             image.setImageResource(itemIcon[position]);
                             name.setText(itemList[position]);
@@ -144,7 +150,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                             break;
                                         }
                                         case MotionEvent.ACTION_UP:
-                                            // Your action here on button click
+                                            list.add(new Product(itemIcon[position],itemList[position],itemPrice[position],descript[position]));
+                                            Intent intent = new Intent();
+                                            intent.putExtra("storeItem", list);
                                         case MotionEvent.ACTION_CANCEL: {
                                             Button view = (Button) v;
                                             view.getBackground().clearColorFilter();

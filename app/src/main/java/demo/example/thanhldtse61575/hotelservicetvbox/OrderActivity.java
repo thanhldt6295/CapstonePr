@@ -6,13 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Product;
 
 public class OrderActivity extends AppCompatActivity {
+
+    List<Product> list = (ArrayList<Product>) getIntent().getSerializableExtra("storeItem");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,10 @@ public class OrderActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("YOUR ORDER");
+
+        ListView listView = (ListView) findViewById(R.id.orderListView);
+        OrderAdapter a = new OrderAdapter(this, list);
+        listView.setAdapter(a); // Error
 
         // Datetime & Calendar
         final TextView txtDate;
