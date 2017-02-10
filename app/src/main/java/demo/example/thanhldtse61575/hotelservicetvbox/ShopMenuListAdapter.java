@@ -150,9 +150,11 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                             break;
                                         }
                                         case MotionEvent.ACTION_UP:
-                                            list.add(new Product(itemIcon[position],itemList[position],itemPrice[position],descript[position]));
+                                            Product pr = new Product(itemIcon[position],itemList[position],itemPrice[position],descript[position]);
+                                            list.add(pr);
                                             Intent intent = new Intent();
                                             intent.putExtra("storeItem", list);
+
                                         case MotionEvent.ACTION_CANCEL: {
                                             Button view = (Button) v;
                                             view.getBackground().clearColorFilter();

@@ -64,6 +64,13 @@ public class OrderAdapter extends BaseAdapter {
 
             item.productDelete = (Button) convertView.findViewById(R.id.btnDelete);
 
+            item.productDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Remove
+                }
+            });
+
             convertView.setTag(item);
         } else {
             item = (ViewItem) convertView.getTag();
