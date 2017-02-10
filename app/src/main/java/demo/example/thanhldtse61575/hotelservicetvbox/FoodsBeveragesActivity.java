@@ -93,6 +93,8 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         btnOrder = (Button) findViewById(R.id.btnOrder);
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
+        btnPlus = (Button) findViewById(R.id.btnPlus);
 
         // Button effect
         btnOrder.setOnTouchListener(new View.OnTouchListener() {

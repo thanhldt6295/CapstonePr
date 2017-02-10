@@ -3,7 +3,6 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,10 +32,13 @@ public class ShoppingActivity extends AppCompatActivity{
     Button btnOrder;
     ExpandableListView expandableListView;
     GridView gridView;
-    ImageView detail;
     Button btnMinus;
     Button btnPlus;
     EditText quantity;
+    ImageView image;
+    TextView name;
+    TextView price;
+    TextView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +98,13 @@ public class ShoppingActivity extends AppCompatActivity{
         btnOrder = (Button) findViewById(R.id.btnOrder);
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
-        detail = (ImageView) findViewById(R.id.imageViewDetail);
         btnMinus = (Button) findViewById(R.id.btnMinus);
         btnPlus = (Button) findViewById(R.id.btnPlus);
         quantity = (EditText) findViewById(R.id.txtQuantity);
+        image = (ImageView) findViewById(R.id.imageViewDetail);
+        name = (TextView) findViewById(R.id.txtServiceName);
+        price = (TextView) findViewById(R.id.txtUnitPrice);
+        description = (TextView) findViewById(R.id.txtDescription);
 
         // Button effect
         btnOrder.setOnTouchListener(new View.OnTouchListener() {
@@ -167,7 +172,7 @@ public class ShoppingActivity extends AppCompatActivity{
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView, detail);
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView, image, name, price, description);
         expandableListView.setAdapter(menuAdapter);
     }
 
