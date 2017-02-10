@@ -22,100 +22,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#504b4e4b"
+            android:background="@color/dark_translucent"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/detailsListView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5" />
+                android:layout_weight="1" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_vertical_margin" />
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="SUB-TOTAL"
-                        android:textAlignment="textEnd"
-                        android:paddingEnd="@dimen/activity_vertical_margin"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_medium" />
-
-                    <TextView
-                        android:id="@+id/txtSubTotal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$"
-                        android:paddingEnd="@dimen/activity_vertical_margin"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_medium" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="DISCOUNT"
-                        android:textAlignment="textEnd"
-                        android:paddingEnd="@dimen/activity_vertical_margin"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_medium" />
-
-                    <TextView
-                        android:id="@+id/txtDiscount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$"
-                        android:paddingEnd="@dimen/activity_vertical_margin"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_medium" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TOTAL"
-                        android:textAlignment="textEnd"
-                        android:paddingEnd="@dimen/activity_vertical_margin"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_large"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtTotal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$"
-                        android:paddingEnd="@dimen/activity_vertical_margin"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_large" />
-                </TableRow>
-
-            </TableLayout>
+            <include layout="@layout/layout_billtotal"/>
 
         </LinearLayout>
 
