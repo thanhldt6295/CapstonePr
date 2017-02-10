@@ -107,51 +107,51 @@ public class ShoppingActivity extends AppCompatActivity{
         description = (TextView) findViewById(R.id.txtDescription);
 
         // Button effect
-        btnOrder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        Button view = (Button) v;
-                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:
-                        // Your action here on button click
-                    case MotionEvent.ACTION_CANCEL: {
-                        Button view = (Button) v;
-                        view.getBackground().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
-                }
-                return true;
-            }
-        });
+//        btnOrder.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN: {
+//                        Button view = (Button) v;
+//                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+//                        v.invalidate();
+//                        break;
+//                    }
+//                    case MotionEvent.ACTION_UP:
+//                        // Your action here on button click
+//                    case MotionEvent.ACTION_CANCEL: {
+//                        Button view = (Button) v;
+//                        view.getBackground().clearColorFilter();
+//                        view.invalidate();
+//                        break;
+//                    }
+//                }
+//                return true;
+//            }
+//        });
 
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int n = Integer.parseInt(quantity.getText().toString());
-                if(n>1) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n-1);
-                    quantity.setText(qty);
-                }
-            }
-        });
-        btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int n = Integer.parseInt(quantity.getText().toString());
-                if(n<100) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n+1);
-                    quantity.setText(qty);
-                }
-            }
-        });
+//        btnMinus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int n = Integer.parseInt(quantity.getText().toString());
+//                if(n>1) {
+//                    StringBuilder qty = new StringBuilder();
+//                    qty.append(n-1);
+//                    quantity.setText(qty);
+//                }
+//            }
+//        });
+//        btnPlus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int n = Integer.parseInt(quantity.getText().toString());
+//                if(n<100) {
+//                    StringBuilder qty = new StringBuilder();
+//                    qty.append(n+1);
+//                    quantity.setText(qty);
+//                }
+//            }
+//        });
 
         // List
         List<String> Headings = new ArrayList<>();
@@ -172,7 +172,7 @@ public class ShoppingActivity extends AppCompatActivity{
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView, image, name, price, description);
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView, image, name, price, description, btnOrder, btnMinus, btnPlus, quantity);
         expandableListView.setAdapter(menuAdapter);
     }
 
