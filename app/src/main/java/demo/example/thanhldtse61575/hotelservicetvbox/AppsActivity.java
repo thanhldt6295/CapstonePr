@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.provider.ContactsContract;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,12 @@ public class AppsActivity extends AppCompatActivity {
     ImageButton iBtnUtube;
     ImageButton iBtnCHplay;
     ImageButton iBtnGG;
+    ImageButton iBtnFB;
+    ImageButton iBtnTV;
+    ImageButton iBtnDic;
+    ImageButton iBtnIng;
+    ImageButton iBtnMp3;
+    ImageButton iBtnMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,12 @@ public class AppsActivity extends AppCompatActivity {
         iBtnUtube = (ImageButton) findViewById(R.id.iBtnUtube);
         iBtnCHplay = (ImageButton) findViewById(R.id.iBtnCHplay);
         iBtnGG =(ImageButton) findViewById(R.id.iBtnGG);
+        iBtnFB =(ImageButton) findViewById(R.id.iBtnFB);
+        iBtnTV = (ImageButton) findViewById(R.id.iBtnTV);
+        iBtnDic = (ImageButton) findViewById(R.id.iBtnDic);
+        iBtnIng = (ImageButton) findViewById(R.id.iBtnIng);
+        iBtnMp3 = (ImageButton) findViewById(R.id.iBtnMp3);
+        iBtnMap = (ImageButton) findViewById(R.id.iBtnMap);
 
         String networkSSID = "test";
         String networkPass = "pass";
@@ -94,11 +107,41 @@ public class AppsActivity extends AppCompatActivity {
             }
         });
 
-        iBtnGG.setOnClickListener(new View.OnClickListener() {
+        iBtnFB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PackageManager manager = getPackageManager();
-                Intent i = manager.getLaunchIntentForPackage("com.android.chrome");
+                Intent i = manager.getLaunchIntentForPackage("com.facebook.katana");
+                i.addCategory(Intent.CATEGORY_LAUNCHER);
+                startActivity(i);
+            }
+        });
+
+        iBtnIng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PackageManager manager = getPackageManager();
+                Intent i = manager.getLaunchIntentForPackage("com.instagram.android");
+                i.addCategory(Intent.CATEGORY_LAUNCHER);
+                startActivity(i);
+            }
+        });
+
+        iBtnMp3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PackageManager manager = getPackageManager();
+                Intent i = manager.getLaunchIntentForPackage("com.zing.mp3");
+                i.addCategory(Intent.CATEGORY_LAUNCHER);
+                startActivity(i);
+            }
+        });
+
+        iBtnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PackageManager manager = getPackageManager();
+                Intent i = manager.getLaunchIntentForPackage("com.google.android.apps.maps");
                 i.addCategory(Intent.CATEGORY_LAUNCHER);
                 startActivity(i);
             }
