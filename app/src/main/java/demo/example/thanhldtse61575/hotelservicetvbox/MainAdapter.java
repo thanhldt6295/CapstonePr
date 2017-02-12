@@ -40,15 +40,18 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
 
                 switch(pos){
                     case 0:
-                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
+                        c.startActivity(new Intent(c, AppsActivity.class));
                         break;
                     case 1:
-                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
                         break;
                     case 2:
+                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+                        break;
+                    case 3:
                         c.startActivity(new Intent(c, ShoppingActivity.class));
                         break;
-                    case 4:
+                    case 5:
                         c.startActivity(new Intent(c, ViewBillActivity.class));
                         break;
                 }

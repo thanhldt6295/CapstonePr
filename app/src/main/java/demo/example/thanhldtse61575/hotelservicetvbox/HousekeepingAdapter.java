@@ -38,15 +38,7 @@ public class HousekeepingAdapter extends RecyclerView.Adapter<Holder>  {
             @Override
             public void onItemClick(View view, int pos) {
                 switch (pos){
-                    case 0:
-                        c.startActivity(new Intent(c, FoodsBeveragesActivity.class));
-                        break;
-                    case 1:
-                        c.startActivity(new Intent(c, HousekeepingActivity.class));
-                        break;
-                    case 2:
-                        c.startActivity(new Intent(c, MaintenanceActivity.class));
-                        break;
+                    //
                 }
             }
         });

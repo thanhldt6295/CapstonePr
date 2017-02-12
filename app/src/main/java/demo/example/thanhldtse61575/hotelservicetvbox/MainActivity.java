@@ -23,8 +23,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] titles = {"PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY"};
-    int[] images = {R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
+    String[] titles = {"APPLICATIONS", "PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY"};
+    int[] images = {R.drawable.img_ecard,R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
             R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey};
 
     @Override

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="demo.example.thanhldtse61575.hotelservicetvbox">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +14,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -18,10 +22,11 @@
             android:name=".WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_welcome"
-            android:theme="@style/FullscreenTheme"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.HOME" />
@@ -34,7 +39,8 @@
         <activity android:name=".MaintenanceActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".ShoppingActivity" />
-        <activity android:name=".ViewBillActivity"></activity>
+        <activity android:name=".ViewBillActivity" />
+        <activity android:name=".AppsActivity"></activity>
     </application>
 
 </manifest>
