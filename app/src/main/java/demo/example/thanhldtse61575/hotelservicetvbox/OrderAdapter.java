@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Product;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 
 /**
  * Created by ThanhLDTSE61575 on 2/10/2017.
@@ -21,11 +21,11 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Product;
 public class OrderAdapter extends BaseAdapter {
 
         private Context ctx;
-        private List<Product> list;
+        private List<CartItem> list;
         private LayoutInflater inflater;
         private Button delete;
 
-        public OrderAdapter(Context ctx, List<Product> list) {
+        public OrderAdapter(Context ctx, List<CartItem> list) {
         this.list = list;
     }
 
@@ -75,11 +75,6 @@ public class OrderAdapter extends BaseAdapter {
         } else {
             item = (ViewItem) convertView.getTag();
         }
-
-        Product curProduct = list.get(position);
-
-        item.productImageView.setImageResource(curProduct.getImage());
-        item.productTitle.setText(curProduct.getServiceName());
 
         return convertView;
     }

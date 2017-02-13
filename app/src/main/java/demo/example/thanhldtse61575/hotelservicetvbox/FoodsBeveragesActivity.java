@@ -25,15 +25,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
+
 public class FoodsBeveragesActivity extends AppCompatActivity {
 
     // Declare
-    Button btnOrder;
     ExpandableListView expandableListView;
     GridView gridView;
-    Button btnMinus;
-    Button btnPlus;
-    EditText quantity;
+    ArrayList<CartItem> cart = new ArrayList<CartItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,58 +89,8 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         });
 
         // Map
-        btnOrder = (Button) findViewById(R.id.btnOrder);
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
-        btnMinus = (Button) findViewById(R.id.btnMinus);
-        btnPlus = (Button) findViewById(R.id.btnPlus);
-
-        // Button effect
-        btnOrder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        Button view = (Button) v;
-                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:
-                        // Your action here on button click
-                    case MotionEvent.ACTION_CANCEL: {
-                        Button view = (Button) v;
-                        view.getBackground().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
-                }
-                return true;
-            }
-        });
-
-//        btnMinus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int n = Integer.parseInt(quantity.getText().toString());
-//                if(n>1) {
-//                    StringBuilder qty = new StringBuilder();
-//                    qty.append(n-1);
-//                    quantity.setText(qty);
-//                }
-//            }
-//        });
-//        btnPlus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int n = Integer.parseInt(quantity.getText().toString());
-//                if(n<100) {
-//                    StringBuilder qty = new StringBuilder();
-//                    qty.append(n+1);
-//                    quantity.setText(qty);
-//                }
-//            }
-//        });
 
         // List
         List<String> Headings = new ArrayList<>();
@@ -162,7 +111,7 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0),L1);
         ChildList.put(Headings.get(1),L2);
-        FoodMenuListAdapter menuAdapter = new FoodMenuListAdapter(this,Headings,ChildList,gridView);
+        StoreMenuAdapter menuAdapter = new StoreMenuAdapter(Headings, ChildList, this, gridView, cart);
         expandableListView.setAdapter(menuAdapter);
     }
 
