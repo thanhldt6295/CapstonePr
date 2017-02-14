@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -26,11 +27,10 @@ public class OrderActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("YOUR ORDER");
 
-        ArrayList<CartItem> list = (ArrayList<CartItem>) getIntent().getSerializableExtra("storeItem");
-
-        //ListView listView = (ListView) findViewById(R.id.orderListView);
-        //OrderAdapter a = new OrderAdapter(this, list);
-        //listView.setAdapter(a);
+        ArrayList<CartItem> cart = (ArrayList<CartItem>) getIntent().getSerializableExtra("storeItem");
+        ListView listView = (ListView) findViewById(R.id.orderListView);
+        OrderAdapter a = new OrderAdapter(this, listView, cart);
+        listView.setAdapter(a);
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -77,7 +77,5 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 }
