@@ -1,12 +1,10 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,38 +15,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Bill;
 
-public class OrderActivity extends AppCompatActivity {
+public class PendingActivity extends AppCompatActivity {
 
-    Button finalize;
+    List<Bill> details = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_pending);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("YOUR ORDER");
-
-        final List<CartItem> cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
-
-        if(cart!=null){
-            ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart);
-            listView.setAdapter(a);
-        }
-
-        finalize = (Button) findViewById(R.id.btnFinalizeOrder); //MOMIJI
-        finalize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OrderActivity.this, PendingActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -90,7 +70,7 @@ public class OrderActivity extends AppCompatActivity {
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(OrderActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                new DatePickerDialog(PendingActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
