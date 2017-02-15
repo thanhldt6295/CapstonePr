@@ -31,6 +31,14 @@ public class ShoppingActivity extends AppCompatActivity {
     // Declare
     ExpandableListView expandableListView;
     GridView gridView;
+    ImageView image;
+    TextView name;
+    TextView price;
+    TextView description;
+    Button btnOrder;
+    Button btnMinus;
+    Button btnPlus;
+    EditText quantity;
     ArrayList<CartItem> cart = new ArrayList<CartItem>();
 
     @Override
@@ -90,6 +98,14 @@ public class ShoppingActivity extends AppCompatActivity {
         // Map
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
+        image = (ImageView) findViewById(R.id.imageViewDetail);
+        name = (TextView) findViewById(R.id.txtServiceName);
+        price = (TextView) findViewById(R.id.txtUnitPrice);
+        description = (TextView) findViewById(R.id.txtDescription);
+        quantity = (EditText) findViewById(R.id.txtQuantity);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
+        btnPlus = (Button) findViewById(R.id.btnPlus);
+        btnOrder = (Button) findViewById(R.id.btnOrder);
 
         // List
         List<String> Headings = new ArrayList<>();
@@ -110,7 +126,10 @@ public class ShoppingActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        StoreMenuAdapter menuAdapter = new StoreMenuAdapter(Headings, ChildList, this, gridView, cart);
+        //StoreMenuAdapter menuAdapter = new StoreMenuAdapter(Headings, ChildList, this, gridView, cart);
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this,Headings,ChildList,gridView,
+                                                                    image,name,price,description,
+                                                                  btnOrder,btnMinus,btnPlus,quantity,cart);
         expandableListView.setAdapter(menuAdapter);
     }
 

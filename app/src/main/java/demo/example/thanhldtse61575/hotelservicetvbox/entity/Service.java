@@ -1,71 +1,73 @@
 package demo.example.thanhldtse61575.hotelservicetvbox.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by ThanhLDTSE61575 on 2/7/2017.
  */
 
-public class Service {
-    private int serviceID;
-    private String serviceName;
-    private int categoryID;
-    private double unitPrice;
-    private String description;
-    private String image;
+public class Service implements Serializable{
+    private int ServiceID;
+    private String ServiceName;
+    private int CategoryID;
+    private double UnitPrice;
+    private String Description;
+    private String Image;
 
-    public Service(int serviceID, String serviceName, int categoryID, double unitPrice, String description, String image){
-        this.serviceID = serviceID;
-        this.serviceName = serviceName;
-        this.categoryID = categoryID;
-        this.unitPrice = unitPrice;
-        this.description = description;
-        this.image = image;
+    public Service(int ServiceID, String ServiceName, int CategoryID, double UnitPrice, String Description, String Image){
+        this.ServiceID = ServiceID;
+        this.ServiceName = ServiceName;
+        this.CategoryID = CategoryID;
+        this.UnitPrice = UnitPrice;
+        this.Description = Description;
+        this.Image = Image;
     }
 
     public int getServiceID() {
-        return serviceID;
+        return ServiceID;
     }
 
-    public void setServiceID(int serviceID) {
-        serviceID = serviceID;
+    public void setServiceID(int ServiceID) {
+        ServiceID = ServiceID;
     }
 
     public String getServiceName() {
-        return serviceName;
+        return ServiceName;
     }
 
-    public void setServiceName(String serviceName) {
-        serviceName = serviceName;
+    public void setServiceName(String ServiceName) {
+        ServiceName = ServiceName;
     }
 
     public int getCategoryID() {
-        return categoryID;
+        return CategoryID;
     }
 
-    public void setCategoryID(int categoryID) {
-        categoryID = categoryID;
+    public void setCategoryID(int CategoryID) {
+        CategoryID = CategoryID;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public void setDescription(String description) {
-        description = description;
+    public void setDescription(String Description) {
+        Description = Description;
     }
 
     public double getUnitPrice() {
-        return unitPrice;
+        return UnitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        unitPrice = unitPrice;
+    public void setUnitPrice(double UnitPrice) {
+        UnitPrice = UnitPrice;
     }
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
-    public void setImage(String image) {
-        image = image;
+    public void setImage(String Image) {
+        Image = Image;
     }
 }

@@ -100,7 +100,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtTotal"
+                        android:id="@+id/txtStoreTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:paddingEnd="@dimen/activity_vertical_margin"

@@ -2,20 +2,19 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -32,6 +31,14 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
     // Declare
     ExpandableListView expandableListView;
     GridView gridView;
+    ImageView image;
+    TextView name;
+    TextView price;
+    TextView description;
+    Button btnOrder;
+    Button btnMinus;
+    Button btnPlus;
+    EditText quantity;
     ArrayList<CartItem> cart = new ArrayList<CartItem>();
 
     @Override
@@ -91,6 +98,14 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         // Map
         expandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
         gridView = (GridView) findViewById(R.id.gridView);
+        image = (ImageView) findViewById(R.id.imageViewDetail);
+        name = (TextView) findViewById(R.id.txtServiceName);
+        price = (TextView) findViewById(R.id.txtUnitPrice);
+        description = (TextView) findViewById(R.id.txtDescription);
+        quantity = (EditText) findViewById(R.id.txtQuantity);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
+        btnPlus = (Button) findViewById(R.id.btnPlus);
+        btnOrder = (Button) findViewById(R.id.btnOrder);
 
         // List
         List<String> Headings = new ArrayList<>();
@@ -111,7 +126,9 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0),L1);
         ChildList.put(Headings.get(1),L2);
-        StoreMenuAdapter menuAdapter = new StoreMenuAdapter(Headings, ChildList, this, gridView, cart);
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this,Headings,ChildList,gridView,
+                                                                image,name,price,description,
+                                                                btnOrder,btnMinus,btnPlus,quantity,cart);
         expandableListView.setAdapter(menuAdapter);
     }
 
@@ -128,7 +145,9 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this, OrderActivity.class));
+                Intent intent = new Intent(this, OrderActivity.class);
+                intent.putExtra("storeItem", cart);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

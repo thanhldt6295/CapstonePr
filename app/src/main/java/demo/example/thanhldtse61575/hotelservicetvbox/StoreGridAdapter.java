@@ -155,6 +155,5 @@ public class StoreGridAdapter extends BaseAdapter {
         });
 
         return convertView;
-
     }
 }

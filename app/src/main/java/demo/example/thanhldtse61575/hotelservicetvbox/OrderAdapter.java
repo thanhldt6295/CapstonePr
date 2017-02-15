@@ -1,9 +1,8 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -31,7 +30,7 @@ public class OrderAdapter extends BaseAdapter {
     private List<CartItem> cart;
     private LayoutInflater layoutInflater;
 
-    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> list) {
+    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart) {
         this.ctx = ctx;
         this.orderListView = orderListView;
         this.cart = cart;
@@ -59,12 +58,13 @@ public class OrderAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.layout_orderitem, null);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
-        String url = cart.get(position).getImage();
-        Picasso.with(ctx)
-                .load(url)
-                .placeholder(R.drawable.loading)
-                .fit()
-                .centerCrop().into(image);
+        image.setImageResource(R.drawable.demo);
+//        String url = cart.get(position).getImage();
+//        Picasso.with(ctx)
+//                .load(url)
+//                .placeholder(R.drawable.loading)
+//                .fit()
+//                .centerCrop().into(image);
         TextView name = (TextView) convertView.findViewById(R.id.txtServiceName);
         name.setText(cart.get(position).getServiceName());
         TextView unitPrice = (TextView) convertView.findViewById(R.id.txtUnitPrice);
@@ -72,7 +72,8 @@ public class OrderAdapter extends BaseAdapter {
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) + "đ");
 
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
-        quantity.setText("1");
+        quantity.setText(cart.get(position).getQuantity()+"");
+
 
         Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(new View.OnClickListener() {
@@ -100,16 +101,16 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
 
-        Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
+        final Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                btnDelete.setBackgroundColor(Color.RED);
+                cart.remove(position);
+                new OrderAdapter(ctx, orderListView, cart);
             }
         });
 
         return convertView;
-
     }
-
 }

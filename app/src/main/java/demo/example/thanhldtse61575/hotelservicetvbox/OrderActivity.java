@@ -13,8 +13,10 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -27,10 +29,13 @@ public class OrderActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("YOUR ORDER");
 
-        ArrayList<CartItem> cart = (ArrayList<CartItem>) getIntent().getSerializableExtra("storeItem");
-        ListView listView = (ListView) findViewById(R.id.orderListView);
-        OrderAdapter a = new OrderAdapter(this, listView, cart);
-        listView.setAdapter(a);
+        List<CartItem> cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
+
+        if(cart!=null){
+            ListView listView = (ListView) findViewById(R.id.orderListView);
+            OrderAdapter a = new OrderAdapter(this, listView, cart);
+            listView.setAdapter(a);
+        }
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -77,5 +82,4 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
-
 }
