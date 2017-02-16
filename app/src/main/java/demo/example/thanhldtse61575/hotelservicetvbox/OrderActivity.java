@@ -2,15 +2,23 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +30,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class OrderActivity extends AppCompatActivity {
 
+    List<CartItem> cart = new ArrayList<>();
     Button finalize;
 
     @Override
@@ -33,22 +42,40 @@ public class OrderActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("YOUR ORDER");
 
-        final List<CartItem> cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
+        cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
+
+        TextView total = (TextView) findViewById(R.id.txtCartTotal);
+        EditText cmt = (EditText) findViewById(R.id.txtComment);
+        Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
+        Button btnClear = (Button) findViewById(R.id.btnClearOrder);
 
         if(cart!=null){
             ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart);
+            OrderAdapter a = new OrderAdapter(this, listView, cart, total, cmt, btnFinalize, btnClear);
             listView.setAdapter(a);
         }
 
-        finalize = (Button) findViewById(R.id.btnFinalizeOrder); //MOMIJI
-        finalize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OrderActivity.this, PendingActivity.class);
-                startActivity(intent);
-            }
-        });
+        //finalize = (Button) findViewById(R.id.btnFinalizeOrder);
+//        finalize.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                class SendDataToServer extends AsyncTask<String, Void, Integer> {
+//
+//                    @Override
+//                    protected Integer doInBackground(String... params) {
+//                        CommonService commonService = new CommonService();
+//                        int returnva = commonService.sendData(params[0],params[1]);
+//                        return returnva;
+//                    }
+//
+//                    protected void onPostExecute(Integer response) {
+//                        //
+//                    }
+//                }
+//                String retu = new Gson().toJson(cart);
+//                new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+retu+"&deliveryTime=1232323232323");
+//            }
+//        });
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -96,3 +123,4 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
 }
+

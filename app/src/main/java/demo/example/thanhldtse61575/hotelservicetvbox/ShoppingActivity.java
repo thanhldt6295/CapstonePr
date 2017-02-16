@@ -15,9 +15,12 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,7 +42,8 @@ public class ShoppingActivity extends AppCompatActivity {
     Button btnMinus;
     Button btnPlus;
     EditText quantity;
-    ArrayList<CartItem> cart = new ArrayList<CartItem>();
+    List<CartItem> cart;
+    TextView total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class ShoppingActivity extends AppCompatActivity {
         btnMinus = (Button) findViewById(R.id.btnMinus);
         btnPlus = (Button) findViewById(R.id.btnPlus);
         btnOrder = (Button) findViewById(R.id.btnOrder);
+        total = (TextView) findViewById(R.id.txtCartTotal);
 
         // List
         List<String> Headings = new ArrayList<>();
@@ -126,7 +131,11 @@ public class ShoppingActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
-        //StoreMenuAdapter menuAdapter = new StoreMenuAdapter(Headings, ChildList, this, gridView, cart);
+
+        cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
+        if(cart==null){
+            cart = new ArrayList<>();
+        }
         ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this,Headings,ChildList,gridView,
                                                                     image,name,price,description,
                                                                   btnOrder,btnMinus,btnPlus,quantity,cart);
@@ -147,10 +156,12 @@ public class ShoppingActivity extends AppCompatActivity {
                 return true;
             case R.id.cart:
                 Intent intent = new Intent(this, OrderActivity.class);
-                intent.putExtra("storeItem", cart);
+                intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 }
+
+

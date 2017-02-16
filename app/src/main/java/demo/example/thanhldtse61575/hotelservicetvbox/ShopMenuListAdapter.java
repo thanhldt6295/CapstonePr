@@ -131,7 +131,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
             }
 
             protected void onPostExecute(String response) {
-                //pare json sang list service
+                //parse json sang list service
                 final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {}.getType());
 
                 ItemGridAdapter adapter = new ItemGridAdapter(ctx, acc);
@@ -163,7 +163,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                         Service sv = acc.get(position);
                                         if(list==null) list.add(new CartItem(sv.getServiceID(),sv.getServiceName(),sv.getCategoryID(),
                                                 sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                Integer.parseInt(quantity.getText().toString())));
+                                                Integer.parseInt(quantity.getText().toString()), "aaaa"));
                                         else {
                                             boolean isHave=false;
                                             for (CartItem od: list) {
@@ -174,7 +174,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                             }
                                             if(!isHave) list.add(new CartItem(sv.getServiceID(),sv.getServiceName(),sv.getCategoryID(),
                                                     sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                    Integer.parseInt(quantity.getText().toString())));
+                                                    Integer.parseInt(quantity.getText().toString()), ""));
                                         }
 
                                     case MotionEvent.ACTION_CANCEL: {
@@ -209,10 +209,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                 }
                             }
                         });
+
                     }
                 });
-                //pare object hoac list object sang json
-                String retu = new Gson().toJson(acc);
             }
         }
 

@@ -116,7 +116,7 @@ public class StoreGridAdapter extends BaseAdapter {
                                 CartItem cartItem = new CartItem(getItem(position).getServiceID(),
                                         getItem(position).getServiceName(), getItem(position).getCategoryID(),
                                         getItem(position).getUnitPrice(), getItem(position).getDescription(),
-                                        getItem(position).getImage(), Integer.parseInt(quantity.getText().toString()));
+                                        getItem(position).getImage(), Integer.parseInt(quantity.getText().toString()),"");
                                 cart.add(cartItem);
 
                             case MotionEvent.ACTION_CANCEL: {

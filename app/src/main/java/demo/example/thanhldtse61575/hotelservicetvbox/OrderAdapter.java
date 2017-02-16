@@ -2,16 +2,22 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -29,11 +35,19 @@ public class OrderAdapter extends BaseAdapter {
     private ListView orderListView;
     private List<CartItem> cart;
     private LayoutInflater layoutInflater;
+    private TextView total;
+    private EditText comment;
+    private Button finalize;
+    private Button clear;
 
-    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart) {
+    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, EditText comment, Button finalize, Button clear) {
         this.ctx = ctx;
         this.orderListView = orderListView;
         this.cart = cart;
+        this.total = total;
+        this.comment = comment;
+        this.finalize = finalize;
+        this.clear = clear;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -74,6 +88,11 @@ public class OrderAdapter extends BaseAdapter {
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
         quantity.setText(cart.get(position).getQuantity()+"");
 
+        float t = 0;
+        for (int i = 0; i < cart.size(); i++){
+            t += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+        }
+        total.setText(format.format(t) + "đ");
 
         Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +103,7 @@ public class OrderAdapter extends BaseAdapter {
                     StringBuilder qty = new StringBuilder();
                     qty.append(n + 1);
                     quantity.setText(qty);
+                    cart.get(position).setQuantity(n+1);
                 }
             }
         });
@@ -97,6 +117,7 @@ public class OrderAdapter extends BaseAdapter {
                     StringBuilder qty = new StringBuilder();
                     qty.append(n - 1);
                     quantity.setText(qty);
+                    cart.get(position).setQuantity(n-1);
                 }
             }
         });
@@ -105,11 +126,65 @@ public class OrderAdapter extends BaseAdapter {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnDelete.setBackgroundColor(Color.RED);
                 cart.remove(position);
-                new OrderAdapter(ctx, orderListView, cart);
+                notifyDataSetChanged();
             }
         });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cart.clear();
+                notifyDataSetChanged();
+            }
+        });
+
+        finalize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                class SendDataToServer extends AsyncTask<String, Void, Integer> {
+
+                    @Override
+                    protected Integer doInBackground(String... params) {
+                        CommonService commonService = new CommonService();
+                        int returnva = commonService.sendData(params[0],params[1]);
+                        return returnva;
+                    }
+
+                    protected void onPostExecute(Integer response) {
+                        //
+                    }
+                }
+                String retu = new Gson().toJson(cart);
+                new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+retu+"&deliveryTime=1232323232323");
+            }
+        });
+
+        orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                comment.setText(cart.get(position).getComment());
+            }
+        });
+
+        if(comment!=null) {
+            comment.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    cart.get(position).setComment(s.toString());
+                }
+            });
+        }
 
         return convertView;
     }

@@ -41,8 +41,7 @@
         <activity android:name=".OrderActivity" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name=".ViewBillActivity" />
-        <activity android:name=".AppsActivity" />
-        <activity android:name=".PendingActivity"></activity>
+        <activity android:name=".AppsActivity"></activity>
     </application>
 
 </manifest>

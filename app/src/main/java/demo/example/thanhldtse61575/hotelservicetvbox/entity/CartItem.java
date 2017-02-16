@@ -15,8 +15,9 @@ public class CartItem implements Serializable {
     private String description;
     private String image;
     private int quantity;
+    private String comment;
 
-    public CartItem(int serviceID, String serviceName, int categoryID, double unitPrice, String description, String image, int quantity) {
+    public CartItem(int serviceID, String serviceName, int categoryID, double unitPrice, String description, String image, int quantity, String comment) {
         this.serviceID = serviceID;
         this.serviceName = serviceName;
         this.categoryID = categoryID;
@@ -24,6 +25,15 @@ public class CartItem implements Serializable {
         this.description = description;
         this.image = image;
         this.quantity = quantity;
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public int getServiceID() {
