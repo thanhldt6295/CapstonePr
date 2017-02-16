@@ -122,7 +122,7 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
 
-        final Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
+        Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +135,7 @@ public class OrderAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 cart.clear();
+                total.setText("$");
                 notifyDataSetChanged();
             }
         });
@@ -147,16 +148,16 @@ public class OrderAdapter extends BaseAdapter {
                     @Override
                     protected Integer doInBackground(String... params) {
                         CommonService commonService = new CommonService();
-                        int returnva = commonService.sendData(params[0],params[1]);
-                        return returnva;
+                        int returnValue = commonService.sendData(params[0],params[1]);
+                        return returnValue;
                     }
 
                     protected void onPostExecute(Integer response) {
                         //
                     }
                 }
-                String retu = new Gson().toJson(cart);
-                new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+retu+"&deliveryTime=1232323232323");
+                String returnList = new Gson().toJson(cart);
+                new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+returnList+"&deliveryTime=1232323232323");
             }
         });
 

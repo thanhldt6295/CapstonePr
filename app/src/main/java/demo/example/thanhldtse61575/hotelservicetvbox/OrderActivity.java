@@ -31,7 +31,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 public class OrderActivity extends AppCompatActivity {
 
     List<CartItem> cart = new ArrayList<>();
-    Button finalize;
+    //Button finalize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
