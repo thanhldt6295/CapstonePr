@@ -32,7 +32,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
  */
 public class ShopMenuListAdapter extends BaseExpandableListAdapter {
     private List<String> header_titles;
-    private HashMap<String,List<String>> child_titles;
+    private HashMap<String, List<String>> child_titles;
     private Context ctx;
     private GridView grid;
     private ImageView image;
@@ -44,13 +44,14 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
     private Button btnPlus;
     private EditText quantity;
     private List<CartItem> list = new ArrayList<CartItem>();
-    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,List<String>> child_titles, GridView grid,
+
+    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String, List<String>> child_titles, GridView grid,
                         ImageView image, TextView name, TextView price, TextView description, Button btnOrder,
-                        Button btnMinus, Button btnPlus, EditText quantity, List<CartItem> list){
-        this.ctx=ctx;
-        this.child_titles=child_titles;
-        this.header_titles=header_titles;
-        this.grid=grid;
+                        Button btnMinus, Button btnPlus, EditText quantity, List<CartItem> list) {
+        this.ctx = ctx;
+        this.child_titles = child_titles;
+        this.header_titles = header_titles;
+        this.grid = grid;
         this.image = image;
         this.name = name;
         this.price = price;
@@ -59,7 +60,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
         this.btnMinus = btnMinus;
         this.btnPlus = btnPlus;
         this.quantity = quantity;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
@@ -100,9 +101,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String title = (String) this.getGroup(groupPosition);
-        if(convertView==null){
+        if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.layout_headmenuitem,null);
+            convertView = layoutInflater.inflate(R.layout.layout_headmenuitem, null);
         }
         TextView textView = (TextView) convertView.findViewById(R.id.textViewHeadList);
         textView.setTypeface(null, Typeface.BOLD);
@@ -112,10 +113,10 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String title = (String) this.getChild(groupPosition,childPosition);
-        if(convertView==null){
+        final String title = (String) this.getChild(groupPosition, childPosition);
+        if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.layout_childmenuitem,null);
+            convertView = layoutInflater.inflate(R.layout.layout_childmenuitem, null);
         }
 
         final TextView textView = (TextView) convertView.findViewById(R.id.textViewChildList);
@@ -132,13 +133,23 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
 
             protected void onPostExecute(String response) {
                 //parse json sang list service
-                final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {}.getType());
+                final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+                }.getType());
 
                 ItemGridAdapter adapter = new ItemGridAdapter(ctx, acc);
                 grid.setAdapter(adapter);
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        image.setVisibility(View.VISIBLE);
+                        name.setVisibility(View.VISIBLE);
+                        price.setVisibility(View.VISIBLE);
+                        description.setVisibility(View.VISIBLE);
+                        btnPlus.setVisibility(View.VISIBLE);
+                        btnMinus.setVisibility(View.VISIBLE);
+                        quantity.setVisibility(View.VISIBLE);
+                        btnOrder.setVisibility(View.VISIBLE);
+
                         quantity.setText("1");
                         image.setImageResource(R.drawable.demo);
 //                        Picasso.with(ctx)
@@ -147,7 +158,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
 //                                .fit()
 //                                .centerCrop().into(image);
                         name.setText(acc.get(position).getServiceName());
-                        price.setText(acc.get(position).getUnitPrice()+"");
+                        price.setText(acc.get(position).getUnitPrice() + "");
                         description.setText(acc.get(position).getDescription());
                         btnOrder.setOnTouchListener(new View.OnTouchListener() {
                             @Override
@@ -161,20 +172,22 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                     }
                                     case MotionEvent.ACTION_UP:
                                         Service sv = acc.get(position);
-                                        if(list==null) list.add(new CartItem(sv.getServiceID(),sv.getServiceName(),sv.getCategoryID(),
-                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                Integer.parseInt(quantity.getText().toString()), "aaaa"));
+                                        if (list == null)
+                                            list.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                    Integer.parseInt(quantity.getText().toString()), "aaaa"));
                                         else {
-                                            boolean isHave=false;
-                                            for (CartItem od: list) {
-                                                if(od.getServiceID()==sv.getServiceID()){
-                                                    isHave=true;
-                                                    od.setQuantity(od.getQuantity()+Integer.parseInt(quantity.getText().toString()));
+                                            boolean isHave = false;
+                                            for (CartItem od : list) {
+                                                if (od.getServiceID() == sv.getServiceID()) {
+                                                    isHave = true;
+                                                    od.setQuantity(od.getQuantity() + Integer.parseInt(quantity.getText().toString()));
                                                 }
                                             }
-                                            if(!isHave) list.add(new CartItem(sv.getServiceID(),sv.getServiceName(),sv.getCategoryID(),
-                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                    Integer.parseInt(quantity.getText().toString()), ""));
+                                            if (!isHave)
+                                                list.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                        Integer.parseInt(quantity.getText().toString()), ""));
                                         }
 
                                     case MotionEvent.ACTION_CANCEL: {
@@ -191,9 +204,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                             @Override
                             public void onClick(View v) {
                                 int n = Integer.parseInt(quantity.getText().toString());
-                                if(n>1) {
+                                if (n > 1) {
                                     StringBuilder qty = new StringBuilder();
-                                    qty.append(n-1);
+                                    qty.append(n - 1);
                                     quantity.setText(qty);
                                 }
                             }
@@ -202,9 +215,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                             @Override
                             public void onClick(View v) {
                                 int n = Integer.parseInt(quantity.getText().toString());
-                                if(n<100) {
+                                if (n < 100) {
                                     StringBuilder qty = new StringBuilder();
-                                    qty.append(n+1);
+                                    qty.append(n + 1);
                                     quantity.setText(qty);
                                 }
                             }
@@ -218,7 +231,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(groupPosition==0&childPosition==0){
+                if (groupPosition == 0 & childPosition == 0) {
                     new GetDataFromSrever().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
                 }
 //                if(groupPosition==0&childPosition==1){

@@ -204,22 +204,4 @@ public class AppsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_cart, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.cart:
-                startActivity(new Intent(this, OrderActivity.class));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

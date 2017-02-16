@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -146,10 +147,11 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
                 return true;
             case R.id.cart:
                 Intent intent = new Intent(this, OrderActivity.class);
-                intent.putExtra("storeItem", cart);
+                intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

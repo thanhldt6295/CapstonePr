@@ -23,9 +23,9 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] titles = {"APPLICATIONS", "PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY"};
+    String[] titles = {"APPLICATIONS", "PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY", "YOUTUBE"};
     int[] images = {R.drawable.img_ecard,R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
-            R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey};
+            R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey, R.drawable.img_youtube};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,22 +87,4 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(ma);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_cart, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.cart:
-                startActivity(new Intent(this, OrderActivity.class));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

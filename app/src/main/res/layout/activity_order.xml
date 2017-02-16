@@ -72,29 +72,18 @@
                 <TimePicker
                     android:id="@+id/tpDeliveryTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_vertical_margin" />
 
-                <TextView
-                    android:id="@+id/tvComment"
+                <DatePicker
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="COMMENT"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtComment"
-                    android:layout_width="match_parent"
+                    android:id="@+id/datePicker"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Insert comment"
-                    android:inputType="textMultiLine" />
+                    android:layout_weight="1"/>
 
                 <Space
                     android:layout_width="match_parent"

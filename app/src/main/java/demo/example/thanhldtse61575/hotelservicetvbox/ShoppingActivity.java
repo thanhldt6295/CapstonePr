@@ -45,6 +45,7 @@ public class ShoppingActivity extends AppCompatActivity {
     List<CartItem> cart;
     TextView total;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
