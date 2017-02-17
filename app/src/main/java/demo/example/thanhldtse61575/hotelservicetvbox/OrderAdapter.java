@@ -36,16 +36,14 @@ public class OrderAdapter extends BaseAdapter {
     private List<CartItem> cart;
     private LayoutInflater layoutInflater;
     private TextView total;
-    private EditText comment;
     private Button finalize;
     private Button clear;
 
-    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, EditText comment, Button finalize, Button clear) {
+    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, Button finalize, Button clear) {
         this.ctx = ctx;
         this.orderListView = orderListView;
         this.cart = cart;
         this.total = total;
-        this.comment = comment;
         this.finalize = finalize;
         this.clear = clear;
         layoutInflater = LayoutInflater.from(ctx);
@@ -128,9 +126,32 @@ public class OrderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 cart.remove(position);
                 notifyDataSetChanged();
+                // Phải thêm trường hợp nếu cart null thì TOTAL = $
             }
         });
 
+        final EditText comment = (EditText) convertView.findViewById(R.id.txtComment);
+        comment.setText(cart.get(position).getComment());
+        if(comment!=null) {
+            comment.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    cart.get(position).setComment(s.toString());
+                }
+            });
+        }
+
+        // Phải thêm 1 dialog confirm ở đây
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +161,7 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
 
+        // Phải thêm 1 dialog confirm ở đây
         finalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,32 +182,6 @@ public class OrderAdapter extends BaseAdapter {
                 new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+returnList+"&deliveryTime=1232323232323");
             }
         });
-
-        orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                comment.setText(cart.get(position).getComment());
-            }
-        });
-
-        if(comment!=null) {
-            comment.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    cart.get(position).setComment(s.toString());
-                }
-            });
-        }
 
         return convertView;
     }

@@ -45,13 +45,12 @@ public class OrderActivity extends AppCompatActivity {
         cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
 
         TextView total = (TextView) findViewById(R.id.txtCartTotal);
-        EditText cmt = (EditText) findViewById(R.id.txtComment);
         Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
         Button btnClear = (Button) findViewById(R.id.btnClearOrder);
 
         if(cart!=null){
             ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart, total, cmt, btnFinalize, btnClear);
+            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear);
             listView.setAdapter(a);
         }
 
