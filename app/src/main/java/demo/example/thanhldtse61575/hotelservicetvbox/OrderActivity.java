@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -120,6 +122,17 @@ public class OrderActivity extends AppCompatActivity {
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Gson gson = new Gson();
+        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+        String cartinfo = gson.toJson(cart);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("cartinfo", cartinfo);
+        editor.commit();
+        super.onBackPressed();
     }
 }
 

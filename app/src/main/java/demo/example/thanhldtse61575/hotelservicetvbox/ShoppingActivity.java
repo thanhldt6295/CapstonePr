@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -162,6 +168,27 @@ public class ShoppingActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        Gson gson = new Gson();
+
+        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+        String json = sp.getString("cartinfo", "");
+
+        if(json.length()>0){
+            cart.clear();
+            JsonArray entries = (JsonArray) new JsonParser().parse(json);
+
+            for (int i = 0; i < entries.size(); i++) {
+                CartItem cartItem = gson.fromJson(entries.get(i).toString(), CartItem.class);
+                cart.add(cartItem);
+            }
+
+        }
+
+        super.onResume();
     }
 }
 
