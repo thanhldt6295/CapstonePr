@@ -125,8 +125,10 @@ public class OrderAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 cart.remove(position);
+                if(cart.size() == 0){
+                    total.setText("0đ");
+                }
                 notifyDataSetChanged();
-                // Phải thêm trường hợp nếu cart null thì TOTAL = $
             }
         });
 
@@ -156,7 +158,7 @@ public class OrderAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 cart.clear();
-                total.setText("$");
+                total.setText("0đ");
                 notifyDataSetChanged();
             }
         });

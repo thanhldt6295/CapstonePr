@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,11 +44,12 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
     private Button btnMinus;
     private Button btnPlus;
     private EditText quantity;
-    private List<CartItem> list = new ArrayList<CartItem>();
+    private List<CartItem> cart = new ArrayList<CartItem>();
 
-    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String, List<String>> child_titles, GridView grid,
-                        ImageView image, TextView name, TextView price, TextView description, Button btnOrder,
-                        Button btnMinus, Button btnPlus, EditText quantity, List<CartItem> list) {
+    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,
+                        List<String>> child_titles, GridView grid, ImageView image, TextView name,
+                        TextView price, TextView description, Button btnOrder, Button btnMinus,
+                        Button btnPlus, EditText quantity, List<CartItem> cart) {
         this.ctx = ctx;
         this.child_titles = child_titles;
         this.header_titles = header_titles;
@@ -60,7 +62,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
         this.btnMinus = btnMinus;
         this.btnPlus = btnPlus;
         this.quantity = quantity;
-        this.list = list;
+        this.cart = cart;
     }
 
     @Override
@@ -172,20 +174,20 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                     }
                                     case MotionEvent.ACTION_UP:
                                         Service sv = acc.get(position);
-                                        if (list == null)
-                                            list.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                        if (cart == null)
+                                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
                                                     sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
                                                     Integer.parseInt(quantity.getText().toString()), "aaaa"));
                                         else {
                                             boolean isHave = false;
-                                            for (CartItem od : list) {
+                                            for (CartItem od : cart) {
                                                 if (od.getServiceID() == sv.getServiceID()) {
                                                     isHave = true;
                                                     od.setQuantity(od.getQuantity() + Integer.parseInt(quantity.getText().toString()));
                                                 }
                                             }
                                             if (!isHave)
-                                                list.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
                                                         sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
                                                         Integer.parseInt(quantity.getText().toString()), ""));
                                         }

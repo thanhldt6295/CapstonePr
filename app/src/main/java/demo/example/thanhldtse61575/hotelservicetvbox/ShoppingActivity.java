@@ -49,8 +49,6 @@ public class ShoppingActivity extends AppCompatActivity {
     Button btnPlus;
     EditText quantity;
     List<CartItem> cart;
-    TextView total;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +115,8 @@ public class ShoppingActivity extends AppCompatActivity {
         btnMinus = (Button) findViewById(R.id.btnMinus);
         btnPlus = (Button) findViewById(R.id.btnPlus);
         btnOrder = (Button) findViewById(R.id.btnOrder);
-        total = (TextView) findViewById(R.id.txtCartTotal);
+
+        cart = new ArrayList<>();
 
         // List
         List<String> Headings = new ArrayList<>();
@@ -139,13 +138,9 @@ public class ShoppingActivity extends AppCompatActivity {
         ChildList.put(Headings.get(0), L1);
         ChildList.put(Headings.get(1), L2);
 
-        cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
-        if(cart==null){
-            cart = new ArrayList<>();
-        }
-        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this,Headings,ChildList,gridView,
-                                                                    image,name,price,description,
-                                                                  btnOrder,btnMinus,btnPlus,quantity,cart);
+
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView,
+                image, name, price, description, btnOrder, btnMinus, btnPlus, quantity, cart);
         expandableListView.setAdapter(menuAdapter);
     }
 
@@ -177,7 +172,7 @@ public class ShoppingActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
         String json = sp.getString("cartinfo", "");
 
-        if(json.length()>0){
+        if (json.length() > 0) {
             cart.clear();
             JsonArray entries = (JsonArray) new JsonParser().parse(json);
 

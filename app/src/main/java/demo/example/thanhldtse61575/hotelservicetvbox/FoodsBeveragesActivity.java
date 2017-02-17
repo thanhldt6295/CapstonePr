@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -16,6 +18,10 @@ import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -40,7 +46,7 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
     Button btnMinus;
     Button btnPlus;
     EditText quantity;
-    ArrayList<CartItem> cart = new ArrayList<CartItem>();
+    List<CartItem> cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +114,8 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         btnPlus = (Button) findViewById(R.id.btnPlus);
         btnOrder = (Button) findViewById(R.id.btnOrder);
 
+        cart = new ArrayList<>();
+
         // List
         List<String> Headings = new ArrayList<>();
         List<String> L1 = new ArrayList<>();
@@ -127,9 +135,9 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         }
         ChildList.put(Headings.get(0),L1);
         ChildList.put(Headings.get(1),L2);
-        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this,Headings,ChildList,gridView,
-                                                                image,name,price,description,
-                                                                btnOrder,btnMinus,btnPlus,quantity,cart);
+
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView,
+                image, name, price, description, btnOrder, btnMinus, btnPlus, quantity, cart);
         expandableListView.setAdapter(menuAdapter);
     }
 
@@ -152,6 +160,27 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        Gson gson = new Gson();
+
+        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+        String json = sp.getString("cartinfo", "");
+
+        if (json.length() > 0) {
+            cart.clear();
+            JsonArray entries = (JsonArray) new JsonParser().parse(json);
+
+            for (int i = 0; i < entries.size(); i++) {
+                CartItem cartItem = gson.fromJson(entries.get(i).toString(), CartItem.class);
+                cart.add(cartItem);
+            }
+
+        }
+
+        super.onResume();
     }
 
 }
