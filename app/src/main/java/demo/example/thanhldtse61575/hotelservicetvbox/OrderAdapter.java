@@ -1,6 +1,8 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.text.Editable;
@@ -153,35 +155,55 @@ public class OrderAdapter extends BaseAdapter {
             });
         }
 
-        // Phải thêm 1 dialog confirm ở đây
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cart.clear();
-                total.setText("0đ");
-                notifyDataSetChanged();
+
+                new AlertDialog.Builder(ctx)
+                        .setTitle("Confirm Clear Your Order")
+                        .setMessage("Do you really want to whatever?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                cart.clear();
+                                total.setText("0đ");
+                                notifyDataSetChanged();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 
-        // Phải thêm 1 dialog confirm ở đây
         finalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                class SendDataToServer extends AsyncTask<String, Void, Integer> {
+                if(cart.size()!=0) {
+                    new AlertDialog.Builder(ctx)
+                            .setTitle("Confirm Order")
+                            .setMessage("Are you sure?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                    @Override
-                    protected Integer doInBackground(String... params) {
-                        CommonService commonService = new CommonService();
-                        int returnValue = commonService.sendData(params[0],params[1]);
-                        return returnValue;
-                    }
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    class SendDataToServer extends AsyncTask<String, Void, Integer> {
 
-                    protected void onPostExecute(Integer response) {
-                        //
-                    }
+                                        @Override
+                                        protected Integer doInBackground(String... params) {
+                                            CommonService commonService = new CommonService();
+                                            int returnValue = commonService.sendData(params[0], params[1]);
+                                            return returnValue;
+                                        }
+
+                                        protected void onPostExecute(Integer response) {
+                                            //
+                                        }
+                                    }
+                                    String returnList = new Gson().toJson(cart);
+                                    new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&list=" + returnList + "&deliveryTime=1232323232323");
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null).show();
                 }
-                String returnList = new Gson().toJson(cart);
-                new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+returnList+"&deliveryTime=1232323232323");
             }
         });
 
