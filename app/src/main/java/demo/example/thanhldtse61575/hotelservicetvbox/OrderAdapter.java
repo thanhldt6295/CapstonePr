@@ -1,22 +1,24 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -40,14 +42,19 @@ public class OrderAdapter extends BaseAdapter {
     private TextView total;
     private Button finalize;
     private Button clear;
+    private TimePicker deliveryTime;
+    private DatePicker deliveryDate;
 
-    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, Button finalize, Button clear) {
+    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, Button finalize, Button clear,
+                        TimePicker deliveryTime, DatePicker deliveryDate) {
         this.ctx = ctx;
         this.orderListView = orderListView;
         this.cart = cart;
         this.total = total;
         this.finalize = finalize;
         this.clear = clear;
+        this.deliveryTime = deliveryTime;
+        this.deliveryDate = deliveryDate;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -66,6 +73,7 @@ public class OrderAdapter extends BaseAdapter {
         return position;
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -75,7 +83,7 @@ public class OrderAdapter extends BaseAdapter {
         image.setImageResource(R.drawable.demo);
 //        String url = cart.get(position).getImage();
 //        Picasso.with(ctx)
-//                .load(url)
+//                .load(cart.get(position).getImage())
 //                .placeholder(R.drawable.loading)
 //                .fit()
 //                .centerCrop().into(image);
@@ -158,19 +166,21 @@ public class OrderAdapter extends BaseAdapter {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(cart.size()!=0) {
+                    new AlertDialog.Builder(ctx)
+                            .setTitle("Confirm Clear Your Order")
+                            .setMessage("Do you really want to whatever?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                new AlertDialog.Builder(ctx)
-                        .setTitle("Confirm Clear Your Order")
-                        .setMessage("Do you really want to whatever?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                cart.clear();
-                                total.setText("0đ");
-                                notifyDataSetChanged();
-                            }})
-                        .setNegativeButton(android.R.string.no, null).show();
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    cart.clear();
+                                    total.setText("0đ");
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null).show();
+                }
             }
         });
 
@@ -199,7 +209,18 @@ public class OrderAdapter extends BaseAdapter {
                                         }
                                     }
                                     String returnList = new Gson().toJson(cart);
-                                    new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&list=" + returnList + "&deliveryTime=1232323232323");
+//                                    int hour = deliveryTime.getHour();
+//                                    int minute = deliveryTime.getMinute();
+//                                    deliveryDate.getDayOfMonth();
+//                                    deliveryDate.getMonth();
+//                                    deliveryDate.getYear();
+
+                                    String datetime = ""; //deliveryDate.getDayOfMonth() + "-" + deliveryDate.getMonth() + "-" + deliveryDate.getYear() + " " + hour + ":" + minute + ":00";
+                                    new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&list=" + returnList + "&deliveryTime=" + datetime);
+                                    cart.clear();
+                                    total.setText("0đ");
+                                    notifyDataSetChanged();
+                                    Toast.makeText(ctx, "Your order has been accepted. Please enjoy! Thank you!", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();

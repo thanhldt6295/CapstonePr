@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +124,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
 
         textView.setText(title);
 
-        class GetDataFromSrever extends AsyncTask<String, Void, String> {
+        class GetDataFromServer extends AsyncTask<String, Void, String> {
 
             protected String doInBackground(String... params) {
                 CommonService commonService = new CommonService();
@@ -138,7 +137,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
                 }.getType());
 
-                ItemGridAdapter adapter = new ItemGridAdapter(ctx, acc);
+                ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
                 grid.setAdapter(adapter);
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -155,7 +154,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                         quantity.setText("1");
                         image.setImageResource(R.drawable.demo);
 //                        Picasso.with(ctx)
-//                                .load(url)
+//                                .load(acc.get(position).getImage())
 //                                .placeholder(R.drawable.loading)
 //                                .fit()
 //                                .centerCrop().into(image);
@@ -234,463 +233,36 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 if (groupPosition == 0 & childPosition == 0) {
-                    new GetDataFromSrever().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
+                    new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
                 }
-//                if(groupPosition==0&childPosition==1){
-//                    final String itemList[] = {"A", "B", "C", "D"};
-//                    final String itemPrice[] = {"35000", "20000", "15000", "30000"};
-//                    final String descript[] = {"dadasdasdasd", "abcdjdadkas", "weqeqwewqe", "dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.demo, R.drawable.img, R.drawable.img, R.drawable.img};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                if(groupPosition==0&childPosition==2){
-//                    final String itemList[] = {"C", "B", "C", "C", "C", "C"};
-//                    final String itemPrice[] = {"20000", "25000", "10000", "15000", "15000", "30000"};
-//                    final String descript[] = {"abcdjdadkas", "weqeqwewqe", "dadasdasdasd", "abcdjdadkas", "weqeqwewqe", "dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.demo, R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.demo, R.drawable.img};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                if(groupPosition==1&childPosition==0){
-//                    final String itemList[] = {"B", "B", "B", "B", "B", "B"};
-//                    final String itemPrice[] = {"20000", "25000", "10000", "15000", "15000", "30000"};
-//                    final String descript[] = {"abcdjdadkas", "weqeqwewqe", "dadasdasdasd", "abcdjdadkas", "weqeqwewqe", "dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.img};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                if(groupPosition==1&childPosition==1){
-//                    final String itemList[] = {"A", "B", "C", "D"};
-//                    final String itemPrice[] = {"35000", "20000", "15000", "30000"};
-//                    final String descript[] = {"dadasdasdasd", "abcdjdadkas", "weqeqwewqe", "dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.img, R.drawable.img, R.drawable.img, R.drawable.img};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                if(groupPosition==1&childPosition==2){
-//                    final String itemList[] = {"TTTTT", "BC"};
-//                    final String itemPrice[] = {"20000","26000"};
-//                    final String descript[] = {"weqeqwewqe", "dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.img, R.drawable.img};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                if(groupPosition==1&childPosition==3){
-//                    final String itemList[] = {"AAAA", "FFFFF"};
-//                    final String itemPrice[] = {"30000","26000"};
-//                    final String descript[] = {"weqeqwewqe", "dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.demo, R.drawable.demo};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                if(groupPosition==1&childPosition==4){
-//                    final String itemList[] = {"TTTTT"};
-//                    final String itemPrice[] = {"30000"};
-//                    final String descript[] = {"weqeqwewqe"};
-//                    final int itemIcon[] = {R.drawable.demo};
-//
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
+                if(groupPosition==0&childPosition==1){
+
+                }
+                if(groupPosition==0&childPosition==2){
+
+                }
+                if(groupPosition==1&childPosition==0){
+
+                }
+                if(groupPosition==1&childPosition==1){
+
+                }
+                if(groupPosition==1&childPosition==2){
+
+                }
+                if(groupPosition==1&childPosition==3){
+
+                }
+                if(groupPosition==1&childPosition==4){
+
+                }
 //                if(groupPosition==1&childPosition==5){
 //                    final String itemList[] = {"BC"};
 //                    final String itemPrice[] = {"26000"};
 //                    final String descript[] = {"dadasdasdasd"};
 //                    final int itemIcon[] = {R.drawable.img};
 //
-//                    ItemGridAdapter adapter = new ItemGridAdapter(ctx, itemIcon, itemList);
+//                    ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, itemIcon, itemList);
 //                    grid.setAdapter(adapter);
 //                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //                        @Override

@@ -17,7 +17,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 /**
  * Created by ThanhLDTSE61575 on 2/14/2017.
  */
-public class ItemGridAdapter extends BaseAdapter {
+public class ShopGridViewAdapter extends BaseAdapter {
 
 //    private int icons[];
 //    private String items[];
@@ -25,7 +25,7 @@ public class ItemGridAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
 
-    public ItemGridAdapter(Context context, List<Service> list){
+    public ShopGridViewAdapter(Context context, List<Service> list){
         this.context=context;
         this.list = list;
     }

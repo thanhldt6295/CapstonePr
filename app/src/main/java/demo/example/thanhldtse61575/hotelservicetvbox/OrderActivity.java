@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -33,7 +34,6 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 public class OrderActivity extends AppCompatActivity {
 
     List<CartItem> cart = new ArrayList<>();
-    //Button finalize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,34 +49,15 @@ public class OrderActivity extends AppCompatActivity {
         TextView total = (TextView) findViewById(R.id.txtCartTotal);
         Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
         Button btnClear = (Button) findViewById(R.id.btnClearOrder);
+        TimePicker deliveryTime = (TimePicker) findViewById(R.id.tpDeliveryTime);
+        deliveryTime.setIs24HourView(true);
+        DatePicker deliveryDate = (DatePicker) findViewById(R.id.datePicker);
 
         if(cart!=null){
             ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear);
+            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear, deliveryTime, deliveryDate);
             listView.setAdapter(a);
         }
-
-        //finalize = (Button) findViewById(R.id.btnFinalizeOrder);
-//        finalize.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                class SendDataToServer extends AsyncTask<String, Void, Integer> {
-//
-//                    @Override
-//                    protected Integer doInBackground(String... params) {
-//                        CommonService commonService = new CommonService();
-//                        int returnva = commonService.sendData(params[0],params[1]);
-//                        return returnva;
-//                    }
-//
-//                    protected void onPostExecute(Integer response) {
-//                        //
-//                    }
-//                }
-//                String retu = new Gson().toJson(cart);
-//                new SendDataToServer().execute("http://localhost:49457/api/getapp/","roomid=201&list="+retu+"&deliveryTime=1232323232323");
-//            }
-//        });
 
         // Datetime & Calendar
         final TextView txtDate;
