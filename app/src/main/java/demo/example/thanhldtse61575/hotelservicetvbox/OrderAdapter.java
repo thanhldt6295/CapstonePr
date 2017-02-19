@@ -168,8 +168,8 @@ public class OrderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(cart.size()!=0) {
                     new AlertDialog.Builder(ctx)
-                            .setTitle("Confirm Clear Your Order")
-                            .setMessage("Do you really want to whatever?")
+                            .setTitle(R.string.confirm_clear)
+                            .setMessage(R.string.confirm_question_do)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -189,8 +189,8 @@ public class OrderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(cart.size()!=0) {
                     new AlertDialog.Builder(ctx)
-                            .setTitle("Confirm Order")
-                            .setMessage("Are you sure?")
+                            .setTitle(R.string.confirm_order)
+                            .setMessage(R.string.confirm_question_do)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -220,7 +220,7 @@ public class OrderAdapter extends BaseAdapter {
                                     cart.clear();
                                     total.setText("0đ");
                                     notifyDataSetChanged();
-                                    Toast.makeText(ctx, "Your order has been accepted. Please enjoy! Thank you!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();

@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class RoomServicesActivity extends AppCompatActivity {
 
-    String[] titles = {"FOODS & BEVERAGES", "HOUSEKEEPING", "MAINTENANCE", "FRONT-DESK"};
+    int[] titles = {R.string.food_drink, R.string.housekeeping, R.string.maintenance, R.string.front_desk};
     int[] images = {R.drawable.hotelww, R.drawable.img_housekeeping, R.drawable.img_maintenance, R.drawable.img_request};
 
     @Override
@@ -26,7 +26,7 @@ public class RoomServicesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("ROOM SERVICES");
+        abTitle.setText(getResources().getString(R.string.service));
 
         // Datetime & Calendar
         final TextView txtDate;

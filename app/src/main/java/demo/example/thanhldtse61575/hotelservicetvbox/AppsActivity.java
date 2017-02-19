@@ -40,7 +40,7 @@ public class AppsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("APPLICATIONS");
+        abTitle.setText(getResources().getString(R.string.application));
 
 //        String networkSSID = "test";
 //        String networkPass = "pass";

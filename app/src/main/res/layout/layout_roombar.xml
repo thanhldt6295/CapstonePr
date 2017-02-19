@@ -7,7 +7,7 @@
     android:background="@color/black_overlay">
 
         <TextView
-            android:text="ROOM ID"
+            android:text="@string/roomid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/roomid"

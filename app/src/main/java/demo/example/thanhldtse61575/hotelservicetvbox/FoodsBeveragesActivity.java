@@ -55,7 +55,7 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("FOODS & BEVERAGES");
+        abTitle.setText(getResources().getString(R.string.food_drink));
 
         // Datetime & Calendar
         final TextView txtDate;

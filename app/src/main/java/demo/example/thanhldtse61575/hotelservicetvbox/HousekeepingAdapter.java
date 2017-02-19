@@ -45,8 +45,8 @@ public class HousekeepingAdapter extends RecyclerView.Adapter<Holder>  {
                 switch (pos){
                     case 0:
                         new AlertDialog.Builder(c)
-                                .setTitle("Confirm Service")
-                                .setMessage("Do you really want to whatever?")
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -61,7 +61,7 @@ public class HousekeepingAdapter extends RecyclerView.Adapter<Holder>  {
                                             }
                                         }
                                         new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&serviceName=" + titles[position]);
-                                        Toast.makeText(c, "Please wait... We will serve you soon. Please enjoy! Thank you!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(c, R.string.confirm_answer_wait, Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .setNegativeButton(android.R.string.no, null).show();

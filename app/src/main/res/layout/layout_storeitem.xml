@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/buttonstyles"
             android:minHeight="0dp"
-            android:text="ORDER"
+            android:text="@string/add"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"

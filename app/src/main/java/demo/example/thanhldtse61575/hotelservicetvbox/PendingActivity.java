@@ -48,7 +48,7 @@ public class PendingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("PENDING REQUEST");
+        abTitle.setText(getResources().getString(R.string.pending));
 
         new GetDataFromServer().execute("api"); //Waiting API
 

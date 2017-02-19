@@ -35,7 +35,8 @@
                         android:childDivider="@color/white"
                         android:divider="@color/white"
                         android:dividerHeight="1dp"
-                        android:listSelector="@drawable/list_selector"></ExpandableListView>
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="vertical"></ExpandableListView>
 
                 </FrameLayout>
 

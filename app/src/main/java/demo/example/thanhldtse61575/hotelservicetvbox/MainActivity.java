@@ -16,7 +16,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] titles = {"APPLICATIONS", "PROMOTIONAL CHANNEL", "ROOM SERVICES", "SHOPPING", "E-CARD", "BILLING", "SURVEY", "YOUTUBE"};
+    int[] titles = {R.string.application, R.string.promotional, R.string.service, R.string.shopping,
+            R.string.ecard, R.string.bill, R.string.survey};
     int[] images = {R.drawable.img_ecard,R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
             R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey, R.drawable.img_youtube};
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("Hotel Service TV Box");
+        abTitle.setText(getResources().getString(R.string.app_name));
 
         // Datetime & Calendar
         final TextView txtDate;

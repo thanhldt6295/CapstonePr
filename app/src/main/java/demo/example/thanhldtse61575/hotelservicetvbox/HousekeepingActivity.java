@@ -27,7 +27,7 @@ public class HousekeepingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("HOUSEKEEPING");
+        abTitle.setText(getResources().getString(R.string.housekeeping));
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

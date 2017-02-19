@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 public class MainAdapter extends RecyclerView.Adapter<Holder> {
 
     Context c;
-    String[] titles;
+    int[] titles;
     int[] images;
 
-    public MainAdapter(Context c, String[] titles, int[] images) {
+    public MainAdapter(Context c, int[] titles, int[] images) {
         this.c = c;
         this.titles = titles;
         this.images = images;

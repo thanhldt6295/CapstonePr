@@ -26,7 +26,7 @@ public class PromotionalChanelActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("PROMOTIONAL CHANNEL");
+        abTitle.setText(getResources().getString(R.string.promotional));
 
         // Datetime & Calendar
         final TextView txtDate;

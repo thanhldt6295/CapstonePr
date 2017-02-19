@@ -28,7 +28,7 @@ public class ViewBillActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("MY BILLING");
+        abTitle.setText(getResources().getString(R.string.bill));
 
         details.add(new Bill("Tuna Sandwich", "ROOM SERVICES/FOODS AND BEVERAGES/BREAKFAST", 80000, 1));
         details.add(new Bill("Mojito", "ROOM SERVICES/FOODS AND BEVERAGES/BEVERAGES", 45000, 2));

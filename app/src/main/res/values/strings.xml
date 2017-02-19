@@ -1,64 +1,121 @@
 <resources>
-    <string name="app_name">HotelServiceTVBox</string>
+    <string name="app_name">Hotel Service TV Box</string>
+    <string name="title_activity_welcome">Welcome Activity</string>
+    <string name="total">TOTAL</string>
+    <string name="roomid">ROOM ID</string>
+    <string name="add">ORDER</string>
+    <string name="finalize">FINALIZE</string>
+    <string name="clear">CLEAR ORDER</string>
+    <string name="comment">COMMENT</string>
+    <string name="delivery_time">DELIVERY TIME</string>
 
-    <string name="title_activity_welcome">WelcomeActivity</string>
-    <string name="dummy_button">ENGLISH</string>
-    <string name="dummy_button2">VIETNAMESE</string>
+    <!-- Dialog Notify-->
+    <string name="confirm_service">Confirm Service</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="confirm_clear">Confirm Clear</string>
+    <string name="confirm_question_do">Do you really want to whatever?</string>
+    <string name="confirm_answer_wait">Please wait... We will serve you soon. Please enjoy! Thank you!</string>
+    <string name="confirm_answer_accepted">Your order has been accepted. Please enjoy! Thank you!</string>
+
+    <!-- WelcomeActivity -->
+    <string name="dummy_eng">ENGLISH</string>
+    <string name="dummy_viet">TIẾNG VIỆT</string>
     <string name="dummy_content">WELCOME\nOUR HOTEL</string>
-    <string name="promotional_chanel">PROMOTIONAL CHANEL</string>
-    <string name="room_services">ROOM SERVICES</string>
-    <string name="virtual_shopping">VIRTUAL SHOPPING</string>
-    <string name="e_cards">E-CARDS</string>
-    <string name="survey">SURVEY</string>
-    <string name="view_bill">VIEW BILL</string>
 
-    <!-- Menu -->
-    <string-array name="menu_titles">
-        <item>PROMOTIONAL CHANEL</item>
-        <item>ROOM SERVICES</item>
-        <item>VIRTUAL SHOPPING</item>
-        <item>E-CARDS</item>
-        <item>SURVEY</item>
-        <item>VIEW BILL</item>
-    </string-array>
+    <!-- MainActivity -->
+    <string name="application">APPLICATIONS</string>
+    <string name="promotional">PROMOTIONAL CHANEL</string>
+    <string name="service">ROOM SERVICES</string>
+    <string name="shopping">VIRTUAL SHOPPING</string>
+    <string name="ecard">E-CARDS</string>
+    <string name="survey">SURVEY</string>
+    <string name="bill">BILLING</string>
+    <string name="order">YOUR ORDER</string>
+    <string name="pending">PENDING</string>
+
+    <!-- PromotionalChanelActivity -->
+    <!-- RoomServicesActivity -->
+    <string name="food_drink">FOODS AND BEVERAGES</string>
+    <string name="housekeeping">HOUSEKEEPING</string>
+    <string name="maintenance">MAINTENANCE</string>
+    <string name="front_desk">FRONT-DESK</string>
+
+    <!-- HousekeepingActivity -->
+
+    <!-- MenuList -->
+    <string name="food">FOODS</string>
+    <string name="beverage">BEVERAGES</string>
+
+    <string name="breakfast">BREAKFAST</string>
+    <string name="lunch">LUNCH</string>
+    <string name="dinner">DINNER</string>
+    <string name="dessert">DESSERT</string>
+
+    <string name="coffee">COFFEE</string>
+    <string name="fruit">FRUIT JUICE</string>
+    <string name="wine">WINE</string>
+    <string name="mojito">MOJITO</string>
+
+    <string name="souvenir">SOUVENIR</string>
+    <string name="personal">PERSONAL</string>
+
+    <string name="decoration">DECORATION</string>
+    <string name="keychain">KEYCHAIN</string>
+    <string name="toy">TOY</string>
+
+    <string name="houseware">HOUSEWARE</string>
+    <string name="lighter">LIGHTER</string>
+    <string name="tshirtf">T-SHIRT (female)</string>
+    <string name="tshirtm">T-SHIRT (male)</string>
+    <string name="coatf">COAT (female)</string>
+    <string name="coatm">COAT (male)</string>
+    <string name="trouserf">TROUSERS (female)</string>
+    <string name="trouserm">TROUSERS (male)</string>
+    <string name="underwearf">UNDERWEAR (female)</string>
+    <string name="underwearm">UNDERWEAR (male)</string>
 
     <!-- Foods and Drinks -->
     <string-array name="food_header_titles">
-        <item>FOODS</item>
-        <item>BEVERAGES</item>
+        <item>@string/food</item>
+        <item>@string/beverage</item>
     </string-array>
 
     <string-array name="food_h1_items">
-        <item>BREAKFAST</item>
-        <item>LUNCH</item>
-        <item>DINNER</item>
+        <item>@string/breakfast</item>
+        <item>@string/lunch</item>
+        <item>@string/dinner</item>
+        <item>@string/dessert</item>
     </string-array>
 
     <string-array name="food_h2_items">
-        <item>COFFEE</item>
-        <item>FRUIT JUICE</item>
-        <item>WINE</item>
-        <item>MOJITO</item>
+        <item>@string/coffee</item>
+        <item>@string/fruit</item>
+        <item>@string/wine</item>
+        <item>@string/mojito</item>
     </string-array>
 
     <!-- Virtual Shopping -->
     <string-array name="shopping_header_titles">
-        <item>SOURVENIR</item>
-        <item>PERSONAL</item>
+        <item>@string/souvenir</item>
+        <item>@string/personal</item>
     </string-array>
 
     <string-array name="shopping_h1_items">
-        <item>DECORATIONS</item>
-        <item>KEYCHAINS</item>
-        <item>TOYS</item>
+        <item>@string/decoration</item>
+        <item>@string/keychain</item>
+        <item>@string/toy</item>
     </string-array>
 
     <string-array name="shopping_h2_items">
-        <item>HOUSEWARE</item>
-        <item>LIGHTERS</item>
-        <item>T-SHIRT</item>
-        <item>COAT</item>
-        <item>TROUSERS</item>
-        <item>UNDERWEAR</item>
+        <item>@string/houseware</item>
+        <item>@string/lighter</item>
+        <item>@string/tshirtf</item>
+        <item>@string/tshirtm</item>
+        <item>@string/coatf</item>
+        <item>@string/coatm</item>
+        <item>@string/trouserf</item>
+        <item>@string/trouserm</item>
+        <item>@string/underwearf</item>
+        <item>@string/underwearm</item>
     </string-array>
 </resources>
