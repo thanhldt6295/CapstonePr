@@ -44,7 +44,7 @@
     <string name="maintenance">BẢO TRÌ THIẾT BỊ</string>
     <string name="total">THÀNH TIỀN</string>
     <string name="roomid">SỐ PHÒNG</string>
-    <string name="order">ĐƠN HÀNG CỦA BẠN</string>
+    <string name="order">ĐƠN HÀNG CỦA QUÝ KHÁCH</string>
     <string name="pending">ĐƠN HÀNG ĐANG CHỜ</string>
     <string name="delivery_time">THỜI GIAN HẸN</string>
     <string name="clear">XÓA HẾT</string>
@@ -52,7 +52,7 @@
     <string name="finalize">XÁC NHẬN</string>
     <string name="comment">GHI CHÚ</string>
     <string name="confirm_answer_wait">Xin chờ trong giây lát. Chúng tôi sẽ phục vụ quý khách ngay. Hãy tận hưởng nhé! Chân thành cảm ơn.</string>
-    <string name="confirm_question_do">Qúy khách thực sự muốn chứ?</string>
+    <string name="confirm_question_do">Quý khách thực sự muốn chứ?</string>
     <string name="confirm_service">Xác nhận dịch vụ</string>
     <string name="confirm_clear">Xác nhận xóa hết</string>
     <string name="confirm_order">Xác nhận đơn hàng</string>

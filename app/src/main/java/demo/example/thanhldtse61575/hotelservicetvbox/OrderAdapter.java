@@ -80,13 +80,13 @@ public class OrderAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.layout_orderitem, null);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
-        image.setImageResource(R.drawable.demo);
-//        String url = cart.get(position).getImage();
-//        Picasso.with(ctx)
-//                .load(cart.get(position).getImage())
-//                .placeholder(R.drawable.loading)
-//                .fit()
-//                .centerCrop().into(image);
+        //image.setImageResource(R.drawable.demo);
+        //String url = cart.get(position).getImage();
+        Picasso.with(ctx)
+                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/256/Apple%20logo%20icon%20-%20Classic.png")
+                .placeholder(R.drawable.loading)
+                .fit()
+                .centerCrop().into(image);
         TextView name = (TextView) convertView.findViewById(R.id.txtServiceName);
         name.setText(cart.get(position).getServiceName());
         TextView unitPrice = (TextView) convertView.findViewById(R.id.txtUnitPrice);

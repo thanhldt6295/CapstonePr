@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
@@ -21,8 +19,6 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
  */
 public class ShopGridViewAdapter extends BaseAdapter {
 
-//    private int icons[];
-//    private String items[];
     private List<Service> list;
     private Context context;
     private LayoutInflater inflater;
@@ -59,9 +55,9 @@ public class ShopGridViewAdapter extends BaseAdapter {
         ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewGrid);
         TextView item = (TextView) gridView.findViewById(R.id.textViewGrid);
 
-        //icon.setImageResource(R.drawable.demo);
+        //String url = list.get(position).getImage();
         Picasso.with(context)
-                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/128/Apple%20logo%20icon%20-%20Classic.png")
+                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/256/Apple%20logo%20icon%20-%20Classic.png")
                 .placeholder(R.drawable.loading)
                 .fit()
                 .centerCrop().into(icon);

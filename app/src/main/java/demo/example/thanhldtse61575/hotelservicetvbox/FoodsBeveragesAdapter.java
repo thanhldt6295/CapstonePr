@@ -28,9 +28,10 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
- * Created by ThanhLDTSE61575 on 1/9/2017.
+ * Created by ThanhLDTSE61575 on 2/19/2017.
  */
-public class ShopMenuListAdapter extends BaseExpandableListAdapter {
+
+public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
     private List<String> header_titles;
     private HashMap<String, List<String>> child_titles;
     private Context ctx;
@@ -45,8 +46,8 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
     private EditText quantity;
     private List<CartItem> cart = new ArrayList<CartItem>();
 
-    ShopMenuListAdapter(Context ctx, List<String> header_titles, HashMap<String,
-                        List<String>> child_titles, GridView grid, ImageView image, TextView name,
+    FoodsBeveragesAdapter(Context ctx, List<String> header_titles, HashMap<String,
+            List<String>> child_titles, GridView grid, ImageView image, TextView name,
                         TextView price, TextView description, Button btnOrder, Button btnMinus,
                         Button btnPlus, EditText quantity, List<CartItem> cart) {
         this.ctx = ctx;
@@ -256,70 +257,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 if(groupPosition==1&childPosition==4){
 
                 }
-//                if(groupPosition==1&childPosition==5){
-//                    final String itemList[] = {"BC"};
-//                    final String itemPrice[] = {"26000"};
-//                    final String descript[] = {"dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.img};
-//
-//                    ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
+                if(groupPosition==1&childPosition==5){
+
+                }
             }
         });
         return convertView;
