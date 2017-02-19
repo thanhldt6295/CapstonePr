@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.net.URI;
 import java.net.URL;
 import java.util.List;
@@ -57,7 +59,12 @@ public class ShopGridViewAdapter extends BaseAdapter {
         ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewGrid);
         TextView item = (TextView) gridView.findViewById(R.id.textViewGrid);
 
-        icon.setImageResource(R.drawable.demo);
+        //icon.setImageResource(R.drawable.demo);
+        Picasso.with(context)
+                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/128/Apple%20logo%20icon%20-%20Classic.png")
+                .placeholder(R.drawable.loading)
+                .fit()
+                .centerCrop().into(icon);
         item.setText(list.get(position).getServiceName());
 
         return gridView;

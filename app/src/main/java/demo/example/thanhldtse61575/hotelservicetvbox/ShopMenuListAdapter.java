@@ -152,12 +152,12 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                         btnOrder.setVisibility(View.VISIBLE);
 
                         quantity.setText("1");
-                        image.setImageResource(R.drawable.demo);
-//                        Picasso.with(ctx)
-//                                .load(acc.get(position).getImage())
-//                                .placeholder(R.drawable.loading)
-//                                .fit()
-//                                .centerCrop().into(image);
+                        //image.setImageResource(R.drawable.demo);
+                        Picasso.with(ctx)
+                                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/256/Apple%20logo%20icon%20-%20Classic.png")
+                                .placeholder(R.drawable.loading)
+                                .fit()
+                                .centerCrop().into(image);
                         name.setText(acc.get(position).getServiceName());
                         price.setText(acc.get(position).getUnitPrice() + "");
                         description.setText(acc.get(position).getDescription());

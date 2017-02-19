@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -65,14 +67,12 @@ public class PendingAdapter extends BaseAdapter{
         EditText comment = (EditText) convertView.findViewById(R.id.txtComment);
         Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
 
-        image.setImageResource(R.drawable.demo);
-//      String url = cart.get(position).getImage();
-//      Picasso.with(ctx)
-//           .load(url)
-//           .placeholder(R.drawable.loading)
-//           .fit()
-//           .centerCrop().into(image);
-
+        String url = cart.get(position).getImage();
+        Picasso.with(ctx)
+           .load(url)
+           .placeholder(R.drawable.loading)
+           .fit()
+           .centerCrop().into(image);
         name.setText(cart.get(position).getServiceName());
         DecimalFormat format = new DecimalFormat("###,###.#");
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) + "đ");
