@@ -2,10 +2,13 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * Created by ThanhLDTSE61575 on 1/10/2017.
@@ -31,7 +34,7 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, final int position) {
+    public void onBindViewHolder(final Holder holder, final int position) {
         holder.img.setImageResource(images[position]);
         holder.txt.setText(titles[position]);
         holder.setItemClickListener(new ItemClickListener() {
@@ -40,19 +43,134 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
 
                 switch(pos){
                     case 0:
-                        c.startActivity(new Intent(c, AppsActivity.class));
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, AppsActivity.class));
+
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
                         break;
                     case 1:
-                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
+
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
                         break;
                     case 2:
-                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
                         break;
                     case 3:
-                        c.startActivity(new Intent(c, ShoppingActivity.class));
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, ShoppingActivity.class));
+
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
                         break;
                     case 5:
-                        c.startActivity(new Intent(c, ViewBillActivity.class));
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, ViewBillActivity.class));
+
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
                         break;
                 }
 
