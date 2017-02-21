@@ -59,4 +59,10 @@
     <string name="confirm_answer_accepted">Đơn hàng của quý khách đã được tiếp nhận. Hãy tận hưởng nhé! Chân thành cảm ơn.</string>
     <string name="confirm_back">Xác nhận thoát ra</string>
     <string name="confirm_back_question">Thao tác này sẽ làm mất đi giỏ hàng của bạn. Bạn có chắc chắn muốn thoát không?</string>
+
+    <string name="room_cleaning">DỌN PHÒNG</string>
+    <string name="laundry">GIẶT ỦI</string>
+    <string name="datetime">NGÀY/GIỜ</string>
+
+
 </resources>

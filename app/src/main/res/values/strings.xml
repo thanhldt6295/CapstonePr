@@ -43,6 +43,12 @@
     <string name="front_desk">FRONT-DESK</string>
 
     <!-- HousekeepingActivity -->
+    <string name="room_cleaning">ROOM CLEANING</string>
+    <string name="laundry">LAUNDRY</string>
+    <string name="bath_extras">BATH EXTRAS</string>
+    <string name="bed_extras">BED EXTRAS</string>
+    <string name="room_extras">ROOM EXTRAS</string>
+    <string name="datetime">DATE/TIME</string>
 
     <!-- MenuList -->
     <string name="food">FOODS</string>

@@ -16,7 +16,8 @@ import java.util.Date;
 
 public class HousekeepingActivity extends AppCompatActivity {
 
-    String[] titles = {"ROOM CLEANING", "LAUNDRY", "BATH EXTRAS", "BED EXTRAS", "ROOM EXTRAS"};
+    int[] titles = {R.string.room_cleaning, R.string.laundry, R.string.bath_extras,
+            R.string.bed_extras, R.string.room_extras};
     int[] images = {R.drawable.img_roomcleaning, R.drawable.img_laundry, R.drawable.img_bathextras,
             R.drawable.img_bedextras, R.drawable.img_roomextras};
 
