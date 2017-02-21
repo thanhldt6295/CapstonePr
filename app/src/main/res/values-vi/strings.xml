@@ -57,4 +57,6 @@
     <string name="confirm_clear">Xác nhận xóa hết</string>
     <string name="confirm_order">Xác nhận đơn hàng</string>
     <string name="confirm_answer_accepted">Đơn hàng của quý khách đã được tiếp nhận. Hãy tận hưởng nhé! Chân thành cảm ơn.</string>
+    <string name="confirm_back">Xác nhận thoát ra</string>
+    <string name="confirm_back_question">Thao tác này sẽ làm mất đi giỏ hàng của bạn. Bạn có chắc chắn muốn thoát không?</string>
 </resources>

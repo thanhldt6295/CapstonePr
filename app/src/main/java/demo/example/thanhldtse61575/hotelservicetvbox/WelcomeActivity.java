@@ -131,8 +131,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 Toast.makeText(v.getContext(),
                         "You have selected English", Toast.LENGTH_SHORT)
                         .show();
-                Intent mainAct = new Intent(WelcomeActivity.this,MainActivity.class);
-                startActivity(mainAct);
+                //Intent mainAct = new Intent(WelcomeActivity.this,MainActivity.class);
+                //startActivity(mainAct);
+                setLocale("en");
             }
         });
 
@@ -140,7 +141,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(),
-                        "Qúy khách đã chọn Tiếng Việt", Toast.LENGTH_SHORT)
+                        "Quý khách đã chọn Tiếng Việt", Toast.LENGTH_SHORT)
                         .show();
                 setLocale("vi");
             }

@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -183,4 +185,35 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(cart.size()!=0) {
+            final Gson gson = new Gson();
+            SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+            final SharedPreferences.Editor editor = sp.edit();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(R.string.confirm_back);
+            builder.setMessage(R.string.confirm_back_question);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    cart.clear();
+                    String str = gson.toJson(cart);
+                    editor.putString("cartinfo", str);
+                    editor.commit();
+                    FoodsBeveragesActivity.super.onBackPressed();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //Nothing
+                }
+            });
+            builder.show();
+        }
+        if(cart.size()==0) {
+            FoodsBeveragesActivity.super.onBackPressed();
+        }
+    }
 }

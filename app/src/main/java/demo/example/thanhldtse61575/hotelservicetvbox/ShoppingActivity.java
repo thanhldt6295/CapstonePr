@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NavUtils;
@@ -17,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,7 +27,6 @@ import com.google.gson.JsonParser;
 
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -184,6 +184,38 @@ public class ShoppingActivity extends AppCompatActivity {
         }
 
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(cart.size()!=0) {
+            final Gson gson = new Gson();
+            SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+            final SharedPreferences.Editor editor = sp.edit();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(R.string.confirm_back);
+            builder.setMessage(R.string.confirm_back_question);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    cart.clear();
+                    String str = gson.toJson(cart);
+                    editor.putString("cartinfo", str);
+                    editor.commit();
+                    ShoppingActivity.super.onBackPressed();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //Nothing
+                }
+            });
+            builder.show();
+        }
+        if(cart.size()==0) {
+            ShoppingActivity.super.onBackPressed();
+        }
     }
 }
 
