@@ -55,9 +55,9 @@ public class ShopGridViewAdapter extends BaseAdapter {
         ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewGrid);
         TextView item = (TextView) gridView.findViewById(R.id.textViewGrid);
 
-        //String url = list.get(position).getImage();
+        String url = list.get(position).getImage();
         Picasso.with(context)
-                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/256/Apple%20logo%20icon%20-%20Classic.png")
+                .load(url)
                 .placeholder(R.drawable.loading)
                 .fit()
                 .centerCrop().into(icon);

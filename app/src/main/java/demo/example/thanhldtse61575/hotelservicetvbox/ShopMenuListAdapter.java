@@ -152,9 +152,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                         btnOrder.setVisibility(View.VISIBLE);
 
                         quantity.setText("1");
-                        //String url = cart.get(position).getImage();
+                        String url = acc.get(position).getImage();
                         Picasso.with(ctx)
-                                .load("http://files.softicons.com/download/system-icons/apple-logo-icons-by-thvg/png/256/Apple%20logo%20icon%20-%20Classic.png")
+                                .load(url)
                                 .placeholder(R.drawable.loading)
                                 .fit()
                                 .centerCrop().into(image);
@@ -233,6 +233,14 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 if (groupPosition == 0 & childPosition == 0) {
+                    image.setVisibility(View.INVISIBLE);
+                    name.setVisibility(View.INVISIBLE);
+                    price.setVisibility(View.INVISIBLE);
+                    description.setVisibility(View.INVISIBLE);
+                    btnPlus.setVisibility(View.INVISIBLE);
+                    btnMinus.setVisibility(View.INVISIBLE);
+                    quantity.setVisibility(View.INVISIBLE);
+                    btnOrder.setVisibility(View.INVISIBLE);
                     new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
                 }
                 if(groupPosition==0&childPosition==1){

@@ -196,7 +196,7 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
 
             builder.setTitle(R.string.confirm_back);
             builder.setMessage(R.string.confirm_back_question);
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     cart.clear();
                     String str = gson.toJson(cart);
@@ -205,7 +205,7 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
                     FoodsBeveragesActivity.super.onBackPressed();
                 }
             });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     //Nothing
                 }

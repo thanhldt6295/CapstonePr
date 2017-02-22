@@ -69,6 +69,8 @@
     <string name="air_condition">MÁY LẠNH</string>
     <string name="refrigerator">TỦ LẠNH</string>
     <string name="television">TIVI</string>
+    <string name="cancel">Hủy</string>
+    <string name="yes">Có</string>
 
 
 </resources>

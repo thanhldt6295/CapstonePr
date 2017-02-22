@@ -8,6 +8,8 @@
     <string name="clear">CLEAR ORDER</string>
     <string name="comment">COMMENT</string>
     <string name="delivery_time">DELIVERY TIME</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>
