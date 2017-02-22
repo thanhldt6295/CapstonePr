@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -14,6 +16,9 @@ import java.util.Date;
 
 public class MaintenanceActivity extends AppCompatActivity {
 
+    int[] titles = {R.string.television, R.string.air_condition, R.string.refrigerator};
+    int[] images = {R.drawable.img_roomcleaning, R.drawable.img_laundry, R.drawable.img_bathextras};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +27,11 @@ public class MaintenanceActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.maintenance));
+
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
+        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        MaintenanceAdapter ma = new MaintenanceAdapter(this, titles, images);
+        rv.setAdapter(ma);
 
         // Datetime & Calendar
         final TextView txtDate;

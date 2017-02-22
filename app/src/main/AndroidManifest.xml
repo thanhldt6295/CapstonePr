@@ -41,6 +41,11 @@
         <activity android:name=".OrderActivity" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name=".ViewBillActivity" />
+        <activity android:name=".housekeeping.RoomCleaningActivity" />
+        <activity android:name=".housekeeping.LaundryActivity" />
+        <activity android:name=".housekeeping.BathExtraActivity" />
+        <activity android:name=".housekeeping.BedExtraActivity" />
+        <activity android:name=".housekeeping.RoomExtraActivity" />
         <activity android:name=".AppsActivity"></activity>
     </application>
 

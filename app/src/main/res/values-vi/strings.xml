@@ -63,6 +63,12 @@
     <string name="room_cleaning">DỌN PHÒNG</string>
     <string name="laundry">GIẶT ỦI</string>
     <string name="datetime">NGÀY/GIỜ</string>
+    <string name="bath_extras">THÊM ABC</string>
+    <string name="bed_extras">THÊM BCD</string>
+    <string name="room_extras">THÊM DCE</string>
+    <string name="air_condition">MÁY LẠNH</string>
+    <string name="refrigerator">TỦ LẠNH</string>
+    <string name="television">TIVI</string>
 
 
 </resources>

@@ -50,6 +50,11 @@
     <string name="room_extras">ROOM EXTRAS</string>
     <string name="datetime">DATE/TIME</string>
 
+    <!-- MaintenanceActivity -->
+    <string name="television">TELEVISION</string>
+    <string name="air_condition">AIR CONDITIONER </string>
+    <string name="refrigerator">REFRIGERATOR</string>
+
     <!-- MenuList -->
     <string name="food">FOODS</string>
     <string name="beverage">BEVERAGES</string>
