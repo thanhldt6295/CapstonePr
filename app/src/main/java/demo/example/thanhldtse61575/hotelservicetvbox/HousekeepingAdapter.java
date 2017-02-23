@@ -9,15 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.BathExtraActivity;
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.BedExtraActivity;
+import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraActivity;
 import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.LaundryActivity;
 import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.RoomCleaningActivity;
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.RoomExtraActivity;
 
 /**
  * Created by VULHSE61532 on 1/12/2017.
@@ -79,13 +73,19 @@ public class HousekeepingAdapter extends RecyclerView.Adapter<Holder>  {
                         c.startActivity(new Intent(c, LaundryActivity.class));
                         break;
                     case 2:
-                        c.startActivity(new Intent(c, BathExtraActivity.class));
+                        Intent bathExtra = new Intent(c, ExtraActivity.class);
+                        bathExtra.putExtra("type", 1);
+                        c.startActivity(bathExtra);
                         break;
                     case 3:
-                        c.startActivity(new Intent(c, BedExtraActivity.class));
+                        Intent bedExtra = new Intent(c, ExtraActivity.class);
+                        bedExtra.putExtra("type", 2);
+                        c.startActivity(bedExtra);
                         break;
                     case 4:
-                        c.startActivity(new Intent(c, RoomExtraActivity.class));
+                        Intent roomExtra = new Intent(c, ExtraActivity.class);
+                        roomExtra.putExtra("type", 3);
+                        c.startActivity(roomExtra);
                         break;
                 }
             }

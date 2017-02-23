@@ -46,7 +46,8 @@
         <activity android:name=".housekeeping.BathExtraActivity" />
         <activity android:name=".housekeeping.BedExtraActivity" />
         <activity android:name=".housekeeping.RoomExtraActivity" />
-        <activity android:name=".AppsActivity"></activity>
+        <activity android:name=".AppsActivity" />
+        <activity android:name=".housekeeping.ExtraActivity"></activity>
     </application>
 
 </manifest>
