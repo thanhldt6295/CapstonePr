@@ -46,7 +46,7 @@ public class AppsAdapter extends BaseAdapter {
         View gridView = convertView;
         if(convertView==null){
             inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            gridView = inflater.inflate(R.layout.layout_griditem,null);
+            gridView = inflater.inflate(R.layout.layout_appitem,null);
         }
 
         ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewGrid);

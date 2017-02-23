@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ import java.util.List;
 public class AppsActivity extends AppCompatActivity {
 
     GridView gridView;
-    String items[] = {"Youtube", "Facebook", "Instagram", "Mp3 Zing", "Google Maps", "Youtube", "Facebook", "Instagram", "Mp3 Zing", "Google Maps", "Google Maps"};
+    String items[] = {"Youtube", "Facebook", "Instagram", "Mp3 Zing", "Google Maps", "SETTINGS", "Facebook", "Instagram", "Mp3 Zing", "Google Maps", "Google Maps"};
     int icons[] = {R.drawable.utube, R.drawable.facebook, R.drawable.instagram, R.drawable.mp3, R.drawable.maps, R.drawable.utube, R.drawable.facebook, R.drawable.instagram, R.drawable.mp3, R.drawable.maps, R.drawable.maps};
 
     @Override
@@ -92,6 +93,9 @@ public class AppsActivity extends AppCompatActivity {
                 }
                 if(position==4){
                     OpenApps("com.google.android.apps.maps");
+                }
+                if(position==5){
+                    startActivityForResult(new Intent(Settings.ACTION_SETTINGS),0);
                 }
             }
         });
