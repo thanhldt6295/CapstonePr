@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class PromotionalChanelActivity extends AppCompatActivity {
 
-    String[] titles = {"SPA", "GYM", "POOL", "CANTIN", "SPORT"};
+    int[] titles = {R.string.spa, R.string.gym, R.string.pool, R.string.tennis, R.string.golf};
     int[] images = {R.drawable.hotelww, R.drawable.pool, R.drawable.hotelww, R.drawable.pool, R.drawable.card};
 
     @Override

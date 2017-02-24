@@ -45,28 +45,6 @@ public class HousekeepingAdapter extends RecyclerView.Adapter<Holder>  {
             public void onItemClick(View view, int pos) {
                 switch (pos){
                     case 0:
-//                        new AlertDialog.Builder(c)
-//                                .setTitle(R.string.confirm_service)
-//                                .setMessage(R.string.confirm_question_do)
-//                                .setIcon(android.R.drawable.ic_dialog_alert)
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//
-//                                    public void onClick(DialogInterface dialog, int whichButton) {
-//                                        class SendDataToServer extends AsyncTask<String, Void, Integer> {
-//
-//                                            @Override
-//                                            protected Integer doInBackground(String... params) {
-//                                                CommonService commonService = new CommonService();
-//                                                int returnValue = commonService.sendData(params[0], params[1]);
-//                                                return returnValue;
-//                                            }
-//                                        }
-//                                        new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&serviceName=" + titles[position]);
-//                                        Toast.makeText(c, R.string.confirm_answer_wait, Toast.LENGTH_SHORT).show();
-//                                    }
-//                                })
-//                                .setNegativeButton(android.R.string.no, null).show();
-//                        break;
                         c.startActivity(new Intent(c, RoomCleaningActivity.class));
                         break;
                     case 1:

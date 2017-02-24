@@ -47,7 +47,8 @@
         <activity android:name=".housekeeping.ExtraActivity" />
         <activity android:name=".SurveyActivity" />
         <activity android:name=".RecommendActivity" />
-        <activity android:name=".RecommendDetailActivity"></activity>
+        <activity android:name=".RecommendDetailActivity" />
+        <activity android:name=".PromoDetailsActivity"></activity>
     </application>
 
 </manifest>

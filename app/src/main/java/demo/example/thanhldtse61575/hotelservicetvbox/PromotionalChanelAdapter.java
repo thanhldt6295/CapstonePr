@@ -1,6 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,10 @@ import android.widget.Toast;
 public class PromotionalChanelAdapter extends RecyclerView.Adapter<Holder> {
 
     Context c;
-    String[] titles;
+    int[] titles;
     int[] images;
 
-    public PromotionalChanelAdapter(Context c, String[] titles, int[] images) {
+    public PromotionalChanelAdapter(Context c, int[] titles, int[] images) {
         this.c = c;
         this.titles = titles;
         this.images = images;
@@ -37,7 +38,9 @@ public class PromotionalChanelAdapter extends RecyclerView.Adapter<Holder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                Toast.makeText(c, titles[pos], Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(c, PromoDetailsActivity.class);
+                i.putExtra("type", pos);
+                c.startActivity(i);
             }
         });
     }

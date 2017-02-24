@@ -39,6 +39,12 @@
     <string name="recommend">RECOMMEND</string>
 
     <!-- PromotionalChanelActivity -->
+    <string name="spa">SPA</string>
+    <string name="gym">GYM</string>
+    <string name="pool">POOL</string>
+    <string name="tennis">TENNIS COURT</string>
+    <string name="golf">GOLF</string>
+    
     <!-- RoomServicesActivity -->
     <string name="food_drink">FOODS AND BEVERAGES</string>
     <string name="housekeeping">HOUSEKEEPING</string>
