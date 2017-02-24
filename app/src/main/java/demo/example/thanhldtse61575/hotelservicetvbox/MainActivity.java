@@ -17,8 +17,8 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     int[] titles = {R.string.application, R.string.promotional, R.string.service, R.string.shopping,
-            R.string.ecard, R.string.bill, R.string.survey};
-    int[] images = {R.drawable.img_ecard,R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
+            R.string.ecard, R.string.bill, R.string.survey, R.string.recommend};
+    int[] images = {R.drawable.img_app,R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
             R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey, R.drawable.img_youtube};
 
     @Override

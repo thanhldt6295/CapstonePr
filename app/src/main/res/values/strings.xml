@@ -36,6 +36,7 @@
     <string name="bill">BILLING</string>
     <string name="order">YOUR ORDER</string>
     <string name="pending">PENDING</string>
+    <string name="recommend">RECOMMEND</string>
 
     <!-- PromotionalChanelActivity -->
     <!-- RoomServicesActivity -->

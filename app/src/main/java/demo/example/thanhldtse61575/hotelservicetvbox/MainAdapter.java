@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
+
 /**
  * Created by ThanhLDTSE61575 on 1/10/2017.
  */
@@ -186,6 +188,32 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
 
                                     case MotionEvent.ACTION_UP:
                                         c.startActivity(new Intent(c, SurveyActivity.class));
+
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
+                        break;
+                    case 7:
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, RecommendActivity.class));
 
                                     case MotionEvent.ACTION_CANCEL: {
                                         ImageView image = (ImageView) v;

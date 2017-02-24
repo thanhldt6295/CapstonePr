@@ -31,8 +31,9 @@ import java.util.List;
 public class AppsActivity extends AppCompatActivity {
 
     GridView gridView;
-    String items[] = {"Youtube", "Facebook", "Instagram", "Mp3 Zing", "Google Maps", "SETTINGS", "Facebook", "Instagram", "Mp3 Zing", "Google Maps", "Google Maps"};
-    int icons[] = {R.drawable.utube, R.drawable.facebook, R.drawable.instagram, R.drawable.mp3, R.drawable.maps, R.drawable.utube, R.drawable.facebook, R.drawable.instagram, R.drawable.mp3, R.drawable.maps, R.drawable.maps};
+    String items[] = {"Youtube", "Facebook", "Calculator", "Mp3 Zing", "Google Maps", "Settings", "Gmail", "TV"};
+    int icons[] = {R.drawable.icon_utube, R.drawable.icon_fb, R.drawable.icon_calculator, R.drawable.icon_mp3,
+            R.drawable.icon_ggmaps, R.drawable.icon_setting, R.drawable.icon_gmail, R.drawable.icon_tivi};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class AppsActivity extends AppCompatActivity {
                     OpenApps("com.facebook.katana");
                 }
                 if(position==2){
-                    OpenApps("com.instagram.android");
+                    OpenApps("cache.wind.calculator");
                 }
                 if(position==3){
                     OpenApps("com.zing.mp3");
@@ -96,6 +97,12 @@ public class AppsActivity extends AppCompatActivity {
                 }
                 if(position==5){
                     startActivityForResult(new Intent(Settings.ACTION_SETTINGS),0);
+                }
+                if(position==6){
+                    OpenApps("com.google.android.gm");
+                }
+                if(position==7){
+
                 }
             }
         });
