@@ -17,7 +17,7 @@ import java.util.Date;
 public class RoomServicesActivity extends AppCompatActivity {
 
     int[] titles = {R.string.food_drink, R.string.housekeeping, R.string.maintenance, R.string.front_desk};
-    int[] images = {R.drawable.hotelww, R.drawable.img_housekeeping, R.drawable.img_maintenance, R.drawable.img_request};
+    int[] images = {R.drawable.img_foodsandbeverages, R.drawable.img_housekeeping, R.drawable.img_maintenance, R.drawable.img_request};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
