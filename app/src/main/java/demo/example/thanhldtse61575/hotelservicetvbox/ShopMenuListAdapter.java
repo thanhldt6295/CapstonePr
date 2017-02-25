@@ -124,7 +124,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
 
         textView.setText(title);
 
-        final int[] categoryID = {0};
+        final String[] categoryName = {null};
         class GetDataFromServer extends AsyncTask<String, Void, String> {
 
             protected String doInBackground(String... params) {
@@ -138,11 +138,12 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
                 }.getType());
 
-                // Search follow categoryID
+                // Search follow categoryName
                 final List<Service> accID = new ArrayList<Service>();
                 for (Service ac : acc) {
-                    if (ac.getCategoryID() == categoryID[0]) {
-                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                    String cagName = ac.getCategoryName().toString().toUpperCase();
+                    if (cagName.equals(categoryName[0])) {
+                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                     }
                 }
 
@@ -240,51 +241,16 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (groupPosition == 0 & childPosition == 0) {
-                    image.setVisibility(View.INVISIBLE);
-                    name.setVisibility(View.INVISIBLE);
-                    price.setVisibility(View.INVISIBLE);
-                    description.setVisibility(View.INVISIBLE);
-                    btnPlus.setVisibility(View.INVISIBLE);
-                    btnMinus.setVisibility(View.INVISIBLE);
-                    quantity.setVisibility(View.INVISIBLE);
-                    btnOrder.setVisibility(View.INVISIBLE);
-                    categoryID[0] = 1;
-                    new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-                }
-                if(groupPosition==0&childPosition==1){
-                    image.setVisibility(View.INVISIBLE);
-                    name.setVisibility(View.INVISIBLE);
-                    price.setVisibility(View.INVISIBLE);
-                    description.setVisibility(View.INVISIBLE);
-                    btnPlus.setVisibility(View.INVISIBLE);
-                    btnMinus.setVisibility(View.INVISIBLE);
-                    quantity.setVisibility(View.INVISIBLE);
-                    btnOrder.setVisibility(View.INVISIBLE);
-                    categoryID[0] = 2;
-                    new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-                }
-                if(groupPosition==0&childPosition==2){
-
-                }
-                if(groupPosition==1&childPosition==0){
-
-                }
-                if(groupPosition==1&childPosition==1){
-
-                }
-                if(groupPosition==1&childPosition==2){
-
-                }
-                if(groupPosition==1&childPosition==3){
-
-                }
-                if(groupPosition==1&childPosition==4){
-
-                }
-                if(groupPosition==1&childPosition==5){
-
-                }
+                image.setVisibility(View.INVISIBLE);
+                name.setVisibility(View.INVISIBLE);
+                price.setVisibility(View.INVISIBLE);
+                description.setVisibility(View.INVISIBLE);
+                btnPlus.setVisibility(View.INVISIBLE);
+                btnMinus.setVisibility(View.INVISIBLE);
+                quantity.setVisibility(View.INVISIBLE);
+                btnOrder.setVisibility(View.INVISIBLE);
+                categoryName[0] = getChild(groupPosition,childPosition).toString();
+                new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
             }
         });
         return convertView;

@@ -10,14 +10,16 @@ public class Service implements Serializable{
     private int ServiceID;
     private String ServiceName;
     private int CategoryID;
+    private String CategoryName;
     private double UnitPrice;
     private String Description;
     private String Image;
 
-    public Service(int ServiceID, String ServiceName, int CategoryID, double UnitPrice, String Description, String Image){
+    public Service(int ServiceID, String ServiceName, int CategoryID, String CategoryName, double UnitPrice, String Description, String Image){
         this.ServiceID = ServiceID;
         this.ServiceName = ServiceName;
         this.CategoryID = CategoryID;
+        this.CategoryName = CategoryName;
         this.UnitPrice = UnitPrice;
         this.Description = Description;
         this.Image = Image;
@@ -69,5 +71,13 @@ public class Service implements Serializable{
 
     public void setImage(String Image) {
         Image = Image;
+    }
+
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        CategoryName = categoryName;
     }
 }

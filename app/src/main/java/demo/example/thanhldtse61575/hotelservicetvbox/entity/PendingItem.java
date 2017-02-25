@@ -8,34 +8,27 @@ import java.io.Serializable;
 
 public class PendingItem implements Serializable {
 
-    private int serviceID;
     private String serviceName;
-    private int categoryID;
+    private String categoryName;
     private double unitPrice;
     private String description;
     private String image;
     private int quantity;
     private String comment;
+    private String orderTime;
     private String deliveryTime;
 
-    public PendingItem(int serviceID, String serviceName, int categoryID, double unitPrice, String description, String image, int quantity, String comment, String deliveryTime) {
-        this.serviceID = serviceID;
+    public PendingItem(String serviceName, String categoryName, double unitPrice, String description,
+                       String image, int quantity, String comment, String orderTime, String deliveryTime) {
         this.serviceName = serviceName;
-        this.categoryID = categoryID;
+        this.categoryName = categoryName;
         this.unitPrice = unitPrice;
         this.description = description;
         this.image = image;
         this.quantity = quantity;
         this.comment = comment;
+        this.orderTime = orderTime;
         this.deliveryTime = deliveryTime;
-    }
-
-    public int getServiceID() {
-        return serviceID;
-    }
-
-    public void setServiceID(int serviceID) {
-        this.serviceID = serviceID;
     }
 
     public String getServiceName() {
@@ -46,12 +39,20 @@ public class PendingItem implements Serializable {
         this.serviceName = serviceName;
     }
 
-    public int getCategoryID() {
-        return categoryID;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
     }
 
     public double getUnitPrice() {

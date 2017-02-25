@@ -254,9 +254,9 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
                     quantity.setVisibility(View.INVISIBLE);
                     btnOrder.setVisibility(View.INVISIBLE);
                     final List<Service> acc = new ArrayList<Service>();
-                    acc.add(new Service(5,"RICE",1,50000.0,"hihihi","http://webdata.vcmedia.vn/k:webdata/100/d49469comtam1/8-mon-com-ngon-ban-nen-thu-mot-lan-trong-doi.jpg"));
-                    acc.add(new Service(6,"PHO",1,60000.0,"hohoho","http://www.phoonghung.vn/resources/uploaded/PhoOngHung/product/2014/12/21/pho-duoi-bo-to-lon-21-0-635545084150222500.png"));
-                    acc.add(new Service(7,"NOODLES",1,100000.0,"hohoho","http://vnhow.vn/img/uploads/contents/desc/2010/07/cach-che-bien-mon-mi-goi-xao-so-diep-tom-vien.jpg"));
+                    acc.add(new Service(5,"RICE",1,"",50000.0,"hihihi","http://webdata.vcmedia.vn/k:webdata/100/d49469comtam1/8-mon-com-ngon-ban-nen-thu-mot-lan-trong-doi.jpg"));
+                    acc.add(new Service(6,"PHO",1,"",60000.0,"hohoho","http://www.phoonghung.vn/resources/uploaded/PhoOngHung/product/2014/12/21/pho-duoi-bo-to-lon-21-0-635545084150222500.png"));
+                    acc.add(new Service(7,"NOODLES",1,"",100000.0,"hohoho","http://vnhow.vn/img/uploads/contents/desc/2010/07/cach-che-bien-mon-mi-goi-xao-so-diep-tom-vien.jpg"));
                     ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
                     grid.setAdapter(adapter);
                     grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -356,8 +356,8 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
                     quantity.setVisibility(View.INVISIBLE);
                     btnOrder.setVisibility(View.INVISIBLE);
                     final List<Service> acc = new ArrayList<Service>();
-                    acc.add(new Service(8,"EGGS",1,50.000,"hihihi","http://toinayangi.vn/wp-content/uploads/2015/07/khoai-tay-xao-xuc-xich-8.jpg"));
-                    acc.add(new Service(9,"SPAGHETTI",1,60.000,"hohoho","http://www.xaluan.com/images/news/Image/2013/02/14/1511c8e43cd4d2.img.jpg"));
+                    acc.add(new Service(8,"EGGS",1,"",50.000,"hihihi","http://toinayangi.vn/wp-content/uploads/2015/07/khoai-tay-xao-xuc-xich-8.jpg"));
+                    acc.add(new Service(9,"SPAGHETTI",1,"",60.000,"hohoho","http://www.xaluan.com/images/news/Image/2013/02/14/1511c8e43cd4d2.img.jpg"));
                     ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
                     grid.setAdapter(adapter);
                     grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

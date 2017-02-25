@@ -10,23 +10,37 @@ public class OrderDetail {
     private int orderDetailID;
     private int orderID;
     private int serviceID;
+    private String serviceName;
+    private int categoryID;
+    private String categoryName;
+    private double unitPrice;
+    private String description;
+    private String image;
     private int quantity;
-    private Timestamp orderTime;
-    private String status;
-    private String note;
+    private String comment;
+    private String orderTime;
+    private String deliveryTime;
     private String staffID;
-    private Timestamp deliverTime;
+    private String status;
 
-    public OrderDetail(int orderDetailID, int orderID, int serviceID, int quantity, Timestamp orderTime, String status, String note, String staffID,  Timestamp deliverTime) {
+    public OrderDetail(int orderDetailID, int orderID, int serviceID, String serviceName, int categoryID, String categoryName,
+                       double unitPrice, String description, String image, int quantity, String comment, String orderTime,
+                       String deliveryTime, String staffID,  String status) {
         this.orderDetailID = orderDetailID;
         this.orderID = orderID;
         this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+        this.unitPrice = unitPrice;
+        this.description = description;
+        this.image = image;
         this.quantity = quantity;
+        this.comment = comment;
         this.orderTime = orderTime;
-        this.status = status;
-        this.note = note;
+        this.deliveryTime = deliveryTime;
         this.staffID = staffID;
-        this.deliverTime = deliverTime;
+        this.status = status;
     }
 
     public int getOrderDetailID() {
@@ -61,28 +75,76 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public Timestamp getOrderTime() {
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Timestamp orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     public String getStaffID() {
@@ -93,11 +155,11 @@ public class OrderDetail {
         this.staffID = staffID;
     }
 
-    public Timestamp getDeliverTime() {
-        return deliverTime;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDeliverTime(Timestamp deliverTime) {
-        this.deliverTime = deliverTime;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
