@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.v7.app.ActionBar;
@@ -15,7 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.Locale;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -134,6 +141,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 //Intent mainAct = new Intent(WelcomeActivity.this,MainActivity.class);
                 //startActivity(mainAct);
                 setLocale("en");
+                setDataFromSharedPreferences("en");
             }
         });
 
@@ -144,6 +152,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         "Quý khách đã chọn Tiếng Việt", Toast.LENGTH_SHORT)
                         .show();
                 setLocale("vi");
+                setDataFromSharedPreferences("vi");
             }
         });
     }
@@ -158,6 +167,17 @@ public class WelcomeActivity extends AppCompatActivity {
         res.updateConfiguration(conf, dm);
         Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
+    }
+
+    private static final String SHARE_TAG = "Share";
+    private static final String LOCALE_TAG = "LocalePrefs";
+
+    private void setDataFromSharedPreferences(String lang){
+        SharedPreferences sharedPref = this.getSharedPreferences(SHARE_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(LOCALE_TAG, lang);
+        editor.commit();
     }
 
     @Override

@@ -72,6 +72,15 @@
     <string name="cancel">Hủy</string>
     <string name="yes">Có</string>
     <string name="recommend">GỢI Ý</string>
+    <string name="golf">GÔN</string>
+    <string name="gym">TẬP THỂ HÌNH</string>
+    <string name="message">TIN NHẮN</string>
+    <string name="pool">HỒ BƠI</string>
+    <string name="receiver">NGƯỜI NHẬN</string>
+    <string name="send">GỬI</string>
+    <string name="spa"></string>
+    <string name="subject">TIÊU ĐỀ</string>
+    <string name="yourname">TÊN CỦA BẠN</string>
 
 
 </resources>
