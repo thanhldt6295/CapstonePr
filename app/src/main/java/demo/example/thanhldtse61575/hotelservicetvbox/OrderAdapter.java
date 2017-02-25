@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
@@ -80,7 +81,7 @@ public class OrderAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.layout_orderitem, null);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
-        //image.setImageResource(R.drawable.demo);
+
         String url = cart.get(position).getImage();
         Picasso.with(ctx)
                 .load(url)
@@ -209,14 +210,14 @@ public class OrderAdapter extends BaseAdapter {
                                         }
                                     }
                                     String returnList = new Gson().toJson(cart);
-//                                    int hour = deliveryTime.getHour();
-//                                    int minute = deliveryTime.getMinute();
-//                                    deliveryDate.getDayOfMonth();
-//                                    deliveryDate.getMonth();
-//                                    deliveryDate.getYear();
 
-                                    String datetime = ""; //deliveryDate.getDayOfMonth() + "-" + deliveryDate.getMonth() + "-" + deliveryDate.getYear() + " " + hour + ":" + minute + ":00";
-                                    new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&list=" + returnList + "&deliveryTime=" + datetime);
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
+                                            deliveryTime.getHour(), deliveryTime.getMinute(), 0);
+                                    long time2Serv = calendar.getTimeInMillis()/1000;
+
+                                    new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&list=" + returnList + "&deliveryTime=" + time2Serv);
+
                                     cart.clear();
                                     total.setText("0đ");
                                     notifyDataSetChanged();

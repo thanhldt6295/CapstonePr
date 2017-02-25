@@ -1,86 +1,76 @@
 package demo.example.thanhldtse61575.hotelservicetvbox.entity;
 
-import java.sql.Timestamp;
-
 /**
  * Created by ThanhLDTSE61575 on 1/15/2017.
  */
 public class OrderDetail {
 
-    private int orderDetailID;
-    private int orderID;
-    private int serviceID;
-    private String serviceName;
+    private int OrderDetailID;
+    private int OrderID;
+    private int ServiceID;
+    private String ServiceName;
     private int categoryID;
     private String categoryName;
     private double unitPrice;
-    private String description;
-    private String image;
-    private int quantity;
-    private String comment;
-    private String orderTime;
-    private String deliveryTime;
-    private String staffID;
-    private String status;
+    private String Description;
+    private String Image;
+    private int Quantity;
+    private String Note;
+    private long OrderTime;
+    private long DeliverTime;
+    private String StaffID;
+    private String Status;
 
     public OrderDetail(int orderDetailID, int orderID, int serviceID, String serviceName, int categoryID, String categoryName,
-                       double unitPrice, String description, String image, int quantity, String comment, String orderTime,
-                       String deliveryTime, String staffID,  String status) {
-        this.orderDetailID = orderDetailID;
-        this.orderID = orderID;
-        this.serviceID = serviceID;
-        this.serviceName = serviceName;
+                       double unitPrice, String description, String image, int quantity, String comment, long orderTime,
+                       long deliveryTime, String staffID,  String status) {
+        this.OrderDetailID = orderDetailID;
+        this.OrderID = orderID;
+        this.ServiceID = serviceID;
+        this.ServiceName = serviceName;
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.unitPrice = unitPrice;
-        this.description = description;
-        this.image = image;
-        this.quantity = quantity;
-        this.comment = comment;
-        this.orderTime = orderTime;
-        this.deliveryTime = deliveryTime;
-        this.staffID = staffID;
-        this.status = status;
+        this.Description = description;
+        this.Image = image;
+        this.Quantity = quantity;
+        this.Note = comment;
+        this.OrderTime = orderTime;
+        this.DeliverTime = deliveryTime;
+        this.StaffID = staffID;
+        this.Status = status;
     }
 
     public int getOrderDetailID() {
-        return orderDetailID;
+        return OrderDetailID;
     }
 
     public void setOrderDetailID(int orderDetailID) {
-        this.orderDetailID = orderDetailID;
+        OrderDetailID = orderDetailID;
     }
 
     public int getOrderID() {
-        return orderID;
+        return OrderID;
     }
 
     public void setOrderID(int orderID) {
-        this.orderID = orderID;
+        OrderID = orderID;
     }
 
     public int getServiceID() {
-        return serviceID;
+        return ServiceID;
     }
 
     public void setServiceID(int serviceID) {
-        this.serviceID = serviceID;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        ServiceID = serviceID;
     }
 
     public String getServiceName() {
-        return serviceName;
+        return ServiceName;
     }
 
     public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+        ServiceName = serviceName;
     }
 
     public int getCategoryID() {
@@ -108,58 +98,66 @@ public class OrderDetail {
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Description = description;
     }
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        Image = image;
     }
 
-    public String getComment() {
-        return comment;
+    public int getQuantity() {
+        return Quantity;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
     }
 
-    public String getOrderTime() {
-        return orderTime;
+    public String getNote() {
+        return Note;
     }
 
-    public void setOrderTime(String orderTime) {
-        this.orderTime = orderTime;
+    public void setNote(String note) {
+        Note = note;
     }
 
-    public String getDeliveryTime() {
-        return deliveryTime;
+    public long getOrderTime() {
+        return OrderTime;
     }
 
-    public void setDeliveryTime(String deliveryTime) {
-        this.deliveryTime = deliveryTime;
+    public void setOrderTime(long orderTime) {
+        OrderTime = orderTime;
+    }
+
+    public long getDeliverTime() {
+        return DeliverTime;
+    }
+
+    public void setDeliverTime(long deliverTime) {
+        DeliverTime = deliverTime;
     }
 
     public String getStaffID() {
-        return staffID;
+        return StaffID;
     }
 
     public void setStaffID(String staffID) {
-        this.staffID = staffID;
+        StaffID = staffID;
     }
 
     public String getStatus() {
-        return status;
+        return Status;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        Status = status;
     }
 }

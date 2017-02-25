@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Bill;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 /**
  * Created by VULHSE61532 on 1/15/2017.
@@ -19,12 +19,14 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Bill;
 public class ViewBillAdapter extends BaseAdapter {
 
     private Context c;
-    private List<Bill> details;
+    private List<OrderDetail> details;
     LayoutInflater layoutInflater;
+    private TextView total;
 
-    public ViewBillAdapter(Context c, List<Bill> details) {
+    public ViewBillAdapter(Context c, List<OrderDetail> details, TextView total) {
         this.c = c;
         this.details = details;
+        this.total = total;
         layoutInflater = LayoutInflater.from(c);
     }
 
@@ -38,7 +40,7 @@ public class ViewBillAdapter extends BaseAdapter {
     }
 
     @Override
-    public Bill getItem(int position) {
+    public OrderDetail getItem(int position) {
         return details.get(position);
     }
 
@@ -57,13 +59,18 @@ public class ViewBillAdapter extends BaseAdapter {
         TextView quantity = (TextView) convertView.findViewById(R.id.txtQuantity);
         TextView itemTotal = (TextView) convertView.findViewById(R.id.txtItemTotal);
 
-        serviceName.setText(getItem(position).getName());
-        category.setText(getItem(position).getCategory());
+        serviceName.setText(getItem(position).getServiceName());
+        category.setText(getItem(position).getCategoryName());
         DecimalFormat format = new DecimalFormat("###,###.#");
         unitPrice.setText(format.format(getItem(position).getUnitPrice()) + "đ");
         quantity.setText(getItem(position).getQuantity() + "");
         itemTotal.setText(format.format(getItem(position).getUnitPrice() * getItem(position).getQuantity()) + "đ");
 
+        float t = 0;
+        for (int i = 0; i < details.size(); i++){
+            t += details.get(i).getQuantity() *details.get(i).getUnitPrice();
+        }
+        total.setText(format.format(t) + "đ");
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

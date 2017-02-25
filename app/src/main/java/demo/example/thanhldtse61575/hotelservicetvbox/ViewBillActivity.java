@@ -1,6 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,17 +10,51 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Bill;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class ViewBillActivity extends AppCompatActivity {
 
-    List<Bill> details = new ArrayList<>();
+    List<OrderDetail> details = new ArrayList<>();
+    List<OrderDetail> done = new ArrayList<>();
+
+    class GetDataFromServer extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... params) {
+            CommonService commonService = new CommonService();
+            String returnva = commonService.getData(params[0]);
+            return returnva;
+        }
+
+        protected void onPostExecute(String response) {
+            //parse json sang list
+            details = new Gson().fromJson(response, new TypeToken<List<OrderDetail>>() {
+            }.getType());
+
+            TextView total = (TextView) findViewById(R.id.txtCartTotal);
+
+            for (OrderDetail od: details) {
+                String stt = od.getStatus().toString().toUpperCase().trim();
+                if (stt.equals("DONE")) {
+                    done.add(new OrderDetail(od.getOrderDetailID(),od.getOrderID(),
+                            od.getServiceID(),od.getServiceName(),od.getCategoryID(),
+                            od.getCategoryName(),od.getUnitPrice(),od.getDescription(),od.getImage(),
+                            od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
+                }
+            }
+            ListView listView = (ListView) findViewById(R.id.detailsListView);
+            ViewBillAdapter a = new ViewBillAdapter(ViewBillActivity.this, done, total);
+            listView.setAdapter(a);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +65,7 @@ public class ViewBillActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.bill));
 
-        details.add(new Bill("Tuna Sandwich", "ROOM SERVICES/FOODS AND BEVERAGES/BREAKFAST", 80000, 1));
-        details.add(new Bill("Mojito", "ROOM SERVICES/FOODS AND BEVERAGES/BEVERAGES", 45000, 2));
-        details.add(new Bill("Keychain", "SHOPPING/SOURVENIR", 20000, 1));
-
-        ListView listView = (ListView) findViewById(R.id.detailsListView);
-        ViewBillAdapter a = new ViewBillAdapter(this, details);
-        listView.setAdapter(a);
+        new ViewBillActivity.GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/GetOrderDetailByOrderID/2");
 
         // Datetime & Calendar
         final TextView txtDate;

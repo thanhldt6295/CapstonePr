@@ -81,8 +81,9 @@
                     android:focusable="true"
                     android:numColumns="auto_fit"
                     android:scrollbars="vertical"
-                    android:stretchMode="columnWidth" />
-
+                    android:stretchMode="columnWidth"
+                    android:horizontalSpacing="10dp"
+                    android:verticalSpacing="20dp"/>
 
             </LinearLayout>
 

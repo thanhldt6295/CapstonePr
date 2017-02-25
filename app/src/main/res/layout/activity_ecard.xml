@@ -11,7 +11,33 @@
     android:background="@drawable/backgr"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.EcardActivity">
 
-    <include layout="@layout/layout_ecard"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="606dp">
+
+            <include layout="@layout/layout_ecard" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <Button
+                android:text="@string/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSend"
+                android:background="@drawable/buttonstyles"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <include layout="@layout/layout_roombar" />
 

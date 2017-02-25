@@ -19,12 +19,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.PendingItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class PendingActivity extends AppCompatActivity {
 
-    List<PendingItem> details = new ArrayList<>();
+    List<OrderDetail> details = new ArrayList<>();
+    List<OrderDetail> pending = new ArrayList<>();
 
     class GetDataFromServer extends AsyncTask<String, Void, String> {
 
@@ -35,9 +35,24 @@ public class PendingActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String response) {
-            //parse json sang list service
-            details = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+            //parse json sang list
+            details = new Gson().fromJson(response, new TypeToken<List<OrderDetail>>() {
             }.getType());
+
+            TextView total = (TextView) findViewById(R.id.txtCartTotal);
+
+            for (OrderDetail od: details) {
+                String stt = od.getStatus().toString().toUpperCase().trim();
+                if (stt.equals("DONE")) {
+                    pending.add(new OrderDetail(od.getOrderDetailID(),od.getOrderID(),
+                            od.getServiceID(),od.getServiceName(),od.getCategoryID(),
+                            od.getCategoryName(),od.getUnitPrice(),od.getDescription(),od.getImage(),
+                            od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
+                }
+            }
+            ListView listView = (ListView) findViewById(R.id.detailsListView);
+            PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total);
+            listView.setAdapter(a);
         }
     }
 
@@ -50,15 +65,7 @@ public class PendingActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.pending));
 
-        new GetDataFromServer().execute("api"); //Waiting API
-
-        TextView total = (TextView) findViewById(R.id.txtCartTotal);
-
-        if(details!=null){
-            ListView listView = (ListView) findViewById(R.id.detailsListView);
-            PendingAdapter a = new PendingAdapter(this, listView, details, total);
-            listView.setAdapter(a);
-        }
+        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/GetOrderDetailByOrderID/2");
 
         // Datetime & Calendar
         final TextView txtDate;
