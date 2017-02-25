@@ -1,6 +1,5 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,10 +55,9 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(RecommendActivity.this,RecommendDetailActivity.class);
-//                intent.putExtra("list", (Serializable) RecommendEntityList);
-//                intent.putExtra("position", position);
-//                startActivity(intent);
+                Intent intent = new Intent(RecommendActivity.this,RecommendDetailActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
         });
 

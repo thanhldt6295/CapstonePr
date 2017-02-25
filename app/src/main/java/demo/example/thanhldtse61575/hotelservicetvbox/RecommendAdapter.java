@@ -1,6 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +120,7 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
 
                 results.count = filterList.size();
                 results.values = filterList;
+                setDataFromSharedPreferences(filterList);
 
             } else {
 
@@ -134,5 +138,19 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
             RecommendList = (ArrayList<Recommend>)results.values;
             notifyDataSetChanged();
         }
+    }
+
+    private static final String PREFS_TAG = "SharedPrefs";
+    private static final String PRODUCT_TAG = "MyProduct";
+
+    private void setDataFromSharedPreferences(ArrayList<Recommend> curProduct){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(curProduct);
+
+        SharedPreferences sharedPref = context.getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(PRODUCT_TAG, jsonCurProduct);
+        editor.commit();
     }
 }

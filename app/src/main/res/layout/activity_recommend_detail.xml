@@ -8,14 +8,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/backgr"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.RecommendDetailActivity">
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:padding="20dp"
-        android:src="@drawable/demo"/>
+        android:layout_below="@+id/space"/>
 
     <TextView
         android:id="@+id/recNameTV"
@@ -28,7 +34,8 @@
         android:layout_gravity="center_vertical"
         android:text="ABC"
         android:textColor="@color/white"
-        android:layout_weight="0.3">
+        android:layout_weight="0.3"
+        android:layout_below="@+id/imageView">
     </TextView>
 
     <TextView
@@ -39,7 +46,10 @@
         android:text="BCD"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
-        android:layout_weight="0.7">
+        android:layout_weight="0.7"
+        android:layout_below="@+id/recNameTV">
     </TextView>
+
+    <include layout="@layout/layout_roombar" />
 
 </RelativeLayout>
