@@ -211,12 +211,12 @@ public class OrderAdapter extends BaseAdapter {
                                     }
                                     String returnList = new Gson().toJson(cart);
 
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-                                            deliveryTime.getHour(), deliveryTime.getMinute(), 0);
-                                    long time2Serv = calendar.getTimeInMillis()/1000;
+//                                    Calendar calendar = Calendar.getInstance();
+//                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
+//                                            deliveryTime.getHour(), deliveryTime.getMinute(), 0);
+//                                    long time2Serv = calendar.getTimeInMillis()/1000;
 
-                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart?", "roomid=201&deliveryTime=" + time2Serv + "&list=" +returnList);
+                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart?", "roomid=201&deliveryTime=&list=" +returnList);
 
                                     cart.clear();
                                     total.setText("0đ");
