@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
@@ -83,7 +85,9 @@ public class PendingAdapter extends BaseAdapter{
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) + "đ");
         quantity.setText(cart.get(position).getQuantity()+"");
 
-        String normalDate = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date(cart.get(position).getDeliverTime()*1000));
+        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String normalDate = isoFormat.format(new java.util.Date(cart.get(position).getDeliverTime()*1000));;
         deliveryTime.setText(normalDate);
 
         comment.setText(cart.get(position).getNote());
