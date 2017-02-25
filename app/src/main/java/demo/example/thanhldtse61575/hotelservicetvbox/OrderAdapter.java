@@ -216,7 +216,7 @@ public class OrderAdapter extends BaseAdapter {
                                             deliveryTime.getHour(), deliveryTime.getMinute(), 0);
                                     long time2Serv = calendar.getTimeInMillis()/1000;
 
-                                    new SendDataToServer().execute("http://localhost:49457/api/getapp/", "roomid=201&list=" + returnList + "&deliveryTime=" + time2Serv);
+                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart?", "roomid=201&deliveryTime=" + time2Serv + "&list=" +returnList);
 
                                     cart.clear();
                                     total.setText("0đ");

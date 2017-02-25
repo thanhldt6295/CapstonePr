@@ -41,16 +41,17 @@ public class EcardActivity extends AppCompatActivity {
 
         btnSend = (Button) findViewById(R.id.btnSend);
         gridView = (GridView) findViewById(R.id.gridViewCard);
-        EcardAdapter adapter = new EcardAdapter(this, icons);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final ImageView zoom = (ImageView) findViewById(R.id.imageViewGrid);
-                final Animation zoomAni = AnimationUtils.loadAnimation(EcardActivity.this,R.anim.zoom);
-                zoom.startAnimation(zoomAni);
-            }
-        });
+        gridView.setAdapter(new ImageAdapter(this));
+//        EcardAdapter adapter = new EcardAdapter(this, icons);
+//        gridView.setAdapter(adapter);
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                final ImageView zoom = (ImageView) findViewById(R.id.imageViewGrid);
+//                final Animation zoomAni = AnimationUtils.loadAnimation(EcardActivity.this,R.anim.zoom);
+//                zoom.startAnimation(zoomAni);
+//            }
+//        });
 
         btnSend.setOnTouchListener(new View.OnTouchListener() {
             @Override

@@ -85,7 +85,15 @@
         android:focusable="true"
         android:numColumns="auto_fit"
         android:clickable="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="20dp"/>
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"/>
 
     <TextView
         android:text="@string/yourname"
