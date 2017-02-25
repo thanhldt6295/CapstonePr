@@ -17,9 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 import java.util.Locale;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;

@@ -124,6 +124,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
 
         textView.setText(title);
 
+        final int[] categoryID = {0};
         class GetDataFromServer extends AsyncTask<String, Void, String> {
 
             protected String doInBackground(String... params) {
@@ -137,7 +138,15 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
                 }.getType());
 
-                ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
+                // Search follow categoryID
+                final List<Service> accID = new ArrayList<Service>();
+                for (Service ac : acc) {
+                    if (ac.getCategoryID() == categoryID[0]) {
+                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                    }
+                }
+
+                ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, accID);
                 grid.setAdapter(adapter);
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -152,15 +161,15 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                         btnOrder.setVisibility(View.VISIBLE);
 
                         quantity.setText("1");
-                        String url = acc.get(position).getImage();
+                        String url = accID.get(position).getImage();
                         Picasso.with(ctx)
                                 .load(url)
                                 .placeholder(R.drawable.loading)
                                 .fit()
                                 .centerCrop().into(image);
-                        name.setText(acc.get(position).getServiceName());
-                        price.setText(acc.get(position).getUnitPrice() + "");
-                        description.setText(acc.get(position).getDescription());
+                        name.setText(accID.get(position).getServiceName());
+                        price.setText(accID.get(position).getUnitPrice() + "");
+                        description.setText(accID.get(position).getDescription());
                         btnOrder.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View v, MotionEvent event) {
@@ -172,7 +181,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                         break;
                                     }
                                     case MotionEvent.ACTION_UP:
-                                        Service sv = acc.get(position);
+                                        Service sv = accID.get(position);
                                         if (cart == null)
                                             cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
                                                     sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
@@ -223,7 +232,6 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                                 }
                             }
                         });
-
                     }
                 });
             }
@@ -241,10 +249,20 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                     btnMinus.setVisibility(View.INVISIBLE);
                     quantity.setVisibility(View.INVISIBLE);
                     btnOrder.setVisibility(View.INVISIBLE);
+                    categoryID[0] = 1;
                     new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
                 }
                 if(groupPosition==0&childPosition==1){
-
+                    image.setVisibility(View.INVISIBLE);
+                    name.setVisibility(View.INVISIBLE);
+                    price.setVisibility(View.INVISIBLE);
+                    description.setVisibility(View.INVISIBLE);
+                    btnPlus.setVisibility(View.INVISIBLE);
+                    btnMinus.setVisibility(View.INVISIBLE);
+                    quantity.setVisibility(View.INVISIBLE);
+                    btnOrder.setVisibility(View.INVISIBLE);
+                    categoryID[0] = 2;
+                    new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
                 }
                 if(groupPosition==0&childPosition==2){
 
@@ -264,70 +282,9 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 if(groupPosition==1&childPosition==4){
 
                 }
-//                if(groupPosition==1&childPosition==5){
-//                    final String itemList[] = {"BC"};
-//                    final String itemPrice[] = {"26000"};
-//                    final String descript[] = {"dadasdasdasd"};
-//                    final int itemIcon[] = {R.drawable.img};
-//
-//                    ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, itemIcon, itemList);
-//                    grid.setAdapter(adapter);
-//                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            quantity.setText("1");
-//                            image.setImageResource(itemIcon[position]);
-//                            name.setText(itemList[position]);
-//                            price.setText(itemPrice[position]);
-//                            description.setText(descript[position]);
-//                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    switch (event.getAction()) {
-//                                        case MotionEvent.ACTION_DOWN: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                            v.invalidate();
-//                                            break;
-//                                        }
-//                                        case MotionEvent.ACTION_UP:
-//                                            // Your action here on button click
-//                                        case MotionEvent.ACTION_CANCEL: {
-//                                            Button view = (Button) v;
-//                                            view.getBackground().clearColorFilter();
-//                                            view.invalidate();
-//                                            break;
-//                                        }
-//                                    }
-//                                    return true;
-//                                }
-//                            });
-//                            btnMinus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n>1) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n-1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int n = Integer.parseInt(quantity.getText().toString());
-//                                    if(n<100) {
-//                                        StringBuilder qty = new StringBuilder();
-//                                        qty.append(n+1);
-//                                        quantity.setText(qty);
-//                                    }
-//                                }
-//                            });
-//                            //Toast.makeText(ShopMenuListAdapter.this,itemList[position],Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
+                if(groupPosition==1&childPosition==5){
+
+                }
             }
         });
         return convertView;

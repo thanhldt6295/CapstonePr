@@ -10,15 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
-
 public class SurveyActivity extends AppCompatActivity {
 
     @Override
