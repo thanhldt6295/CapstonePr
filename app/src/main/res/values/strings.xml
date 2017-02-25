@@ -44,7 +44,7 @@
     <string name="pool">POOL</string>
     <string name="tennis">TENNIS COURT</string>
     <string name="golf">GOLF</string>
-    
+
     <!-- RoomServicesActivity -->
     <string name="food_drink">FOODS AND BEVERAGES</string>
     <string name="housekeeping">HOUSEKEEPING</string>
@@ -63,6 +63,13 @@
     <string name="television">TELEVISION</string>
     <string name="air_condition">AIR CONDITIONER </string>
     <string name="refrigerator">REFRIGERATOR</string>
+
+    <!-- EcardActivity -->
+    <string name="send">SEND</string>
+    <string name="yourname">YOUR NAME: </string>
+    <string name="message">MESSAGE: </string>
+    <string name="receiver">RECEIVER MAIL: </string>
+    <string name="subject">SUBJECT: </string>
 
     <!-- MenuList -->
     <string name="food">FOODS</string>

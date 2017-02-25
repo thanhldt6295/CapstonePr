@@ -48,7 +48,8 @@
         <activity android:name=".SurveyActivity" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".RecommendDetailActivity" />
-        <activity android:name=".PromoDetailsActivity"></activity>
+        <activity android:name=".PromoDetailsActivity" />
+        <activity android:name=".EcardActivity"></activity>
     </application>
 
 </manifest>

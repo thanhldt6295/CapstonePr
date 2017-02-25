@@ -2,80 +2,86 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgr"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="30dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingTop="60dp">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Email receiver"
+        android:hint="abc@gmail.com"
         android:ems="10"
-        android:layout_below="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:id="@+id/editText2" />
+        android:layout_below="@+id/txtYourName"
+        android:layout_alignEnd="@+id/txtYourName"
+        android:id="@+id/txtMailRecv"
+        android:textColor="@color/white"/>
 
     <TextView
-        android:text="Subject:"
+        android:text="@string/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/txtMailRecv"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:id="@+id/textView3"
-        android:layout_toStartOf="@+id/editText3"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_toStartOf="@+id/txtSubject"
+        android:layout_alignEnd="@+id/textView2"
+        android:textColor="@color/white"/>
 
     <TextView
-        android:text="Message:"
+        android:text="@string/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/editText"
+        android:layout_toEndOf="@+id/txtYourName"
         android:layout_marginStart="23dp"
-        android:id="@+id/textView4" />
+        android:id="@+id/textView4"
+        android:textColor="@color/white"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:inputType="textMultiLine"
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/textView4"
         android:layout_marginStart="13dp"
-        android:id="@+id/editText4"
+        android:id="@+id/txtMessage"
         android:layout_alignBottom="@+id/textView3"
-        android:text="Message" />
+        android:hint="Dear..."
+        android:textColor="@color/white"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Subject"
+        android:hint="ABC"
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+        android:id="@+id/txtSubject"
+        android:layout_below="@+id/txtMailRecv"
+        android:layout_alignStart="@+id/txtMailRecv"
+        android:textColor="@color/white"/>
 
     <TextView
-        android:text="Email receiver:"
+        android:text="@string/receiver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignParentStart="true" />
+        android:layout_alignBaseline="@+id/txtMailRecv"
+        android:layout_alignBottom="@+id/txtMailRecv"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/white"/>
 
     <GridView
+        android:id="@+id/gridViewCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_marginTop="13dp"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/txtSubject"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_toStartOf="@+id/button"
+        android:layout_height="match_parent" />
 
     <Button
         android:text="Send"
@@ -84,28 +90,30 @@
         android:id="@+id/button"
         android:textSize="14sp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/editText2"
-        android:layout_toStartOf="@+id/editText2" />
+        android:layout_above="@+id/txtMailRecv"
+        android:layout_toStartOf="@+id/txtMailRecv"
+        android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Your Name:"
+        android:text="@string/yourname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:layout_alignBaseline="@+id/editText"
-        android:layout_alignBottom="@+id/editText"
+        android:layout_alignBaseline="@+id/txtYourName"
+        android:layout_alignBottom="@+id/txtYourName"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_alignEnd="@+id/textView2"
+        android:textColor="@color/white"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Your Name"
+        android:hint="Sally John"
         android:ems="10"
         android:layout_marginStart="16dp"
-        android:id="@+id/editText"
+        android:id="@+id/txtYourName"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_toEndOf="@+id/textView"
+        android:textColor="@color/white"/>
 </RelativeLayout>

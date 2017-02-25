@@ -1,4 +1,4 @@
-package demo.example.thanhldtse61575.hotelservicetvbox.housekeeping;
+package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.support.v7.app.ActionBar;
@@ -6,39 +6,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.AppsActivity;
-import demo.example.thanhldtse61575.hotelservicetvbox.R;
+public class EcardActivity extends AppCompatActivity {
 
-public class ExtraActivity extends AppCompatActivity {
+    GridView gridView;
+    int icons[] = {R.drawable.icon_utube, R.drawable.icon_fb, R.drawable.icon_calculator, R.drawable.icon_mp3,
+            R.drawable.icon_ggmaps, R.drawable.icon_setting, R.drawable.icon_gmail, R.drawable.icon_tivi};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_extra);
-
+        setContentView(R.layout.activity_ecard);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        abTitle.setText(getResources().getString(R.string.ecard));
 
-        Bundle extra = getIntent().getExtras();
-        int type = extra.getInt("type");
-        switch (type){
-            case 1:
-                abTitle.setText(getResources().getString(R.string.bath_extras));
-                break;
-            case 2:
-                abTitle.setText(getResources().getString(R.string.bed_extras));
-                break;
-            case 3:
-                abTitle.setText(getResources().getString(R.string.room_extras));
-                break;
-        }
+        gridView = (GridView) findViewById(R.id.gridViewCard);
+        EcardAdapter adapter = new EcardAdapter(this, icons);
+        gridView.setAdapter(adapter);
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -80,9 +72,10 @@ public class ExtraActivity extends AppCompatActivity {
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ExtraActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                new DatePickerDialog(EcardActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
     }
 }
