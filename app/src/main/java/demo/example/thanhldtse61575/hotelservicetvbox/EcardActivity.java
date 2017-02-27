@@ -2,7 +2,9 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.animation.Animator;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -64,6 +67,17 @@ public class EcardActivity extends AppCompatActivity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
+                        Intent i = new Intent(Intent.ACTION_SEND);
+                        i.setType("application/image");
+                        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"thanhldt6295@gmail.com"});
+                        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+                        i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+                        i.putExtra(Intent.EXTRA_STREAM, Uri.parse("E:///GitHub/CapstonePrj/CaptonePrj/CapstonePrj/app/src/main/res/drawable/demo.jpeg"));
+                        try {
+                            startActivity(Intent.createChooser(i, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(EcardActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                        }
 
                     case MotionEvent.ACTION_CANCEL: {
                         Button view = (Button) v;

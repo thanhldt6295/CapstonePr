@@ -18,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter {
@@ -47,26 +49,54 @@ public class ImageAdapter extends BaseAdapter {
 
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        final ImageView imageView;
+        final ViewHolder holder;
         if (convertView == null) {
-            imageView = new ImageView(mContext);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        } else {
-            imageView = (ImageView) convertView;
+            inflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.layout_ecarditem, null);
+
+            holder = new ViewHolder();
+            holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
+            holder.checkbox = (CheckBox) convertView.findViewById(R.id.itemCheckBox);
+
+            convertView.setTag(holder);
         }
+        else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.checkbox.setId(position);
+        holder.imageview.setId(position);
+        holder.checkbox.setTag(position);
+        holder.checkbox.setOnClickListener(new OnClickListener() {
 
-        imageView.setImageResource(mThumbIds[position]);
-        imageView.setTag(mThumbIds[position]);
-        imageView.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                CheckBox cb = (CheckBox) v;
+                if (cb.isChecked()){
+                    holder.checkbox.setChecked(false);
+                } else {
+                    holder.checkbox.setChecked(true);
+                }
+            }
+        });
+        holder.imageview.setImageResource(mThumbIds[position]);
+        holder.imageview.setTag(mThumbIds[position]);
+        holder.imageview.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-                int id = (Integer) arg0.getTag();
-                zoomImageFromThumb(arg0, id);
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //int id = v.getId();
+                //Intent intent = new Intent();
+                //intent.setAction(Intent.ACTION_VIEW);
+                //intent.setDataAndType(Uri.parse("file://" + arrPath[id]), "image/*");
+                //startActivity(intent);
+
+                int id = (Integer) v.getTag();
+                zoomImageFromThumb(v, id);
             }
         });
 
-        return imageView;
+        holder.id = position;
+        return convertView;
     }
 
     // References to our images in res > drawable
@@ -215,4 +245,10 @@ public class ImageAdapter extends BaseAdapter {
             }
         });
     }
+}
+
+class ViewHolder {
+    ImageView imageview;
+    CheckBox checkbox;
+    int id;
 }
