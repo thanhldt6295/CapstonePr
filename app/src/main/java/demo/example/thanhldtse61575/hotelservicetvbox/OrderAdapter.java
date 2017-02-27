@@ -2,6 +2,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -196,29 +197,7 @@ public class OrderAdapter extends BaseAdapter {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    class SendDataToServer extends AsyncTask<String, Void, Integer> {
-
-                                        @Override
-                                        protected Integer doInBackground(String... params) {
-                                            CommonService commonService = new CommonService();
-                                            int returnValue = commonService.sendData(params[0], params[1]);
-                                            return returnValue;
-                                        }
-
-                                        protected void onPostExecute(Integer response) {
-                                            if(response==200){
-                                                cart.clear();
-                                                total.setText("0đ");
-                                                notifyDataSetChanged();
-
-                                                Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
-                                            }
-                                            else{
-                                                Toast.makeText(ctx, response+"", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }
-                                    String returnList = new Gson().toJson(cart);
+                                    final String returnList = new Gson().toJson(cart);
                                     final Calendar calendar = Calendar.getInstance();
                                     deliveryTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
                                         @Override
@@ -227,8 +206,33 @@ public class OrderAdapter extends BaseAdapter {
                                                     deliveryTime.getHour(), deliveryTime.getMinute(), 0);
                                         }
                                     });
-                                    long time2Serv = calendar.getTimeInMillis()/1000;
-                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart?", "roomid=201&deliveryTime=" + time2Serv + "&list=" +returnList);
+                                    final long time2Serv = calendar.getTimeInMillis()/1000;
+                                    class SendDataToServer extends AsyncTask<String, String, String> {
+
+                                        @Override
+                                        protected String doInBackground(String... params) {
+                                            CommonService commonService = new CommonService();
+                                            ContentValues values = new ContentValues();
+                                            values.put("list", params[2]);
+                                            values.put("deliveryTime", Double.parseDouble(params[1]));
+                                            values.put("roomid", Integer.parseInt(params[3]));
+                                            return commonService.sendData(params[0], values)+"";
+                                        }
+
+                                        protected void onPostExecute(String response) {
+                                            if(response.equals("200")){
+                                                cart.clear();
+                                                total.setText("0đ");
+                                                notifyDataSetChanged();
+
+                                                Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", time2Serv+"" ,returnList+"",202+"");
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();
