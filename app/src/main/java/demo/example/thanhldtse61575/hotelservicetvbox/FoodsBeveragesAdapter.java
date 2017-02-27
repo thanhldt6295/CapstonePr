@@ -125,6 +125,7 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
 
         textView.setText(title);
 
+        final String[] categoryName = {null};
         class GetDataFromServer extends AsyncTask<String, Void, String> {
 
             protected String doInBackground(String... params) {
@@ -138,7 +139,16 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
                 final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
                 }.getType());
 
-                ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
+                // Search follow categoryName
+                final List<Service> accID = new ArrayList<Service>();
+                for (Service ac : acc) {
+                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+                    if (cagName.equals(categoryName[0])) {
+                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                    }
+                }
+
+                ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, accID);
                 grid.setAdapter(adapter);
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -153,15 +163,15 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
                         btnOrder.setVisibility(View.VISIBLE);
 
                         quantity.setText("1");
-                        String url = acc.get(position).getImage();
+                        String url = accID.get(position).getImage();
                         Picasso.with(ctx)
                                 .load(url)
                                 .placeholder(R.drawable.loading)
                                 .fit()
                                 .centerCrop().into(image);
-                        name.setText(acc.get(position).getServiceName());
-                        price.setText(acc.get(position).getUnitPrice() + "");
-                        description.setText(acc.get(position).getDescription());
+                        name.setText(accID.get(position).getServiceName());
+                        price.setText(accID.get(position).getUnitPrice() + "");
+                        description.setText(accID.get(position).getDescription());
                         btnOrder.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View v, MotionEvent event) {
@@ -173,7 +183,7 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
                                         break;
                                     }
                                     case MotionEvent.ACTION_UP:
-                                        Service sv = acc.get(position);
+                                        Service sv = accID.get(position);
                                         if (cart == null)
                                             cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
                                                     sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
@@ -224,7 +234,6 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
                                 }
                             }
                         });
-
                     }
                 });
             }
@@ -233,238 +242,16 @@ public class FoodsBeveragesAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (groupPosition == 0 & childPosition == 1) {
-                    image.setVisibility(View.INVISIBLE);
-                    name.setVisibility(View.INVISIBLE);
-                    price.setVisibility(View.INVISIBLE);
-                    description.setVisibility(View.INVISIBLE);
-                    btnPlus.setVisibility(View.INVISIBLE);
-                    btnMinus.setVisibility(View.INVISIBLE);
-                    quantity.setVisibility(View.INVISIBLE);
-                    btnOrder.setVisibility(View.INVISIBLE);
-                    new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-                }
-                if(groupPosition==0&childPosition==0){
-                    image.setVisibility(View.INVISIBLE);
-                    name.setVisibility(View.INVISIBLE);
-                    price.setVisibility(View.INVISIBLE);
-                    description.setVisibility(View.INVISIBLE);
-                    btnPlus.setVisibility(View.INVISIBLE);
-                    btnMinus.setVisibility(View.INVISIBLE);
-                    quantity.setVisibility(View.INVISIBLE);
-                    btnOrder.setVisibility(View.INVISIBLE);
-                    final List<Service> acc = new ArrayList<Service>();
-                    acc.add(new Service(5,"RICE",1,"",50000.0,"hihihi","http://webdata.vcmedia.vn/k:webdata/100/d49469comtam1/8-mon-com-ngon-ban-nen-thu-mot-lan-trong-doi.jpg"));
-                    acc.add(new Service(6,"PHO",1,"",60000.0,"hohoho","http://www.phoonghung.vn/resources/uploaded/PhoOngHung/product/2014/12/21/pho-duoi-bo-to-lon-21-0-635545084150222500.png"));
-                    acc.add(new Service(7,"NOODLES",1,"",100000.0,"hohoho","http://vnhow.vn/img/uploads/contents/desc/2010/07/cach-che-bien-mon-mi-goi-xao-so-diep-tom-vien.jpg"));
-                    ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
-                    grid.setAdapter(adapter);
-                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            image.setVisibility(View.VISIBLE);
-                            name.setVisibility(View.VISIBLE);
-                            price.setVisibility(View.VISIBLE);
-                            description.setVisibility(View.VISIBLE);
-                            btnPlus.setVisibility(View.VISIBLE);
-                            btnMinus.setVisibility(View.VISIBLE);
-                            quantity.setVisibility(View.VISIBLE);
-                            btnOrder.setVisibility(View.VISIBLE);
-
-                            quantity.setText("1");
-                            String url = acc.get(position).getImage();
-                            Picasso.with(ctx)
-                                    .load(url)
-                                    .placeholder(R.drawable.loading)
-                                    .fit()
-                                    .centerCrop().into(image);
-                            name.setText(acc.get(position).getServiceName());
-                            price.setText(acc.get(position).getUnitPrice() + "");
-                            description.setText(acc.get(position).getDescription());
-                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-                                @Override
-                                public boolean onTouch(View v, MotionEvent event) {
-                                    switch (event.getAction()) {
-                                        case MotionEvent.ACTION_DOWN: {
-                                            Button view = (Button) v;
-                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                                            v.invalidate();
-                                            break;
-                                        }
-                                        case MotionEvent.ACTION_UP:
-                                            Service sv = acc.get(position);
-                                            if (cart == null)
-                                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                        Integer.parseInt(quantity.getText().toString()), "aaaa"));
-                                            else {
-                                                boolean isHave = false;
-                                                for (CartItem od : cart) {
-                                                    if (od.getServiceID() == sv.getServiceID()) {
-                                                        isHave = true;
-                                                        od.setQuantity(od.getQuantity() + Integer.parseInt(quantity.getText().toString()));
-                                                    }
-                                                }
-                                                if (!isHave)
-                                                    cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                            sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                            Integer.parseInt(quantity.getText().toString()), ""));
-                                            }
-
-                                        case MotionEvent.ACTION_CANCEL: {
-                                            Button view = (Button) v;
-                                            view.getBackground().clearColorFilter();
-                                            view.invalidate();
-                                            break;
-                                        }
-                                    }
-                                    return true;
-                                }
-                            });
-                            btnMinus.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    int n = Integer.parseInt(quantity.getText().toString());
-                                    if (n > 1) {
-                                        StringBuilder qty = new StringBuilder();
-                                        qty.append(n - 1);
-                                        quantity.setText(qty);
-                                    }
-                                }
-                            });
-                            btnPlus.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    int n = Integer.parseInt(quantity.getText().toString());
-                                    if (n < 100) {
-                                        StringBuilder qty = new StringBuilder();
-                                        qty.append(n + 1);
-                                        quantity.setText(qty);
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
-                if(groupPosition==0&childPosition==2){
-                    image.setVisibility(View.INVISIBLE);
-                    name.setVisibility(View.INVISIBLE);
-                    price.setVisibility(View.INVISIBLE);
-                    description.setVisibility(View.INVISIBLE);
-                    btnPlus.setVisibility(View.INVISIBLE);
-                    btnMinus.setVisibility(View.INVISIBLE);
-                    quantity.setVisibility(View.INVISIBLE);
-                    btnOrder.setVisibility(View.INVISIBLE);
-                    final List<Service> acc = new ArrayList<Service>();
-                    acc.add(new Service(8,"EGGS",1,"",50.000,"hihihi","http://toinayangi.vn/wp-content/uploads/2015/07/khoai-tay-xao-xuc-xich-8.jpg"));
-                    acc.add(new Service(9,"SPAGHETTI",1,"",60.000,"hohoho","http://www.xaluan.com/images/news/Image/2013/02/14/1511c8e43cd4d2.img.jpg"));
-                    ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, acc);
-                    grid.setAdapter(adapter);
-                    grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            image.setVisibility(View.VISIBLE);
-                            name.setVisibility(View.VISIBLE);
-                            price.setVisibility(View.VISIBLE);
-                            description.setVisibility(View.VISIBLE);
-                            btnPlus.setVisibility(View.VISIBLE);
-                            btnMinus.setVisibility(View.VISIBLE);
-                            quantity.setVisibility(View.VISIBLE);
-                            btnOrder.setVisibility(View.VISIBLE);
-
-                            quantity.setText("1");
-                            String url = acc.get(position).getImage();
-                            Picasso.with(ctx)
-                                    .load(url)
-                                    .placeholder(R.drawable.loading)
-                                    .fit()
-                                    .centerCrop().into(image);
-                            name.setText(acc.get(position).getServiceName());
-                            price.setText(acc.get(position).getUnitPrice() + "");
-                            description.setText(acc.get(position).getDescription());
-                            btnOrder.setOnTouchListener(new View.OnTouchListener() {
-                                @Override
-                                public boolean onTouch(View v, MotionEvent event) {
-                                    switch (event.getAction()) {
-                                        case MotionEvent.ACTION_DOWN: {
-                                            Button view = (Button) v;
-                                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                                            v.invalidate();
-                                            break;
-                                        }
-                                        case MotionEvent.ACTION_UP:
-                                            Service sv = acc.get(position);
-                                            if (cart == null)
-                                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                        Integer.parseInt(quantity.getText().toString()), "aaaa"));
-                                            else {
-                                                boolean isHave = false;
-                                                for (CartItem od : cart) {
-                                                    if (od.getServiceID() == sv.getServiceID()) {
-                                                        isHave = true;
-                                                        od.setQuantity(od.getQuantity() + Integer.parseInt(quantity.getText().toString()));
-                                                    }
-                                                }
-                                                if (!isHave)
-                                                    cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                            sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                            Integer.parseInt(quantity.getText().toString()), ""));
-                                            }
-
-                                        case MotionEvent.ACTION_CANCEL: {
-                                            Button view = (Button) v;
-                                            view.getBackground().clearColorFilter();
-                                            view.invalidate();
-                                            break;
-                                        }
-                                    }
-                                    return true;
-                                }
-                            });
-                            btnMinus.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    int n = Integer.parseInt(quantity.getText().toString());
-                                    if (n > 1) {
-                                        StringBuilder qty = new StringBuilder();
-                                        qty.append(n - 1);
-                                        quantity.setText(qty);
-                                    }
-                                }
-                            });
-                            btnPlus.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    int n = Integer.parseInt(quantity.getText().toString());
-                                    if (n < 100) {
-                                        StringBuilder qty = new StringBuilder();
-                                        qty.append(n + 1);
-                                        quantity.setText(qty);
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
-                if(groupPosition==1&childPosition==0){
-
-                }
-                if(groupPosition==1&childPosition==1){
-
-                }
-                if(groupPosition==1&childPosition==2){
-
-                }
-                if(groupPosition==1&childPosition==3){
-
-                }
-                if(groupPosition==1&childPosition==4){
-
-                }
-                if(groupPosition==1&childPosition==5){
-
-                }
+                image.setVisibility(View.INVISIBLE);
+                name.setVisibility(View.INVISIBLE);
+                price.setVisibility(View.INVISIBLE);
+                description.setVisibility(View.INVISIBLE);
+                btnPlus.setVisibility(View.INVISIBLE);
+                btnMinus.setVisibility(View.INVISIBLE);
+                quantity.setVisibility(View.INVISIBLE);
+                btnOrder.setVisibility(View.INVISIBLE);
+                categoryName[0] = getChild(groupPosition,childPosition).toString().trim();
+                new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
             }
         });
         return convertView;

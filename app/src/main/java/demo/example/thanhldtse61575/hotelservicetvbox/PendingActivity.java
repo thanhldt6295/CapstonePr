@@ -43,16 +43,18 @@ public class PendingActivity extends AppCompatActivity {
 
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
-                if (stt.equals("DONE")) {
+                if (stt.equals("PENDING")) {
                     pending.add(new OrderDetail(od.getOrderDetailID(),od.getOrderID(),
                             od.getServiceID(),od.getServiceName(),od.getCategoryID(),
                             od.getCategoryName(),od.getUnitPrice(),od.getDescription(),od.getImage(),
                             od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
                 }
             }
-            ListView listView = (ListView) findViewById(R.id.detailsListView);
-            PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total);
-            listView.setAdapter(a);
+            if(pending!=null) {
+                ListView listView = (ListView) findViewById(R.id.detailsListView);
+                PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total);
+                listView.setAdapter(a);
+            }
         }
     }
 

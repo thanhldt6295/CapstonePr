@@ -141,7 +141,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 // Search follow categoryName
                 final List<Service> accID = new ArrayList<Service>();
                 for (Service ac : acc) {
-                    String cagName = ac.getCategoryName().toString().toUpperCase();
+                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
                     if (cagName.equals(categoryName[0])) {
                         accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                     }
@@ -249,7 +249,7 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                 btnMinus.setVisibility(View.INVISIBLE);
                 quantity.setVisibility(View.INVISIBLE);
                 btnOrder.setVisibility(View.INVISIBLE);
-                categoryName[0] = getChild(groupPosition,childPosition).toString();
+                categoryName[0] = getChild(groupPosition,childPosition).toString().trim();
                 new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
             }
         });

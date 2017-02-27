@@ -94,14 +94,14 @@
 
     <string name="houseware">HOUSEWARE</string>
     <string name="lighter">LIGHTER</string>
-    <string name="tshirtf">T-SHIRT (female)</string>
-    <string name="tshirtm">T-SHIRT (male)</string>
-    <string name="coatf">COAT (female)</string>
-    <string name="coatm">COAT (male)</string>
-    <string name="trouserf">TROUSERS (female)</string>
-    <string name="trouserm">TROUSERS (male)</string>
-    <string name="underwearf">UNDERWEAR (female)</string>
-    <string name="underwearm">UNDERWEAR (male)</string>
+    <string name="tshirtf">T-SHIRT (F)</string>
+    <string name="tshirtm">T-SHIRT (M)</string>
+    <string name="coatf">COAT (F)</string>
+    <string name="coatm">COAT (M)</string>
+    <string name="trouserf">TROUSERS (F)</string>
+    <string name="trouserm">TROUSERS (M)</string>
+    <string name="underwearf">UNDERWEAR (F)</string>
+    <string name="underwearm">UNDERWEAR (N)</string>
 
     <!-- Foods and Drinks -->
     <string-array name="food_header_titles">

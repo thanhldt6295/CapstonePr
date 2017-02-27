@@ -206,22 +206,29 @@ public class OrderAdapter extends BaseAdapter {
                                         }
 
                                         protected void onPostExecute(Integer response) {
-                                            //
+                                            if(response==200){
+                                                cart.clear();
+                                                total.setText("0đ");
+                                                notifyDataSetChanged();
+
+                                                Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                Toast.makeText(ctx, response+"", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     }
                                     String returnList = new Gson().toJson(cart);
-
-//                                    Calendar calendar = Calendar.getInstance();
-//                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-//                                            deliveryTime.getHour(), deliveryTime.getMinute(), 0);
-//                                    long time2Serv = calendar.getTimeInMillis()/1000;
-
-                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart?", "roomid=201&deliveryTime=&list=" +returnList);
-
-                                    cart.clear();
-                                    total.setText("0đ");
-                                    notifyDataSetChanged();
-                                    Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                    final Calendar calendar = Calendar.getInstance();
+                                    deliveryTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+                                        @Override
+                                        public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                                            calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
+                                                    deliveryTime.getHour(), deliveryTime.getMinute(), 0);
+                                        }
+                                    });
+                                    long time2Serv = calendar.getTimeInMillis()/1000;
+                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart?", "roomid=201&deliveryTime=" + time2Serv + "&list=" +returnList);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();
