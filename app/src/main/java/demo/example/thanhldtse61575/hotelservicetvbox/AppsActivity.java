@@ -1,7 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
@@ -34,6 +36,7 @@ public class AppsActivity extends AppCompatActivity {
     String items[] = {"Youtube", "Facebook", "Calculator", "Mp3 Zing", "Google Maps", "Settings", "Gmail", "TV"};
     int icons[] = {R.drawable.icon_utube, R.drawable.icon_fb, R.drawable.icon_calculator, R.drawable.icon_mp3,
             R.drawable.icon_ggmaps, R.drawable.icon_setting, R.drawable.icon_gmail, R.drawable.icon_tivi};
+    TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class AppsActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.application));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
 
 //        String networkSSID = "test";
 //        String networkPass = "pass";
@@ -184,5 +189,13 @@ public class AppsActivity extends AppCompatActivity {
         Intent i = manager.getLaunchIntentForPackage(appID);
         i.addCategory(Intent.CATEGORY_LAUNCHER);
         startActivity(i);
+    }
+
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }

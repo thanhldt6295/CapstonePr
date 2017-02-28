@@ -6,20 +6,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -27,8 +31,12 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
  */
 public class WelcomeActivity extends AppCompatActivity {
 
+    TextView customerWel;
     Button dummyBtnEng;
     Button dummyBtnViet;
+    public static final String mPath = "roomid.txt";
+    private QuoteBank mQuoteBank;
+    private List<String> mLines;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -108,6 +116,35 @@ public class WelcomeActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("Hotel Service TV Box");
 
+        mQuoteBank = new QuoteBank(this);
+        mLines = mQuoteBank.readLine(mPath);
+        String roomid = "";
+        for (final String string : mLines) {
+            setDataFromSharedPref(string);
+            roomid = string;
+        }
+
+        class GetDataFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final String acc = new Gson().fromJson(response, new TypeToken<String>() {
+                }.getType());
+
+                customerWel = (TextView) findViewById(R.id.fullscreen_content);
+
+                customerWel.setText("WELCOME " + acc.toString().toUpperCase().trim());
+            }
+        }
+
+        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetCustNameByRoomID/" + roomid);
+
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
@@ -174,6 +211,17 @@ public class WelcomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(LOCALE_TAG, lang);
+        editor.commit();
+    }
+
+    private static final String SHARE_ROOM = "ShareRoom";
+    private static final String ROOM_ID = "RoomID";
+
+    private void setDataFromSharedPref(String roomid){
+        SharedPreferences sharedPref = this.getSharedPreferences(SHARE_ROOM, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(ROOM_ID, roomid);
         editor.commit();
     }
 

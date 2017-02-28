@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +25,8 @@ import java.util.List;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 
 public class RecommendDetailActivity extends AppCompatActivity {
+
+    TextView roomid;
 
     private List<Recommend> getDataFromSharedPreferences(){
         Gson gson = new Gson();
@@ -46,6 +48,8 @@ public class RecommendDetailActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.recommend));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPref());
 
         List<Recommend> RecommendEntityList = getDataFromSharedPreferences();
         int index = getIntent().getExtras().getInt("position");
@@ -102,5 +106,13 @@ public class RecommendDetailActivity extends AppCompatActivity {
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
+
+    private String getDataFromSharedPref(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }

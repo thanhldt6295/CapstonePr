@@ -43,7 +43,7 @@
     <string name="housekeeping">DỊCH VỤ DỌN PHÒNG</string>
     <string name="maintenance">BẢO TRÌ THIẾT BỊ</string>
     <string name="total">THÀNH TIỀN</string>
-    <string name="roomid">SỐ PHÒNG</string>
+    <string name="roomid">PHÒNG</string>
     <string name="order">ĐƠN HÀNG CỦA QUÝ KHÁCH</string>
     <string name="pending">ĐƠN HÀNG ĐANG CHỜ</string>
     <string name="delivery_time">THỜI GIAN HẸN</string>

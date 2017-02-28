@@ -1,6 +1,8 @@
 package demo.example.thanhldtse61575.hotelservicetvbox.housekeeping;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,14 +22,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.AppsActivity;
 import demo.example.thanhldtse61575.hotelservicetvbox.CommonService;
-import demo.example.thanhldtse61575.hotelservicetvbox.OrderAdapter;
 import demo.example.thanhldtse61575.hotelservicetvbox.R;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class ExtraActivity extends AppCompatActivity {
 
+    TextView roomid;
     final String[] categoryName = {null};
     class GetDataFromServer extends AsyncTask<String, Void, String> {
 
@@ -69,6 +70,8 @@ public class ExtraActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
@@ -134,5 +137,13 @@ public class ExtraActivity extends AppCompatActivity {
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
+
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }

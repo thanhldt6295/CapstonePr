@@ -1,15 +1,22 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
             R.string.ecard, R.string.bill, R.string.survey, R.string.recommend};
     int[] images = {R.drawable.img_app,R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_shopping,
             R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey, R.drawable.img_youtube};
+    TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.app_name));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -81,4 +91,31 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(ma);
     }
 
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_pending, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.pending:
+                Intent i = new Intent(MainActivity.this, PendingActivity.class);
+                startActivity(i);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

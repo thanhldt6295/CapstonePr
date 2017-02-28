@@ -1,6 +1,8 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ public class PromotionalChanelActivity extends AppCompatActivity {
 
     int[] titles = {R.string.spa, R.string.gym, R.string.pool, R.string.tennis, R.string.golf};
     int[] images = {R.drawable.hotelww, R.drawable.pool, R.drawable.hotelww, R.drawable.pool, R.drawable.card};
+    TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class PromotionalChanelActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.promotional));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -79,4 +84,11 @@ public class PromotionalChanelActivity extends AppCompatActivity {
         rv.setAdapter(ma);
     }
 
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
+    }
 }

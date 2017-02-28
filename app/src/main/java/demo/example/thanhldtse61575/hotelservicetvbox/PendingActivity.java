@@ -1,6 +1,8 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +27,7 @@ public class PendingActivity extends AppCompatActivity {
 
     List<OrderDetail> details = new ArrayList<>();
     List<OrderDetail> pending = new ArrayList<>();
+    TextView roomidTV;
 
     class GetDataFromServer extends AsyncTask<String, Void, String> {
 
@@ -50,7 +53,7 @@ public class PendingActivity extends AppCompatActivity {
                             od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
                 }
             }
-            if(pending!=null) {
+            if(pending.size()!=0) {
                 ListView listView = (ListView) findViewById(R.id.detailsListView);
                 PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total);
                 listView.setAdapter(a);
@@ -67,7 +70,12 @@ public class PendingActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.pending));
 
-        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/GetOrderDetailByOrderID/2");
+        String roomid = getDataFromSharedPreferences();
+
+        roomidTV = (TextView) findViewById(R.id.roomid);
+        roomidTV.setText(getResources().getString(R.string.roomid) + " " + roomid);
+
+        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/GetOrderDetailByRoomID/" + roomid);
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -113,5 +121,13 @@ public class PendingActivity extends AppCompatActivity {
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
+
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }

@@ -1,6 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.MediaController;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +20,7 @@ import java.util.Date;
 public class PromoDetailsActivity extends AppCompatActivity {
 
     VideoView videoView;
+    TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class PromoDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
@@ -46,6 +52,8 @@ public class PromoDetailsActivity extends AppCompatActivity {
                 abTitle.setText(getResources().getString(R.string.pool));
                 videoView = (VideoView) findViewById(R.id.videoView);
                 videoView.setVideoURI(Uri.parse("https://youtu.be/yx5GqeP2qQU"));
+                MediaController mc = new MediaController(this);
+                videoView.setMediaController(mc);
                 videoView.requestFocus();
                 videoView.start();
                 break;
@@ -101,5 +109,13 @@ public class PromoDetailsActivity extends AppCompatActivity {
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
+
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }

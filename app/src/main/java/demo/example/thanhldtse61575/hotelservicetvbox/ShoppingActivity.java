@@ -49,6 +49,7 @@ public class ShoppingActivity extends AppCompatActivity {
     Button btnPlus;
     EditText quantity;
     List<CartItem> cart;
+    TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class ShoppingActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.shopping));
+        roomid = (TextView) findViewById(R.id.roomid);
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -161,6 +164,10 @@ public class ShoppingActivity extends AppCompatActivity {
                 intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
                 return true;
+            case R.id.pending:
+                Intent i = new Intent(ShoppingActivity.this, PendingActivity.class);
+                startActivity(i);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -216,6 +223,14 @@ public class ShoppingActivity extends AppCompatActivity {
         if(cart.size()==0) {
             ShoppingActivity.super.onBackPressed();
         }
+    }
+
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }
 

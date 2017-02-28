@@ -86,7 +86,7 @@ public class PendingAdapter extends BaseAdapter{
         quantity.setText(cart.get(position).getQuantity()+"");
 
         SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        isoFormat.setTimeZone(TimeZone.getTimeZone("GMT+7:00"));
         String normalDate = isoFormat.format(new java.util.Date(cart.get(position).getDeliverTime()*1000));;
         deliveryTime.setText(normalDate);
 

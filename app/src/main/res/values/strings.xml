@@ -2,7 +2,7 @@
     <string name="app_name">Hotel Service TV Box</string>
     <string name="title_activity_welcome">Welcome Activity</string>
     <string name="total">TOTAL</string>
-    <string name="roomid">ROOM ID</string>
+    <string name="roomid">ROOM</string>
     <string name="add">ORDER</string>
     <string name="finalize">FINALIZE</string>
     <string name="clear">CLEAR ORDER</string>

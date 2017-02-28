@@ -29,6 +29,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
@@ -200,7 +201,7 @@ public class OrderAdapter extends BaseAdapter {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     final String returnList = new Gson().toJson(cart);
-                                    final Calendar calendar = Calendar.getInstance();
+                                    final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
                                     deliveryTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
                                         @Override
                                         public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
