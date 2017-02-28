@@ -4,41 +4,171 @@
     android:id="@+id/activity_ecard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgr"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/backgr"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.EcardActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="606dp">
 
-            <include layout="@layout/layout_ecard" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_translucent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="YOUR NAME"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_weight="3"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/txtYourName" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="RECEIVER MAIL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_weight="3"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/txtMailRecv" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="SUBJECT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:textColor="@color/white"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:layout_weight="7"
+                            android:id="@+id/txtSubject" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <Space
+                    android:layout_width="@dimen/activity_vertical_margin"
+                    android:layout_height="match_parent"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="MESSAGE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="textMultiLine"
+                        android:ems="10"
+                        android:id="@+id/txtMessage"
+                        android:hint="Dear..."/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin" />
+
+            <GridView
+                android:id="@+id/gridViewCard"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:columnWidth="200dp"
+                android:focusable="true"
+                android:horizontalSpacing="10dp"
+                android:numColumns="auto_fit"
+                android:scrollbars="horizontal"
+                android:verticalSpacing="10dp" />
 
             <Button
-                android:text="@string/send"
+                android:text="SEND"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnSend"
-                android:background="@drawable/buttonstyles"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
+                android:layout_gravity="end"
+                android:id="@+id/btnSend"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_vertical_margin" />
+
+        <include
+            layout="@layout/layout_roombar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
-
-    <include layout="@layout/layout_roombar" />
 
 </RelativeLayout>

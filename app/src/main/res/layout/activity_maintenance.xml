@@ -11,7 +11,6 @@
     android:background="@drawable/backgr"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.MaintenanceActivity">
 
-    <include layout="@layout/layout_extraitem"/>
 
     <include layout="@layout/layout_roombar"/>
 

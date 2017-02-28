@@ -18,30 +18,69 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/light_translucent"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="7"
+                android:background="@color/light_translucent"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comment"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/activity_vertical_margin" />
+
+                    <EditText
+                        android:id="@+id/txtComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textMultiLine" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/activity_vertical_margin"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/light_translucent"
+                android:orientation="vertical">
+
+
                 <TextView
-                    android:id="@+id/tvDateTime"
+                    android:id="@+id/tvDeliveryTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/datetime"
-                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/activity_vertical_margin" />
 
                 <TimePicker
                     android:id="@+id/timePicker"
@@ -60,49 +99,19 @@
                     android:layout_weight="1"
                     android:scrollbars="vertical" />
 
-            </LinearLayout>
-
-            <Space
-                android:layout_width="@dimen/activity_vertical_margin"
-                android:layout_height="match_parent"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/comment"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold" />
-
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_vertical_margin" />
 
-                <EditText
-                    android:id="@+id/txtComment"
+                <Button
+                    android:id="@+id/btnFinalizeOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textMultiLine" />
+                    android:text="@string/finalize" />
 
             </LinearLayout>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnFinalizeOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/finalize" />
 
         <Space
             android:layout_width="match_parent"

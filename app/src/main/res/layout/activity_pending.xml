@@ -21,13 +21,12 @@
             android:id="@+id/detailsListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/light_translucent"
             android:layout_weight="1" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_vertical_margin" />
-
-        <include layout="@layout/layout_billtotal"/>
 
         <include
             layout="@layout/layout_roombar"
