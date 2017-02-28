@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.text.Editable;
@@ -237,7 +238,7 @@ public class OrderAdapter extends BaseAdapter {
                                             }
                                         }
                                     }
-                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", time2Serv+"" ,returnList+"",202+"");
+                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", time2Serv+"" , returnList+"", getDataFromSharedPreferences());
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();
@@ -246,5 +247,13 @@ public class OrderAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    private String getDataFromSharedPreferences(){
+
+        SharedPreferences sharedPref = ctx.getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
     }
 }
