@@ -164,10 +164,6 @@ public class ShoppingActivity extends AppCompatActivity {
                 intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
                 return true;
-            case R.id.pending:
-                Intent i = new Intent(ShoppingActivity.this, PendingActivity.class);
-                startActivity(i);
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }

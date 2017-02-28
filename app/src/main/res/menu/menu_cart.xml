@@ -7,8 +7,4 @@
         android:icon="@drawable/ic_cart"
         app:showAsAction="always"/>
 
-    <item android:title="Item"
-        android:id="@+id/pending"
-        android:icon="@drawable/ic_pending"
-        app:showAsAction="always"/>
 </menu>
