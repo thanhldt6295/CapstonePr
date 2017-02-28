@@ -23,6 +23,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -30,6 +31,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 /**
  * Created by ThanhLDTSE61575 on 2/10/2017.
@@ -212,11 +214,13 @@ public class OrderAdapter extends BaseAdapter {
                                         @Override
                                         protected String doInBackground(String... params) {
                                             CommonService commonService = new CommonService();
-                                            ContentValues values = new ContentValues();
-                                            values.put("list", params[2]);
-                                            values.put("deliveryTime", Double.parseDouble(params[1]));
-                                            values.put("roomid", Integer.parseInt(params[3]));
-                                            return commonService.sendData(params[0], values)+"";
+                                            //ContentValues values = new ContentValues();
+                                            List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
+                                            ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
+//                                            values.put("list", params[2]);
+//                                            values.put("deliveryTime", Double.parseDouble(params[1]));
+//                                            values.put("roomid", Integer.parseInt(params[3]));
+                                            return commonService.sendData(params[0], toServer)+"";
                                         }
 
                                         protected void onPostExecute(String response) {

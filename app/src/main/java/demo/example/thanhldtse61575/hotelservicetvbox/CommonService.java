@@ -4,15 +4,22 @@ import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 /**
  * Created by ThanhLDTSE61575 on 2/14/2017.
@@ -137,14 +144,15 @@ public class CommonService {
     //using like this: String retu = new Gson().toJson(acc); for pare to JSON
     //retu: JSON string output
     //acc : input object
-    public int sendData(String link, ContentValues contentValues){
+    public int sendData(String link, ToServer contentValues){
         HttpURLConnection connection = null;
         try {
             //Create connection
             URL url = new URL(link);
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            //connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Type","application/json");
 
             //connection.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
             connection.setRequestProperty("Content-Language", "en-US");
@@ -154,9 +162,9 @@ public class CommonService {
             connection.setDoOutput(true);
 
             //Send request
-            String a = getQuery(contentValues);
-            DataOutputStream wr = new DataOutputStream (connection.getOutputStream ());
-            wr.writeUTF (a);
+//            String a = getQuery(contentValues);
+//            DataOutputStream wr = new DataOutputStream (connection.getOutputStream ());
+//            wr.writeUTF (a);
 //            OutputStream os = connection.getOutputStream();
 //            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 //
@@ -165,10 +173,15 @@ public class CommonService {
 //            writer.flush ();
 //            writer.close ();
 //            os.close();
+            String str = new Gson().toJson(contentValues);
+            byte[] outputInBytes = str.getBytes("UTF-8");
+            OutputStream os = connection.getOutputStream();
+            os.write( outputInBytes );
+            os.close();
 
-            wr.flush();
-            wr.close();
-            connection.connect();
+//            wr.flush();
+//            wr.close();
+//            connection.connect();
 
             //Get Response
             InputStream is = connection.getInputStream();
