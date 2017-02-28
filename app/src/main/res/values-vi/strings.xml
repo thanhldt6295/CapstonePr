@@ -81,6 +81,7 @@
     <string name="spa"></string>
     <string name="subject">TIÊU ĐỀ</string>
     <string name="yourname">TÊN CỦA BẠN</string>
+    <string name="notitynull">Không có hàng..</string>
 
 
 </resources>

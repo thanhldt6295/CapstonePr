@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,10 +51,12 @@ public class ExtraActivity extends AppCompatActivity {
                 }
             }
 
-            if(accID!=null){
+            if(accID.size()!=0){
                 ListView listView = (ListView) findViewById(R.id.extraListView);
                 ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID);
                 listView.setAdapter(a);
+            } else {
+                Toast.makeText(ExtraActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -70,7 +70,7 @@ public class ExtraAdapter extends BaseAdapter {
         name.setText(list.get(position).getServiceName());
 
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
-        quantity.setText("1");
+        quantity.setText("0");
 
         Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(new View.OnClickListener() {

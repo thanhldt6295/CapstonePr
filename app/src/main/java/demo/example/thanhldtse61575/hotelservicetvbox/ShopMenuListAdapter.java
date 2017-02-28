@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -145,6 +146,10 @@ public class ShopMenuListAdapter extends BaseExpandableListAdapter {
                     if (cagName.equals(categoryName[0])) {
                         accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                     }
+                }
+
+                if(accID.size()==0){
+                    Toast.makeText(ctx, R.string.notitynull, Toast.LENGTH_SHORT).show();
                 }
 
                 ShopGridViewAdapter adapter = new ShopGridViewAdapter(ctx, accID);

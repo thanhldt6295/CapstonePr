@@ -138,7 +138,7 @@ public class FoodsBeveragesActivity extends AppCompatActivity {
         ChildList.put(Headings.get(0),L1);
         ChildList.put(Headings.get(1),L2);
 
-        FoodsBeveragesAdapter menuAdapter = new FoodsBeveragesAdapter(this, Headings, ChildList, gridView,
+        ShopMenuListAdapter menuAdapter = new ShopMenuListAdapter(this, Headings, ChildList, gridView,
                 image, name, price, description, btnOrder, btnMinus, btnPlus, quantity, cart);
         expandableListView.setAdapter(menuAdapter);
     }

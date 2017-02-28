@@ -50,9 +50,12 @@ public class ViewBillActivity extends AppCompatActivity {
                             od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
                 }
             }
-            ListView listView = (ListView) findViewById(R.id.detailsListView);
-            ViewBillAdapter a = new ViewBillAdapter(ViewBillActivity.this, done, total);
-            listView.setAdapter(a);
+
+            if(done.size()!=0) {
+                ListView listView = (ListView) findViewById(R.id.detailsListView);
+                ViewBillAdapter a = new ViewBillAdapter(ViewBillActivity.this, done, total);
+                listView.setAdapter(a);
+            }
         }
     }
 
