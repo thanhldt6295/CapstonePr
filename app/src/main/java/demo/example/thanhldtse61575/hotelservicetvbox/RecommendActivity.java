@@ -137,14 +137,21 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     private List<Hobby> loadDummyCities(){
         HobbyEntityList = new ArrayList<Hobby>();
 
+        Hobby Hobby0 = new Hobby();
+        Hobby0.setId(0);
+        Hobby0.setName("ALL");
+        HobbyEntityList.add(Hobby0);
+
         Hobby Hobby1 = new Hobby();
         Hobby1.setId(1);
         Hobby1.setName("OCEAN");
         HobbyEntityList.add(Hobby1);
+
         Hobby Hobby2 = new Hobby();
         Hobby2.setId(2);
         Hobby2.setName("MOUNTAIN");
         HobbyEntityList.add(Hobby2);
+
         Hobby Hobby3 = new Hobby();
         Hobby3.setId(3);
         Hobby3.setName("COUNTRYSIDE");
@@ -156,37 +163,61 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     private List<Recommend> loadDummyRecommend(){
 
         RecommendEntityList = new ArrayList<Recommend>();
+
         Recommend Recommend1 = new Recommend();
         Recommend1.setId(1);
+        Recommend1.setHobbyID(0);
         Recommend1.setHobbyID(1);
-        Recommend1.setImage(R.drawable.img);
+        Recommend1.setImage(R.drawable.ocean1);
         Recommend1.setName("ABC");
         Recommend1.setDescription("Hello Ahihi");
         RecommendEntityList.add(Recommend1);
 
         Recommend Recommend2 = new Recommend();
         Recommend2.setId(2);
+        Recommend2.setHobbyID(0);
         Recommend2.setHobbyID(2);
-        Recommend2.setImage(R.drawable.demo);
+        Recommend2.setImage(R.drawable.mountain1);
         Recommend2.setName("BCD");
         Recommend2.setDescription("2nd Cross");
         RecommendEntityList.add(Recommend2);
 
         Recommend Recommend3 = new Recommend();
         Recommend3.setId(3);
+        Recommend3.setHobbyID(0);
         Recommend3.setHobbyID(2);
-        Recommend3.setImage(R.drawable.demo);
+        Recommend3.setImage(R.drawable.mountain2);
         Recommend3.setName("Carlton");
         Recommend3.setDescription("Church Street");
         RecommendEntityList.add(Recommend3);
 
         Recommend Recommend4 = new Recommend();
         Recommend4.setId(4);
+        Recommend4.setHobbyID(0);
         Recommend4.setHobbyID(2);
-        Recommend4.setImage(R.drawable.img);
+        Recommend4.setImage(R.drawable.mountain3);
         Recommend4.setName("New");
         Recommend4.setDescription("Vatanappilly");
         RecommendEntityList.add(Recommend4);
+
+        //ALL
+        Recommend Recommend5 = new Recommend();
+        Recommend5.setId(5);
+        Recommend5.setHobbyID(0);
+        Recommend5.setHobbyID(3);
+        Recommend5.setImage(R.drawable.cntrside1);
+        Recommend5.setName("ABCD");
+        Recommend5.setDescription("Hehe Ahihi");
+        RecommendEntityList.add(Recommend5);
+
+        Recommend Recommend6 = new Recommend();
+        Recommend6.setId(6);
+        Recommend6.setHobbyID(0);
+        Recommend6.setHobbyID(1);
+        Recommend6.setImage(R.drawable.ocean2);
+        Recommend6.setName("BCD");
+        Recommend6.setDescription("thueydhs");
+        RecommendEntityList.add(Recommend6);
 
         return RecommendEntityList;
     }

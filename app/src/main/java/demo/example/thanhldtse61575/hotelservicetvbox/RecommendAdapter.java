@@ -126,6 +126,7 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
 
                 results.count = RecommendFilterList.size();
                 results.values = RecommendFilterList;
+                setDataFromSharedPreferences((ArrayList<Recommend>) RecommendFilterList);
 
             }
             return results;
