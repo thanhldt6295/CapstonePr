@@ -109,27 +109,13 @@ public class PendingAdapter extends BaseAdapter{
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 class SendDataToServer extends AsyncTask<String, String, String> {
-
                                     @Override
                                     protected String doInBackground(String... params) {
                                         CommonService commonService = new CommonService();
-                                        return String.valueOf(commonService.sendCancel(params[0], str));
-                                    }
-
-                                    protected void onPostExecute(String response) {
-                                        if(response.equals("200")){
-                                            cart.remove(position);
-                                            if(cart.size() == 0){
-                                                total.setText("0đ");
-                                            }
-                                            notifyDataSetChanged();
-                                        }
-                                        else{
-                                            Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
-                                        }
+                                        return commonService.getData(params[0]);
                                     }
                                 }
-                                new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", str);
+                                new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/DeletePending/" + str);
                                 cart.remove(position);
                                 if(cart.size() == 0){
                                     total.setText("0đ");
