@@ -1,12 +1,11 @@
 package demo.example.thanhldtse61575.hotelservicetvbox.housekeeping;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,6 @@ public class ExtraAdapter extends BaseAdapter {
         return position;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         cart.clear();

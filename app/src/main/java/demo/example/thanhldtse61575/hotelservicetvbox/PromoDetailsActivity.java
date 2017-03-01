@@ -1,8 +1,11 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.widget.MediaController;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.text.DateFormat;
@@ -21,6 +25,7 @@ public class PromoDetailsActivity extends AppCompatActivity {
 
     VideoView videoView;
     TextView roomid;
+    FloatingActionButton btnOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +46,44 @@ public class PromoDetailsActivity extends AppCompatActivity {
                 videoView = (VideoView) findViewById(R.id.videoView);
                 videoView.setVideoPath("http://r10---sn-oguesn7z.googlevideo.com/videoplayback?ip=123.20.107.36&gir=yes&sparams=clen,dur,expire,gir,id,initcwndbps,ip,ipbits,itag,lmt,mime,mm,mn,ms,mv,nh,pl,source,upn&id=o-AIQkQXGfCsabISzJRDeI6NxZb7r3FP9uE2mDD8If_owF&upn=m_dV-cMlD8U&itag=135&pl=21&source=youtube&beids=%5B9452306%5D&expire=1488215665&clen=6634582&mime=video%2Fmp4&ipbits=0&lmt=1444011887493316&key=cms1&dur=60.000&signature=016F25FA9997906CBF3AC0A490D7A6AFB37FAF6C.10BBBCA9FBB41D5275690624748F44E3F94345A6&title=Phim+qu%E1%BA%A3ng+c%C3%A1o+truy%E1%BB%81n+h%C3%ACnh+v%E1%BB%81+L%27Beauty+Spa&redirect_counter=1&cm2rm=sn-n8vld7r&req_id=d897d2dfb6e9a3ee&cms_redirect=yes&mm=34&mn=sn-oguesn7z&ms=ltu&mt=1488194120&mv=m");
                 videoView.start();
+                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
+                btnOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(PromoDetailsActivity.this)
+                                .setTitle("Confirm Cancel")
+                                .setMessage("Are you sure?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
+                    }
+                });
                 break;
             case 1:
                 abTitle.setText(getResources().getString(R.string.gym));
                 videoView = (VideoView) findViewById(R.id.videoView);
                 videoView.setVideoPath("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4");
                 videoView.start();
+                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
+                btnOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(PromoDetailsActivity.this)
+                                .setTitle("Confirm Cancel")
+                                .setMessage("Are you sure?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
+                    }
+                });
                 break;
             case 2:
                 abTitle.setText(getResources().getString(R.string.pool));
@@ -56,12 +93,60 @@ public class PromoDetailsActivity extends AppCompatActivity {
                 videoView.setMediaController(mc);
                 videoView.requestFocus();
                 videoView.start();
+                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
+                btnOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(PromoDetailsActivity.this)
+                                .setTitle("Confirm Cancel")
+                                .setMessage("Are you sure?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
+                    }
+                });
                 break;
             case 3:
                 abTitle.setText(getResources().getString(R.string.tennis));
+                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
+                btnOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(PromoDetailsActivity.this)
+                                .setTitle("Confirm Cancel")
+                                .setMessage("Are you sure?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
+                    }
+                });
                 break;
             case 4:
                 abTitle.setText(getResources().getString(R.string.golf));
+                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
+                btnOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(PromoDetailsActivity.this)
+                                .setTitle("Confirm Cancel")
+                                .setMessage("Are you sure?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
+                    }
+                });
                 break;
         }
 

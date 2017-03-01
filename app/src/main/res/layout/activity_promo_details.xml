@@ -110,7 +110,8 @@
                 android:clickable="true"
                 android:src="@drawable/ic_cart"
                 app:layout_anchor="@id/videoView"
-                app:layout_anchorGravity="bottom|right|end" />
+                app:layout_anchorGravity="bottom|right|end"
+                app:backgroundTint="@android:color/holo_green_light" />
         </android.support.design.widget.CoordinatorLayout>
 
         <Space

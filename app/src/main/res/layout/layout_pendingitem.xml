@@ -81,7 +81,8 @@
             android:layout_weight="1"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/txtComment" />
+            android:id="@+id/txtComment"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 

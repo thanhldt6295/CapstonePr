@@ -1,12 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -63,7 +59,6 @@ public class PendingAdapter extends BaseAdapter{
         return position;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -94,6 +89,7 @@ public class PendingAdapter extends BaseAdapter{
         String normalDate = isoFormat.format(new java.util.Date(cart.get(position).getDeliverTime()*1000));;
         deliveryTime.setText(normalDate);
 
+        comment.setEnabled(false);
         comment.setText(cart.get(position).getNote());
 
         btnDelete.setOnClickListener(new View.OnClickListener() {

@@ -3,20 +3,67 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraActivity;
+import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraAdapter;
 
 public class MaintenanceActivity extends AppCompatActivity {
 
     TextView roomid;
+
+    class GetDataFromServer extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... params) {
+            CommonService commonService = new CommonService();
+            String returnva = commonService.getData(params[0]);
+            return returnva;
+        }
+
+        protected void onPostExecute(String response) {
+            //parse json sang list service
+            final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+            }.getType());
+
+            // Search follow categoryName
+            final List<Service> accID = new ArrayList<Service>();
+            for (Service ac : acc) {
+                String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
+                if (cagName.equals("MAINTENANCE")) {
+                    accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
+                }
+            }
+
+            if(accID.size()!=0){
+                ListView listView = (ListView) findViewById(R.id.listView);
+                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID);
+                listView.setAdapter(a);
+            } else {
+                Toast.makeText(MaintenanceActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +75,8 @@ public class MaintenanceActivity extends AppCompatActivity {
         abTitle.setText(getResources().getString(R.string.maintenance));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+
+        new MaintenanceActivity.GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
 
         // Datetime & Calendar
         final TextView txtDate;
