@@ -182,7 +182,7 @@ public class ExtraAdapter extends BaseAdapter {
                                             }
                                         }
                                     }
-                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", time2Serv+"" , returnList+"", getDataFromSharedPreferences());
+                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/RequestsApi/SendRequest", time2Serv+"" , returnList+"", getDataFromSharedPreferences());
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();

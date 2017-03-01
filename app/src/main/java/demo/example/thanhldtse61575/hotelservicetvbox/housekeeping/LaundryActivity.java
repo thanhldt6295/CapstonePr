@@ -17,7 +17,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -53,11 +57,13 @@ public class LaundryActivity extends AppCompatActivity {
         deliveryDate = (DatePicker) findViewById(R.id.datePicker);
         comment = (EditText) findViewById(R.id.txtComment);
 
-        final List<CartItem> list = null;
+        final List<CartItem> list = new ArrayList<>();
 
         btnFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String cmt = comment.getText().toString();
+                list.add(new CartItem(23,"Launry",46,0,"","",1,cmt));
                     new AlertDialog.Builder(LaundryActivity.this)
                             .setTitle(R.string.confirm_order)
                             .setMessage(R.string.confirm_question_do)
@@ -74,20 +80,23 @@ public class LaundryActivity extends AppCompatActivity {
                                     }
                                 });
                                 final long time2Serv = calendar.getTimeInMillis()/1000;
-                                final String cmt = comment.getText().toString();
+                                final String returnList = new Gson().toJson(list);
                                 class SendDataToServer extends AsyncTask<String, String, String> {
 
                                     @Override
                                     protected String doInBackground(String... params) {
                                         CommonService commonService = new CommonService();
 
-                                        ToServer toServer = new ToServer( Double.parseDouble(params[1]), list , Integer.parseInt(params[3]));
+                                        List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
+                                        ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
 
                                         return commonService.sendData(params[0], toServer)+"";
                                     }
 
                                     protected void onPostExecute(String response) {
                                         if(response.equals("200")){
+                                            list.clear();
+                                            comment.setText("");
                                             Toast.makeText(LaundryActivity.this, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
                                         }
                                         else{
@@ -95,7 +104,7 @@ public class LaundryActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
-                                new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", time2Serv+"" , cmt, getDataFromSharedPreferences());
+                                new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/RequestsApi/SendRequest", time2Serv+"" , returnList, getDataFromSharedPreferences());
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();
