@@ -82,6 +82,7 @@
     <string name="subject">TIÊU ĐỀ</string>
     <string name="yourname">TÊN CỦA BẠN</string>
     <string name="notitynull">Không có hàng..</string>
+    <string name="notifyqty">Xin hãy chọn số lượng 1 sản phẩm..</string>
 
 
 </resources>

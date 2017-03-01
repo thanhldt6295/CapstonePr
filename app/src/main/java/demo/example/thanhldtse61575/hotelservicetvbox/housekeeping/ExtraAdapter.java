@@ -187,7 +187,7 @@ public class ExtraAdapter extends BaseAdapter {
                             })
                             .setNegativeButton(android.R.string.no, null).show();
                 } else{
-                    Toast.makeText(ctx, "Please choose quantity!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ctx, R.string.notifyqty, Toast.LENGTH_SHORT).show();
                 }
             }
         });
