@@ -152,8 +152,8 @@ public class ExtraAdapter extends BaseAdapter {
                                     deliveryTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
                                         @Override
                                         public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                                            calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-                                                    deliveryTime.getHour(), deliveryTime.getMinute(), 0);
+//                                            calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
+//                                                    deliveryTime.getHour(), deliveryTime.getMinute(), 0);
                                         }
                                     });
                                     final long time2Serv = calendar.getTimeInMillis()/1000;
@@ -186,6 +186,8 @@ public class ExtraAdapter extends BaseAdapter {
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null).show();
+                } else{
+                    Toast.makeText(ctx, "Please choose quantity!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
