@@ -5,6 +5,10 @@
     android:orientation="vertical"
     android:background="@drawable/backgr">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="66dp" />
+
     <WebView
         android:id="@+id/webview"
         android:layout_height="fill_parent"

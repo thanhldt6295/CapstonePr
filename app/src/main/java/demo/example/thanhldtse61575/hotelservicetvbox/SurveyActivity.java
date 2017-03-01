@@ -35,9 +35,9 @@ public class SurveyActivity extends AppCompatActivity {
         webView.setWebViewClient(new Callback());  //HERE IS THE MAIN CHANGE
         String lang = getDataFromSharedPreferences();
         if(lang=="vi") {
-            webView.loadUrl("https://docs.google.com/forms/d/1vEeBFeT3te6CqrDnMa97m9h9vfhHURmabg5G0JCcfLo");
+            webView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLScpyuDZlMiKdCX6jljv7LTELuatjI8eJ2I1MOmR1b0FERUaHQ/viewform");
         } else {
-            webView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLSehjUyreFOmgjibNB5DMpOWlwsChhkv8NIbt73MuEumRHphfg/viewform");
+            webView.loadUrl("https://goo.gl/forms/wJ1jk2KkQclA8Mh52");
         }
 
     }
