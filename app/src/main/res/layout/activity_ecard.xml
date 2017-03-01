@@ -137,19 +137,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_vertical_margin" />
 
-            <GridView
-                android:id="@+id/gridViewCard"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:columnWidth="200dp"
-                android:focusable="true"
-                android:horizontalSpacing="10dp"
-                android:numColumns="auto_fit"
-                android:scrollbars="horizontal"
-                android:verticalSpacing="10dp" />
+            <RelativeLayout
+                android:layout_width="1164dp"
+                android:layout_height="152dp"
+                android:orientation="horizontal"
+                android:layout_weight="0.40"
+                android:weightSum="1">
+
+                <GridView
+                    android:id="@+id/gridViewCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:columnWidth="200dp"
+                    android:focusable="true"
+                    android:horizontalSpacing="10dp"
+                    android:numColumns="auto_fit"
+                    android:scrollbars="horizontal"
+                    android:verticalSpacing="10dp" />
+
+                <ImageView
+                    android:id="@+id/expanded_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
 
             <Button
                 android:text="SEND"

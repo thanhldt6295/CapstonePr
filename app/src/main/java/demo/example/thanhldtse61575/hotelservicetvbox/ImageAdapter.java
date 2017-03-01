@@ -110,9 +110,9 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         // Load the high-resolution "zoomed-in" image.
-        /*final ImageView expandedImageView = (ImageView) ((Activity) mContext)
+        final ImageView expandedImageView = (ImageView) ((Activity) mContext)
                 .findViewById(R.id.expanded_image);
-        expandedImageView.setImageResource(imageResId);*/
+        expandedImageView.setImageResource(imageResId);
 
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step
@@ -162,18 +162,18 @@ public class ImageAdapter extends BaseAdapter {
         // begins,
         // it will position the zoomed-in view in the place of the thumbnail.
         thumbView.setAlpha(0f);
-        //expandedImageView.setVisibility(View.VISIBLE);
+        expandedImageView.setVisibility(View.VISIBLE);
 
         // Set the pivot point for SCALE_X and SCALE_Y transformations to the
         // top-left corner of
         // the zoomed-in view (the default is the center of the view).
-        //expandedImageView.setPivotX(0f);
-        //expandedImageView.setPivotY(0f);
+        expandedImageView.setPivotX(0f);
+        expandedImageView.setPivotY(0f);
 
         // Construct and run the parallel animation of the four translation and
         // scale properties
         // (X, Y, SCALE_X, and SCALE_Y).
-   /*     AnimatorSet set = new AnimatorSet();
+        AnimatorSet set = new AnimatorSet();
         set.play(
                 ObjectAnimator.ofFloat(expandedImageView, View.X,
                         startBounds.left, finalBounds.left))
@@ -243,7 +243,7 @@ public class ImageAdapter extends BaseAdapter {
                 set.start();
                 mCurrentAnimator = set;
             }
-        });*/
+        });
     }
 }
 
