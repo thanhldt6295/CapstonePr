@@ -107,8 +107,7 @@ public class AppsActivity extends AppCompatActivity {
                     OpenApps("com.google.android.gm");
                 }
                 if(position==7){
-                    Intent i = new Intent(AppsActivity.this, PendingActivity.class);
-                    startActivity(i);
+                    OpenApps("devmbf.tivionline170");
                 }
             }
         });

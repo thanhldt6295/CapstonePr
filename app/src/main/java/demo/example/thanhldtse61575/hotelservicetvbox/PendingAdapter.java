@@ -2,8 +2,10 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -30,6 +33,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class PendingAdapter extends BaseAdapter{
 
+    private String str = "";
     private Context ctx;
     private ListView orderListView;
     private List<OrderDetail> cart;
@@ -95,6 +99,8 @@ public class PendingAdapter extends BaseAdapter{
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int a = cart.get(position).getOrderDetailID();
+                str = a + "";
                 new AlertDialog.Builder(ctx)
                         .setTitle("Confirm Cancel")
                         .setMessage("Are you sure?")
@@ -102,6 +108,28 @@ public class PendingAdapter extends BaseAdapter{
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
+                                class SendDataToServer extends AsyncTask<String, String, String> {
+
+                                    @Override
+                                    protected String doInBackground(String... params) {
+                                        CommonService commonService = new CommonService();
+                                        return String.valueOf(commonService.sendCancel(params[0], str));
+                                    }
+
+                                    protected void onPostExecute(String response) {
+                                        if(response.equals("200")){
+                                            cart.remove(position);
+                                            if(cart.size() == 0){
+                                                total.setText("0đ");
+                                            }
+                                            notifyDataSetChanged();
+                                        }
+                                        else{
+                                            Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                                new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/SendListCart", str);
                                 cart.remove(position);
                                 if(cart.size() == 0){
                                     total.setText("0đ");

@@ -41,6 +41,10 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class ExtraAdapter extends BaseAdapter {
 
+    private List<CartItem> cart = new ArrayList<>();
+    private List<CartItem> cart2 = new ArrayList<>();
+    private int qty = 0;
+
     private Context ctx;
     private ListView extraListView;
     private List<Service> list;
@@ -77,6 +81,9 @@ public class ExtraAdapter extends BaseAdapter {
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        cart.clear();
+        cart2.clear();
+
         convertView = layoutInflater.inflate(R.layout.layout_extraitem, null);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
@@ -92,18 +99,15 @@ public class ExtraAdapter extends BaseAdapter {
 
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
 
-        final List<CartItem> cart = new ArrayList<>();
-        final List<CartItem> cart2 = new ArrayList<>();
-
         Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
                 if (n < 11) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n + 1);
-                    quantity.setText(qty);
+                    qty = n + 1;
+                    quantity.setText(qty+"");
+                    cart.get(position).setQuantity(qty);
                 }
             }
         });
@@ -114,9 +118,9 @@ public class ExtraAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
                 if (n > 0) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n - 1);
-                    quantity.setText(qty);
+                    qty = n - 1;
+                    quantity.setText(qty+"");
+                    cart.get(position).setQuantity(qty);
                 }
             }
         });
@@ -124,7 +128,7 @@ public class ExtraAdapter extends BaseAdapter {
         for (Service sv: list) {
             cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
                     sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                    Integer.parseInt(quantity.getText().toString()), ""));
+                    qty, ""));
         }
 
         finalize.setOnClickListener(new View.OnClickListener() {
@@ -134,8 +138,7 @@ public class ExtraAdapter extends BaseAdapter {
                     int q = ci.getQuantity();
                     if(q!=0){
                         cart2.add(new CartItem(ci.getServiceID(), ci.getServiceName(), ci.getCategoryID(),
-                                ci.getUnitPrice(), ci.getDescription(), ci.getImage(),
-                                ci.getQuantity(), ""));
+                                ci.getUnitPrice(), ci.getDescription(), ci.getImage(), ci.getQuantity(), ""));
                     }
                 }
                 if(cart2.size()!=0) {

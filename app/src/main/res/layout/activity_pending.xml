@@ -28,6 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_vertical_margin" />
 
+        <include layout="@layout/layout_billtotal"/>
+
         <include
             layout="@layout/layout_roombar"
             android:layout_width="match_parent"
