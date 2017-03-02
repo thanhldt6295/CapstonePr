@@ -22,6 +22,7 @@
     <string name="confirm_back_question">This action will clear all your cart. Are you sure?</string>
     <string name="notitynull">There is not service!</string>
     <string name="notifyqty">Please choose quantity!</string>
+    <string name="error"></string>
 
     <!-- WelcomeActivity -->
     <string name="dummy_eng">ENGLISH</string>

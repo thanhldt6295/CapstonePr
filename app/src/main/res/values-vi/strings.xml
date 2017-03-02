@@ -5,7 +5,6 @@
     <string name="beverage">NƯỚC UỐNG</string>
     <string name="bill">XEM HÓA ĐƠN</string>
     <string name="breakfast">BỮA SÁNG</string>
-    <string name="coat">ÁO KHOÁC</string>
     <string name="coffee">CÀ PHÊ</string>
     <string name="decoration">ĐỒ TRANG TRÍ</string>
     <string name="dinner">BỮA TỐI</string>
@@ -25,9 +24,6 @@
     <string name="souvenir">QUÀ LƯU NIỆM</string>
     <string name="survey">KHẢO SÁT</string>
     <string name="toy">ĐỒ CHƠI</string>
-    <string name="trouser">QUẦN</string>
-    <string name="tshirt">ÁO THUN</string>
-    <string name="underwear">ĐỒ LÓT</string>
     <string name="wine">RƯỢU</string>
     <string name="trouserf">QUẦN (nữ)</string>
     <string name="trouserm">QUẦN (nam)</string>
@@ -63,9 +59,9 @@
     <string name="room_cleaning">DỌN PHÒNG</string>
     <string name="laundry">GIẶT ỦI</string>
     <string name="datetime">NGÀY/GIỜ</string>
-    <string name="bath_extras">THÊM ABC</string>
-    <string name="bed_extras">THÊM BCD</string>
-    <string name="room_extras">THÊM DCE</string>
+    <string name="bath_extras">THÊM ĐỒ TẮM</string>
+    <string name="bed_extras">THÊM ĐỒ NGỦ</string>
+    <string name="room_extras">THÊM DỤNG CỤ</string>
     <string name="air_condition">MÁY LẠNH</string>
     <string name="refrigerator">TỦ LẠNH</string>
     <string name="television">TIVI</string>
@@ -78,11 +74,12 @@
     <string name="pool">HỒ BƠI</string>
     <string name="receiver">NGƯỜI NHẬN</string>
     <string name="send">GỬI</string>
-    <string name="spa"></string>
+    <string name="spa">CHĂM SÓC SẮC ĐẸP</string>
     <string name="subject">TIÊU ĐỀ</string>
     <string name="yourname">TÊN CỦA BẠN</string>
     <string name="notitynull">Không có hàng..</string>
     <string name="notifyqty">Xin hãy chọn số lượng 1 sản phẩm..</string>
+    <string name="tennis">QUẦN VỢT</string>
 
 
 </resources>

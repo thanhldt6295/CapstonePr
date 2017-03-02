@@ -30,11 +30,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <com.google.android.youtube.player.YouTubePlayerView
+                    android:layout_width="match_parent"
+                    android:layout_height="430dp"
+                    android:id="@+id/videoView"
+                    android:background="#fff"></com.google.android.youtube.player.YouTubePlayerView>
+                <!--
                 <VideoView
                     android:layout_width="match_parent"
                     android:id="@+id/videoView"
                     android:scaleType="centerCrop"
                     android:layout_height="430dp" />
+                    -->
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -110,7 +117,7 @@
                 android:clickable="true"
                 android:src="@drawable/ic_cart"
                 app:layout_anchor="@id/videoView"
-                app:layout_anchorGravity="bottom|right|end"
+                app:layout_anchorGravity="top|right|end"
                 app:backgroundTint="@android:color/holo_green_light" />
         </android.support.design.widget.CoordinatorLayout>
 
