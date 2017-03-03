@@ -61,16 +61,15 @@
 
 
                 <TextView
-                    android:id="@+id/tvDeliveryTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/delivery_time"
+                    android:text="@string/datetime"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold" />
 
                 <TimePicker
-                    android:id="@+id/tpDeliveryTime"
+                    android:id="@+id/timePicker"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"/>

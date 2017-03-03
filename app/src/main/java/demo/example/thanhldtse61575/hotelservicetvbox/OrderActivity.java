@@ -49,7 +49,7 @@ public class OrderActivity extends AppCompatActivity {
         TextView total = (TextView) findViewById(R.id.txtCartTotal);
         Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
         Button btnClear = (Button) findViewById(R.id.btnClearOrder);
-        TimePicker deliveryTime = (TimePicker) findViewById(R.id.tpDeliveryTime);
+        TimePicker deliveryTime = (TimePicker) findViewById(R.id.timePicker);
         deliveryTime.setIs24HourView(true);
         DatePicker deliveryDate = (DatePicker) findViewById(R.id.datePicker);
 
