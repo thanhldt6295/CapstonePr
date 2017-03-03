@@ -37,7 +37,7 @@ public class SurveyActivity extends AppCompatActivity {
         if(lang=="vi") {
             webView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLScpyuDZlMiKdCX6jljv7LTELuatjI8eJ2I1MOmR1b0FERUaHQ/viewform");
         } else {
-            webView.loadUrl("https://goo.gl/forms/wJ1jk2KkQclA8Mh52");
+            webView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLSehjUyreFOmgjibNB5DMpOWlwsChhkv8NIbt73MuEumRHphfg/viewform?usp=sf_link");
         }
 
     }

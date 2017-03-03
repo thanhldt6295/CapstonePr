@@ -234,7 +234,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         player.setPlaybackEventListener(playbackEventListener);
 /** Start buffering **/
         if (!wasRestored) {
-            player.cueVideo(VIDEO_ID);
+            player.loadVideo(VIDEO_ID);
+            //player.play();
         }
     }
     private PlaybackEventListener playbackEventListener = new PlaybackEventListener() {

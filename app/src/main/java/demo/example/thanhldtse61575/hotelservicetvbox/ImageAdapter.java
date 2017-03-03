@@ -71,7 +71,7 @@ public class ImageAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 CheckBox cb = (CheckBox) v;
-                if (cb.isChecked()){
+                if (!cb.isChecked()){
                     holder.checkbox.setChecked(false);
                 } else {
                     holder.checkbox.setChecked(true);
