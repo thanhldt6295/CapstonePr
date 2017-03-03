@@ -63,8 +63,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                     @Override
                     public void onClick(View v) {
                         new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle("Confirm Cancel")
-                                .setMessage("Are you sure?")
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -89,8 +89,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                     @Override
                     public void onClick(View v) {
                         new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle("Confirm Cancel")
-                                .setMessage("Are you sure?")
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -111,8 +111,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                     @Override
                     public void onClick(View v) {
                         new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle("Confirm Cancel")
-                                .setMessage("Are you sure?")
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -133,8 +133,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                     @Override
                     public void onClick(View v) {
                         new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle("Confirm Cancel")
-                                .setMessage("Are you sure?")
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -155,13 +155,13 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                     @Override
                     public void onClick(View v) {
                         new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle("Confirm Cancel")
-                                .setMessage("Are you sure?")
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PromoDetailsActivity.this, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }

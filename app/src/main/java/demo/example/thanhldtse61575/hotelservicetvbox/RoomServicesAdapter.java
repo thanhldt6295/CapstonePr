@@ -1,11 +1,14 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Created by ThanhLDTSE61575 on 1/11/2017.
@@ -46,6 +49,18 @@ public class RoomServicesAdapter extends RecyclerView.Adapter<Holder> {
                         break;
                     case 2:
                         c.startActivity(new Intent(c, MaintenanceActivity.class));
+                        break;
+                    case 3:
+                        new AlertDialog.Builder(c)
+                                .setTitle(R.string.confirm_service)
+                                .setMessage(R.string.confirm_question_do)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Toast.makeText(c, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                    }})
+                                .setNegativeButton(android.R.string.no, null).show();
                         break;
                 }
             }
