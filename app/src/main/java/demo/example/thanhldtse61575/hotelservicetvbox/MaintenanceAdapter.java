@@ -50,7 +50,7 @@ public class MaintenanceAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.layout_extraitem, null);
+        convertView = layoutInflater.inflate(R.layout.layout_maintenanceitem, null);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
 

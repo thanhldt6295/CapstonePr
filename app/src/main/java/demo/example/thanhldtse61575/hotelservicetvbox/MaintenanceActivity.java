@@ -56,7 +56,7 @@ public class MaintenanceActivity extends AppCompatActivity {
             }
 
             if(accID.size()!=0){
-                ListView listView = (ListView) findViewById(R.id.listView);
+                ListView listView = (ListView) findViewById(R.id.maintenanceListView);
                 MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID);
                 listView.setAdapter(a);
             } else {
