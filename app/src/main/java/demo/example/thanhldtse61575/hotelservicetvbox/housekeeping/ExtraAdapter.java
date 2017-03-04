@@ -136,7 +136,7 @@ public class ExtraAdapter extends BaseAdapter {
                     int q = ci.getQuantity();
                     if(q!=0){
                         cart2.add(new CartItem(ci.getServiceID(), ci.getServiceName(), ci.getCategoryID(),
-                                ci.getUnitPrice(), ci.getDescription(), ci.getImage(), ci.getQuantity(), ""));
+                                ci.getUnitPrice(), ci.getDescription(), ci.getImage(), ci.getQuantity(), ci.getComment()));
                     }
                 }
                 if(cart2.size()!=0) {

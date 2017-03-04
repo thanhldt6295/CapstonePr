@@ -110,8 +110,8 @@
                 android:clickable="true"
                 android:src="@drawable/ic_bell"
                 app:layout_anchor="@id/videoView"
-                app:layout_anchorGravity="bottom|right|end"
-                app:backgroundTint="@android:color/black" />
+                app:layout_anchorGravity="top|right|end"
+                app:backgroundTint="@android:color/holo_green_dark" />
         </android.support.design.widget.CoordinatorLayout>
 
         <Space

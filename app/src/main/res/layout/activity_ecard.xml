@@ -42,7 +42,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:text="YOUR NAME"
+                            android:text="@string/yourname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -54,7 +54,8 @@
                             android:layout_weight="7"
                             android:inputType="textPersonName"
                             android:ems="10"
-                            android:id="@+id/txtYourName" />
+                            android:id="@+id/txtYourName"
+                            android:hint="Sally John"/>
 
                     </TableRow>
 
@@ -64,7 +65,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:text="RECEIVER MAIL"
+                            android:text="@string/receiver"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -76,7 +77,8 @@
                             android:layout_weight="7"
                             android:inputType="textPersonName"
                             android:ems="10"
-                            android:id="@+id/txtMailRecv" />
+                            android:id="@+id/txtMailRecv"
+                            android:hint="abc@gmail.com"/>
 
                     </TableRow>
 
@@ -86,7 +88,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:text="SUBJECT"
+                            android:text="@string/subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -98,7 +100,8 @@
                             android:inputType="textPersonName"
                             android:ems="10"
                             android:layout_weight="7"
-                            android:id="@+id/txtSubject" />
+                            android:id="@+id/txtSubject"
+                            android:hint="Subject"/>
 
                     </TableRow>
 
@@ -115,7 +118,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="MESSAGE"
+                        android:text="@string/message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"/>
@@ -166,11 +169,12 @@
             </RelativeLayout>
 
             <Button
-                android:text="SEND"
+                android:text="@string/send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:id="@+id/btnSend"/>
+                android:id="@+id/btnSend"
+                android:background="@drawable/buttonstyles"/>
 
         </LinearLayout>
 

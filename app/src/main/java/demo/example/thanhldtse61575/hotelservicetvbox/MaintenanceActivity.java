@@ -50,14 +50,19 @@ public class MaintenanceActivity extends AppCompatActivity {
             final List<Service> accID = new ArrayList<Service>();
             for (Service ac : acc) {
                 String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
-                if (cagName.equals("MAINTENANCE")) {
+                if (cagName.equals(getResources().getString(R.string.maintenance).toString())) {
                     accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
                 }
             }
 
+            Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
+            TimePicker deliveryTime = (TimePicker) findViewById(R.id.timePicker);
+            deliveryTime.setIs24HourView(true);
+            DatePicker deliveryDate = (DatePicker) findViewById(R.id.datePicker);
+
             if(accID.size()!=0){
                 ListView listView = (ListView) findViewById(R.id.maintenanceListView);
-                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID);
+                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID, btnFinalize, deliveryTime, deliveryDate);
                 listView.setAdapter(a);
             } else {
                 Toast.makeText(MaintenanceActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();

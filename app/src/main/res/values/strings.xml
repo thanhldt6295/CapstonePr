@@ -22,6 +22,7 @@
     <string name="confirm_back_question">This action will clear all your cart. Are you sure?</string>
     <string name="notitynull">There is not service!</string>
     <string name="notifyqty">Please choose quantity!</string>
+    <string name="notifychoose">Please comment, then choose service!</string>
     <string name="error"></string>
 
     <!-- WelcomeActivity -->
@@ -47,6 +48,8 @@
     <string name="pool">POOL</string>
     <string name="tennis">TENNIS COURT</string>
     <string name="golf">GOLF</string>
+    <string name="worktime">Working hour</string>
+    <string name="capacity">Capacity</string>
 
     <!-- RoomServicesActivity -->
     <string name="food_drink">FOODS AND BEVERAGES</string>
