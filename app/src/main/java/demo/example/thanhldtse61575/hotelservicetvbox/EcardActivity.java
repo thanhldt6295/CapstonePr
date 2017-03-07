@@ -27,6 +27,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class EcardActivity extends AppCompatActivity {
 
@@ -66,7 +67,6 @@ public class EcardActivity extends AppCompatActivity {
 //                zoom.startAnimation(zoomAni);
 //            }
 //        });
-
         btnSend.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -80,7 +80,11 @@ public class EcardActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                         Intent i = new Intent(Intent.ACTION_SEND);
                         i.setType("application/image");
-                        i.putExtra(Intent.EXTRA_EMAIL  , new String[] {revMail.getText().toString()});
+                        if(!isEmailValid(revMail.getText().toString())) {
+                            Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT).show();
+                        } else {
+                            i.putExtra(Intent.EXTRA_EMAIL, new String[]{revMail.getText().toString()});
+                        }
                         i.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
                         i.putExtra(Intent.EXTRA_TEXT   , message.getText());
                         i.putExtra(Intent.EXTRA_STREAM, Uri.parse("CapstonePrj://demo.example.thanhldtse61575.hotelservicetvbox/drawable/demo"));
@@ -153,5 +157,10 @@ public class EcardActivity extends AppCompatActivity {
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                .matches();
     }
 }

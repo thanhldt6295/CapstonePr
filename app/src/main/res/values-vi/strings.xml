@@ -83,6 +83,7 @@
     <string name="notifychoose">Xin hãy ghi chú rõ ràng rồi tick chọn dịch vụ đó..</string>
     <string name="capacity">Sức chứa (người/phòng)</string>
     <string name="worktime">Thời gian làm việc</string>
+    <string name="validate">Email không hợp lệ!</string>
 
 
 </resources>

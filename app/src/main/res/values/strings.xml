@@ -76,6 +76,7 @@
     <string name="message">MESSAGE: </string>
     <string name="receiver">RECEIVER MAIL: </string>
     <string name="subject">SUBJECT: </string>
+    <string name="validate">Invalid Email!</string>
 
     <!-- MenuList -->
     <string name="food">FOODS</string>

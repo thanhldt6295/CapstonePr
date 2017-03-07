@@ -75,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="7"
-                            android:inputType="textPersonName"
+                            android:inputType="textEmailAddress"
                             android:ems="10"
                             android:id="@+id/txtMailRecv"
                             android:hint="abc@gmail.com"/>
