@@ -149,13 +149,8 @@ public class ExtraAdapter extends BaseAdapter {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     final String returnList = new Gson().toJson(cart2);
                                     final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
-                                    deliveryTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-                                        @Override
-                                        public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-//                                            calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-//                                                    deliveryTime.getHour(), deliveryTime.getMinute(), 0);
-                                        }
-                                    });
+                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
+                                            deliveryTime.getCurrentHour(), deliveryTime.getCurrentMinute(), 0);
                                     final long time2Serv = calendar.getTimeInMillis()/1000;
                                     class SendDataToServer extends AsyncTask<String, String, String> {
 
