@@ -4,16 +4,14 @@
 
     <ImageView
         android:id="@+id/thumbImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_width="280dp"
+        android:layout_height="280dp" />
 
-    <CheckBox
-        android:id="@+id/itemCheckBox"
+    <RadioButton
+        android:id="@+id/radiobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:checked="false" />
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

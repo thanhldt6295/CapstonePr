@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -56,13 +56,11 @@ public class ExtraActivity extends AppCompatActivity {
             }
 
             Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-            TimePicker deliveryTime = (TimePicker) findViewById(R.id.timePicker);
-            deliveryTime.setIs24HourView(true);
-            DatePicker deliveryDate = (DatePicker) findViewById(R.id.datePicker);
+            Spinner s = (Spinner) findViewById(R.id.spinner);
 
             if(accID.size()!=0){
                 ListView listView = (ListView) findViewById(R.id.extraListView);
-                ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, btnFinalize, deliveryTime, deliveryDate);
+                ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize);
                 listView.setAdapter(a);
             } else {
                 Toast.makeText(ExtraActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();

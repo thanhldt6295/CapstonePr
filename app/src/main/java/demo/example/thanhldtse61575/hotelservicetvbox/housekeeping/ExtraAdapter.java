@@ -9,12 +9,14 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -43,22 +45,21 @@ public class ExtraAdapter extends BaseAdapter {
     private List<CartItem> cart = new ArrayList<>();
     private List<CartItem> cart2 = new ArrayList<>();
     private int qty = 0;
+    private String[] arraySpinner;
 
     private Context ctx;
     private ListView extraListView;
     private List<Service> list;
     private Button finalize;
-    private TimePicker deliveryTime;
-    private DatePicker deliveryDate;
+    private Spinner spin;
     private LayoutInflater layoutInflater;
 
-    ExtraAdapter(Context c, ListView exList, List<Service> list, Button finalize, TimePicker deliveryTime, DatePicker deliveryDate){
+    ExtraAdapter(Context c, ListView exList, List<Service> list, Spinner spin, Button finalize){
         this.ctx = c;
         this.extraListView = exList;
         this.list = list;
+        this.spin = spin;
         this.finalize = finalize;
-        this.deliveryTime = deliveryTime;
-        this.deliveryDate = deliveryDate;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -83,6 +84,13 @@ public class ExtraAdapter extends BaseAdapter {
         cart2.clear();
 
         convertView = layoutInflater.inflate(R.layout.layout_extraitem, null);
+
+        this.arraySpinner = new String[] {
+                "15", "30", "45", "60", "100"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        spin.setAdapter(adapter);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
 
@@ -148,10 +156,7 @@ public class ExtraAdapter extends BaseAdapter {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     final String returnList = new Gson().toJson(cart2);
-                                    final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
-                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-                                            deliveryTime.getCurrentHour(), deliveryTime.getCurrentMinute(), 0);
-                                    final long time2Serv = calendar.getTimeInMillis()/1000;
+                                    final long time2Serv = 60*Long.parseLong(spin.getSelectedItem().toString());
                                     class SendDataToServer extends AsyncTask<String, String, String> {
 
                                         @Override

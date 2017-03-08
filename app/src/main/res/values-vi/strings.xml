@@ -84,6 +84,7 @@
     <string name="capacity">Sức chứa (người/phòng)</string>
     <string name="worktime">Thời gian làm việc</string>
     <string name="validate">Email không hợp lệ!</string>
+    <string name="minutes"> PHÚT SAU</string>
 
 
 </resources>

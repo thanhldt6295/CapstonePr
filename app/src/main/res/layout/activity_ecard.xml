@@ -153,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:clickable="true"
-                    android:columnWidth="200dp"
+                    android:columnWidth="280dp"
                     android:focusable="true"
                     android:horizontalSpacing="10dp"
                     android:numColumns="auto_fit"

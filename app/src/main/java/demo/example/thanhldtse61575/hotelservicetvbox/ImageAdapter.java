@@ -21,8 +21,14 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class ImageAdapter extends BaseAdapter {
+
+    RadioGroup rgp;
+    private RadioButton mSelectedRB;
+    private int mSelectedPosition = -1;
 
     private Animator mCurrentAnimator;
 
@@ -33,6 +39,7 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c) {
         mContext = c;
+        rgp = new RadioGroup(c);
     }
 
     public int getCount() {
@@ -56,51 +63,52 @@ public class ImageAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
-            holder.checkbox = (CheckBox) convertView.findViewById(R.id.itemCheckBox);
+            holder.ratiobtn = (RadioButton) convertView.findViewById(R.id.radiobtn);
 
             convertView.setTag(holder);
         }
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.checkbox.setId(position);
-        holder.imageview.setId(position);
-        holder.checkbox.setTag(position);
-        holder.checkbox.setOnClickListener(new OnClickListener() {
+//        holder.ratiobtn.setId(position);
+//        holder.imageview.setId(position);
 
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                CheckBox cb = (CheckBox) v;
-                if (!cb.isChecked()){
-                    holder.checkbox.setChecked(false);
-                } else {
-                    holder.checkbox.setChecked(true);
-                }
-            }
-        });
         holder.imageview.setImageResource(mThumbIds[position]);
         holder.imageview.setTag(mThumbIds[position]);
         holder.imageview.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                //int id = v.getId();
-                //Intent intent = new Intent();
-                //intent.setAction(Intent.ACTION_VIEW);
-                //intent.setDataAndType(Uri.parse("file://" + arrPath[id]), "image/*");
-                //startActivity(intent);
-
                 int id = (Integer) v.getTag();
                 zoomImageFromThumb(v, id);
             }
         });
 
-        holder.id = position;
+        holder.ratiobtn.setOnClickListener(new OnClickListener() {
+
+            public void onClick(View v) {
+                if ((position != mSelectedPosition && mSelectedRB != null)) {
+                    mSelectedRB.setChecked(false);
+                }
+
+                mSelectedPosition = position;
+                mSelectedRB = (RadioButton) v;
+            }
+        });
+        if (mSelectedPosition != position) {
+            holder.ratiobtn.setChecked(false);
+        } else {
+            holder.ratiobtn.setChecked(true);
+            if (mSelectedRB != null && holder.ratiobtn != mSelectedRB) {
+                mSelectedRB = holder.ratiobtn;
+            }
+        }
+
+        //holder.id = position;
         return convertView;
     }
 
     // References to our images in res > drawable
-    public Integer[] mThumbIds = { R.drawable.icon_fb, R.drawable.icon_utube, R.drawable.icon_mp3 };
+    public Integer[] mThumbIds = { R.drawable.ocean1, R.drawable.ocean2, R.drawable.mountain1, R.drawable.mountain2, R.drawable.mountain3 };
 
     private void zoomImageFromThumb(final View thumbView, int imageResId) {
         // If there's an animation in progress, cancel it immediately and
@@ -249,6 +257,6 @@ public class ImageAdapter extends BaseAdapter {
 
 class ViewHolder {
     ImageView imageview;
-    CheckBox checkbox;
+    RadioButton ratiobtn;
     int id;
 }

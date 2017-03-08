@@ -1,27 +1,22 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
-import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -29,9 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
@@ -43,6 +36,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class MaintenanceAdapter extends BaseAdapter {
 
+    private String[] arraySpinner;
     private int q = 0;
     private List<CartItem> cart = new ArrayList<>();
     private List<CartItem> cart2 = new ArrayList<>();
@@ -50,18 +44,16 @@ public class MaintenanceAdapter extends BaseAdapter {
     private Context ctx;
     private ListView listView;
     private List<Service> list;
+    private Spinner spin;
     private Button finalize;
-    private TimePicker deliveryTime;
-    private DatePicker deliveryDate;
     private LayoutInflater layoutInflater;
 
-    MaintenanceAdapter(Context c, ListView listView, List<Service> list, Button finalize, TimePicker deliveryTime, DatePicker deliveryDate){
+    MaintenanceAdapter(Context c, ListView listView, List<Service> list, Spinner spin, Button finalize){
         this.ctx = c;
         this.listView = listView;
         this.list = list;
+        this.spin = spin;
         this.finalize = finalize;
-        this.deliveryDate = deliveryDate;
-        this.deliveryTime = deliveryTime;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -87,6 +79,13 @@ public class MaintenanceAdapter extends BaseAdapter {
         cart2.clear();
 
         convertView = layoutInflater.inflate(R.layout.layout_maintenanceitem, null);
+
+        this.arraySpinner = new String[] {
+                "15", "30", "45", "60", "100"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        spin.setAdapter(adapter);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
 
@@ -139,10 +138,7 @@ public class MaintenanceAdapter extends BaseAdapter {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     final String returnList = new Gson().toJson(cart2);
-                                    final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
-                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-                                            deliveryTime.getCurrentHour(), deliveryTime.getCurrentMinute(), 0);
-                                    final long time2Serv = calendar.getTimeInMillis()/1000;
+                                    final long time2Serv = 60*Long.parseLong(spin.getSelectedItem().toString());
                                     class SendDataToServer extends AsyncTask<String, String, String> {
 
                                         @Override

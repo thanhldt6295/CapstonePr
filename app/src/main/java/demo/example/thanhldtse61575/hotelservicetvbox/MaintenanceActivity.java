@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,10 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraActivity;
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraAdapter;
 
 public class MaintenanceActivity extends AppCompatActivity {
 
@@ -55,14 +52,12 @@ public class MaintenanceActivity extends AppCompatActivity {
                 }
             }
 
+            Spinner s = (Spinner) findViewById(R.id.spinner);
             Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-            TimePicker deliveryTime = (TimePicker) findViewById(R.id.timePicker);
-            deliveryTime.setIs24HourView(true);
-            DatePicker deliveryDate = (DatePicker) findViewById(R.id.datePicker);
 
             if(accID.size()!=0){
                 ListView listView = (ListView) findViewById(R.id.maintenanceListView);
-                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID, btnFinalize, deliveryTime, deliveryDate);
+                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID, s, btnFinalize);
                 listView.setAdapter(a);
             } else {
                 Toast.makeText(MaintenanceActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();

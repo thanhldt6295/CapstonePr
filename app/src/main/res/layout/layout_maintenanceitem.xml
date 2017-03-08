@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="1">
 
     <ImageView
         android:id="@+id/imageViewDetail"
@@ -20,7 +21,8 @@
         android:text="REQUEST NAME"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_medium"
-        android:layout_width="300dp" />
+        android:layout_width="300dp"
+        android:layout_weight="0.19" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,7 +30,8 @@
         android:id="@+id/edCmt"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:hint="@string/comment" />
+        android:hint="@string/comment"
+        android:layout_weight="0.47" />
 
     <CheckBox
         android:layout_width="wrap_content"
