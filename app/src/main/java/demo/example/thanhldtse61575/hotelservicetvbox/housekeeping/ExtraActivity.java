@@ -77,7 +77,7 @@ public class ExtraActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
@@ -145,7 +145,7 @@ public class ExtraActivity extends AppCompatActivity {
         });
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

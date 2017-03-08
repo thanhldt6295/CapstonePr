@@ -70,7 +70,7 @@ public class PendingActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.pending));
 
-        String roomid = getDataFromSharedPreferences();
+        String roomid = getRoomID();
 
         roomidTV = (TextView) findViewById(R.id.roomid);
         roomidTV.setText(getResources().getString(R.string.roomid) + " " + roomid);
@@ -123,7 +123,7 @@ public class PendingActivity extends AppCompatActivity {
         });
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

@@ -28,7 +28,7 @@ public class RecommendDetailActivity extends AppCompatActivity {
 
     TextView roomid;
 
-    private List<Recommend> getDataFromSharedPreferences(){
+    private List<Recommend> getDetails(){
         Gson gson = new Gson();
         List<Recommend> productFromShared = new ArrayList<>();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
@@ -49,9 +49,9 @@ public class RecommendDetailActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.recommend));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPref());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        List<Recommend> RecommendEntityList = getDataFromSharedPreferences();
+        List<Recommend> RecommendEntityList = getDetails();
         int index = getIntent().getExtras().getInt("position");
         Recommend rec = RecommendEntityList.get(index);
 
@@ -108,7 +108,7 @@ public class RecommendDetailActivity extends AppCompatActivity {
         });
     }
 
-    private String getDataFromSharedPref(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

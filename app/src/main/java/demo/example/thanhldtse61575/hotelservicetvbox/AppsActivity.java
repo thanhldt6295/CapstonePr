@@ -47,7 +47,7 @@ public class AppsActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.application));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
 //        String networkSSID = "test";
 //        String networkPass = "pass";
@@ -190,7 +190,7 @@ public class AppsActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

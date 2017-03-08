@@ -45,7 +45,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.recommend));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
         listView = (ListView) findViewById(R.id.recListView);
@@ -240,7 +240,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.app_name));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(ma);
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

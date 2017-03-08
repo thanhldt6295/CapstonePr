@@ -33,7 +33,7 @@ public class SurveyActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
 
         webView.setWebViewClient(new Callback());  //HERE IS THE MAIN CHANGE
-        String lang = getDataFromSharedPreferences();
+        String lang = getLang();
         if(lang=="vi") {
             webView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLScpyuDZlMiKdCX6jljv7LTELuatjI8eJ2I1MOmR1b0FERUaHQ/viewform");
         } else {
@@ -50,9 +50,9 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getLang(){
 
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("Share", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareLang", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("LocalePrefs", "");
 
         return jsonPreferences;

@@ -46,7 +46,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
 //        getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         name = (TextView) findViewById(R.id.tvPromoName);
 
@@ -215,7 +215,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         });
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

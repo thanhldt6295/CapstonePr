@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,40 +31,40 @@ public class MaintenanceActivity extends AppCompatActivity {
 
     TextView roomid;
 
-    class GetDataFromServer extends AsyncTask<String, Void, String> {
-
-        protected String doInBackground(String... params) {
-            CommonService commonService = new CommonService();
-            String returnva = commonService.getData(params[0]);
-            return returnva;
-        }
-
-        protected void onPostExecute(String response) {
-            //parse json sang list service
-            final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
-            }.getType());
-
-            // Search follow categoryName
-            final List<Service> accID = new ArrayList<Service>();
-            for (Service ac : acc) {
-                String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
-                if (cagName.equals(getResources().getString(R.string.maintenance).toString())) {
-                    accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
-                }
-            }
-
-            Spinner s = (Spinner) findViewById(R.id.spinner);
-            Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-
-            if(accID.size()!=0){
-                ListView listView = (ListView) findViewById(R.id.maintenanceListView);
-                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID, s, btnFinalize);
-                listView.setAdapter(a);
-            } else {
-                Toast.makeText(MaintenanceActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    class GetDataFromServer extends AsyncTask<String, Void, String> {
+//
+//        protected String doInBackground(String... params) {
+//            CommonService commonService = new CommonService();
+//            String returnva = commonService.getData(params[0]);
+//            return returnva;
+//        }
+//
+//        protected void onPostExecute(String response) {
+//            //parse json sang list service
+//            final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+//            }.getType());
+//
+//            // Search follow categoryName
+//            final List<Service> accID = new ArrayList<Service>();
+//            for (Service ac : acc) {
+//                String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
+//                if (cagName.equals(getResources().getString(R.string.maintenance).toString())) {
+//                    accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
+//                }
+//            }
+//
+//            Spinner s = (Spinner) findViewById(R.id.spinner);
+//            Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
+//
+//            if(accID.size()!=0){
+//                ListView listView = (ListView) findViewById(R.id.maintenanceListView);
+//                MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID, s, btnFinalize);
+//                listView.setAdapter(a);
+//            } else {
+//                Toast.makeText(MaintenanceActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,29 @@ public class MaintenanceActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.maintenance));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        new MaintenanceActivity.GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
+        final List<Service> acc = getServiceList();
+        // Search follow categoryName
+        final List<Service> accID = new ArrayList<Service>();
+        for (Service ac : acc) {
+            String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
+            if (cagName.equals(getResources().getString(R.string.maintenance).toString())) {
+                accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
+            }
+        }
+
+        Spinner s = (Spinner) findViewById(R.id.spinner);
+        Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
+
+        if(accID.size()!=0){
+            ListView listView = (ListView) findViewById(R.id.maintenanceListView);
+            MaintenanceAdapter a = new MaintenanceAdapter(MaintenanceActivity.this, listView, accID, s, btnFinalize);
+            listView.setAdapter(a);
+        } else {
+            Toast.makeText(MaintenanceActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
+        }
+        //new MaintenanceActivity.GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -124,11 +145,23 @@ public class MaintenanceActivity extends AppCompatActivity {
         });
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
+    }
+
+    private List<Service> getServiceList(){
+        Gson gson = new Gson();
+        List<Service> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedService", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("ServiceList", "");
+
+        Type type = new TypeToken<List<Service>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
     }
 }

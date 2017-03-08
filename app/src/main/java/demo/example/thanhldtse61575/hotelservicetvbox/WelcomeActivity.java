@@ -22,8 +22,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -37,6 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
     public static final String mPath = "roomid.txt";
     private QuoteBank mQuoteBank;
     private List<String> mLines;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -120,11 +125,11 @@ public class WelcomeActivity extends AppCompatActivity {
         mLines = mQuoteBank.readLine(mPath);
         String roomid = "";
         for (final String string : mLines) {
-            setDataFromSharedPref(string);
+            setRoomID2Share(string);
             roomid = string;
         }
 
-        class GetDataFromServer extends AsyncTask<String, Void, String> {
+        class GetCustomerFromServer extends AsyncTask<String, Void, String> {
 
             protected String doInBackground(String... params) {
                 CommonService commonService = new CommonService();
@@ -143,7 +148,25 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }
 
-        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetCustNameByRoomID/" + roomid);
+        class GetServiceFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+                }.getType());
+
+                setList2Share(acc);
+            }
+        }
+
+        new GetCustomerFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetCustNameByRoomID/" + roomid);
+        new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -175,7 +198,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 //Intent mainAct = new Intent(WelcomeActivity.this,MainActivity.class);
                 //startActivity(mainAct);
                 setLocale("en");
-                setDataFromSharedPreferences("en");
+                setLang2Share("en");
             }
         });
 
@@ -186,7 +209,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         "Quý khách đã chọn Tiếng Việt", Toast.LENGTH_SHORT)
                         .show();
                 setLocale("vi");
-                setDataFromSharedPreferences("vi");
+                setLang2Share("vi");
             }
         });
     }
@@ -203,11 +226,11 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(refresh);
     }
 
-    private static final String SHARE_TAG = "Share";
+    private static final String SHARE_LANG = "ShareLang";
     private static final String LOCALE_TAG = "LocalePrefs";
 
-    private void setDataFromSharedPreferences(String lang){
-        SharedPreferences sharedPref = this.getSharedPreferences(SHARE_TAG, Context.MODE_PRIVATE);
+    private void setLang2Share(String lang){
+        SharedPreferences sharedPref = this.getSharedPreferences(SHARE_LANG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(LOCALE_TAG, lang);
@@ -217,11 +240,35 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final String SHARE_ROOM = "ShareRoom";
     private static final String ROOM_ID = "RoomID";
 
-    private void setDataFromSharedPref(String roomid){
+    private void setRoomID2Share(String roomid){
         SharedPreferences sharedPref = this.getSharedPreferences(SHARE_ROOM, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(ROOM_ID, roomid);
+        editor.commit();
+    }
+
+    private static final String ShSERVICE_TAG = "SharedService";
+    private static final String SVLIST_TAG = "ServiceList";
+    private List<Service> getServiceList(){
+        Gson gson = new Gson();
+        List<Service> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShSERVICE_TAG, Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString(SVLIST_TAG, "");
+
+        Type type = new TypeToken<List<Service>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
+    private void setList2Share(List<Service> list){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(list);
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShSERVICE_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(SVLIST_TAG, jsonCurProduct);
         editor.commit();
     }
 
