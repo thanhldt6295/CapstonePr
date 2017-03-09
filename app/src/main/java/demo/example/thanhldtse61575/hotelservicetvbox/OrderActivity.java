@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -49,13 +50,11 @@ public class OrderActivity extends AppCompatActivity {
         TextView total = (TextView) findViewById(R.id.txtCartTotal);
         Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
         Button btnClear = (Button) findViewById(R.id.btnClearOrder);
-        TimePicker deliveryTime = (TimePicker) findViewById(R.id.timePicker);
-        deliveryTime.setIs24HourView(true);
-        DatePicker deliveryDate = (DatePicker) findViewById(R.id.datePicker);
+        Spinner s = (Spinner) findViewById(R.id.spinner);
 
         if(cart!=null){
             ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear, deliveryTime, deliveryDate);
+            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear, s);
             listView.setAdapter(a);
         }
 

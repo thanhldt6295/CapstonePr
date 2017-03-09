@@ -13,12 +13,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -41,6 +43,8 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class OrderAdapter extends BaseAdapter {
 
+    private String[] arraySpinner;
+
     private Context ctx;
     private ListView orderListView;
     private List<CartItem> cart;
@@ -48,19 +52,16 @@ public class OrderAdapter extends BaseAdapter {
     private TextView total;
     private Button finalize;
     private Button clear;
-    private TimePicker deliveryTime;
-    private DatePicker deliveryDate;
+    private Spinner spin;
 
-    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, Button finalize, Button clear,
-                        TimePicker deliveryTime, DatePicker deliveryDate) {
+    public OrderAdapter(Context ctx, ListView orderListView, List<CartItem> cart, TextView total, Button finalize, Button clear, Spinner spin) {
         this.ctx = ctx;
         this.orderListView = orderListView;
         this.cart = cart;
         this.total = total;
         this.finalize = finalize;
         this.clear = clear;
-        this.deliveryTime = deliveryTime;
-        this.deliveryDate = deliveryDate;
+        this.spin = spin;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -84,6 +85,13 @@ public class OrderAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(R.layout.layout_orderitem, null);
+
+        this.arraySpinner = new String[] {
+                "15", "30", "45", "60", "100"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        spin.setAdapter(adapter);
 
         ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
 
@@ -202,10 +210,7 @@ public class OrderAdapter extends BaseAdapter {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     final String returnList = new Gson().toJson(cart);
-                                    final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
-                                    calendar.set(deliveryDate.getYear(), deliveryDate.getMonth(), deliveryDate.getDayOfMonth(),
-                                            deliveryTime.getCurrentHour(), deliveryTime.getCurrentMinute(), 0);
-                                    final long time2Serv = calendar.getTimeInMillis()/1000;
+                                    final long time2Serv=60*Long.parseLong(spin.getSelectedItem().toString());
                                     class SendDataToServer extends AsyncTask<String, String, String> {
 
                                         @Override
