@@ -55,7 +55,6 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
                                         c.startActivity(new Intent(c, AppsActivity.class));
 
@@ -81,7 +80,6 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
                                         c.startActivity(new Intent(c, PromotionalChanelActivity.class));
 
@@ -107,9 +105,8 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+                                        c.startActivity(new Intent(c, FoodyActivity.class));
 
                                     case MotionEvent.ACTION_CANCEL: {
                                         ImageView image = (ImageView) v;
@@ -133,9 +130,8 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, ShoppingActivity.class));
+                                        c.startActivity(new Intent(c, RequestTicketActivity.class));
 
                                     case MotionEvent.ACTION_CANCEL: {
                                         ImageView image = (ImageView) v;
@@ -159,9 +155,8 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, EcardActivity.class));
+                                        c.startActivity(new Intent(c, ShoppingActivity.class));
 
                                     case MotionEvent.ACTION_CANCEL: {
                                         ImageView image = (ImageView) v;
@@ -185,9 +180,8 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, ViewBillActivity.class));
+                                        c.startActivity(new Intent(c, EcardActivity.class));
 
                                     case MotionEvent.ACTION_CANCEL: {
                                         ImageView image = (ImageView) v;
@@ -211,9 +205,8 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
-
                                     case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, SurveyActivity.class));
+                                        c.startActivity(new Intent(c, ViewBillActivity.class));
 
                                     case MotionEvent.ACTION_CANCEL: {
                                         ImageView image = (ImageView) v;
@@ -237,7 +230,31 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                                         v.invalidate();
                                         break;
                                     }
+                                    case MotionEvent.ACTION_UP:
+                                        c.startActivity(new Intent(c, SurveyActivity.class));
 
+                                    case MotionEvent.ACTION_CANCEL: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
+                        break;
+                    case 8:
+                        holder.img.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN: {
+                                        ImageView image = (ImageView) v;
+                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
+                                        v.invalidate();
+                                        break;
+                                    }
                                     case MotionEvent.ACTION_UP:
                                         c.startActivity(new Intent(c, RecommendActivity.class));
 

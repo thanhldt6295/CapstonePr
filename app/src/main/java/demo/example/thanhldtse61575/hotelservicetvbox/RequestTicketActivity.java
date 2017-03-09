@@ -2,61 +2,48 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
-
-import com.google.gson.Gson;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraActivity;
+public class RequestTicketActivity extends AppCompatActivity {
 
-public class OrderActivity extends AppCompatActivity {
-
-    List<CartItem> cart = new ArrayList<>();
     TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_request_ticket);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
-        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText(getResources().getString(R.string.order));
+        TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        abTitle.setText(getResources().getString(R.string.request_ticket));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
+        Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
+        String[] typeSpinnerArray = new String[] {getResources().getString(R.string.housekeeping),
+                getResources().getString(R.string.maintenance),
+                getResources().getString(R.string.front_desk)};
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, typeSpinnerArray);
+        typeSpinner.setAdapter(typeAdapter);
 
-        TextView total = (TextView) findViewById(R.id.txtCartTotal);
-        Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-        Button btnClear = (Button) findViewById(R.id.btnClearOrder);
-        Spinner s = (Spinner) findViewById(R.id.spinner);
-
-        if(cart!=null){
-            ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear, s);
-            listView.setAdapter(a);
-        }
+        Spinner timeSpinner = (Spinner) findViewById(R.id.timeSpinner);
+        String[] timeSpinnerArray = new String[] {"15", "30", "45", "60", "100"};
+        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, timeSpinnerArray);
+        timeSpinner.setAdapter(timeAdapter);
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -82,7 +69,6 @@ public class OrderActivity extends AppCompatActivity {
                 }
             }
         };
-
         t.start();
 
         final Calendar myCalen = Calendar.getInstance();
@@ -94,34 +80,18 @@ public class OrderActivity extends AppCompatActivity {
                 myCalen.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             }
         };
-
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(OrderActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                new DatePickerDialog(RequestTicketActivity.this, date, myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Gson gson = new Gson();
-        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
-        String cartinfo = gson.toJson(cart);
-        final SharedPreferences.Editor editor = sp.edit();
-        editor.putString("cartinfo", cartinfo);
-        editor.commit();
-        super.onBackPressed();
-    }
-
-    private String getRoomID(){
-
+    private String getRoomID() {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
-
         return jsonPreferences;
     }
-
 }
-

@@ -55,7 +55,8 @@
         <activity
             android:name=".FoodyActivity"
             android:label="@string/title_activity_foody"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".RequestTicketActivity"></activity>
     </application>
 
 </manifest>

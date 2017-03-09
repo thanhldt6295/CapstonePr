@@ -35,6 +35,7 @@
     <string name="application">APPLICATIONS</string>
     <string name="promotional">PROMOTIONAL CHANEL</string>
     <string name="service">ROOM SERVICES</string>
+    <string name="request_ticket">REQUEST TICKET</string>
     <string name="shopping">VIRTUAL SHOPPING</string>
     <string name="ecard">E-CARDS</string>
     <string name="survey">SURVEY</string>
@@ -65,6 +66,7 @@
     <string name="bed_extras">BED EXTRAS</string>
     <string name="room_extras">ROOM EXTRAS</string>
     <string name="datetime">DATE/TIME</string>
+    <string name="comment_hint">Please describe with as much detail as possible</string>
 
     <!-- MaintenanceActivity -->
     <string name="television">TELEVISION</string>

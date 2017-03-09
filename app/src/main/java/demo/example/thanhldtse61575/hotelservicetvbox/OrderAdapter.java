@@ -252,10 +252,8 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     private String getDataFromSharedPreferences(){
-
         SharedPreferences sharedPref = ctx.getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
-
         return jsonPreferences;
     }
 }
