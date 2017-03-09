@@ -46,7 +46,7 @@
         <activity android:name=".housekeeping.RoomCleaningActivity" />
         <activity android:name=".housekeeping.LaundryActivity" />
         <activity android:name=".AppsActivity" />
-        <activity android:name=".housekeeping.ExtraActivity" />
+        <activity android:name=".ExtraActivity" />
         <activity android:name=".SurveyActivity" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".RecommendDetailActivity" />

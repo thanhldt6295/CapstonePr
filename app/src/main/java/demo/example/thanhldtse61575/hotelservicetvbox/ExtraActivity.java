@@ -1,4 +1,4 @@
-package demo.example.thanhldtse61575.hotelservicetvbox.housekeeping;
+package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -24,15 +24,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.CommonService;
-import demo.example.thanhldtse61575.hotelservicetvbox.R;
-
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class ExtraActivity extends AppCompatActivity {
 
     TextView roomid;
     final String[] categoryName = {null};
+
     class GetDataFromServer extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... params) {
@@ -49,16 +47,17 @@ public class ExtraActivity extends AppCompatActivity {
             // Search follow categoryName
             final List<Service> accID = new ArrayList<Service>();
             for (Service ac : acc) {
-                String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
+                String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+                ;
                 if (cagName.equals(categoryName[0])) {
                     accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
                 }
             }
 
             Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-            Spinner s = (Spinner) findViewById(R.id.spinner);
+            Spinner s = (Spinner) findViewById(R.id.timeSpinner);
 
-            if(accID.size()!=0){
+            if (accID.size() != 0) {
                 ListView listView = (ListView) findViewById(R.id.extraListView);
                 ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize);
                 listView.setAdapter(a);
@@ -75,29 +74,13 @@ public class ExtraActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
-        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        Bundle extra = getIntent().getExtras();
-        int type = extra.getInt("type");
-        switch (type){
-            case 1:
-                categoryName[0] = getResources().getString(R.string.bath_extras).toString().toUpperCase().trim();
-                abTitle.setText(getResources().getString(R.string.bath_extras));
-                new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-                break;
-            case 2:
-                categoryName[0] = getResources().getString(R.string.bed_extras).toString().toUpperCase().trim();
-                abTitle.setText(getResources().getString(R.string.bed_extras));
-                new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-                break;
-            case 3:
-                categoryName[0] = getResources().getString(R.string.room_extras).toString().toUpperCase().trim();
-                abTitle.setText(getResources().getString(R.string.room_extras));
-                new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-                break;
-        }
+        categoryName[0] = getResources().getString(R.string.bed_extras).toString().toUpperCase().trim();
+        abTitle.setText(getResources().getString(R.string.room_extras));
+        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -139,13 +122,13 @@ public class ExtraActivity extends AppCompatActivity {
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ExtraActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                new DatePickerDialog(ExtraActivity.this, date, myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
     }
 
-    private String getRoomID(){
+    private String getRoomID() {
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");

@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.ExtraActivity;
+
 import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.LaundryActivity;
 import demo.example.thanhldtse61575.hotelservicetvbox.housekeeping.RoomCleaningActivity;
 

@@ -1,4 +1,4 @@
-package demo.example.thanhldtse61575.hotelservicetvbox.housekeeping;
+package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -110,7 +110,7 @@ public class ExtraAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
-                if (n < 11) {
+                if (n < 10) {
                     qty = n + 1;
                     quantity.setText(qty+"");
                     cart.get(position).setQuantity(qty);

@@ -55,6 +55,10 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_vertical_margin"/>
+
         <include layout="@layout/layout_datetime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

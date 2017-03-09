@@ -23,10 +23,10 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    int[] titles = {R.string.application, R.string.promotional, R.string.service, R.string.request_ticket, R.string.shopping,
+    int[] titles = {R.string.application, R.string.promotional, R.string.service, R.string.room_extras, R.string.request_ticket, R.string.shopping,
             R.string.ecard, R.string.bill, R.string.survey, R.string.recommend};
-    int[] images = {R.drawable.img_app,R.drawable.img_hotel, R.drawable.img_foodsandbeverages, R.drawable.img_roomcleaning,
-            R.drawable.img_shopping, R.drawable.img_ecard,R.drawable.bill, R.drawable.img_survey, R.drawable.img_youtube};
+    int[] images = {R.drawable.img_app, R.drawable.img_hotel, R.drawable.img_foodsandbeverages, R.drawable.img_bathextras, R.drawable.img_roomcleaning,
+            R.drawable.img_shopping, R.drawable.img_ecard, R.drawable.img_billing, R.drawable.img_survey, R.drawable.img_youtube};
     TextView roomid;
 
     @Override
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.layout_slidemenu);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
-        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.app_name));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(MainActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
-                                                            myCalen.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(MainActivity.this, date, myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                        myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(ma);
     }
 
-    private String getRoomID(){
+    private String getRoomID() {
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
