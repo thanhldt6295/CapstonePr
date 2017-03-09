@@ -13,34 +13,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
-
-        <Space
-            android:id="@+id/space"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_above="@+id/hobbySpinner"/>
 
         <Spinner
             android:id="@+id/hobbySpinner"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:spinnerMode="dropdown"
-            android:dropDownSelector="@android:drawable/btn_dropdown"
+            android:layout_height="?attr/actionBarSize"
             android:background="#806f7171"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"></Spinner>
+            android:dropDownSelector="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"></Spinner>
 
         <ListView
             android:id="@+id/recListView"
             android:layout_width="wrap_content"
-            android:background="#30729f64"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/hobbySpinner"/>
+            android:layout_weight="1"
+            android:layout_below="@+id/hobbySpinner"
+            android:background="#30729f64" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_vertical_margin" />
+
+        <include layout="@layout/layout_roombar" />
 
     </LinearLayout>
-
-    <include layout="@layout/layout_roombar" />
 
 </RelativeLayout>
