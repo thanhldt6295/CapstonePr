@@ -68,6 +68,7 @@ public class PendingAdapter extends BaseAdapter{
         TextView name = (TextView) convertView.findViewById(R.id.txtServiceName);
         TextView unitPrice = (TextView) convertView.findViewById(R.id.txtUnitPrice);
         TextView quantity = (TextView) convertView.findViewById(R.id.txtQuantity);
+        TextView orderTime = (TextView) convertView.findViewById(R.id.txtOrderTime);
         TextView deliveryTime = (TextView) convertView.findViewById(R.id.txtDeliveryTime);
         EditText comment = (EditText) convertView.findViewById(R.id.txtComment);
         Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
@@ -86,6 +87,9 @@ public class PendingAdapter extends BaseAdapter{
 
         SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         isoFormat.setTimeZone(TimeZone.getTimeZone("GMT+7:00"));
+
+        String normalDate2 = isoFormat.format(new java.util.Date(cart.get(position).getOrderTime()*1000));;
+        orderTime.setText(normalDate2);
         String normalDate = isoFormat.format(new java.util.Date(cart.get(position).getDeliverTime()*1000));;
         deliveryTime.setText(normalDate);
 

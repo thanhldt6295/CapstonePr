@@ -51,7 +51,11 @@
         <activity android:name=".RecommendActivity" />
         <activity android:name=".RecommendDetailActivity" />
         <activity android:name=".PromoDetailsActivity" />
-        <activity android:name=".EcardActivity"></activity>
+        <activity android:name=".EcardActivity" />
+        <activity
+            android:name=".FoodyActivity"
+            android:label="@string/title_activity_foody"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

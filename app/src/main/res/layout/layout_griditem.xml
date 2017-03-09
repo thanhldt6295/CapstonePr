@@ -21,4 +21,24 @@
             android:textColor="@color/white"
             android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/txtUnitPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unit price"
+            android:layout_below="@+id/textViewGrid"
+            android:layout_centerInParent="true"
+            android:textColor="@color/red"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description"
+            android:layout_below="@+id/txtUnitPrice"
+            android:layout_centerInParent="true"
+            android:textStyle="italic"
+            android:textColor="@color/white"/>
+
 </RelativeLayout>

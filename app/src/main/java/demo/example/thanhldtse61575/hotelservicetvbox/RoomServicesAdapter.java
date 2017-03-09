@@ -42,7 +42,7 @@ public class RoomServicesAdapter extends RecyclerView.Adapter<Holder> {
             public void onItemClick(View view, int pos) {
                 switch (pos){
                     case 0:
-                        c.startActivity(new Intent(c, FoodsBeveragesActivity.class));
+                        c.startActivity(new Intent(c, FoodyActivity.class));
                         break;
                     case 1:
                         c.startActivity(new Intent(c, HousekeepingActivity.class));

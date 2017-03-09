@@ -210,7 +210,9 @@ public class OrderAdapter extends BaseAdapter {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     final String returnList = new Gson().toJson(cart);
-                                    final long time2Serv=60*Long.parseLong(spin.getSelectedItem().toString());
+                                    final long time=60*Long.parseLong(spin.getSelectedItem().toString());
+                                    final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
+                                    final long time2Serv = calendar.getTimeInMillis()/1000 + time;
                                     class SendDataToServer extends AsyncTask<String, String, String> {
 
                                         @Override
