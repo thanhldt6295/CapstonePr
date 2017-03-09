@@ -17,23 +17,32 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/detailsListView"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/light_translucent"
-            android:layout_weight="1" />
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/detailsListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin" />
+
+            <include layout="@layout/layout_billtotal"/>
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_vertical_margin" />
 
-        <include layout="@layout/layout_billtotal"/>
-
-        <include
-            layout="@layout/layout_roombar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <include layout="@layout/layout_roombar"/>
 
     </LinearLayout>
 
