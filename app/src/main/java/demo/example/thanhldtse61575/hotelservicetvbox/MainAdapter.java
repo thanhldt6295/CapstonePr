@@ -42,260 +42,38 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-
-                switch(pos){
+                switch (pos){
                     case 0:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, AppsActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, AppsActivity.class));
                         break;
                     case 1:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
                         break;
                     case 2:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, FoodyActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, FoodyActivity.class));
                         break;
                     case 3:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, ExtraActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, ExtraActivity.class));
                         break;
                     case 4:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, RequestTicketActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, RequestTicketActivity.class));
                         break;
                     case 5:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, ShoppingActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, ShoppingActivity.class));
                         break;
                     case 6:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, EcardActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, EcardActivity.class));
                         break;
                     case 7:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, ViewBillActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, ViewBillActivity.class));
                         break;
                     case 8:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, SurveyActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, SurveyActivity.class));
                         break;
                     case 9:
-                        holder.img.setOnTouchListener(new View.OnTouchListener() {
-                            @Override
-                            public boolean onTouch(View v, MotionEvent event) {
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(50, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                    case MotionEvent.ACTION_UP:
-                                        c.startActivity(new Intent(c, RecommendActivity.class));
-
-                                    case MotionEvent.ACTION_CANCEL: {
-                                        ImageView image = (ImageView) v;
-                                        image.setColorFilter(Color.argb(0, 0, 0, 0));
-                                        v.invalidate();
-                                        break;
-                                    }
-                                }
-                                return true;
-                            }
-                        });
+                        c.startActivity(new Intent(c, RecommendActivity.class));
                         break;
                 }
-
             }
         });
     }
