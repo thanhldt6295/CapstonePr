@@ -47,7 +47,7 @@
     <string name="add">ĐẶT</string>
     <string name="finalize">XÁC NHẬN</string>
     <string name="comment">GHI CHÚ</string>
-    <string name="confirm_answer_wait">Xin chờ trong giây lát. Chúng tôi sẽ phục vụ quý khách ngay. Hãy tận hưởng nhé! Chân thành cảm ơn.</string>
+    <string name="confirm_answer_wait">Xin quý khách vui lòng chờ trong giây lát. Chúng tôi sẽ phục vụ quý khách ngay. Hãy tận hưởng nhé! Chân thành cảm ơn.</string>
     <string name="confirm_question_do">Quý khách thực sự muốn chứ?</string>
     <string name="confirm_service">Xác nhận dịch vụ</string>
     <string name="confirm_clear">Xác nhận xóa hết</string>
@@ -78,13 +78,16 @@
     <string name="subject">TIÊU ĐỀ</string>
     <string name="yourname">TÊN CỦA BẠN</string>
     <string name="notitynull">Không có dịch vụ..</string>
-    <string name="notifyqty">Xin hãy chọn số lượng 1 sản phẩm..</string>
+    <string name="notifyqty">Xin quý khách vui lòng chọn số lượng 1 sản phẩm..</string>
     <string name="tennis">QUẦN VỢT</string>
-    <string name="notifychoose">Xin hãy ghi chú rõ ràng rồi tick chọn dịch vụ đó..</string>
+    <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú..</string>
     <string name="capacity">Sức chứa (người/phòng)</string>
     <string name="worktime">Thời gian làm việc</string>
     <string name="validate">Email không hợp lệ!</string>
     <string name="minutes"> PHÚT SAU</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="comment_hint">Xin quý khách vui lòng mô tả chi tiết..</string>
+    <string name="request_ticket">YÊU CẦU</string>
 
 
 </resources>
