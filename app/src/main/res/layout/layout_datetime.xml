@@ -48,7 +48,7 @@
             android:background="@drawable/finalizestyles"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:textSize="@dimen/text_size_large"/>
 
     </LinearLayout>
 
