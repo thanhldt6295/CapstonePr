@@ -45,7 +45,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/finalize"
-            android:background="@drawable/finalizestyles"/>
+            android:background="@drawable/finalizestyles"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="30dp"/>
 
     </LinearLayout>
 

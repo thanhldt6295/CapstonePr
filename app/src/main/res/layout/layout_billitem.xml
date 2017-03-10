@@ -11,14 +11,14 @@
 
         <TextView
             android:textColor="@color/white"
-            android:textSize="25dp"
+            android:textSize="26dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtServiceName"/>
 
         <TextView
             android:textColor="@color/white"
-            android:textSize="10dp"
+            android:textSize="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtCategory" />

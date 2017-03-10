@@ -46,6 +46,7 @@ public class HobbyAdapter extends ArrayAdapter<Hobby> {
         view.setTextColor(Color.WHITE);
         view.setGravity(Gravity.CENTER);
         view.setText(hobbyList.get(position).getName());
+        view.setTextSize(30);
 
         return view;
     }
@@ -59,6 +60,7 @@ public class HobbyAdapter extends ArrayAdapter<Hobby> {
         view.setTextColor(Color.BLACK);
         view.setText(hobbyList.get(position).getName());
         view.setHeight(60);
+        view.setTextSize(20);
 
         return view;
     }
