@@ -12,7 +12,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateHidden" >
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,6 @@
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.HOME" />
@@ -39,24 +39,30 @@
         <activity android:name=".FoodsBeveragesActivity" />
         <activity android:name=".HousekeepingActivity" />
         <activity android:name=".MaintenanceActivity" />
-        <activity android:name=".OrderActivity" />
+        <activity android:name=".OrderActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name=".ViewBillActivity" />
         <activity android:name=".PendingActivity" />
         <activity android:name=".housekeeping.RoomCleaningActivity" />
         <activity android:name=".housekeeping.LaundryActivity" />
-        <activity android:name=".AppsActivity" />
-        <activity android:name=".ExtraActivity" />
-        <activity android:name=".SurveyActivity" />
+        <activity android:name=".AppsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ExtraActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".SurveyActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".RecommendDetailActivity" />
         <activity android:name=".PromoDetailsActivity" />
-        <activity android:name=".EcardActivity" />
+        <activity android:name=".EcardActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".FoodyActivity"
             android:label="@string/title_activity_foody"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RequestTicketActivity"></activity>
+        <activity android:name=".RequestTicketActivity"
+            android:windowSoftInputMode="stateHidden" ></activity>
     </application>
 
 </manifest>

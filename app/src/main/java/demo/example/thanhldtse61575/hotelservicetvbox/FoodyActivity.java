@@ -63,20 +63,12 @@ public class FoodyActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private static final String SHARE_CART = "SharedCart";
+    private static final String CART_LIST = "CartList";
+    private static List<CartItem> cart = new ArrayList<>();
+
     TextView roomid;
     private ViewPager mViewPager;
-    private List<CartItem> cart = new ArrayList<>();
-    private List<CartItem> getCartList(){
-        Gson gson = new Gson();
-        List<CartItem> list = new ArrayList<>();
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedCart", Context.MODE_PRIVATE);
-        String jsonPreferences = sharedPref.getString("CartList", "");
-
-        Type type = new TypeToken<List<CartItem>>() {}.getType();
-        list = gson.fromJson(jsonPreferences, type);
-
-        return list;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +165,6 @@ public class FoodyActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.cart:
-                cart = getCartList();
                 Intent intent = new Intent(this, OrderActivity.class);
                 intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
@@ -191,7 +182,6 @@ public class FoodyActivity extends AppCompatActivity {
 
         if (json.length() > 0) {
             cart.clear();
-            setCart2Share(cart);
             JsonArray entries = (JsonArray) new JsonParser().parse(json);
 
             for (int i = 0; i < entries.size(); i++) {
@@ -206,7 +196,6 @@ public class FoodyActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        cart = getCartList();
         if(cart.size()!=0) {
             final Gson gson = new Gson();
             SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
@@ -222,7 +211,6 @@ public class FoodyActivity extends AppCompatActivity {
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
                     editor.commit();
-                    setCart2Share(cart);
                     FoodyActivity.super.onBackPressed();
                 }
             });
@@ -246,17 +234,6 @@ public class FoodyActivity extends AppCompatActivity {
         return jsonPreferences;
     }
 
-    private void setCart2Share(List<CartItem> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedCart", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        editor.putString("CartList", jsonCurProduct);
-        editor.commit();
-    }
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -265,11 +242,10 @@ public class FoodyActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String SHARE_CART = "SharedCart";
-        private static final String CART_LIST = "CartList";
+
         private static final String ARG_SECTION_NUMBER = "section_number";
         private GridView grid;
-        private List<CartItem> cart = new ArrayList<CartItem>();
+
         private int quantity = 0;
 
         private List<Service> getServiceList(){
@@ -302,10 +278,12 @@ public class FoodyActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
+            grid = (GridView) rootView.findViewById(R.id.gridView);
+            final List<Service> acc = getServiceList();
+
             if(getArguments().getInt(ARG_SECTION_NUMBER)==1) {
-                View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
-                grid = (GridView) rootView.findViewById(R.id.gridView);
-                final List<Service> acc = getServiceList();
+
                 // Search follow categoryName
                 final List<Service> accID = new ArrayList<Service>();
                 for (Service ac : acc) {
@@ -342,15 +320,12 @@ public class FoodyActivity extends AppCompatActivity {
                                         sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
                             }
                         }
-                        setCart2Share(cart);
                     }
                 });
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
-                View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
-                grid = (GridView) rootView.findViewById(R.id.gridView);
-                final List<Service> acc = getServiceList();
+
                 // Search follow categoryName
                 final List<Service> accID = new ArrayList<Service>();
                 for (Service ac : acc) {
@@ -387,15 +362,12 @@ public class FoodyActivity extends AppCompatActivity {
                                         sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
                             }
                         }
-                        setCart2Share(cart);
                     }
                 });
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
-                View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
-                grid = (GridView) rootView.findViewById(R.id.gridView);
-                final List<Service> acc = getServiceList();
+
                 // Search follow categoryName
                 final List<Service> accID = new ArrayList<Service>();
                 for (Service ac : acc) {
@@ -432,28 +404,57 @@ public class FoodyActivity extends AppCompatActivity {
                                         sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
                             }
                         }
-                        setCart2Share(cart);
+                    }
+                });
+                return rootView;
+            }
+            if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
+                // Search follow categoryName
+                final List<Service> accID = new ArrayList<Service>();
+                for (Service ac : acc) {
+                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+                    if (cagName.equals(getResources().getString(R.string.dessert).toString())) {
+                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                    }
+                }
+                if(accID.size()==0){
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
+                }
+                ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
+                grid.setAdapter(adapter);
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        quantity = quantity + 1;
+                        Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
+                        Service sv = accID.get(position);
+                        if (cart.size() == 0) {
+                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                        }
+                        else {
+                            boolean isHave = false;
+                            for (CartItem od : cart) {
+                                if (od.getServiceID() == sv.getServiceID()) {
+                                    isHave = true;
+                                    od.setQuantity(od.getQuantity() + 1);
+                                }
+                            }
+                            if (!isHave) {
+                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                            }
+                        }
                     }
                 });
                 return rootView;
             }
             else {
-                View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
+//                View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
                 //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
                 //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                 return rootView;
             }
-        }
-
-        private void setCart2Share(List<CartItem> list){
-            Gson gson = new Gson();
-            String jsonCurProduct = gson.toJson(list);
-
-            SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(SHARE_CART, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-
-            editor.putString(CART_LIST, jsonCurProduct);
-            editor.commit();
         }
     }
 

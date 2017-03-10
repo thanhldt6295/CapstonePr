@@ -55,7 +55,6 @@ public class ShopGridViewAdapter extends BaseAdapter {
         ImageView icon = (ImageView) gridView.findViewById(R.id.imageViewGrid);
         TextView item = (TextView) gridView.findViewById(R.id.textViewGrid);
         TextView price = (TextView) gridView.findViewById(R.id.txtUnitPrice);
-        TextView description = (TextView) gridView.findViewById(R.id.txtDescription);
 
         String url = list.get(position).getImage();
         Picasso.with(context)
@@ -65,7 +64,6 @@ public class ShopGridViewAdapter extends BaseAdapter {
                 .centerCrop().into(icon);
         item.setText(list.get(position).getServiceName());
         price.setText(list.get(position).getUnitPrice()+"");
-        description.setText(list.get(position).getDescription());
 
         return gridView;
     }

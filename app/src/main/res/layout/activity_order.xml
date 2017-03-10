@@ -50,7 +50,7 @@
                 android:id="@+id/tvDeliveryTime"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
+                android:layout_weight="0.05"
                 android:text="@string/delivery_time"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium"
@@ -66,7 +66,7 @@
                 android:id="@+id/tvMinutes"
                 android:layout_width="131dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.46"
+                android:layout_weight="0.13"
                 android:text="@string/minutes"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium"
@@ -75,19 +75,29 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnFinalizeOrder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/finalize" />
+                android:orientation="horizontal"
+                android:layout_weight="0.29"
+                android:weightSum="1">
 
                 <Button
                     android:id="@+id/btnClearOrder"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/clear" />
+                    android:layout_height="95dp"
+                    android:text="@string/clear"
+                    android:layout_weight="0.50"
+                    android:background="@drawable/clearstyles"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"/>
+
+                <Button
+                    android:id="@+id/btnFinalizeOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/finalize"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/finalizestyles"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"/>
 
             </LinearLayout>
 

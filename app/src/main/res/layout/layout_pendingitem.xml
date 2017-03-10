@@ -102,7 +102,7 @@
         android:minWidth="@dimen/text_size_large"
         android:text="x"
         android:layout_gravity="center"
-        android:textColor="@color/white"
+        android:background="@drawable/clearstyles"
         android:textSize="@dimen/text_size_medium"
         android:textStyle="bold" />
 

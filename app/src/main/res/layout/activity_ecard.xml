@@ -170,11 +170,15 @@
 
             <Button
                 android:text="@string/send"
-                android:layout_width="wrap_content"
+                android:layout_width="187dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:id="@+id/btnSend"
-                android:background="@drawable/buttonstyles"/>
+                android:background="@drawable/buttonstyles"
+                android:layout_weight="0.17"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
