@@ -58,7 +58,7 @@ public class RoomServicesAdapter extends RecyclerView.Adapter<Holder> {
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(c, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(c, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                         break;

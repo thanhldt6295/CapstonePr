@@ -92,7 +92,7 @@ public class LaundryActivity extends AppCompatActivity {
                                         if(response.equals("200")){
                                             list.clear();
                                             comment.setText("");
-                                            Toast.makeText(LaundryActivity.this, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LaundryActivity.this, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
                                         }
                                         else{
                                             Toast.makeText(LaundryActivity.this, response, Toast.LENGTH_SHORT).show();

@@ -70,7 +70,7 @@ public class RequestTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!comment.getText().toString().equals("")) {
                     new AlertDialog.Builder(RequestTicketActivity.this)
-                            .setTitle(R.string.confirm_order)
+                            .setTitle(R.string.confirm_service)
                             .setMessage(R.string.confirm_question_do)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -103,7 +103,7 @@ public class RequestTicketActivity extends AppCompatActivity {
                                                 acc.clear();
                                                 accID.clear();
                                                 comment.setText("");
-                                                Toast.makeText(RequestTicketActivity.this, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RequestTicketActivity.this, R.string.confirm_request_wait, Toast.LENGTH_SHORT).show();
                                             }
                                             else{
                                                 Toast.makeText(RequestTicketActivity.this, response, Toast.LENGTH_SHORT).show();

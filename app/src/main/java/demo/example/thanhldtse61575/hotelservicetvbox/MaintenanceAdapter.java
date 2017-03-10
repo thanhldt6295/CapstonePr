@@ -161,7 +161,7 @@ public class MaintenanceAdapter extends BaseAdapter {
                                                 cart2.clear();
                                                 notifyDataSetChanged();
 
-                                                Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ctx, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
                                             }
                                             else{
                                                 Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();

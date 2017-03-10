@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -69,7 +66,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -95,7 +92,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -117,7 +114,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -139,7 +136,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_answer_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -161,7 +158,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PromoDetailsActivity.this, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }

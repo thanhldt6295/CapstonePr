@@ -12,13 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,8 +28,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.CommonService;
-import demo.example.thanhldtse61575.hotelservicetvbox.R;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
@@ -149,7 +145,7 @@ public class ExtraAdapter extends BaseAdapter {
                 }
                 if(cart2.size()!=0) {
                     new AlertDialog.Builder(ctx)
-                            .setTitle(R.string.confirm_order)
+                            .setTitle(R.string.confirm_service)
                             .setMessage(R.string.confirm_question_do)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -177,7 +173,7 @@ public class ExtraAdapter extends BaseAdapter {
                                                 cart2.clear();
                                                 notifyDataSetChanged();
 
-                                                Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ctx, R.string.confirm_request_wait, Toast.LENGTH_SHORT).show();
                                             }
                                             else{
                                                 Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();

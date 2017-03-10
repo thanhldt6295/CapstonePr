@@ -30,8 +30,8 @@
                 android:numColumns="auto_fit"
                 android:scrollbars="vertical"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="@dimen/activity_vertical_margin"
-                android:horizontalSpacing="@dimen/activity_horizontal_margin"/>
+                android:verticalSpacing="32dp"
+                android:horizontalSpacing="@dimen/activity_vertical_margin"/>
 
         </LinearLayout>
 

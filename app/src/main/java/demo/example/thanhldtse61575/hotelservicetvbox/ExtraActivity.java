@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,43 +30,6 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 public class ExtraActivity extends AppCompatActivity {
 
     TextView roomid;
-    final String[] categoryName = {null};
-
-    class GetDataFromServer extends AsyncTask<String, Void, String> {
-
-        protected String doInBackground(String... params) {
-            CommonService commonService = new CommonService();
-            String returnva = commonService.getData(params[0]);
-            return returnva;
-        }
-
-        protected void onPostExecute(String response) {
-            //parse json sang list service
-            final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
-            }.getType());
-
-            // Search follow categoryName
-            final List<Service> accID = new ArrayList<Service>();
-            for (Service ac : acc) {
-                String cagName = ac.getCategoryName().toString().toUpperCase().trim();
-                ;
-                if (cagName.equals(categoryName[0])) {
-                    accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
-                }
-            }
-
-            Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-            Spinner s = (Spinner) findViewById(R.id.timeSpinner);
-
-            if (accID.size() != 0) {
-                ListView listView = (ListView) findViewById(R.id.extraListView);
-                ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize);
-                listView.setAdapter(a);
-            } else {
-                Toast.makeText(ExtraActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +39,31 @@ public class ExtraActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        abTitle.setText(getResources().getString(R.string.room_extras));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        categoryName[0] = getResources().getString(R.string.bed_extras).toString().toUpperCase().trim();
-        abTitle.setText(getResources().getString(R.string.room_extras));
-        new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
+        final List<Service> acc = getServiceList();
+        // Search follow categoryName
+        final List<Service> accID = new ArrayList<Service>();
+        for (Service ac : acc) {
+            String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+            ;
+            if (cagName.equals(getResources().getString(R.string.room_extras))) {
+                accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
+            }
+        }
+
+        Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
+        Spinner s = (Spinner) findViewById(R.id.timeSpinner);
+
+        if (accID.size() != 0) {
+            ListView listView = (ListView) findViewById(R.id.extraListView);
+            ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize);
+            listView.setAdapter(a);
+        } else {
+            Toast.makeText(ExtraActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
+        }
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -134,5 +117,17 @@ public class ExtraActivity extends AppCompatActivity {
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
+    }
+
+    private List<Service> getServiceList(){
+        Gson gson = new Gson();
+        List<Service> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedService", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("ServiceList", "");
+
+        Type type = new TypeToken<List<Service>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
     }
 }

@@ -2,7 +2,6 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -16,13 +15,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -233,7 +230,7 @@ public class OrderAdapter extends BaseAdapter {
                                                 total.setText("0đ");
                                                 notifyDataSetChanged();
 
-                                                Toast.makeText(ctx, R.string.confirm_answer_accepted, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ctx, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
                                             }
                                             else{
                                                 Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();

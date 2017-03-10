@@ -7,12 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.GridView;
-import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -275,184 +271,70 @@ public class FoodyActivity extends AppCompatActivity {
             return fragment;
         }
 
+        public void PassData2Tabbed(String cag){
+            final List<Service> acc = getServiceList();
+            // Search follow categoryName
+            final List<Service> accID = new ArrayList<Service>();
+            for (Service ac : acc) {
+                String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+                if (cagName.equals(cag)) {
+                    accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                }
+            }
+            if(accID.size()==0){
+                Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
+            }
+            ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
+            grid.setAdapter(adapter);
+            grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    quantity = quantity + 1;
+                    Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
+                    Service sv = accID.get(position);
+                    if (cart.size() == 0) {
+                        cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                    }
+                    else {
+                        boolean isHave = false;
+                        for (CartItem od : cart) {
+                            if (od.getServiceID() == sv.getServiceID()) {
+                                isHave = true;
+                                od.setQuantity(od.getQuantity() + 1);
+                            }
+                        }
+                        if (!isHave) {
+                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                        }
+                    }
+                }
+            });
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
             grid = (GridView) rootView.findViewById(R.id.gridView);
-            final List<Service> acc = getServiceList();
-
             if(getArguments().getInt(ARG_SECTION_NUMBER)==1) {
-
-                // Search follow categoryName
-                final List<Service> accID = new ArrayList<Service>();
-                for (Service ac : acc) {
-                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
-                    if (cagName.equals(getResources().getString(R.string.breakfast).toString())) {
-                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
-                    }
-                }
-                if(accID.size()==0){
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
-                }
-                ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
-                grid.setAdapter(adapter);
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        quantity = quantity + 1;
-                        Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
-                        Service sv = accID.get(position);
-                        if (cart.size() == 0) {
-                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                        }
-                        else {
-                            boolean isHave = false;
-                            for (CartItem od : cart) {
-                                if (od.getServiceID() == sv.getServiceID()) {
-                                    isHave = true;
-                                    od.setQuantity(od.getQuantity() + 1);
-                                }
-                            }
-                            if (!isHave) {
-                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                            }
-                        }
-                    }
-                });
+                PassData2Tabbed(getResources().getString(R.string.breakfast).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
-
-                // Search follow categoryName
-                final List<Service> accID = new ArrayList<Service>();
-                for (Service ac : acc) {
-                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
-                    if (cagName.equals(getResources().getString(R.string.lunch).toString())) {
-                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
-                    }
-                }
-                if(accID.size()==0){
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
-                }
-                ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
-                grid.setAdapter(adapter);
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        quantity = quantity + 1;
-                        Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
-                        Service sv = accID.get(position);
-                        if (cart.size() == 0) {
-                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                        }
-                        else {
-                            boolean isHave = false;
-                            for (CartItem od : cart) {
-                                if (od.getServiceID() == sv.getServiceID()) {
-                                    isHave = true;
-                                    od.setQuantity(od.getQuantity() + 1);
-                                }
-                            }
-                            if (!isHave) {
-                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                            }
-                        }
-                    }
-                });
+                PassData2Tabbed(getResources().getString(R.string.lunch).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
-
-                // Search follow categoryName
-                final List<Service> accID = new ArrayList<Service>();
-                for (Service ac : acc) {
-                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
-                    if (cagName.equals(getResources().getString(R.string.dinner).toString())) {
-                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
-                    }
-                }
-                if(accID.size()==0){
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
-                }
-                ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
-                grid.setAdapter(adapter);
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        quantity = quantity + 1;
-                        Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
-                        Service sv = accID.get(position);
-                        if (cart.size() == 0) {
-                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                        }
-                        else {
-                            boolean isHave = false;
-                            for (CartItem od : cart) {
-                                if (od.getServiceID() == sv.getServiceID()) {
-                                    isHave = true;
-                                    od.setQuantity(od.getQuantity() + 1);
-                                }
-                            }
-                            if (!isHave) {
-                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                            }
-                        }
-                    }
-                });
+                PassData2Tabbed(getResources().getString(R.string.dinner).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
-                // Search follow categoryName
-                final List<Service> accID = new ArrayList<Service>();
-                for (Service ac : acc) {
-                    String cagName = ac.getCategoryName().toString().toUpperCase().trim();
-                    if (cagName.equals(getResources().getString(R.string.dessert).toString())) {
-                        accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
-                    }
-                }
-                if(accID.size()==0){
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
-                }
-                ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
-                grid.setAdapter(adapter);
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        quantity = quantity + 1;
-                        Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
-                        Service sv = accID.get(position);
-                        if (cart.size() == 0) {
-                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                        }
-                        else {
-                            boolean isHave = false;
-                            for (CartItem od : cart) {
-                                if (od.getServiceID() == sv.getServiceID()) {
-                                    isHave = true;
-                                    od.setQuantity(od.getQuantity() + 1);
-                                }
-                            }
-                            if (!isHave) {
-                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                            }
-                        }
-                    }
-                });
+                PassData2Tabbed(getResources().getString(R.string.dessert).toString());
                 return rootView;
             }
             else {
-//                View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
-                //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-                //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                 return rootView;
             }
         }
