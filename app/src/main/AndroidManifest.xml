@@ -35,13 +35,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PromotionalChanelActivity" />
-        <activity android:name=".RoomServicesActivity" />
-        <activity android:name=".FoodsBeveragesActivity" />
-        <activity android:name=".HousekeepingActivity" />
         <activity android:name=".MaintenanceActivity" />
         <activity android:name=".OrderActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ShoppingActivity" />
         <activity android:name=".ViewBillActivity" />
         <activity android:name=".PendingActivity" />
         <activity android:name=".housekeeping.RoomCleaningActivity" />
@@ -60,7 +56,11 @@
         <activity
             android:name=".FoodyActivity"
             android:label="@string/title_activity_foody"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ShopActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".RequestTicketActivity"
             android:windowSoftInputMode="stateHidden" ></activity>
     </application>

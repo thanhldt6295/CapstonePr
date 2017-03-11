@@ -81,7 +81,7 @@ public class OrderAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        convertView = layoutInflater.inflate(R.layout.layout_orderitem, null);
+        convertView = layoutInflater.inflate(R.layout.layout_cartitem, null);
 
         this.arraySpinner = new String[] {
                 "15", "30", "45", "60", "100"

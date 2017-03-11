@@ -1,6 +1,5 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,24 +9,19 @@ import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
+
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 public class EcardActivity extends AppCompatActivity {
 
@@ -36,8 +30,6 @@ public class EcardActivity extends AppCompatActivity {
     EditText message;
     Button btnSend;
     GridView gridView;
-    int icons[] = {R.drawable.icon_utube, R.drawable.icon_fb, R.drawable.icon_calculator, R.drawable.icon_mp3,
-            R.drawable.icon_ggmaps, R.drawable.icon_setting, R.drawable.icon_gmail, R.drawable.icon_tivi};
     TextView roomid;
 
     @Override
@@ -57,16 +49,7 @@ public class EcardActivity extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSend);
         gridView = (GridView) findViewById(R.id.gridViewCard);
         gridView.setAdapter(new ImageAdapter(this));
-//        EcardAdapter adapter = new EcardAdapter(this, icons);
-//        gridView.setAdapter(adapter);
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                final ImageView zoom = (ImageView) findViewById(R.id.imageViewGrid);
-//                final Animation zoomAni = AnimationUtils.loadAnimation(EcardActivity.this,R.anim.zoom);
-//                zoom.startAnimation(zoomAni);
-//            }
-//        });
+
         btnSend.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

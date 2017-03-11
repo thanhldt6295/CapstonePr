@@ -44,7 +44,11 @@ import java.util.List;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
-public class FoodyActivity extends AppCompatActivity {
+/**
+ * Created by ThanhLDTSE61575 on 3/11/2017.
+ */
+
+public class ShopActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -54,7 +58,7 @@ public class FoodyActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ShopActivity.SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -67,11 +71,11 @@ public class FoodyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foody);
+        setContentView(R.layout.activity_shop);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText(getResources().getString(R.string.food_drink));
+        abTitle.setText(getResources().getString(R.string.shopping));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -115,14 +119,14 @@ public class FoodyActivity extends AppCompatActivity {
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(FoodyActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                new DatePickerDialog(ShopActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new ShopActivity.SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -131,6 +135,12 @@ public class FoodyActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setTabTextColors(-100,-1);
         tabLayout.setupWithViewPager(mViewPager);
+
+//        TabWidget tw = (TabWidget) findViewById(android.R.id.tabs);
+//        View tabView = tw.getChildTabViewAt(0);
+//        TextView tv = (TextView)tabView.findViewById(android.R.id.title);
+//        tv.setTextSize(50);
+
     }
 
     @Override
@@ -197,7 +207,7 @@ public class FoodyActivity extends AppCompatActivity {
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
                     editor.commit();
-                    FoodyActivity.super.onBackPressed();
+                    ShopActivity.super.onBackPressed();
                 }
             });
             builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -208,7 +218,7 @@ public class FoodyActivity extends AppCompatActivity {
             builder.show();
         }
         if(cart.size()==0) {
-            FoodyActivity.super.onBackPressed();
+            ShopActivity.super.onBackPressed();
         }
     }
 
@@ -252,8 +262,8 @@ public class FoodyActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static ShopActivity.PlaceholderFragment newInstance(int sectionNumber) {
+            ShopActivity.PlaceholderFragment fragment = new ShopActivity.PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -284,39 +294,39 @@ public class FoodyActivity extends AppCompatActivity {
             grid = (GridView) rootView.findViewById(R.id.gridView);
             rel = (RelativeLayout) rootView.findViewById(R.id.relative);
             if(getArguments().getInt(ARG_SECTION_NUMBER)==1) {
-                PassData2Tabbed(getResources().getString(R.string.breakfast).toString());
+                PassData2Tabbed(getResources().getString(R.string.souvenir).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
-                PassData2Tabbed(getResources().getString(R.string.lunch).toString());
+                PassData2Tabbed(getResources().getString(R.string.keychain).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
-                PassData2Tabbed(getResources().getString(R.string.dinner).toString());
+                PassData2Tabbed(getResources().getString(R.string.houseware).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
-                PassData2Tabbed(getResources().getString(R.string.dessert).toString());
+                PassData2Tabbed(getResources().getString(R.string.lighter).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==5){
-                PassData2Tabbed(getResources().getString(R.string.coffee).toString());
+                PassData2Tabbed(getResources().getString(R.string.tshirtf).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==6){
-                PassData2Tabbed(getResources().getString(R.string.wine).toString());
+                PassData2Tabbed(getResources().getString(R.string.tshirtm).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==7){
-                PassData2Tabbed(getResources().getString(R.string.fruit).toString());
+                PassData2Tabbed(getResources().getString(R.string.coatf).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==8){
-                PassData2Tabbed(getResources().getString(R.string.mojito).toString());
+                PassData2Tabbed(getResources().getString(R.string.coatm).toString());
                 return rootView;
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==9){
-                PassData2Tabbed(getResources().getString(R.string.other_drinks).toString());
+                PassData2Tabbed(getResources().getString(R.string.toy).toString());
                 return rootView;
             }
             else {
@@ -339,7 +349,7 @@ public class FoodyActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return ShopActivity.PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
@@ -352,23 +362,23 @@ public class FoodyActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return getResources().getString(R.string.breakfast);
+                    return getResources().getString(R.string.souvenir);
                 case 1:
-                    return getResources().getString(R.string.lunch);
+                    return getResources().getString(R.string.keychain);
                 case 2:
-                    return getResources().getString(R.string.dinner);
+                    return getResources().getString(R.string.houseware);
                 case 3:
-                    return getResources().getString(R.string.dessert);
+                    return getResources().getString(R.string.lighter);
                 case 4:
-                    return getResources().getString(R.string.coffee);
+                    return getResources().getString(R.string.tshirtf);
                 case 5:
-                    return getResources().getString(R.string.wine);
+                    return getResources().getString(R.string.tshirtm);
                 case 6:
-                    return getResources().getString(R.string.fruit);
+                    return getResources().getString(R.string.coatf);
                 case 7:
-                    return getResources().getString(R.string.mojito);
+                    return getResources().getString(R.string.coatm);
                 case 8:
-                    return getResources().getString(R.string.other_drinks);
+                    return getResources().getString(R.string.toy);
             }
             return null;
         }

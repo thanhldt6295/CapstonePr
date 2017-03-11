@@ -65,7 +65,7 @@ public class FoodyAdapter extends BaseAdapter{
         View gridView = convertView;
         if(convertView==null){
             inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            gridView = inflater.inflate(R.layout.layout_griditem,null);
+            gridView = inflater.inflate(R.layout.layout_gridviewitem,null);
             holder = new ViewHolder();
 
             holder.image = (ImageView) gridView.findViewById(R.id.imageViewGrid);
@@ -77,7 +77,7 @@ public class FoodyAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View v) {
                     holder.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    ViewGroup container = (ViewGroup) holder.layoutInflater.inflate(R.layout.layout_storeitem, null);
+                    ViewGroup container = (ViewGroup) holder.layoutInflater.inflate(R.layout.layout_itemdetails, null);
                     holder.popup = new PopupWindow(container, 600, 600, true);
                     holder.popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 

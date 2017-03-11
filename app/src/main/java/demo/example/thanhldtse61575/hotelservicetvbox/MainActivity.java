@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;

@@ -2,15 +2,10 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 
 /**
  * Created by ThanhLDTSE61575 on 1/10/2017.
@@ -59,7 +54,7 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                         c.startActivity(new Intent(c, RequestTicketActivity.class));
                         break;
                     case 5:
-                        c.startActivity(new Intent(c, ShoppingActivity.class));
+                        c.startActivity(new Intent(c, ShopActivity.class));
                         break;
                     case 6:
                         c.startActivity(new Intent(c, EcardActivity.class));

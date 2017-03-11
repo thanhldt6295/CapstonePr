@@ -58,7 +58,7 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
         View updateView;
         ViewHolder viewHolder;
         if (view == null) {
-            updateView = mLayoutInflater.inflate(R.layout.layout_recommend, null);
+            updateView = mLayoutInflater.inflate(R.layout.layout_recommenditem, null);
             viewHolder = new ViewHolder();
 
             viewHolder.imageView = (ImageView) updateView.findViewById(R.id.imageView);
