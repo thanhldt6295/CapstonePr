@@ -83,7 +83,7 @@
     <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú..</string>
     <string name="capacity">Sức chứa (người/phòng)</string>
     <string name="worktime">Thời gian làm việc</string>
-    <string name="validate">Email không hợp lệ!</string>
+    <string name="validate">Email không hợp lệ hoặc Tin nhắn bị trống!</string>
     <string name="minutes"> PHÚT SAU</string>
     <string name="action_settings">Cài đặt</string>
     <string name="comment_hint">Xin quý khách vui lòng mô tả chi tiết..</string>

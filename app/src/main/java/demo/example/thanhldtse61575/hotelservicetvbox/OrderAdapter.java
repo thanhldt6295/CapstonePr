@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.text.Editable;
@@ -230,7 +231,11 @@ public class OrderAdapter extends BaseAdapter {
                                                 total.setText("0đ");
                                                 notifyDataSetChanged();
 
-                                                Toast.makeText(ctx, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
+                                                Toast toast = Toast.makeText(ctx, R.string.confirm_order_accepted, Toast.LENGTH_SHORT);
+                                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                vToast.setTextColor(Color.WHITE);
+                                                vToast.setTextSize(30);
+                                                toast.show();
                                             }
                                             else{
                                                 Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();

@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -103,7 +104,11 @@ public class RequestTicketActivity extends AppCompatActivity {
                                                 acc.clear();
                                                 accID.clear();
                                                 comment.setText("");
-                                                Toast.makeText(RequestTicketActivity.this, R.string.confirm_request_wait, Toast.LENGTH_SHORT).show();
+                                                Toast toast = Toast.makeText(RequestTicketActivity.this, R.string.confirm_request_wait, Toast.LENGTH_SHORT);
+                                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                vToast.setTextColor(Color.WHITE);
+                                                vToast.setTextSize(30);
+                                                toast.show();
                                             }
                                             else{
                                                 Toast.makeText(RequestTicketActivity.this, response, Toast.LENGTH_SHORT).show();
@@ -115,7 +120,11 @@ public class RequestTicketActivity extends AppCompatActivity {
                             })
                             .setNegativeButton(android.R.string.no, null).show();
                 } else{
-                    Toast.makeText(RequestTicketActivity.this, R.string.notifychoose, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(RequestTicketActivity.this, R.string.notifychoose, Toast.LENGTH_SHORT);
+                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                    vToast.setTextColor(Color.RED);
+                    vToast.setTextSize(30);
+                    toast.show();
                 }
             }
         });

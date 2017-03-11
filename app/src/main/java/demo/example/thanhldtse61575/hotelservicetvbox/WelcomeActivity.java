@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -192,9 +193,11 @@ public class WelcomeActivity extends AppCompatActivity {
         dummyBtnEng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                        "You have selected English", Toast.LENGTH_SHORT)
-                        .show();
+                Toast toast = Toast.makeText(v.getContext(), "You have selected English", Toast.LENGTH_SHORT);
+                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                vToast.setTextColor(Color.CYAN);
+                vToast.setTextSize(30);
+                toast.show();
                 //Intent mainAct = new Intent(WelcomeActivity.this,MainActivity.class);
                 //startActivity(mainAct);
                 setLocale("en");
@@ -205,9 +208,11 @@ public class WelcomeActivity extends AppCompatActivity {
         dummyBtnViet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                        "Quý khách đã chọn Tiếng Việt", Toast.LENGTH_SHORT)
-                        .show();
+                Toast toast = Toast.makeText(v.getContext(), "Quý khách đã chọn Tiếng Việt", Toast.LENGTH_SHORT);
+                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                vToast.setTextColor(Color.CYAN);
+                vToast.setTextSize(30);
+                toast.show();
                 setLocale("vi");
                 setLang2Share("vi");
             }

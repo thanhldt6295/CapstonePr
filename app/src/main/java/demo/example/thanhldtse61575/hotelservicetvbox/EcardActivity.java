@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -63,7 +64,7 @@ public class EcardActivity extends AppCompatActivity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
-                        if(isEmailValid(revMail.getText().toString())) {
+                        if(isEmailValid(revMail.getText().toString())|message.getText().equals("")) {
                             Intent i = new Intent(Intent.ACTION_SEND);
                             i.setType("application/image");
                             i.putExtra(Intent.EXTRA_EMAIL, new String[]{revMail.getText().toString()});
@@ -76,7 +77,11 @@ public class EcardActivity extends AppCompatActivity {
                                 Toast.makeText(EcardActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT).show();
+                            Toast toast = Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT);
+                            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                            vToast.setTextColor(Color.RED);
+                            vToast.setTextSize(30);
+                            toast.show();
                         }
 
                     case MotionEvent.ACTION_CANCEL: {

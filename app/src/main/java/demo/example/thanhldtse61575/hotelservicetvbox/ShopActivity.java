@@ -332,7 +332,7 @@ public class ShopActivity extends AppCompatActivity {
                                     quantity = quantity + 1;
                                     Toast toast = Toast.makeText(getActivity(), quantity+"", Toast.LENGTH_SHORT);
                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                    vToast.setTextColor(Color.WHITE);
+                                    vToast.setTextColor(Color.CYAN);
                                     vToast.setTextSize(30);
                                     toast.show();
 

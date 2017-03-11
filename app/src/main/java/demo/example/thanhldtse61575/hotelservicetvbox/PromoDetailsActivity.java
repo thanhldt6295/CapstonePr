@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.view.View;
@@ -66,7 +67,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                        vToast.setTextColor(Color.WHITE);
+                                        vToast.setTextSize(30);
+                                        toast.show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -89,7 +94,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                        vToast.setTextColor(Color.WHITE);
+                                        vToast.setTextSize(30);
+                                        toast.show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -112,7 +121,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                        vToast.setTextColor(Color.WHITE);
+                                        vToast.setTextSize(30);
+                                        toast.show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -134,7 +147,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                        vToast.setTextColor(Color.WHITE);
+                                        vToast.setTextSize(30);
+                                        toast.show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }
@@ -156,7 +173,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(PromoDetailsActivity.this, R.string.confirm_order_accepted, Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                        vToast.setTextColor(Color.WHITE);
+                                        vToast.setTextSize(30);
+                                        toast.show();
                                     }})
                                 .setNegativeButton(android.R.string.no, null).show();
                     }

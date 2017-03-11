@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 
 import android.view.LayoutInflater;
@@ -173,7 +174,11 @@ public class ExtraAdapter extends BaseAdapter {
                                                 cart2.clear();
                                                 notifyDataSetChanged();
 
-                                                Toast.makeText(ctx, R.string.confirm_request_wait, Toast.LENGTH_SHORT).show();
+                                                Toast toast = Toast.makeText(ctx, R.string.confirm_request_wait, Toast.LENGTH_SHORT);
+                                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                vToast.setTextColor(Color.WHITE);
+                                                vToast.setTextSize(30);
+                                                toast.show();
                                             }
                                             else{
                                                 Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
@@ -185,7 +190,11 @@ public class ExtraAdapter extends BaseAdapter {
                             })
                             .setNegativeButton(android.R.string.no, null).show();
                 } else{
-                    Toast.makeText(ctx, R.string.notifyqty, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(ctx, R.string.notifyqty, Toast.LENGTH_SHORT);
+                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                    vToast.setTextColor(Color.RED);
+                    vToast.setTextSize(30);
+                    toast.show();
                 }
             }
         });
