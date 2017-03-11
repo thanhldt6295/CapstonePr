@@ -139,22 +139,22 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
         Hobby Hobby0 = new Hobby();
         Hobby0.setId(0);
-        Hobby0.setName("ALL");
+        Hobby0.setName(getResources().getString(R.string.all));
         HobbyEntityList.add(Hobby0);
 
         Hobby Hobby1 = new Hobby();
         Hobby1.setId(1);
-        Hobby1.setName("OCEAN");
+        Hobby1.setName(getResources().getString(R.string.ocean));
         HobbyEntityList.add(Hobby1);
 
         Hobby Hobby2 = new Hobby();
         Hobby2.setId(2);
-        Hobby2.setName("MOUNTAIN");
+        Hobby2.setName(getResources().getString(R.string.mountain));
         HobbyEntityList.add(Hobby2);
 
         Hobby Hobby3 = new Hobby();
         Hobby3.setId(3);
-        Hobby3.setName("COUNTRYSIDE");
+        Hobby3.setName(getResources().getString(R.string.countryside));
         HobbyEntityList.add(Hobby3);
 
         return HobbyEntityList;

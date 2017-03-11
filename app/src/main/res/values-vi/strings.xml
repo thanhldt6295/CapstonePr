@@ -89,6 +89,10 @@
     <string name="comment_hint">Xin quý khách vui lòng mô tả chi tiết..</string>
     <string name="request_ticket">YÊU CẦU</string>
     <string name="other_drinks">Nước giải khát</string>
+    <string name="all">TẤT CẢ</string>
+    <string name="countryside">LÀNG QUÊ</string>
+    <string name="mountain">LEO NÚI</string>
+    <string name="ocean">ĐI BIỂN</string>
 
 
 </resources>

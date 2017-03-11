@@ -30,22 +30,21 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     public static final String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
     public static String VIDEO_ID = "";
 
-    //VideoView videoView;
     TextView roomid;
     TextView name;
+    TextView hour;
     FloatingActionButton btnOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_details);
-//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         name = (TextView) findViewById(R.id.tvPromoName);
+        hour = (TextView) findViewById(R.id.tvWorkHour);
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
@@ -55,6 +54,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                 YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
                 youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
                 name.setText(R.string.spa);
+                hour.setText(R.string.spahour);
                 btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
                 btnOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -73,14 +73,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                 });
                 break;
             case 1:
-//                abTitle.setText(getResources().getString(R.string.gym));
-//                videoView = (VideoView) findViewById(R.id.videoView);
-//                videoView.setVideoPath("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4");
-//                videoView.start();
                 VIDEO_ID = "PvWBLOsOdp8";
                 youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
                 youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
                 name.setText(R.string.gym);
+                hour.setText(R.string.gymhour);
                 btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
                 btnOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,6 +100,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                 youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
                 youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
                 name.setText(R.string.pool);
+                hour.setText(R.string.poolhour);
                 btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
                 btnOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
