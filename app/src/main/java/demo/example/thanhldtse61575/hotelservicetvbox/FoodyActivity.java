@@ -271,7 +271,7 @@ public class FoodyActivity extends AppCompatActivity {
                 }
             }
             if(accID.size()==0){
-                Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
             }
             FoodyAdapter adapter = new FoodyAdapter(getActivity().getApplicationContext(), accID, rel, cart);
             grid.setAdapter(adapter);
@@ -280,42 +280,43 @@ public class FoodyActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            int indexTab = getArguments().getInt(ARG_SECTION_NUMBER);
             View rootView = inflater.inflate(R.layout.fragment_order, container, false);
             grid = (GridView) rootView.findViewById(R.id.gridView);
             rel = (RelativeLayout) rootView.findViewById(R.id.relative);
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==1) {
+            if(indexTab==1) {
                 PassData2Tabbed(getResources().getString(R.string.breakfast).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
+            else if(indexTab==2){
                 PassData2Tabbed(getResources().getString(R.string.lunch).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
+            else if(indexTab==3){
                 PassData2Tabbed(getResources().getString(R.string.dinner).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
+            else if(indexTab==4){
                 PassData2Tabbed(getResources().getString(R.string.dessert).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==5){
+            else if(indexTab==5){
                 PassData2Tabbed(getResources().getString(R.string.coffee).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==6){
+            else if(indexTab==6){
                 PassData2Tabbed(getResources().getString(R.string.wine).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==7){
+            else if(indexTab==7){
                 PassData2Tabbed(getResources().getString(R.string.fruit).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==8){
+            else if(indexTab==8){
                 PassData2Tabbed(getResources().getString(R.string.mojito).toString());
                 return rootView;
             }
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==9){
+            else if(indexTab==9){
                 PassData2Tabbed(getResources().getString(R.string.other_drinks).toString());
                 return rootView;
             }

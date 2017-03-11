@@ -281,7 +281,7 @@ public class ShopActivity extends AppCompatActivity {
                 }
             }
             if(accID.size()==0){
-                Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
             }
             FoodyAdapter adapter = new FoodyAdapter(getActivity().getApplicationContext(), accID, rel, cart);
             grid.setAdapter(adapter);

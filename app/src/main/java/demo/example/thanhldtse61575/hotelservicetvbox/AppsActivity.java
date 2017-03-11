@@ -92,7 +92,7 @@ public class AppsActivity extends AppCompatActivity {
                     OpenApps("com.facebook.katana");
                 }
                 if(position==2){
-                    OpenApps("cache.wind.calculator");
+                    OpenApps("com.android2.calculator3");
                 }
                 if(position==3){
                     OpenApps("com.zing.mp3");
