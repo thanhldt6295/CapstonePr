@@ -72,6 +72,7 @@ public class ShopActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private static Menu mMenu;
     private static List<Service> serviceList = new ArrayList<>();
     private static List<CartItem> cart = new ArrayList<>();
     private static GridView gridView;
@@ -158,7 +159,25 @@ public class ShopActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_cart, menu);
-        return true;
+        mMenu = menu;
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private static void setActionIcon(boolean showWithBadge)
+    {
+        MenuItem item = mMenu.findItem(R.id.cart);
+
+        if(mMenu != null)
+        {
+            if(showWithBadge)
+            {
+                item.setIcon(R.drawable.ic_carted);
+            }
+            else
+            {
+                item.setIcon(R.drawable.ic_cart);
+            }
+        }
     }
 
     @Override
@@ -328,13 +347,17 @@ public class ShopActivity extends AppCompatActivity {
                                     break;
                                 }
                                 case MotionEvent.ACTION_UP:
-                                    if(cart.size()==0) quantity = 0;
+                                    if(cart.size()==0) {
+                                        quantity = 0;
+                                        setActionIcon(false);
+                                    }
                                     quantity = quantity + 1;
                                     Toast toast = Toast.makeText(getActivity(), quantity+"", Toast.LENGTH_SHORT);
                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                     vToast.setTextColor(Color.CYAN);
                                     vToast.setTextSize(30);
                                     toast.show();
+                                    setActionIcon(true);
 
                                     Service sv = serviceCagList.get(position);
                                     if (cart.size() == 0) {
