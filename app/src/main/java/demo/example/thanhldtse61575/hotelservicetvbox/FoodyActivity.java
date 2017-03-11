@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -16,14 +18,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +40,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -59,7 +68,13 @@ public class FoodyActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private static List<Service> serviceList = new ArrayList<>();
     private static List<CartItem> cart = new ArrayList<>();
+    private static GridView gridView;
+    private static RelativeLayout relativeLayout;
+    private static PopupWindow popup;
+    private static LayoutInflater layoutInflater;
+    private static int quantity = 0;
     TextView roomid;
 
     private ViewPager mViewPager;
@@ -74,6 +89,8 @@ public class FoodyActivity extends AppCompatActivity {
         abTitle.setText(getResources().getString(R.string.food_drink));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+
+        serviceList = getServiceList();
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -220,6 +237,18 @@ public class FoodyActivity extends AppCompatActivity {
         return jsonPreferences;
     }
 
+    private List<Service> getServiceList(){
+        Gson gson = new Gson();
+        List<Service> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedService", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("ServiceList", "");
+
+        Type type = new TypeToken<List<Service>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -230,20 +259,6 @@ public class FoodyActivity extends AppCompatActivity {
          */
 
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private GridView grid;
-        private RelativeLayout rel;
-
-        private List<Service> getServiceList(){
-            Gson gson = new Gson();
-            List<Service> list = new ArrayList<>();
-            SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences("SharedService", Context.MODE_PRIVATE);
-            String jsonPreferences = sharedPref.getString("ServiceList", "");
-
-            Type type = new TypeToken<List<Service>>() {}.getType();
-            list = gson.fromJson(jsonPreferences, type);
-
-            return list;
-        }
 
         public PlaceholderFragment() {
         }
@@ -261,20 +276,101 @@ public class FoodyActivity extends AppCompatActivity {
         }
 
         public void PassData2Tabbed(String cag){
-            final List<Service> acc = getServiceList();
             // Search follow categoryName
-            final List<Service> accID = new ArrayList<Service>();
-            for (Service ac : acc) {
+            final List<Service> serviceCagList = new ArrayList<Service>();
+            for (Service ac : serviceList) {
                 String cagName = ac.getCategoryName().toString().toUpperCase().trim();
                 if (cagName.equals(cag)) {
-                    accID.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                    serviceCagList.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                 }
             }
-            if(accID.size()==0){
+            if(serviceCagList.size()==0){
                 //Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
             }
-            FoodyAdapter adapter = new FoodyAdapter(getActivity().getApplicationContext(), accID, rel, cart);
-            grid.setAdapter(adapter);
+            FoodyAdapter adapter = new FoodyAdapter(getActivity().getApplicationContext(), serviceCagList);
+            gridView.setAdapter(adapter);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_itemdetails, null);
+                    popup = new PopupWindow(container, 600, 600, true);
+                    popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+                    Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
+                    ImageView icon = (ImageView) container.findViewById(R.id.imageViewDetail);
+                    TextView item = (TextView) container.findViewById(R.id.txtServiceName);
+                    TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);
+                    TextView description = (TextView) container.findViewById(R.id.txtDescription);
+
+                    String url = serviceCagList.get(position).getImage();
+                    Picasso.with(getActivity())
+                            .load(url)
+                            .placeholder(R.drawable.loading)
+                            .fit()
+                            .centerCrop().into(icon);
+                    item.setText(serviceCagList.get(position).getServiceName());
+                    price.setText(serviceCagList.get(position).getUnitPrice() + "");
+                    description.setText(serviceCagList.get(position).getDescription());
+
+                    btnOrder.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN: {
+                                    Button view = (Button) v;
+                                    view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                                    v.invalidate();
+                                    break;
+                                }
+                                case MotionEvent.ACTION_UP:
+                                    if(cart.size()==0) quantity = 0;
+                                    quantity = quantity + 1;
+                                    Toast toast = Toast.makeText(getActivity(), quantity+"", Toast.LENGTH_SHORT);
+                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                    vToast.setTextColor(Color.WHITE);
+                                    vToast.setTextSize(30);
+                                    toast.show();
+
+                                    Service sv = serviceCagList.get(position);
+                                    if (cart.size() == 0) {
+                                        cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                                    }
+                                    else {
+                                        boolean isHave = false;
+                                        for (CartItem od : cart) {
+                                            if (od.getServiceID() == sv.getServiceID()) {
+                                                isHave = true;
+                                                od.setQuantity(od.getQuantity() + 1);
+                                            }
+                                        }
+                                        if (!isHave) {
+                                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                                        }
+                                    }
+
+                                case MotionEvent.ACTION_CANCEL: {
+                                    Button view = (Button) v;
+                                    view.getBackground().clearColorFilter();
+                                    view.invalidate();
+                                    break;
+                                }
+                            }
+                            return true;
+                        }
+                    });
+
+                    container.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            popup.dismiss();
+                            return true;
+                        }
+                    });
+                }
+            });
         }
 
         @Override
@@ -282,8 +378,8 @@ public class FoodyActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             int indexTab = getArguments().getInt(ARG_SECTION_NUMBER);
             View rootView = inflater.inflate(R.layout.fragment_order, container, false);
-            grid = (GridView) rootView.findViewById(R.id.gridView);
-            rel = (RelativeLayout) rootView.findViewById(R.id.relative);
+            gridView = (GridView) rootView.findViewById(R.id.gridView);
+            relativeLayout = (RelativeLayout) rootView.findViewById(R.id.relative);
             if(indexTab==1) {
                 PassData2Tabbed(getResources().getString(R.string.breakfast).toString());
                 return rootView;
