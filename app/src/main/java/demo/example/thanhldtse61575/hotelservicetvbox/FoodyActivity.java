@@ -22,9 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,11 +59,9 @@ public class FoodyActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private static final String SHARE_CART = "SharedCart";
-    private static final String CART_LIST = "CartList";
     private static List<CartItem> cart = new ArrayList<>();
-
     TextView roomid;
+
     private ViewPager mViewPager;
 
     @Override
@@ -74,7 +72,6 @@ public class FoodyActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.food_drink));
-
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -184,7 +181,6 @@ public class FoodyActivity extends AppCompatActivity {
                 CartItem cartItem = gson.fromJson(entries.get(i).toString(), CartItem.class);
                 cart.add(cartItem);
             }
-
         }
 
         super.onResume();
@@ -241,8 +237,7 @@ public class FoodyActivity extends AppCompatActivity {
 
         private static final String ARG_SECTION_NUMBER = "section_number";
         private GridView grid;
-
-        private int quantity = 0;
+        private RelativeLayout rel;
 
         private List<Service> getServiceList(){
             Gson gson = new Gson();
@@ -284,33 +279,8 @@ public class FoodyActivity extends AppCompatActivity {
             if(accID.size()==0){
                 Toast.makeText(getActivity().getApplicationContext(), R.string.notitynull, Toast.LENGTH_SHORT).show();
             }
-            ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity().getApplicationContext(), accID);
+            FoodyAdapter adapter = new FoodyAdapter(getActivity().getApplicationContext(), accID, rel, cart);
             grid.setAdapter(adapter);
-            grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    quantity = quantity + 1;
-                    Toast.makeText(getActivity().getApplicationContext(), quantity+"", Toast.LENGTH_SHORT).show();
-                    Service sv = accID.get(position);
-                    if (cart.size() == 0) {
-                        cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                    }
-                    else {
-                        boolean isHave = false;
-                        for (CartItem od : cart) {
-                            if (od.getServiceID() == sv.getServiceID()) {
-                                isHave = true;
-                                od.setQuantity(od.getQuantity() + 1);
-                            }
-                        }
-                        if (!isHave) {
-                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
-                        }
-                    }
-                }
-            });
         }
 
         @Override
@@ -318,6 +288,7 @@ public class FoodyActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_foody, container, false);
             grid = (GridView) rootView.findViewById(R.id.gridView);
+            rel = (RelativeLayout) rootView.findViewById(R.id.relative);
             if(getArguments().getInt(ARG_SECTION_NUMBER)==1) {
                 PassData2Tabbed(getResources().getString(R.string.breakfast).toString());
                 return rootView;
@@ -332,6 +303,22 @@ public class FoodyActivity extends AppCompatActivity {
             }
             if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
                 PassData2Tabbed(getResources().getString(R.string.dessert).toString());
+                return rootView;
+            }
+            if(getArguments().getInt(ARG_SECTION_NUMBER)==5){
+                PassData2Tabbed(getResources().getString(R.string.coffee).toString());
+                return rootView;
+            }
+            if(getArguments().getInt(ARG_SECTION_NUMBER)==6){
+                PassData2Tabbed(getResources().getString(R.string.wine).toString());
+                return rootView;
+            }
+            if(getArguments().getInt(ARG_SECTION_NUMBER)==7){
+                PassData2Tabbed(getResources().getString(R.string.fruit).toString());
+                return rootView;
+            }
+            if(getArguments().getInt(ARG_SECTION_NUMBER)==8){
+                PassData2Tabbed(getResources().getString(R.string.mojito).toString());
                 return rootView;
             }
             else {
@@ -359,8 +346,8 @@ public class FoodyActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 5;
+            // Show 8 total pages.
+            return 8;
         }
 
         @Override
@@ -376,6 +363,12 @@ public class FoodyActivity extends AppCompatActivity {
                     return getResources().getString(R.string.dessert);
                 case 4:
                     return getResources().getString(R.string.coffee);
+                case 5:
+                    return getResources().getString(R.string.wine);
+                case 6:
+                    return getResources().getString(R.string.fruit);
+                case 7:
+                    return getResources().getString(R.string.mojito);
             }
             return null;
         }
