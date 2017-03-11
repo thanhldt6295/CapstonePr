@@ -25,6 +25,7 @@ import java.util.Date;
 
 public class EcardActivity extends AppCompatActivity {
 
+    EditText sender;
     EditText revMail;
     EditText subject;
     EditText message;
@@ -43,6 +44,7 @@ public class EcardActivity extends AppCompatActivity {
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
+        sender = (EditText) findViewById(R.id.txtYourName);
         revMail = (EditText) findViewById(R.id.txtMailRecv);
         subject = (EditText) findViewById(R.id.txtSubject);
         message = (EditText) findViewById(R.id.txtMessage);
@@ -61,20 +63,20 @@ public class EcardActivity extends AppCompatActivity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
-                        Intent i = new Intent(Intent.ACTION_SEND);
-                        i.setType("application/image");
-                        if(!isEmailValid(revMail.getText().toString())) {
-                            Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT).show();
-                        } else {
+                        if(isEmailValid(revMail.getText().toString())) {
+                            Intent i = new Intent(Intent.ACTION_SEND);
+                            i.setType("application/image");
                             i.putExtra(Intent.EXTRA_EMAIL, new String[]{revMail.getText().toString()});
-                        }
-                        i.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
-                        i.putExtra(Intent.EXTRA_TEXT   , message.getText());
-                        i.putExtra(Intent.EXTRA_STREAM, Uri.parse("CapstonePrj://demo.example.thanhldtse61575.hotelservicetvbox/drawable/demo"));
-                        try {
-                            startActivity(Intent.createChooser(i, "Send mail..."));
-                        } catch (android.content.ActivityNotFoundException ex) {
-                            Toast.makeText(EcardActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                            i.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
+                            i.putExtra(Intent.EXTRA_TEXT, message.getText() + "\n\nLove,\n" + sender.getText().toString());
+                            i.putExtra(Intent.EXTRA_STREAM, Uri.parse("CapstonePrj://demo.example.thanhldtse61575.hotelservicetvbox/drawable/demo"));
+                            try {
+                                startActivity(Intent.createChooser(i, "Send mail..."));
+                            } catch (android.content.ActivityNotFoundException ex) {
+                                Toast.makeText(EcardActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT).show();
                         }
 
                     case MotionEvent.ACTION_CANCEL: {

@@ -88,7 +88,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/clearstyles"
                     android:textColor="@color/white"
-                    android:textSize="30dp"/>
+                    android:textSize="@dimen/text_size_large"/>
 
                 <Button
                     android:id="@+id/btnFinalizeOrder"
@@ -98,7 +98,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/finalizestyles"
                     android:textColor="@color/white"
-                    android:textSize="30dp"/>
+                    android:textSize="@dimen/text_size_large"/>
 
             </LinearLayout>
 

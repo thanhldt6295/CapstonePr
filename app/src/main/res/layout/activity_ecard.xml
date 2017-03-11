@@ -46,7 +46,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:layout_weight="3"/>
+                            android:layout_weight="3"
+                            android:textSize="@dimen/text_size_medium"/>
 
                         <EditText
                             android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
                             android:inputType="textPersonName"
                             android:ems="10"
                             android:id="@+id/txtYourName"
-                            android:hint="Sally John"/>
+                            android:hint="Sally John"
+                            android:textSize="@dimen/text_size_medium"/>
 
                     </TableRow>
 
@@ -69,7 +71,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:layout_weight="3"/>
+                            android:layout_weight="3"
+                            android:textSize="@dimen/text_size_medium"/>
 
                         <EditText
                             android:layout_width="wrap_content"
@@ -78,7 +81,9 @@
                             android:inputType="textEmailAddress"
                             android:ems="10"
                             android:id="@+id/txtMailRecv"
-                            android:hint="abc@gmail.com"/>
+                            android:hint="abc@gmail.com"
+                            android:textSize="@dimen/text_size_medium"
+                            android:textColor="#79aefd"/>
 
                     </TableRow>
 
@@ -92,7 +97,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_medium"/>
 
                         <EditText
                             android:layout_width="wrap_content"
@@ -101,7 +107,9 @@
                             android:ems="10"
                             android:layout_weight="7"
                             android:id="@+id/txtSubject"
-                            android:hint="Subject"/>
+                            android:hint="Subject"
+                            android:textSize="@dimen/text_size_medium"
+                            android:textStyle="bold"/>
 
                     </TableRow>
 
@@ -121,7 +129,8 @@
                         android:text="@string/message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_medium"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -130,7 +139,10 @@
                         android:inputType="textMultiLine"
                         android:ems="10"
                         android:id="@+id/txtMessage"
-                        android:hint="Dear..."/>
+                        android:hint="Dear..."
+                        android:textSize="@dimen/text_size_medium"
+                        android:textColor="@color/white"
+                        android:textStyle="bold|italic"/>
 
                 </LinearLayout>
 
