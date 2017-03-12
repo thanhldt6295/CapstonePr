@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
+        rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         MainAdapter ma = new MainAdapter(this, titles, images);
         rv.setAdapter(ma);
