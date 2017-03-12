@@ -2,15 +2,10 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import java.util.List;
-
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
 
 /**
  * Created by ThanhLDTSE61575 on 3/12/2017.

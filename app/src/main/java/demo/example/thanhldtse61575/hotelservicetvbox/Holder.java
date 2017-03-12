@@ -1,10 +1,6 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
