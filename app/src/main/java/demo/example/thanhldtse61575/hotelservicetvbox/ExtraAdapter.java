@@ -85,7 +85,7 @@ public class ExtraAdapter extends BaseAdapter {
         this.arraySpinner = new String[] {
                 "15", "30", "45", "60", "100"
         };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx,
+        SpinnerAdapter adapter = new SpinnerAdapter(ctx,
                 android.R.layout.simple_spinner_item, arraySpinner);
         spin.setAdapter(adapter);
 

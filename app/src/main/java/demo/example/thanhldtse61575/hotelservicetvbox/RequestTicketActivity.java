@@ -52,13 +52,13 @@ public class RequestTicketActivity extends AppCompatActivity {
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         final Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-        String[] typeSpinnerArray = new String[] {getResources().getString(R.string.housekeeping), getResources().getString(R.string.maintenance), getResources().getString(R.string.front_desk)};
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, typeSpinnerArray);
+        String[] typeSpinnerArray = new String[] {getResources().getString(R.string.housekeeping), getResources().getString(R.string.maintenance), getResources().getString(R.string.front_desk), getResources().getString(R.string.laundry)};
+        SpinnerAdapter typeAdapter = new SpinnerAdapter(this, android.R.layout.simple_spinner_item, typeSpinnerArray);
         typeSpinner.setAdapter(typeAdapter);
 
         final Spinner timeSpinner = (Spinner) findViewById(R.id.timeSpinner);
         String[] timeSpinnerArray = new String[] {"15", "30", "45", "60", "100"};
-        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, timeSpinnerArray);
+        SpinnerAdapter timeAdapter = new SpinnerAdapter(this, android.R.layout.simple_spinner_item, timeSpinnerArray);
         timeSpinner.setAdapter(timeAdapter);
 
         final List<Service> acc = getServiceList();
