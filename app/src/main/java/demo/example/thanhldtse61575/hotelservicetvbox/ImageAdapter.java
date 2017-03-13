@@ -24,6 +24,11 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Image;
+
 public class ImageAdapter extends BaseAdapter {
 
     RadioGroup rgp;
@@ -109,7 +114,6 @@ public class ImageAdapter extends BaseAdapter {
 
     // References to our images in res > drawable
     public Integer[] mThumbIds = { R.drawable.ocean1, R.drawable.ocean2, R.drawable.mountain1, R.drawable.mountain2, R.drawable.mountain3 };
-
     private void zoomImageFromThumb(final View thumbView, int imageResId) {
         // If there's an animation in progress, cancel it immediately and
         // proceed with this one.

@@ -87,7 +87,7 @@ public class OrderAdapter extends BaseAdapter {
         this.arraySpinner = new String[] {
                 "15", "30", "45", "60", "100"
         };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx,
+        SpinnerAdapter adapter = new SpinnerAdapter(ctx,
                 android.R.layout.simple_spinner_item, arraySpinner);
         spin.setAdapter(adapter);
 
@@ -102,17 +102,18 @@ public class OrderAdapter extends BaseAdapter {
         TextView name = (TextView) convertView.findViewById(R.id.txtServiceName);
         name.setText(cart.get(position).getServiceName());
         TextView unitPrice = (TextView) convertView.findViewById(R.id.txtUnitPrice);
-        DecimalFormat format = new DecimalFormat("###,###.#");
+        final DecimalFormat format = new DecimalFormat("###,###.#");
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) + "đ");
 
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
         quantity.setText(cart.get(position).getQuantity()+"");
+        final int[] qty = {0};
 
-        float t = 0;
+        final float[] t = {0};
         for (int i = 0; i < cart.size(); i++){
-            t += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+            t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
         }
-        total.setText(format.format(t) + "đ");
+        total.setText(format.format(t[0]) + "đ");
 
         Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(new View.OnClickListener() {
@@ -120,10 +121,13 @@ public class OrderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
                 if (n < 100) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n + 1);
-                    quantity.setText(qty);
+                    qty[0] +=1;
+                    quantity.setText(qty[0]+"");
                     cart.get(position).setQuantity(n+1);
+                    for (int i = 0; i < cart.size(); i++){
+                        t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+                    }
+                    total.setText(format.format(t[0]) + "đ");
                 }
             }
         });
@@ -134,10 +138,13 @@ public class OrderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
                 if (n > 1) {
-                    StringBuilder qty = new StringBuilder();
-                    qty.append(n - 1);
-                    quantity.setText(qty);
+                    qty[0] -=1;
+                    quantity.setText(qty[0]+"");
                     cart.get(position).setQuantity(n-1);
+                    for (int i = 0; i < cart.size(); i++){
+                        t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+                    }
+                    total.setText(format.format(t[0]) + "đ");
                 }
             }
         });
@@ -147,6 +154,10 @@ public class OrderAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 cart.remove(position);
+                for (int i = 0; i < cart.size(); i++){
+                    t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+                }
+                total.setText(format.format(t[0]) + "đ");
                 if(cart.size() == 0){
                     total.setText("0đ");
                 }

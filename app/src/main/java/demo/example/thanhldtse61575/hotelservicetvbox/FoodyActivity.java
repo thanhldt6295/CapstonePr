@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -159,11 +160,6 @@ public class FoodyActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
@@ -192,6 +188,7 @@ public class FoodyActivity extends AppCompatActivity {
                 CartItem cartItem = gson.fromJson(entries.get(i).toString(), CartItem.class);
                 cart.add(cartItem);
             }
+
         }
 
         super.onResume();
@@ -297,11 +294,16 @@ public class FoodyActivity extends AppCompatActivity {
                     popup = new PopupWindow(container, 600, 600, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
+                    Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
+                    Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
                     Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
                     ImageView icon = (ImageView) container.findViewById(R.id.imageViewDetail);
                     TextView item = (TextView) container.findViewById(R.id.txtServiceName);
                     TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);
                     TextView description = (TextView) container.findViewById(R.id.txtDescription);
+                    final EditText quantty = (EditText) container.findViewById(R.id.txtQuantity);
+                    quantty.setText("1");
+                    final int[] qty = {0};
 
                     String url = serviceCagList.get(position).getImage();
                     Picasso.with(getActivity())
@@ -312,6 +314,29 @@ public class FoodyActivity extends AppCompatActivity {
                     item.setText(serviceCagList.get(position).getServiceName());
                     price.setText(serviceCagList.get(position).getUnitPrice() + "");
                     description.setText(serviceCagList.get(position).getDescription());
+
+                    btnMinus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int n = Integer.parseInt(quantty.getText().toString());
+                            if (n > 1) {
+                                int q = Integer.parseInt(quantty.getText().toString());
+                                qty[0] -= q;
+                                quantty.setText(qty[0]+"");
+                            }
+                        }
+                    });
+                    btnPlus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int n = Integer.parseInt(quantty.getText().toString());
+                            if (n < 100) {
+                                int q = Integer.parseInt(quantty.getText().toString());
+                                qty[0] +=q;
+                                quantty.setText(qty[0]+"");
+                            }
+                        }
+                    });
 
                     btnOrder.setOnTouchListener(new View.OnTouchListener() {
                         @Override
@@ -335,7 +360,8 @@ public class FoodyActivity extends AppCompatActivity {
                                     Service sv = serviceCagList.get(position);
                                     if (cart.size() == 0) {
                                         cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                Integer.parseInt(quantty.getText().toString()), ""));
                                     }
                                     else {
                                         boolean isHave = false;
@@ -347,7 +373,8 @@ public class FoodyActivity extends AppCompatActivity {
                                         }
                                         if (!isHave) {
                                             cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                    Integer.parseInt(quantty.getText().toString()), ""));
                                         }
                                     }
 
