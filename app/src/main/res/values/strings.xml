@@ -11,6 +11,8 @@
     <string name="minutes"> MINUTES LATER</string>
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
+    <string name="USD">USD</string>
+    <string name="added">Added to cart</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>

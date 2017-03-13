@@ -75,7 +75,6 @@ public class FoodyActivity extends AppCompatActivity {
     private static RelativeLayout relativeLayout;
     private static PopupWindow popup;
     private static LayoutInflater layoutInflater;
-    private static int quantity = 0;
     TextView roomid;
 
     private ViewPager mViewPager;
@@ -320,8 +319,7 @@ public class FoodyActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             int n = Integer.parseInt(quantty.getText().toString());
                             if (n > 1) {
-                                int q = Integer.parseInt(quantty.getText().toString());
-                                qty[0] -= q;
+                                qty[0] -= 1;
                                 quantty.setText(qty[0]+"");
                             }
                         }
@@ -331,8 +329,7 @@ public class FoodyActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             int n = Integer.parseInt(quantty.getText().toString());
                             if (n < 100) {
-                                int q = Integer.parseInt(quantty.getText().toString());
-                                qty[0] +=q;
+                                qty[0] +=1;
                                 quantty.setText(qty[0]+"");
                             }
                         }
@@ -349,9 +346,7 @@ public class FoodyActivity extends AppCompatActivity {
                                     break;
                                 }
                                 case MotionEvent.ACTION_UP:
-                                    if(cart.size()==0) quantity = 0;
-                                    quantity = quantity + 1;
-                                    Toast toast = Toast.makeText(getActivity(), quantity+"", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                     vToast.setTextColor(Color.CYAN);
                                     vToast.setTextSize(30);
@@ -368,7 +363,7 @@ public class FoodyActivity extends AppCompatActivity {
                                         for (CartItem od : cart) {
                                             if (od.getServiceID() == sv.getServiceID()) {
                                                 isHave = true;
-                                                od.setQuantity(od.getQuantity() + 1);
+                                                od.setQuantity(od.getQuantity() + Integer.parseInt(quantty.getText().toString()));
                                             }
                                         }
                                         if (!isHave) {

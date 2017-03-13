@@ -13,7 +13,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,6 +82,7 @@ public class OrderAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(R.layout.layout_cartitem, null);
+        final View view = convertView;
 
         this.arraySpinner = new String[] {
                 "15", "30", "45", "60", "100"
@@ -91,7 +91,7 @@ public class OrderAdapter extends BaseAdapter {
                 android.R.layout.simple_spinner_item, arraySpinner);
         spin.setAdapter(adapter);
 
-        ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
+        ImageView image = (ImageView) view.findViewById(R.id.imageViewDetail);
 
         String url = cart.get(position).getImage();
         Picasso.with(ctx)
@@ -99,73 +99,63 @@ public class OrderAdapter extends BaseAdapter {
                 .placeholder(R.drawable.loading)
                 .fit()
                 .centerCrop().into(image);
-        TextView name = (TextView) convertView.findViewById(R.id.txtServiceName);
+        TextView name = (TextView) view.findViewById(R.id.txtServiceName);
         name.setText(cart.get(position).getServiceName());
-        TextView unitPrice = (TextView) convertView.findViewById(R.id.txtUnitPrice);
+        TextView unitPrice = (TextView) view.findViewById(R.id.txtUnitPrice);
         final DecimalFormat format = new DecimalFormat("###,###.#");
-        unitPrice.setText(format.format(cart.get(position).getUnitPrice()) + "đ");
+        unitPrice.setText(format.format(cart.get(position).getUnitPrice()) +" "+ view.getResources().getString(R.string.USD));
 
-        final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
+        final EditText quantity = (EditText) view.findViewById(R.id.txtQuantity);
         quantity.setText(cart.get(position).getQuantity()+"");
-        final int[] qty = {0};
 
-        final float[] t = {0};
-        for (int i = 0; i < cart.size(); i++){
-            t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
-        }
-        total.setText(format.format(t[0]) + "đ");
+        float t = getTotal(cart);
+        total.setText(format.format(t) +" "+ view.getResources().getString(R.string.USD));
 
-        Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
+        Button btnPlus = (Button) view.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
                 if (n < 100) {
-                    qty[0] +=1;
-                    quantity.setText(qty[0]+"");
-                    cart.get(position).setQuantity(n+1);
-                    for (int i = 0; i < cart.size(); i++){
-                        t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
-                    }
-                    total.setText(format.format(t[0]) + "đ");
+                    n+=1;
+                    quantity.setText(n+"");
+                    cart.get(position).setQuantity(n);
+                    float t1 = getTotal(cart);
+                    total.setText(format.format(t1) +" "+ view.getResources().getString(R.string.USD));
                 }
             }
         });
 
-        Button btnMinus = (Button) convertView.findViewById(R.id.btnMinus);
+        Button btnMinus = (Button) view.findViewById(R.id.btnMinus);
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int n = Integer.parseInt(quantity.getText().toString());
                 if (n > 1) {
-                    qty[0] -=1;
-                    quantity.setText(qty[0]+"");
-                    cart.get(position).setQuantity(n-1);
-                    for (int i = 0; i < cart.size(); i++){
-                        t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
-                    }
-                    total.setText(format.format(t[0]) + "đ");
+                    n -=1;
+                    quantity.setText(n+"");
+                    cart.get(position).setQuantity(n);
+                    float t2 = getTotal(cart);
+                    total.setText(format.format(t2) +" "+ view.getResources().getString(R.string.USD));
                 }
             }
         });
 
-        Button btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
+        Button btnDelete = (Button) view.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cart.remove(position);
-                for (int i = 0; i < cart.size(); i++){
-                    t[0] += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
-                }
-                total.setText(format.format(t[0]) + "đ");
+                float t3 = getTotal(cart);
+                total.setText(format.format(t3) + view.getResources());
                 if(cart.size() == 0){
-                    total.setText("0đ");
+                    total.setText("0 "+ view.getResources().getString(R.string.USD));
                 }
                 notifyDataSetChanged();
             }
         });
 
-        final EditText comment = (EditText) convertView.findViewById(R.id.txtComment);
+        final EditText comment = (EditText) view.findViewById(R.id.txtComment);
         comment.setText(cart.get(position).getComment());
         if(comment!=null) {
             comment.addTextChangedListener(new TextWatcher() {
@@ -198,7 +188,7 @@ public class OrderAdapter extends BaseAdapter {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     cart.clear();
-                                    total.setText("0đ");
+                                    total.setText("0 "+ view.getResources().getString(R.string.USD));
                                     notifyDataSetChanged();
                                 }
                             })
@@ -227,19 +217,17 @@ public class OrderAdapter extends BaseAdapter {
                                         @Override
                                         protected String doInBackground(String... params) {
                                             CommonService commonService = new CommonService();
-                                            //ContentValues values = new ContentValues();
+
                                             List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
                                             ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
-//                                            values.put("list", params[2]);
-//                                            values.put("deliveryTime", Double.parseDouble(params[1]));
-//                                            values.put("roomid", Integer.parseInt(params[3]));
+
                                             return commonService.sendData(params[0], toServer)+"";
                                         }
 
                                         protected void onPostExecute(String response) {
                                             if(response.equals("200")){
                                                 cart.clear();
-                                                total.setText("0đ");
+                                                total.setText("0 "+ view.getResources().getString(R.string.USD));
                                                 notifyDataSetChanged();
 
                                                 Toast toast = Toast.makeText(ctx, R.string.confirm_order_accepted, Toast.LENGTH_SHORT);
@@ -261,12 +249,20 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
 
-        return convertView;
+        return view;
     }
 
     private String getDataFromSharedPreferences(){
         SharedPreferences sharedPref = ctx.getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
         return jsonPreferences;
+    }
+
+    private float getTotal(List<CartItem> cart){
+        float total = 0;
+        for (int i = 0; i < cart.size(); i++){
+            total += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+        }
+        return total;
     }
 }

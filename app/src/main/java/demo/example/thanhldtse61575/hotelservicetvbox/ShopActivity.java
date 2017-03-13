@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -79,7 +80,6 @@ public class ShopActivity extends AppCompatActivity {
     private static RelativeLayout relativeLayout;
     private static PopupWindow popup;
     private static LayoutInflater layoutInflater;
-    private static int quantity = 0;
     TextView roomid;
 
     private ViewPager mViewPager;
@@ -320,11 +320,16 @@ public class ShopActivity extends AppCompatActivity {
                     popup = new PopupWindow(container, 600, 600, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
+                    Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
+                    Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
                     Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
                     ImageView icon = (ImageView) container.findViewById(R.id.imageViewDetail);
                     TextView item = (TextView) container.findViewById(R.id.txtServiceName);
                     TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);
                     TextView description = (TextView) container.findViewById(R.id.txtDescription);
+                    final EditText quantty = (EditText) container.findViewById(R.id.txtQuantity);
+                    quantty.setText("1");
+                    final int[] qty = {0};
 
                     String url = serviceCagList.get(position).getImage();
                     Picasso.with(getActivity())
@@ -335,6 +340,27 @@ public class ShopActivity extends AppCompatActivity {
                     item.setText(serviceCagList.get(position).getServiceName());
                     price.setText(serviceCagList.get(position).getUnitPrice() + "");
                     description.setText(serviceCagList.get(position).getDescription());
+
+                    btnMinus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int n = Integer.parseInt(quantty.getText().toString());
+                            if (n > 1) {
+                                qty[0] -= 1;
+                                quantty.setText(qty[0]+"");
+                            }
+                        }
+                    });
+                    btnPlus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int n = Integer.parseInt(quantty.getText().toString());
+                            if (n < 100) {
+                                qty[0] +=1;
+                                quantty.setText(qty[0]+"");
+                            }
+                        }
+                    });
 
                     btnOrder.setOnTouchListener(new View.OnTouchListener() {
                         @Override
@@ -347,34 +373,30 @@ public class ShopActivity extends AppCompatActivity {
                                     break;
                                 }
                                 case MotionEvent.ACTION_UP:
-                                    if(cart.size()==0) {
-                                        quantity = 0;
-                                        setActionIcon(false);
-                                    }
-                                    quantity = quantity + 1;
-                                    Toast toast = Toast.makeText(getActivity(), quantity+"", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                     vToast.setTextColor(Color.CYAN);
                                     vToast.setTextSize(30);
                                     toast.show();
-                                    setActionIcon(true);
 
                                     Service sv = serviceCagList.get(position);
                                     if (cart.size() == 0) {
                                         cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                Integer.parseInt(quantty.getText().toString()), ""));
                                     }
                                     else {
                                         boolean isHave = false;
                                         for (CartItem od : cart) {
                                             if (od.getServiceID() == sv.getServiceID()) {
                                                 isHave = true;
-                                                od.setQuantity(od.getQuantity() + 1);
+                                                od.setQuantity(od.getQuantity() + Integer.parseInt(quantty.getText().toString()));
                                             }
                                         }
                                         if (!isHave) {
                                             cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(), 1, ""));
+                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                    Integer.parseInt(quantty.getText().toString()), ""));
                                         }
                                     }
 
