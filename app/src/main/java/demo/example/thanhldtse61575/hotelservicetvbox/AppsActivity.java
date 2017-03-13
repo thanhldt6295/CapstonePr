@@ -107,8 +107,11 @@ public class AppsActivity extends AppCompatActivity {
                     OpenApps("com.google.android.gm");
                 }
                 if(position==7){
-                    OpenApps("devmbf.tivionline170");
+                    OpenApps("com.media.its.mytvnet");
                 }
+//                if(position==8){
+//                    OpenApps("vn.vnptmedia.hcmsoft.mytv");
+//                }
             }
         });
 
