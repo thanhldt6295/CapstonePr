@@ -68,7 +68,7 @@ public class ImageAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
-            holder.ratiobtn = (RadioButton) convertView.findViewById(R.id.radiobtn);
+            //holder.ratiobtn = (RadioButton) convertView.findViewById(R.id.radiobtn);
 
             convertView.setTag(holder);
         }
@@ -88,25 +88,25 @@ public class ImageAdapter extends BaseAdapter {
             }
         });
 
-        holder.ratiobtn.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                if ((position != mSelectedPosition && mSelectedRB != null)) {
-                    mSelectedRB.setChecked(false);
-                }
-
-                mSelectedPosition = position;
-                mSelectedRB = (RadioButton) v;
-            }
-        });
-        if (mSelectedPosition != position) {
-            holder.ratiobtn.setChecked(false);
-        } else {
-            holder.ratiobtn.setChecked(true);
-            if (mSelectedRB != null && holder.ratiobtn != mSelectedRB) {
-                mSelectedRB = holder.ratiobtn;
-            }
-        }
+//        holder.ratiobtn.setOnClickListener(new OnClickListener() {
+//
+//            public void onClick(View v) {
+//                if ((position != mSelectedPosition && mSelectedRB != null)) {
+//                    mSelectedRB.setChecked(false);
+//                }
+//
+//                mSelectedPosition = position;
+//                mSelectedRB = (RadioButton) v;
+//            }
+//        });
+//        if (mSelectedPosition != position) {
+//            holder.ratiobtn.setChecked(false);
+//        } else {
+//            holder.ratiobtn.setChecked(true);
+//            if (mSelectedRB != null && holder.ratiobtn != mSelectedRB) {
+//                mSelectedRB = holder.ratiobtn;
+//            }
+//        }
 
         //holder.id = position;
         return convertView;
@@ -114,6 +114,7 @@ public class ImageAdapter extends BaseAdapter {
 
     // References to our images in res > drawable
     public Integer[] mThumbIds = { R.drawable.ocean1, R.drawable.ocean2, R.drawable.mountain1, R.drawable.mountain2, R.drawable.mountain3 };
+    //public List<Image> thumbIds = new ArrayList<>();
     private void zoomImageFromThumb(final View thumbView, int imageResId) {
         // If there's an animation in progress, cancel it immediately and
         // proceed with this one.

@@ -13,6 +13,7 @@
     <string name="yes">Yes</string>
     <string name="USD">USD</string>
     <string name="added">Added to cart</string>
+    <string name="attach">ATTACH</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>

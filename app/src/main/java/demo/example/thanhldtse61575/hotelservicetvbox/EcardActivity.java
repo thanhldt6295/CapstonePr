@@ -7,25 +7,53 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Image;
 
 public class EcardActivity extends AppCompatActivity {
 
+    private RelativeLayout relativeLayout;
+    private PopupWindow popup;
+    private LayoutInflater layoutInflater;
+    private List<Image> list = new ArrayList<>();
+    private String imageLink;
     EditText sender;
     EditText revMail;
     EditText subject;
@@ -45,13 +73,54 @@ public class EcardActivity extends AppCompatActivity {
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
+        list.add(new Image("https://images.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg"));
+        list.add(new Image("https://images.pexels.com/photos/28221/pexels-photo-28221.jpg"));
+        list.add(new Image("https://images.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg"));
+        list.add(new Image("https://images.pexels.com/photos/28221/pexels-photo-28221.jpg"));
+        list.add(new Image("https://images.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg"));
+        list.add(new Image("https://images.pexels.com/photos/28221/pexels-photo-28221.jpg"));
+
         sender = (EditText) findViewById(R.id.txtYourName);
         revMail = (EditText) findViewById(R.id.txtMailRecv);
         subject = (EditText) findViewById(R.id.txtSubject);
         message = (EditText) findViewById(R.id.txtMessage);
         btnSend = (Button) findViewById(R.id.btnSend);
         gridView = (GridView) findViewById(R.id.gridViewCard);
-        gridView.setAdapter(new ImageAdapter(this));
+        relativeLayout = (RelativeLayout) findViewById(R.id.activity_ecard);
+        EcardAdapter adapter = new EcardAdapter(this, list);
+        gridView.setAdapter(adapter);
+        //gridView.setAdapter(new ImageAdapter(this));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_ecarditem, null);
+                popup = new PopupWindow(container, 800, 800, true);
+                popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+                ImageView imageView = (ImageView) container.findViewById(R.id.thumbImage);
+                Button btnChoose = (Button) container.findViewById(R.id.btnChoose);
+                final String url = list.get(position).getImage();
+                Picasso.with(EcardActivity.this)
+                        .load(url)
+                        .placeholder(R.drawable.loading)
+                        .fit()
+                        .centerCrop().into(imageView);
+                btnChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        imageLink = url;
+                    }
+                });
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popup.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
 
         btnSend.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -64,18 +133,8 @@ public class EcardActivity extends AppCompatActivity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
-                        if(isEmailValid(revMail.getText().toString())|message.getText().equals("")) {
-                            Intent i = new Intent(Intent.ACTION_SEND);
-                            i.setType("application/image");
-                            i.putExtra(Intent.EXTRA_EMAIL, new String[]{revMail.getText().toString()});
-                            i.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
-                            i.putExtra(Intent.EXTRA_TEXT, message.getText() + "\n\nLove,\n" + sender.getText().toString());
-                            i.putExtra(Intent.EXTRA_STREAM, Uri.parse("CapstonePrj://demo.example.thanhldtse61575.hotelservicetvbox/drawable/demo"));
-                            try {
-                                startActivity(Intent.createChooser(i, "Send mail..."));
-                            } catch (android.content.ActivityNotFoundException ex) {
-                                Toast.makeText(EcardActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                            }
+                        if((isEmailValid(revMail.getText().toString()))&&(!message.getText().equals(""))&&(imageLink.equals(""))) {
+                            new Download().execute(imageLink,"hello.jpg");
                         } else {
                             Toast toast = Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT);
                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -152,5 +211,82 @@ public class EcardActivity extends AppCompatActivity {
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email)
                 .matches();
+    }
+
+    class Download extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int count;
+            try {
+                URL url = new URL(params[0]);
+                URLConnection connection = url.openConnection();
+                connection.connect();
+
+                // this will be useful so that you can show a tipical 0-100%
+                // progress bar
+                int lenghtOfFile = connection.getContentLength();
+
+                // download the file
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+                File sdDir = Environment.getExternalStorageDirectory();
+
+                // Output stream
+                OutputStream output = new FileOutputStream(sdDir + File.separator +params[1]);
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    // After this onProgressUpdate will be called
+                    //publishProgress(((total * 100) / lenghtOfFile)+"");
+
+                    // writing data to file
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+            return params[1];
+        }
+        protected void onPostExecute(String feed) {
+            //new SendEmail().execute(reciver mail, subject, body,feed);
+            new SendEmail().execute(revMail.getText().toString(),subject.getText().toString(),message.getText() + "\n\nLove,\n" + sender.getText().toString(),feed);
+        }
+    }
+
+    class SendEmail extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Mail m = new Mail("einton.potter@gmail.com", "alitaliokoeinton");
+
+            String[] toArr = {params[0]};
+            m.set_to(toArr);
+            m.set_from("einton.potter@gmail.com");
+            m.set_subject(params[1]);
+            m.set_body(params[2]);
+
+            try {
+                File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), File.separator + params[3]);
+                m.addAttachment(filelocation.getAbsolutePath());
+                return m.send()+"";
+            } catch(Exception e) {
+                Log.e("MailApp", "Could not send email", e);
+            }
+            return null;
+        }
     }
 }

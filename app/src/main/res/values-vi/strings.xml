@@ -93,8 +93,9 @@
     <string name="countryside">LÀNG QUÊ</string>
     <string name="mountain">LEO NÚI</string>
     <string name="ocean">ĐI BIỂN</string>
-    <string name="USD">đ</string>
+    <string name="USD">đồng</string>
     <string name="added">Đã thêm vào giỏ</string>
+    <string name="attach">ĐÍNH KÈM</string>
 
 
 </resources>
