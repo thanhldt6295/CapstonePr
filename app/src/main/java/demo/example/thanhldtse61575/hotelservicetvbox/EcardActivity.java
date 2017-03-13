@@ -53,7 +53,7 @@ public class EcardActivity extends AppCompatActivity {
     private PopupWindow popup;
     private LayoutInflater layoutInflater;
     private List<Image> list = new ArrayList<>();
-    private String imageLink;
+    private String imageLink = "";
     EditText sender;
     EditText revMail;
     EditText subject;
@@ -95,7 +95,7 @@ public class EcardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_ecarditem, null);
-                popup = new PopupWindow(container, 800, 800, true);
+                popup = new PopupWindow(container, 1280, 780, true);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
                 ImageView imageView = (ImageView) container.findViewById(R.id.thumbImage);
@@ -104,8 +104,7 @@ public class EcardActivity extends AppCompatActivity {
                 Picasso.with(EcardActivity.this)
                         .load(url)
                         .placeholder(R.drawable.loading)
-                        .fit()
-                        .centerCrop().into(imageView);
+                        .into(imageView);
                 btnChoose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -115,6 +114,7 @@ public class EcardActivity extends AppCompatActivity {
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        imageLink = url;
                         popup.dismiss();
                         return true;
                     }
@@ -133,8 +133,13 @@ public class EcardActivity extends AppCompatActivity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
-                        if((isEmailValid(revMail.getText().toString()))&&(!message.getText().equals(""))&&(imageLink.equals(""))) {
+                        if((isEmailValid(revMail.getText().toString()))&&(!message.getText().equals(""))&&(!imageLink.equals(""))) {
                             new Download().execute(imageLink,"hello.jpg");
+                            Toast toast = Toast.makeText(EcardActivity.this, R.string.sent, Toast.LENGTH_SHORT);
+                            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                            vToast.setTextColor(Color.RED);
+                            vToast.setTextSize(30);
+                            toast.show();
                         } else {
                             Toast toast = Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT);
                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
