@@ -26,17 +26,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.App;
+
 public class AppsActivity extends AppCompatActivity {
 
     GridView gridView;
-    String items[] = {"Youtube", "Facebook", "Calculator", "Mp3 Zing", "Google Maps", "Settings", "Gmail", "TV"};
-    int icons[] = {R.drawable.icon_utube, R.drawable.icon_fb, R.drawable.icon_calculator, R.drawable.icon_mp3,
-            R.drawable.icon_ggmaps, R.drawable.icon_setting, R.drawable.icon_gmail, R.drawable.icon_tivi};
     TextView roomid;
+    List<App> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,15 @@ public class AppsActivity extends AppCompatActivity {
         abTitle.setText(getResources().getString(R.string.application));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+
+        list.add(new App("Youtube","","com.google.android.youtube",R.drawable.icon_utube));
+        list.add(new App("Facebook","","com.facebook.katana",R.drawable.icon_fb));
+        list.add(new App("Calculator","","com.android2.calculator3",R.drawable.icon_calculator));
+        list.add(new App("Mp3 Zing","","com.zing.mp3",R.drawable.icon_mp3));
+        list.add(new App("Google Maps","","com.google.android.apps.maps",R.drawable.icon_ggmaps));
+        list.add(new App("Settings","","",R.drawable.icon_setting));
+        list.add(new App("Gmail","","com.google.android.gm",R.drawable.icon_gmail));
+        list.add(new App("TV","","com.media.its.mytvnet",R.drawable.icon_tivi));
 
 //        String networkSSID = "test";
 //        String networkPass = "pass";
@@ -79,39 +89,16 @@ public class AppsActivity extends AppCompatActivity {
 //        }
 
         gridView = (GridView) findViewById(R.id.gridViewApps);
-        AppsAdapter adapter = new AppsAdapter(this, icons, items);
+        AppsAdapter adapter = new AppsAdapter(this, list);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(position==0){
-                    OpenApps("com.google.android.youtube");
-                }
-                if(position==1){
-                    OpenApps("com.facebook.katana");
-                }
-                if(position==2){
-                    OpenApps("com.android2.calculator3");
-                }
-                if(position==3){
-                    OpenApps("com.zing.mp3");
-                }
-                if(position==4){
-                    OpenApps("com.google.android.apps.maps");
-                }
-                if(position==5){
+                if(list.get(position).getName().equals("Settings")){
                     startActivityForResult(new Intent(Settings.ACTION_SETTINGS),0);
+                } else{
+                    OpenApps(list.get(position).getAppid());
                 }
-                if(position==6){
-                    OpenApps("com.google.android.gm");
-                }
-                if(position==7){
-                    OpenApps("com.media.its.mytvnet");
-                }
-//                if(position==8){
-//                    OpenApps("vn.vnptmedia.hcmsoft.mytv");
-//                }
             }
         });
 
