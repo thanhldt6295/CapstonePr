@@ -94,6 +94,7 @@ public class EcardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_ecarditem, null);
+                popup = new PopupWindow(container, 1280, 800, true);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
                 ImageView imageView = (ImageView) container.findViewById(R.id.thumbImage);
