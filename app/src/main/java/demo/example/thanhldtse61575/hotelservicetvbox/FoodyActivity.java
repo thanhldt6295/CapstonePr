@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -54,6 +56,7 @@ import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.BagdeDrawable;
 
 public class FoodyActivity extends AppCompatActivity {
 
@@ -153,8 +156,17 @@ public class FoodyActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_cart, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem itemCart = menu.findItem(R.id.action_cart);
+        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
+        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+        String cartQuantity = sp.getString("cartQuantity", "");
+        setBadgeCount(this, icon, cartQuantity);
         return true;
     }
 
@@ -164,7 +176,7 @@ public class FoodyActivity extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.cart:
+            case R.id.action_cart:
                 Intent intent = new Intent(this, OrderActivity.class);
                 intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
@@ -191,6 +203,8 @@ public class FoodyActivity extends AppCompatActivity {
 
         }
 
+        invalidateOptionsMenu();
+
         super.onResume();
     }
 
@@ -210,6 +224,7 @@ public class FoodyActivity extends AppCompatActivity {
                     cart.clear();
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
+                    editor.putString("cartQuantity", "0");
                     editor.commit();
                     FoodyActivity.super.onBackPressed();
                 }
@@ -443,6 +458,23 @@ public class FoodyActivity extends AppCompatActivity {
                 return rootView;
             }
         }
+    }
+
+    public static void setBadgeCount(Context context, LayerDrawable icon, String count) {
+
+        BagdeDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BagdeDrawable) {
+            badge = (BagdeDrawable) reuse;
+        } else {
+            badge = new BagdeDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
     /**

@@ -2,9 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Item"
-        android:id="@+id/cart"
-        android:icon="@drawable/ic_cart"
-        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_cart_button"
+        app:showAsAction="always"
+        android:title="CART" />
 
 </menu>

@@ -166,7 +166,7 @@ public class ShopActivity extends AppCompatActivity {
 
     private static void setActionIcon(boolean showWithBadge)
     {
-        MenuItem item = mMenu.findItem(R.id.cart);
+        MenuItem item = mMenu.findItem(R.id.action_cart);
 
         if(mMenu != null)
         {
@@ -192,7 +192,7 @@ public class ShopActivity extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.cart:
+            case R.id.action_cart:
                 Intent intent = new Intent(this, OrderActivity.class);
                 intent.putExtra("storeItem", (Serializable) cart);
                 startActivity(intent);
