@@ -16,6 +16,7 @@
     <string name="attach">ATTACH</string>
     <string name="sent">SENT</string>
     <string name="cancelled">CANCELLED</string>
+    <string name="attached">Attached Image</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>

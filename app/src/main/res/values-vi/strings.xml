@@ -99,6 +99,7 @@
     <string name="sent">ĐÃ GỬI</string>
     <string name="cancelled">ĐÃ HỦY</string>
     <string name="error"></string>
+    <string name="attached">Đã kèm ảnh</string>
 
 
 </resources>

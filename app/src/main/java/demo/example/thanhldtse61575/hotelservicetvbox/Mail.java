@@ -21,7 +21,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 /**
- * Created by ThanhLDTSE61575 on 3/13/2017.
+ * Created by ASUS on 3/11/2017.
  */
 
 public class Mail extends javax.mail.Authenticator {
@@ -32,7 +32,7 @@ public class Mail extends javax.mail.Authenticator {
     private String[] _to;
     private String _from;
 
-    private int _port;
+    private String _port;
     private String _sport;
 
     private String _host;
@@ -55,7 +55,7 @@ public class Mail extends javax.mail.Authenticator {
         _body = ""; // email body
 
         _host = "smtp.gmail.com";
-        _port = 465;
+        _port = "465";
 
 
         _multipart = new MimeMultipart();
@@ -113,7 +113,7 @@ public class Mail extends javax.mail.Authenticator {
 
             // send email
             Transport transport = session.getTransport("smtps");
-            transport.connect(_host, _port, _user, _pass);
+            transport.connect(_host, Integer.parseInt(_port), _user, _pass);
             transport.send(msg);
             transport.close();
 
@@ -129,7 +129,7 @@ public class Mail extends javax.mail.Authenticator {
         BodyPart messageBodyPart = new MimeBodyPart();
         DataSource source = new FileDataSource(path.getPath());
 
-        messageBodyPart.setFileName("gif");
+        messageBodyPart.setFileName("newmain");
         messageBodyPart.setDisposition(MimeBodyPart.ATTACHMENT);
         messageBodyPart.setHeader("Content-ID","<vogue>");
         messageBodyPart.setDataHandler(new DataHandler(source));
@@ -139,15 +139,16 @@ public class Mail extends javax.mail.Authenticator {
     private Properties _setProperties() {
         Properties props = new Properties();
 
-        props.put("mail.smtp.user", _user);
         props.put("mail.smtp.host", _host);
-        props.put("mail.smtp.port", _port);
-        props.put("mail.smtp.socketFactory.port", _port);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.debug", "true");
-        props.put("mail.smtp.starttls.enable","true");
-        props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", _port);
+
+        props.put("mail.smtp.user", _user);
+        props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.debug", "true");
+        props.put("mail.smtp.socketFactory.port", _port);
+        props.put("mail.smtp.socketFactory.fallback", "false");
 
         return props;
     }
@@ -186,11 +187,11 @@ public class Mail extends javax.mail.Authenticator {
         this._from = _from;
     }
 
-    public int get_port() {
+    public String get_port() {
         return _port;
     }
 
-    public void set_port(int _port) {
+    public void set_port(String _port) {
         this._port = _port;
     }
 
@@ -251,5 +252,6 @@ public class Mail extends javax.mail.Authenticator {
     }
 
     // more of the getters and setters …..
-}
 
+
+}

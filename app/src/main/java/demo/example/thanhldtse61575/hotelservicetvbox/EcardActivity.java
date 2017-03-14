@@ -114,6 +114,7 @@ public class EcardActivity extends AppCompatActivity {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         imageLink = url;
+                        Toast.makeText(EcardActivity.this, R.string.attached, Toast.LENGTH_SHORT).show();
                         popup.dismiss();
                         return true;
                     }
@@ -134,17 +135,6 @@ public class EcardActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                         if((isEmailValid(revMail.getText().toString()))&&(!message.getText().equals(""))&&(!imageLink.equals(""))) {
                             new Download().execute(imageLink,"haha.jpg");
-                            Toast toast = Toast.makeText(EcardActivity.this, R.string.sent, Toast.LENGTH_SHORT);
-                            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                            vToast.setTextColor(Color.WHITE);
-                            vToast.setTextSize(30);
-                            vToast.setTypeface(null,Typeface.BOLD);
-                            toast.show();
-                            sender.setText("");
-                            revMail.setText("");
-                            subject.setText("");
-                            message.setText("");
-                            imageLink = "";
                         } else {
                             Toast toast = Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT);
                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -273,7 +263,8 @@ public class EcardActivity extends AppCompatActivity {
         }
         protected void onPostExecute(String feed) {
             //new SendEmail().execute(reciver mail, subject, body,feed);
-            new SendEmail().execute(revMail.getText().toString(),subject.getText().toString(),message.getText() + "\n\nLove,\n" + sender.getText().toString(),feed);
+            String mail = revMail.getText().toString();
+            new SendEmail().execute(revMail.getText().toString(), subject.getText().toString(), message.getText() + "\n\nLove, \n" + sender.getText().toString(),feed);
         }
     }
 
@@ -297,6 +288,19 @@ public class EcardActivity extends AppCompatActivity {
                 Log.e("MailApp", "Could not send email", e);
             }
             return null;
+        }
+
+        protected void onPostExecute(String feed) {
+            Toast toast = Toast.makeText(EcardActivity.this, R.string.sent, Toast.LENGTH_SHORT);
+            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+            vToast.setTextColor(Color.WHITE);
+            vToast.setTextSize(30);
+            vToast.setTypeface(null,Typeface.BOLD);
+            toast.show();
+            revMail.setText("");
+            subject.setText("");
+            message.setText("");
+            imageLink = "";
         }
     }
 }
