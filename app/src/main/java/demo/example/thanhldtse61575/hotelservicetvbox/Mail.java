@@ -32,7 +32,7 @@ public class Mail extends javax.mail.Authenticator {
     private String[] _to;
     private String _from;
 
-    private String _port;
+    private int _port;
     private String _sport;
 
     private String _host;
@@ -53,6 +53,9 @@ public class Mail extends javax.mail.Authenticator {
         _from = ""; // email sent from
         _subject = ""; // email subject
         _body = ""; // email body
+
+        _host = "smtp.gmail.com";
+        _port = 465;
 
 
         _multipart = new MimeMultipart();
@@ -82,7 +85,7 @@ public class Mail extends javax.mail.Authenticator {
             Session session = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication("einton.potter@gmail.com","alitaliokoeinton");
+                            return new PasswordAuthentication(_user,_pass);
                         }
                     });
 
@@ -109,7 +112,10 @@ public class Mail extends javax.mail.Authenticator {
             msg.setContent(_multipart);
 
             // send email
-            Transport.send(msg);
+            Transport transport = session.getTransport("smtps");
+            transport.connect(_host, _port, _user, _pass);
+            transport.send(msg);
+            transport.close();
 
             return true;
         } else {
@@ -117,13 +123,13 @@ public class Mail extends javax.mail.Authenticator {
         }
     }
 
-    public void addAttachment(String filename) throws Exception {
+    public void addAttachment(String link) throws Exception {
 
-        Uri path = Uri.parse(filename);
+        Uri path = Uri.parse(link);
         BodyPart messageBodyPart = new MimeBodyPart();
         DataSource source = new FileDataSource(path.getPath());
 
-        messageBodyPart.setFileName("hello");
+        messageBodyPart.setFileName("gif");
         messageBodyPart.setDisposition(MimeBodyPart.ATTACHMENT);
         messageBodyPart.setHeader("Content-ID","<vogue>");
         messageBodyPart.setDataHandler(new DataHandler(source));
@@ -133,11 +139,15 @@ public class Mail extends javax.mail.Authenticator {
     private Properties _setProperties() {
         Properties props = new Properties();
 
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.user", _user);
+        props.put("mail.smtp.host", _host);
+        props.put("mail.smtp.port", _port);
+        props.put("mail.smtp.socketFactory.port", _port);
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.debug", "true");
+        props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
         return props;
     }
@@ -176,11 +186,11 @@ public class Mail extends javax.mail.Authenticator {
         this._from = _from;
     }
 
-    public String get_port() {
+    public int get_port() {
         return _port;
     }
 
-    public void set_port(String _port) {
+    public void set_port(int _port) {
         this._port = _port;
     }
 
@@ -241,6 +251,5 @@ public class Mail extends javax.mail.Authenticator {
     }
 
     // more of the getters and setters …..
-
-
 }
+

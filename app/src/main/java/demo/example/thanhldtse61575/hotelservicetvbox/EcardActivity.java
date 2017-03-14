@@ -2,11 +2,10 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.ActionBar;
@@ -95,7 +94,6 @@ public class EcardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_ecarditem, null);
-                popup = new PopupWindow(container, 1280, 780, true);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
                 ImageView imageView = (ImageView) container.findViewById(R.id.thumbImage);
@@ -134,12 +132,18 @@ public class EcardActivity extends AppCompatActivity {
                     }
                     case MotionEvent.ACTION_UP:
                         if((isEmailValid(revMail.getText().toString()))&&(!message.getText().equals(""))&&(!imageLink.equals(""))) {
-                            new Download().execute(imageLink,"hello.jpg");
+                            new Download().execute(imageLink,"haha.jpg");
                             Toast toast = Toast.makeText(EcardActivity.this, R.string.sent, Toast.LENGTH_SHORT);
                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                            vToast.setTextColor(Color.RED);
+                            vToast.setTextColor(Color.WHITE);
                             vToast.setTextSize(30);
+                            vToast.setTypeface(null,Typeface.BOLD);
                             toast.show();
+                            sender.setText("");
+                            revMail.setText("");
+                            subject.setText("");
+                            message.setText("");
+                            imageLink = "";
                         } else {
                             Toast toast = Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT);
                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -276,11 +280,11 @@ public class EcardActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            Mail m = new Mail("einton.potter@gmail.com", "alitaliokoeinton");
+            Mail m = new Mail("hotelservicetvbox@gmail.com", "capstoneproject");
 
             String[] toArr = {params[0]};
             m.set_to(toArr);
-            m.set_from("einton.potter@gmail.com");
+            m.set_from("hotelservicetvbox@gmail.com");
             m.set_subject(params[1]);
             m.set_body(params[2]);
 

@@ -70,13 +70,13 @@
     <string name="recommend">GỢI Ý</string>
     <string name="golf">GÔN</string>
     <string name="gym">TẬP THỂ HÌNH</string>
-    <string name="message">TIN NHẮN</string>
+    <string name="message">TIN NHẮN: </string>
     <string name="pool">HỒ BƠI</string>
-    <string name="receiver">NGƯỜI NHẬN</string>
+    <string name="receiver">NGƯỜI NHẬN: </string>
     <string name="send">GỬI</string>
     <string name="spa">CHĂM SÓC SẮC ĐẸP</string>
-    <string name="subject">TIÊU ĐỀ</string>
-    <string name="yourname">TÊN CỦA BẠN</string>
+    <string name="subject">TIÊU ĐỀ: </string>
+    <string name="yourname">TÊN CỦA BẠN: </string>
     <string name="notitynull">Không có dịch vụ..</string>
     <string name="notifyqty">Xin quý khách vui lòng chọn số lượng 1 sản phẩm..</string>
     <string name="tennis">QUẦN VỢT</string>
@@ -88,7 +88,7 @@
     <string name="action_settings">Cài đặt</string>
     <string name="comment_hint">Xin quý khách vui lòng mô tả chi tiết..</string>
     <string name="request_ticket">YÊU CẦU</string>
-    <string name="other_drinks">Nước giải khát</string>
+    <string name="other_drinks">NƯỚC GIẢI KHÁT</string>
     <string name="all">TẤT CẢ</string>
     <string name="countryside">LÀNG QUÊ</string>
     <string name="mountain">LEO NÚI</string>
@@ -97,6 +97,8 @@
     <string name="added">Đã thêm vào giỏ</string>
     <string name="attach">ĐÍNH KÈM</string>
     <string name="sent">ĐÃ GỬI</string>
+    <string name="cancelled">ĐÃ HỦY</string>
+    <string name="error"></string>
 
 
 </resources>

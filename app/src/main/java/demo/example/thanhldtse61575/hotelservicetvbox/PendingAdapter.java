@@ -3,6 +3,8 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -82,7 +85,7 @@ public class PendingAdapter extends BaseAdapter{
 
         name.setText(cart.get(position).getServiceName());
         DecimalFormat format = new DecimalFormat("###,###.#");
-        unitPrice.setText(format.format(cart.get(position).getUnitPrice()) + "đ");
+        unitPrice.setText(format.format(cart.get(position).getUnitPrice()) +" "+ ctx.getResources().getString(R.string.USD));
         quantity.setText(cart.get(position).getQuantity()+"");
 
         SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -118,9 +121,15 @@ public class PendingAdapter extends BaseAdapter{
                                 new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/DeletePending/" + str);
                                 cart.remove(position);
                                 if(cart.size() == 0){
-                                    total.setText("0đ");
+                                    total.setText("0 " + ctx.getResources().getString(R.string.USD));
                                 }
                                 notifyDataSetChanged();
+                                Toast toast = Toast.makeText(ctx, R.string.cancelled, Toast.LENGTH_SHORT);
+                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                vToast.setTextColor(Color.WHITE);
+                                vToast.setTextSize(20);
+                                vToast.setTypeface(null, Typeface.BOLD);
+                                toast.show();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
             }
@@ -130,7 +139,7 @@ public class PendingAdapter extends BaseAdapter{
         for (int i = 0; i < cart.size(); i++){
             t += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
         }
-        total.setText(format.format(t) + "đ");
+        total.setText(format.format(t) +" "+ ctx.getResources().getString(R.string.USD));
 
         return convertView;
     }

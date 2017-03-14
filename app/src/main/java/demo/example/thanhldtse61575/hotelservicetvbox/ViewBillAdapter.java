@@ -62,15 +62,15 @@ public class ViewBillAdapter extends BaseAdapter {
         serviceName.setText(getItem(position).getServiceName());
         category.setText(getItem(position).getCategoryName());
         DecimalFormat format = new DecimalFormat("###,###.#");
-        unitPrice.setText(format.format(getItem(position).getUnitPrice()) + "đ");
+        unitPrice.setText(format.format(getItem(position).getUnitPrice()) +" "+ c.getResources().getString(R.string.USD));
         quantity.setText(getItem(position).getQuantity() + "");
-        itemTotal.setText(format.format(getItem(position).getUnitPrice() * getItem(position).getQuantity()) + "đ");
+        itemTotal.setText(format.format(getItem(position).getUnitPrice() * getItem(position).getQuantity()) +" "+ c.getResources().getString(R.string.USD));
 
         float t = 0;
         for (int i = 0; i < details.size(); i++){
             t += details.get(i).getQuantity() *details.get(i).getUnitPrice();
         }
-        total.setText(format.format(t) + "đ");
+        total.setText(format.format(t) +" "+ c.getResources().getString(R.string.USD));
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

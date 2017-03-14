@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -346,12 +347,6 @@ public class FoodyActivity extends AppCompatActivity {
                                     break;
                                 }
                                 case MotionEvent.ACTION_UP:
-                                    Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
-                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                    vToast.setTextColor(Color.CYAN);
-                                    vToast.setTextSize(30);
-                                    toast.show();
-
                                     Service sv = serviceCagList.get(position);
                                     if (cart.size() == 0) {
                                         cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
@@ -372,6 +367,12 @@ public class FoodyActivity extends AppCompatActivity {
                                                     Integer.parseInt(quantty.getText().toString()), ""));
                                         }
                                     }
+                                    Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
+                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                    vToast.setTextColor(Color.CYAN);
+                                    vToast.setTextSize(30);
+                                    vToast.setTypeface(null, Typeface.BOLD);
+                                    toast.show();
 
                                 case MotionEvent.ACTION_CANCEL: {
                                     Button view = (Button) v;
