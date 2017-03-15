@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -52,6 +54,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.BagdeDrawable;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
@@ -74,7 +77,6 @@ public class ShopActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private static Menu mMenu;
     private static List<Service> serviceList = new ArrayList<>();
     private static List<CartItem> cart = new ArrayList<>();
     private static GridView gridView;
@@ -158,36 +160,22 @@ public class ShopActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_cart, menu);
-        mMenu = menu;
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
-    private static void setActionIcon(boolean showWithBadge)
-    {
-        MenuItem item = mMenu.findItem(R.id.action_cart);
-
-        if(mMenu != null)
-        {
-            if(showWithBadge)
-            {
-                item.setIcon(R.drawable.ic_carted);
-            }
-            else
-            {
-                item.setIcon(R.drawable.ic_cart);
-            }
-        }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem itemCart = menu.findItem(R.id.action_cart);
+        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
+        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
+        String cartQuantity = sp.getString("cartQuantity", "");
+        setBadgeCount(this, icon, cartQuantity);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
@@ -218,6 +206,8 @@ public class ShopActivity extends AppCompatActivity {
             }
         }
 
+        invalidateOptionsMenu();
+
         super.onResume();
     }
 
@@ -237,6 +227,7 @@ public class ShopActivity extends AppCompatActivity {
                     cart.clear();
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
+                    editor.putString("cartQuantity", "0");
                     editor.commit();
                     ShopActivity.super.onBackPressed();
                 }
@@ -324,7 +315,7 @@ public class ShopActivity extends AppCompatActivity {
                     Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
                     Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
                     Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
-                    ImageView icon = (ImageView) container.findViewById(R.id.imageViewDetail);
+                    ImageView imgIcon = (ImageView) container.findViewById(R.id.imageViewDetail);
                     TextView item = (TextView) container.findViewById(R.id.txtServiceName);
                     TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);
                     TextView description = (TextView) container.findViewById(R.id.txtDescription);
@@ -337,7 +328,7 @@ public class ShopActivity extends AppCompatActivity {
                             .load(url)
                             .placeholder(R.drawable.loading)
                             .fit()
-                            .centerCrop().into(icon);
+                            .centerCrop().into(imgIcon);
                     item.setText(serviceCagList.get(position).getServiceName());
                     price.setText(serviceCagList.get(position).getUnitPrice() + "");
                     description.setText(serviceCagList.get(position).getDescription());
@@ -394,6 +385,7 @@ public class ShopActivity extends AppCompatActivity {
                                                     Integer.parseInt(quantty.getText().toString()), ""));
                                         }
                                     }
+                                    getActivity().invalidateOptionsMenu();
                                     Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                     vToast.setTextColor(Color.CYAN);
@@ -469,6 +461,23 @@ public class ShopActivity extends AppCompatActivity {
                 return rootView;
             }
         }
+    }
+
+    public static void setBadgeCount(Context context, LayerDrawable icon, String count) {
+
+        BagdeDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BagdeDrawable) {
+            badge = (BagdeDrawable) reuse;
+        } else {
+            badge = new BagdeDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
     /**

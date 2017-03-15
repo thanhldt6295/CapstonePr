@@ -200,7 +200,6 @@ public class FoodyActivity extends AppCompatActivity {
                 CartItem cartItem = gson.fromJson(entries.get(i).toString(), CartItem.class);
                 cart.add(cartItem);
             }
-
         }
 
         invalidateOptionsMenu();
@@ -312,7 +311,7 @@ public class FoodyActivity extends AppCompatActivity {
                     Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
                     Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
                     Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
-                    ImageView icon = (ImageView) container.findViewById(R.id.imageViewDetail);
+                    ImageView imgIcon = (ImageView) container.findViewById(R.id.imageViewDetail);
                     TextView item = (TextView) container.findViewById(R.id.txtServiceName);
                     TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);
                     TextView description = (TextView) container.findViewById(R.id.txtDescription);
@@ -325,7 +324,7 @@ public class FoodyActivity extends AppCompatActivity {
                             .load(url)
                             .placeholder(R.drawable.loading)
                             .fit()
-                            .centerCrop().into(icon);
+                            .centerCrop().into(imgIcon);
                     item.setText(serviceCagList.get(position).getServiceName());
                     price.setText(serviceCagList.get(position).getUnitPrice() + "");
                     description.setText(serviceCagList.get(position).getDescription());
@@ -382,6 +381,7 @@ public class FoodyActivity extends AppCompatActivity {
                                                     Integer.parseInt(quantty.getText().toString()), ""));
                                         }
                                     }
+                                    getActivity().invalidateOptionsMenu();
                                     Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                     vToast.setTextColor(Color.CYAN);
