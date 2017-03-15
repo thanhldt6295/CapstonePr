@@ -81,7 +81,8 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textStyle="bold|italic"
-            android:textSize="@dimen/text_size_large"/>
+            android:textSize="@dimen/text_size_large"
+            android:maxLength="3"/>
 
         <Button
             android:id="@+id/btnPlus"

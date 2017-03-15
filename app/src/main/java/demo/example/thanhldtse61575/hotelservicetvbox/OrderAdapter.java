@@ -106,6 +106,7 @@ public class OrderAdapter extends BaseAdapter {
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) +" "+ view.getResources().getString(R.string.USD));
 
         final EditText quantity = (EditText) view.findViewById(R.id.txtQuantity);
+        quantity.setEnabled(false);
         quantity.setText(cart.get(position).getQuantity()+"");
 
         float t = getTotal(cart);
