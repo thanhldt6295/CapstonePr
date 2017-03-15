@@ -164,9 +164,7 @@ public class FoodyActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem itemCart = menu.findItem(R.id.action_cart);
         LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
-        SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
-        String cartQuantity = sp.getString("cartQuantity", "");
-        setBadgeCount(this, icon, cartQuantity);
+        setBadgeCount(this, icon, getCartQuantity(cart)+"");
         return true;
     }
 
@@ -223,7 +221,6 @@ public class FoodyActivity extends AppCompatActivity {
                     cart.clear();
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
-                    editor.putString("cartQuantity", "0");
                     editor.commit();
                     FoodyActivity.super.onBackPressed();
                 }
@@ -238,6 +235,14 @@ public class FoodyActivity extends AppCompatActivity {
         if(cart.size()==0) {
             FoodyActivity.super.onBackPressed();
         }
+    }
+
+    private int getCartQuantity(List<CartItem> cart){
+        int q = 0;
+        for (int i = 0; i < cart.size(); i++){
+            q += cart.get(i).getQuantity();
+        }
+        return q;
     }
 
     private String getRoomID(){
@@ -310,7 +315,7 @@ public class FoodyActivity extends AppCompatActivity {
 
                     Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
                     Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
-                    Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
+                    final Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
                     ImageView imgIcon = (ImageView) container.findViewById(R.id.imageViewDetail);
                     TextView item = (TextView) container.findViewById(R.id.txtServiceName);
                     TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);
@@ -363,31 +368,70 @@ public class FoodyActivity extends AppCompatActivity {
                                 case MotionEvent.ACTION_UP:
                                     Service sv = serviceCagList.get(position);
                                     if (cart.size() == 0) {
-                                        cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                Integer.parseInt(quantty.getText().toString()), ""));
+                                        if(Integer.parseInt(quantty.getText().toString())>100){
+                                            btnOrder.setEnabled(false);
+                                            Toast toast = Toast.makeText(getActivity(), R.string.over, Toast.LENGTH_SHORT);
+                                            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                            vToast.setTextColor(Color.RED);
+                                            vToast.setTextSize(20);
+                                            toast.show();
+                                        } else {
+                                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                    Integer.parseInt(quantty.getText().toString()), ""));
+                                            Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
+                                            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                            vToast.setTextColor(Color.CYAN);
+                                            vToast.setTextSize(30);
+                                            vToast.setTypeface(null, Typeface.BOLD);
+                                            toast.show();
+                                        }
                                     }
                                     else {
                                         boolean isHave = false;
                                         for (CartItem od : cart) {
                                             if (od.getServiceID() == sv.getServiceID()) {
                                                 isHave = true;
-                                                od.setQuantity(od.getQuantity() + Integer.parseInt(quantty.getText().toString()));
+                                                if(od.getQuantity() + Integer.parseInt(quantty.getText().toString())>100){
+                                                    btnOrder.setEnabled(false);
+                                                    Toast toast = Toast.makeText(getActivity(), R.string.over, Toast.LENGTH_SHORT);
+                                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                    vToast.setTextColor(Color.RED);
+                                                    vToast.setTextSize(20);
+                                                    toast.show();
+                                                } else {
+                                                    od.setQuantity(od.getQuantity() + Integer.parseInt(quantty.getText().toString()));
+                                                    Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
+                                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                    vToast.setTextColor(Color.CYAN);
+                                                    vToast.setTextSize(30);
+                                                    vToast.setTypeface(null, Typeface.BOLD);
+                                                    toast.show();
+                                                }
                                             }
                                         }
                                         if (!isHave) {
-                                            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                                                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                                                    Integer.parseInt(quantty.getText().toString()), ""));
+                                            if(Integer.parseInt(quantty.getText().toString())>100){
+                                                btnOrder.setEnabled(false);
+                                                Toast toast = Toast.makeText(getActivity(), R.string.over, Toast.LENGTH_SHORT);
+                                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                vToast.setTextColor(Color.RED);
+                                                vToast.setTextSize(20);
+                                                toast.show();
+                                            } else {
+                                                cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                                                        sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
+                                                        Integer.parseInt(quantty.getText().toString()), ""));
+                                                Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
+                                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                                vToast.setTextColor(Color.CYAN);
+                                                vToast.setTextSize(20);
+                                                vToast.setTypeface(null, Typeface.BOLD);
+                                                toast.show();
+                                            }
                                         }
                                     }
                                     getActivity().invalidateOptionsMenu();
-                                    Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
-                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                    vToast.setTextColor(Color.CYAN);
-                                    vToast.setTextSize(30);
-                                    vToast.setTypeface(null, Typeface.BOLD);
-                                    toast.show();
 
                                 case MotionEvent.ACTION_CANCEL: {
                                     Button view = (Button) v;

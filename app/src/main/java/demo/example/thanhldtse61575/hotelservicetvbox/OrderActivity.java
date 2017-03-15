@@ -105,7 +105,6 @@ public class OrderActivity extends AppCompatActivity {
         String cartinfo = gson.toJson(cart);
         final SharedPreferences.Editor editor = sp.edit();
         editor.putString("cartinfo", cartinfo);
-        editor.putString("cartQuantity", String.valueOf(getCartQuantity(cart)));
         editor.commit();
         super.onBackPressed();
     }
@@ -116,14 +115,6 @@ public class OrderActivity extends AppCompatActivity {
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
-    }
-
-    private int getCartQuantity(List<CartItem> cart){
-        int q = 0;
-        for (int i = 0; i < cart.size(); i++){
-            q += cart.get(i).getQuantity();
-        }
-        return q;
     }
 }
 

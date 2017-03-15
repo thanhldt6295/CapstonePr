@@ -17,6 +17,7 @@
     <string name="sent">SENT</string>
     <string name="cancelled">CANCELLED</string>
     <string name="attached">Attached Image</string>
+    <string name="over">Can not order over 100!</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>

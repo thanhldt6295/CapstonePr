@@ -114,7 +114,11 @@ public class EcardActivity extends AppCompatActivity {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         imageLink = url;
-                        Toast.makeText(EcardActivity.this, R.string.attached, Toast.LENGTH_SHORT).show();
+                        Toast toast = Toast.makeText(EcardActivity.this, R.string.attached, Toast.LENGTH_SHORT);
+                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                        vToast.setTextColor(Color.CYAN);
+                        vToast.setTextSize(20);
+                        toast.show();
                         popup.dismiss();
                         return true;
                     }
@@ -294,7 +298,7 @@ public class EcardActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(EcardActivity.this, R.string.sent, Toast.LENGTH_SHORT);
             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
             vToast.setTextColor(Color.WHITE);
-            vToast.setTextSize(30);
+            vToast.setTextSize(20);
             vToast.setTypeface(null,Typeface.BOLD);
             toast.show();
             revMail.setText("");
