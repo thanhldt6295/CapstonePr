@@ -86,7 +86,9 @@
     <string name="message">MESSAGE: </string>
     <string name="receiver">RECEIVER MAIL: </string>
     <string name="subject">SUBJECT: </string>
-    <string name="validate">Invalid Email or Message Null or Not Attach Image!</string>
+    <string name="validateMail">Invalid Email!</string>
+    <string name="validMessage">Please type some message!</string>
+    <string name="validImage">Please attach an image!</string>
 
     <!-- MenuList -->
     <string name="food">FOODS</string>

@@ -23,11 +23,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
@@ -146,6 +145,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 customerWel = (TextView) findViewById(R.id.fullscreen_content);
 
                 customerWel.setText("WELCOME " + acc.toString().toUpperCase().trim());
+
+                setCust2Share(acc);
             }
         }
 
@@ -162,12 +163,48 @@ public class WelcomeActivity extends AppCompatActivity {
                 final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
                 }.getType());
 
-                setList2Share(acc);
+                setServiceList2Share(acc);
+            }
+        }
+
+        class GetPromoFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final List<Promotional> acc = new Gson().fromJson(response, new TypeToken<List<Promotional>>() {
+                }.getType());
+
+                setPromoList2Share(acc);
+            }
+        }
+
+        class GetImageFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final List<String> acc = new Gson().fromJson(response, new TypeToken<List<String>>() {
+                }.getType());
+
+                setImageList2Share(acc);
             }
         }
 
         new GetCustomerFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetCustNameByRoomID/" + roomid);
         new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
+        new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
+        new GetImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetECardLinks");
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -242,6 +279,17 @@ public class WelcomeActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    private static final String SHARE_CUST = "ShareCust";
+    private static final String CUST_TAG = "CustName";
+
+    private void setCust2Share(String custname){
+        SharedPreferences sharedPref = this.getSharedPreferences(SHARE_CUST, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(CUST_TAG, custname);
+        editor.commit();
+    }
+
     private static final String SHARE_ROOM = "ShareRoom";
     private static final String ROOM_ID = "RoomID";
 
@@ -255,18 +303,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private static final String ShSERVICE_TAG = "SharedService";
     private static final String SVLIST_TAG = "ServiceList";
-    private List<Service> getServiceList(){
-        Gson gson = new Gson();
-        List<Service> list = new ArrayList<>();
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShSERVICE_TAG, Context.MODE_PRIVATE);
-        String jsonPreferences = sharedPref.getString(SVLIST_TAG, "");
 
-        Type type = new TypeToken<List<Service>>() {}.getType();
-        list = gson.fromJson(jsonPreferences, type);
-
-        return list;
-    }
-    private void setList2Share(List<Service> list){
+    private void setServiceList2Share(List<Service> list){
         Gson gson = new Gson();
         String jsonCurProduct = gson.toJson(list);
 
@@ -276,6 +314,36 @@ public class WelcomeActivity extends AppCompatActivity {
         editor.putString(SVLIST_TAG, jsonCurProduct);
         editor.commit();
     }
+
+    private static final String ShPROMO_TAG = "SharedPromo";
+    private static final String PRLIST_TAG = "PromoList";
+
+    private void setPromoList2Share(List<Promotional> list){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(list);
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShPROMO_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(PRLIST_TAG, jsonCurProduct);
+        editor.commit();
+    }
+
+    private static final String ShIMAGE_TAG = "SharedImage";
+    private static final String IMGLIST_TAG = "ImageList";
+
+    private void setImageList2Share(List<String> list){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(list);
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShIMAGE_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(IMGLIST_TAG, jsonCurProduct);
+        editor.commit();
+    }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

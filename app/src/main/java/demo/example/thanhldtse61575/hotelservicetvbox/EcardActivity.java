@@ -29,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
@@ -36,6 +38,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
@@ -44,14 +47,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Image;
-
 public class EcardActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
     private PopupWindow popup;
     private LayoutInflater layoutInflater;
-    private List<Image> list = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
     private String imageLink = "";
     EditText sender;
     EditText revMail;
@@ -72,21 +73,17 @@ public class EcardActivity extends AppCompatActivity {
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        list.add(new Image("https://images.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg"));
-        list.add(new Image("https://images.pexels.com/photos/28221/pexels-photo-28221.jpg"));
-        list.add(new Image("https://images.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg"));
-        list.add(new Image("https://images.pexels.com/photos/28221/pexels-photo-28221.jpg"));
-        list.add(new Image("https://images.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg"));
-        list.add(new Image("https://images.pexels.com/photos/28221/pexels-photo-28221.jpg"));
+        list = getImageList();
 
         sender = (EditText) findViewById(R.id.txtYourName);
+        sender.setText(getCustName());
         revMail = (EditText) findViewById(R.id.txtMailRecv);
         subject = (EditText) findViewById(R.id.txtSubject);
         message = (EditText) findViewById(R.id.txtMessage);
         btnSend = (Button) findViewById(R.id.btnSend);
         gridView = (GridView) findViewById(R.id.gridViewCard);
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_ecard);
-        EcardAdapter adapter = new EcardAdapter(this, list);
+        EcardAdapter adapter = new EcardAdapter(EcardActivity.this, list);
         gridView.setAdapter(adapter);
         //gridView.setAdapter(new ImageAdapter(this));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -99,7 +96,7 @@ public class EcardActivity extends AppCompatActivity {
 
                 ImageView imageView = (ImageView) container.findViewById(R.id.thumbImage);
                 Button btnChoose = (Button) container.findViewById(R.id.btnChoose);
-                final String url = list.get(position).getImage();
+                final String url = list.get(position);
                 Picasso.with(EcardActivity.this)
                         .load(url)
                         .placeholder(R.drawable.loading)
@@ -108,17 +105,17 @@ public class EcardActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         imageLink = url;
-                    }
-                });
-                container.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        imageLink = url;
                         Toast toast = Toast.makeText(EcardActivity.this, R.string.attached, Toast.LENGTH_SHORT);
                         TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                         vToast.setTextColor(Color.CYAN);
                         vToast.setTextSize(20);
                         toast.show();
+                        popup.dismiss();
+                    }
+                });
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
                         popup.dismiss();
                         return true;
                     }
@@ -137,14 +134,20 @@ public class EcardActivity extends AppCompatActivity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
-                        if((isEmailValid(revMail.getText().toString()))&&(!message.getText().equals(""))&&(!imageLink.equals(""))) {
-                            new Download().execute(imageLink,"haha.jpg");
-                        } else {
-                            Toast toast = Toast.makeText(EcardActivity.this, R.string.validate, Toast.LENGTH_SHORT);
+                        if(!isEmailValid(revMail.getText().toString())){
+                            Toast toast = Toast.makeText(EcardActivity.this, R.string.validateMail, Toast.LENGTH_SHORT);
                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                             vToast.setTextColor(Color.RED);
                             vToast.setTextSize(30);
                             toast.show();
+                        } else if(imageLink.equals("")){
+                            Toast toast = Toast.makeText(EcardActivity.this, R.string.validImage, Toast.LENGTH_SHORT);
+                            TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                            vToast.setTextColor(Color.RED);
+                            vToast.setTextSize(30);
+                            toast.show();
+                        } else {
+                            new Download().execute(imageLink,"haha.png");
                         }
 
                     case MotionEvent.ACTION_CANCEL: {
@@ -208,6 +211,14 @@ public class EcardActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
+
+        return jsonPreferences;
+    }
+
+    private String getCustName(){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareCust", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("CustName", "");
 
         return jsonPreferences;
     }
@@ -306,5 +317,17 @@ public class EcardActivity extends AppCompatActivity {
             message.setText("");
             imageLink = "";
         }
+    }
+
+    private List<String> getImageList(){
+        Gson gson = new Gson();
+        List<String> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedImage", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("ImageList", "");
+
+        Type type = new TypeToken<List<String>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
     }
 }

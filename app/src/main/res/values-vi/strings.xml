@@ -101,6 +101,9 @@
     <string name="error"></string>
     <string name="attached">Đã kèm ảnh</string>
     <string name="over">Quý khách vui lòng không đặt với số lượng quá 100 trên cùng một món!</string>
+    <string name="validImage">Vui lòng đính kèm hình ảnh!</string>
+    <string name="validMessage">Vui lòng để lại lời nhắn!</string>
+    <string name="validateMail">Email không tồn tại!</string>
 
 
 </resources>

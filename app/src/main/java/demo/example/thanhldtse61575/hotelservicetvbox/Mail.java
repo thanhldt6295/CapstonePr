@@ -129,7 +129,7 @@ public class Mail extends javax.mail.Authenticator {
         BodyPart messageBodyPart = new MimeBodyPart();
         DataSource source = new FileDataSource(path.getPath());
 
-        messageBodyPart.setFileName("newmain");
+        messageBodyPart.setFileName("hotel.png");
         messageBodyPart.setDisposition(MimeBodyPart.ATTACHMENT);
         messageBodyPart.setHeader("Content-ID","<vogue>");
         messageBodyPart.setDataHandler(new DataHandler(source));

@@ -13,9 +13,12 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -25,15 +28,21 @@ import com.google.android.youtube.player.YouTubePlayer.PlaybackEventListener;
 import com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
 
 public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     public static final String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
     public static String VIDEO_ID = "";
 
+    List<Promotional> promo = new ArrayList<>();
     TextView roomid;
     TextView name;
     TextView hour;
+    TextView cap;
     FloatingActionButton btnOrder;
 
     @Override
@@ -44,145 +53,20 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
+        promo = getPromoList();
+
         name = (TextView) findViewById(R.id.tvPromoName);
         hour = (TextView) findViewById(R.id.tvWorkHour);
+        cap = (TextView) findViewById(R.id.tvCapacity);
+        btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
-        switch (type){
-            case 0:
-                VIDEO_ID = "fyAMWF3aNiM";
-                YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
-                youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
-                name.setText(R.string.spa);
-                hour.setText(R.string.spahour);
-                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
-                btnOrder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle(R.string.confirm_service)
-                                .setMessage(R.string.confirm_question_do)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                        vToast.setTextColor(Color.WHITE);
-                                        vToast.setTextSize(30);
-                                        toast.show();
-                                    }})
-                                .setNegativeButton(android.R.string.no, null).show();
-                    }
-                });
-                break;
-            case 1:
-                VIDEO_ID = "PvWBLOsOdp8";
-                youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
-                youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
-                name.setText(R.string.gym);
-                hour.setText(R.string.gymhour);
-                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
-                btnOrder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle(R.string.confirm_service)
-                                .setMessage(R.string.confirm_question_do)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                        vToast.setTextColor(Color.WHITE);
-                                        vToast.setTextSize(30);
-                                        toast.show();
-                                    }})
-                                .setNegativeButton(android.R.string.no, null).show();
-                    }
-                });
-                break;
-            case 2:
-                VIDEO_ID = "-eoVJyZBFMw";
-                youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
-                youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
-                name.setText(R.string.pool);
-                hour.setText(R.string.poolhour);
-                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
-                btnOrder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle(R.string.confirm_service)
-                                .setMessage(R.string.confirm_question_do)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                        vToast.setTextColor(Color.WHITE);
-                                        vToast.setTextSize(30);
-                                        toast.show();
-                                    }})
-                                .setNegativeButton(android.R.string.no, null).show();
-                    }
-                });
-                break;
-            case 3:
-                VIDEO_ID = "Cl4JiA4cgOU";
-                youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
-                youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
-                name.setText(R.string.tennis);
-                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
-                btnOrder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle(R.string.confirm_service)
-                                .setMessage(R.string.confirm_question_do)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                        vToast.setTextColor(Color.WHITE);
-                                        vToast.setTextSize(30);
-                                        toast.show();
-                                    }})
-                                .setNegativeButton(android.R.string.no, null).show();
-                    }
-                });
-                break;
-            case 4:
-                VIDEO_ID = "9Lqr9MC9wM0";
-                youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
-                youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
-                name.setText(R.string.golf);
-                btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
-                btnOrder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(PromoDetailsActivity.this)
-                                .setTitle(R.string.confirm_service)
-                                .setMessage(R.string.confirm_question_do)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                        vToast.setTextColor(Color.WHITE);
-                                        vToast.setTextSize(30);
-                                        toast.show();
-                                    }})
-                                .setNegativeButton(android.R.string.no, null).show();
-                    }
-                });
-                break;
+        int count = promo.size();
+        for(int i = 0; i < count; i++){
+            if(type==i){
+                Display(promo.get(i));
+            }
         }
 
         // Datetime & Calendar
@@ -251,7 +135,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
 /** Start buffering **/
         if (!wasRestored) {
             player.loadVideo(VIDEO_ID);
-            player.setFullscreen(true);
+            //player.setFullscreen(true);
         }
     }
     private PlaybackEventListener playbackEventListener = new PlaybackEventListener() {
@@ -291,4 +175,44 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         public void onVideoStarted() {
         }
     };
+
+    private List<Promotional> getPromoList(){
+        Gson gson = new Gson();
+        List<Promotional> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedPromo", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("PromoList", "");
+
+        Type type = new TypeToken<List<Promotional>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
+
+    private void Display(Promotional promo){
+        VIDEO_ID = promo.getVideoLink();
+        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
+        youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
+        name.setText(promo.getName());
+        hour.setText(promo.getWorkHour());
+        cap.setText(promo.getCapacity()+"");
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(PromoDetailsActivity.this)
+                        .setTitle(R.string.confirm_service)
+                        .setMessage(R.string.confirm_question_do)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                vToast.setTextColor(Color.WHITE);
+                                vToast.setTextSize(30);
+                                toast.show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
+        });
+    }
 }

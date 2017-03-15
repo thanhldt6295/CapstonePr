@@ -1,7 +1,6 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +11,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Image;
-
 /**
  * Created by ThanhLDTSE61575 on 2/25/2017.
  */
 
 public class EcardAdapter extends BaseAdapter {
 
-    private List<Image> list;
+    private List<String> list;
     private Context context;
     private LayoutInflater inflater;
 
-    public EcardAdapter(Context context, List<Image> list){
+    public EcardAdapter(Context context, List<String> list){
         this.context=context;
         this.list = list;
     }
@@ -55,7 +52,7 @@ public class EcardAdapter extends BaseAdapter {
 
         ImageView imageView = (ImageView) gridView.findViewById(R.id.imageViewGrid);
 
-        String url = list.get(position).getImage();
+        String url = list.get(position);
         Picasso.with(context)
                 .load(url)
                 .placeholder(R.drawable.loading)
