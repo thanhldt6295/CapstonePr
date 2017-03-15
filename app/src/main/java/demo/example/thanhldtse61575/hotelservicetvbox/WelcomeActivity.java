@@ -36,6 +36,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 public class WelcomeActivity extends AppCompatActivity {
 
     TextView customerWel;
+    TextView customerWelV;
     Button dummyBtnEng;
     Button dummyBtnViet;
     public static final String mPath = "roomid.txt";
@@ -143,9 +144,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 }.getType());
 
                 customerWel = (TextView) findViewById(R.id.fullscreen_content);
-
+                customerWelV = (TextView) findViewById(R.id.fullscreen_content2);
                 customerWel.setText("WELCOME " + acc.toString().toUpperCase().trim());
-
+                customerWelV.setText("XIN CHÀO " + acc.toString().toUpperCase().trim());
                 setCust2Share(acc);
             }
         }
@@ -224,8 +225,8 @@ public class WelcomeActivity extends AppCompatActivity {
         // while interacting with the UI.
         findViewById(R.id.dummy_btnEng).setOnTouchListener(mDelayHideTouchListener);
 
-        dummyBtnEng = (Button)findViewById(R.id.dummy_btnEng);
-        dummyBtnViet = (Button)findViewById(R.id.dummy_btnViet);
+        dummyBtnEng = (Button)findViewById(R.id.dummy_btnEng2);
+        dummyBtnViet = (Button)findViewById(R.id.dummy_btnViet2);
 
         dummyBtnEng.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,7 +36,8 @@
     <!-- WelcomeActivity -->
     <string name="dummy_eng">ENGLISH</string>
     <string name="dummy_viet">TIẾNG VIỆT</string>
-    <string name="dummy_content">WELCOME\nOUR HOTEL</string>
+    <string name="dummy_content">WELCOME TO OUR HOTEL</string>
+    <string name="dummy_content2">XIN CHÀO QUÝ KHÁCH</string>
 
     <!-- MainActivity -->
     <string name="application">APPLICATIONS</string>
