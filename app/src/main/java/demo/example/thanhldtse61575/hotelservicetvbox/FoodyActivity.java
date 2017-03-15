@@ -382,7 +382,7 @@ public class FoodyActivity extends AppCompatActivity {
                                             Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
                                             TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                             vToast.setTextColor(Color.CYAN);
-                                            vToast.setTextSize(30);
+                                            vToast.setTextSize(20);
                                             vToast.setTypeface(null, Typeface.BOLD);
                                             toast.show();
                                         }
@@ -404,7 +404,7 @@ public class FoodyActivity extends AppCompatActivity {
                                                     Toast toast = Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT);
                                                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                                     vToast.setTextColor(Color.CYAN);
-                                                    vToast.setTextSize(30);
+                                                    vToast.setTextSize(20);
                                                     vToast.setTypeface(null, Typeface.BOLD);
                                                     toast.show();
                                                 }
