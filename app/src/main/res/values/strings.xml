@@ -11,7 +11,7 @@
     <string name="minutes"> MINUTES LATER</string>
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
-    <string name="USD">USD</string>
+    <string name="USD">dong</string>
     <string name="added">Added to Cart</string>
     <string name="attach">ATTACH</string>
     <string name="sent">SENT</string>
@@ -180,8 +180,9 @@
     <string name="gymhour">8AM - 10PM</string>
     <string name="poolhour">6AM - 6PM</string>
 
-    <string name="all">ALL</string>
+    <string name="hobby">HOBBY</string>
     <string name="ocean">OCEAN</string>
     <string name="mountain">MOUNTAIN</string>
     <string name="countryside">COUNTRYSIDE</string>
+    <string name="money">MONEY</string>
 </resources>

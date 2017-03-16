@@ -24,16 +24,20 @@ import java.util.Date;
 import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 
 public class RecommendActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private List<Recommend> RecommendEntityList = new ArrayList<Recommend>();
     private List<Hobby> HobbyEntityList = new ArrayList<Hobby>();
+    private List<Price> PriceEntityList = new ArrayList<Price>();
     private ListView listView;
     private RecommendAdapter adapter;
     private HobbyAdapter HobbyAdapter;
+    private PriceAdapter PriceAdapter;
     private Spinner HobbySpinner;
+    private Spinner PriceSpinner;
     TextView roomid;
 
     @Override
@@ -48,13 +52,19 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
+        PriceSpinner = (Spinner) findViewById(R.id.priceSpinner);
         listView = (ListView) findViewById(R.id.recListView);
-        HobbyAdapter = new HobbyAdapter(this,android.R.layout.simple_spinner_dropdown_item,loadDummyCities());
+        HobbyAdapter = new HobbyAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyHobby());
         HobbyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         HobbySpinner.setAdapter(HobbyAdapter);
         HobbySpinner.setOnItemSelectedListener(this);
-        loadDummyRecommend();
-        adapter = new RecommendAdapter(this, RecommendEntityList);
+
+        PriceAdapter = new PriceAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyPrice());
+        PriceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        PriceSpinner.setAdapter(PriceAdapter);
+        PriceSpinner.setOnItemSelectedListener(this);
+
+        adapter = new RecommendAdapter(this, loadDummyRecommend());
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,12 +144,12 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         return super.onOptionsItemSelected(item);
     }
 
-    private List<Hobby> loadDummyCities(){
+    private List<Hobby> loadDummyHobby(){
         HobbyEntityList = new ArrayList<Hobby>();
 
         Hobby Hobby0 = new Hobby();
         Hobby0.setId(0);
-        Hobby0.setName(getResources().getString(R.string.all));
+        Hobby0.setName(getResources().getString(R.string.hobby));
         HobbyEntityList.add(Hobby0);
 
         Hobby Hobby1 = new Hobby();
@@ -160,62 +170,89 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         return HobbyEntityList;
     }
 
+    private List<Price> loadDummyPrice(){
+        PriceEntityList = new ArrayList<Price>();
+
+        Price price = new Price();
+        price.setId(0);
+        price.setPrice(getResources().getString(R.string.money));
+        PriceEntityList.add(price);
+
+        Price price1 = new Price();
+        price1.setId(1);
+        price1.setPrice("3,000,000 - 5,000,000");
+        PriceEntityList.add(price1);
+
+        Price price2 = new Price();
+        price2.setId(2);
+        price2.setPrice("6,000,000 - 8,000,000");
+        PriceEntityList.add(price2);
+
+        Price price3 = new Price();
+        price3.setId(3);
+        price3.setPrice("over 10,000,000");
+        PriceEntityList.add(price3);
+
+        return PriceEntityList;
+    }
+
+
     private List<Recommend> loadDummyRecommend(){
 
         RecommendEntityList = new ArrayList<Recommend>();
 
         Recommend Recommend1 = new Recommend();
         Recommend1.setId(1);
-        Recommend1.setHobbyID(0);
         Recommend1.setHobbyID(1);
+        Recommend1.setPriceID(1);
         Recommend1.setImage(R.drawable.ocean1);
-        Recommend1.setName("ABC");
+        Recommend1.setAddress("ABC");
         Recommend1.setDescription("Hello Ahihi");
         RecommendEntityList.add(Recommend1);
 
         Recommend Recommend2 = new Recommend();
         Recommend2.setId(2);
-        Recommend2.setHobbyID(0);
         Recommend2.setHobbyID(2);
+        Recommend2.setPriceID(1);
         Recommend2.setImage(R.drawable.mountain1);
-        Recommend2.setName("BCD");
+        Recommend2.setAddress("BCD");
         Recommend2.setDescription("2nd Cross");
         RecommendEntityList.add(Recommend2);
 
         Recommend Recommend3 = new Recommend();
         Recommend3.setId(3);
-        Recommend3.setHobbyID(0);
         Recommend3.setHobbyID(2);
+        Recommend3.setPriceID(2);
         Recommend3.setImage(R.drawable.mountain2);
-        Recommend3.setName("Carlton");
+        Recommend3.setAddress("Carlton");
         Recommend3.setDescription("Church Street");
         RecommendEntityList.add(Recommend3);
 
         Recommend Recommend4 = new Recommend();
         Recommend4.setId(4);
-        Recommend4.setHobbyID(0);
         Recommend4.setHobbyID(2);
+        Recommend4.setPriceID(2);
         Recommend4.setImage(R.drawable.mountain3);
-        Recommend4.setName("New");
+        Recommend4.setAddress("New");
         Recommend4.setDescription("Vatanappilly");
         RecommendEntityList.add(Recommend4);
 
         //ALL
         Recommend Recommend5 = new Recommend();
         Recommend5.setId(5);
-        Recommend5.setHobbyID(0);
         Recommend5.setHobbyID(3);
+        Recommend5.setPriceID(3);
         Recommend5.setImage(R.drawable.cntrside1);
-        Recommend5.setName("ABCD");
+        Recommend5.setAddress("ABCD");
         Recommend5.setDescription("Hehe Ahihi");
         RecommendEntityList.add(Recommend5);
 
         Recommend Recommend6 = new Recommend();
         Recommend6.setId(6);
-        Recommend6.setHobbyID(0);
         Recommend6.setHobbyID(1);
+        Recommend6.setPriceID(3);
         Recommend6.setImage(R.drawable.ocean2);
-        Recommend6.setName("BCD");
+        Recommend6.setAddress("BCD");
         Recommend6.setDescription("thueydhs");
         RecommendEntityList.add(Recommend6);
 
@@ -224,10 +261,21 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Hobby Hobby = HobbyAdapter.getItem(position);
+        String search = "0";
+        Spinner spinner = (Spinner) parent;
+        if(spinner.getId() == R.id.hobbySpinner)
+        {
+            Hobby Hobby = HobbyAdapter.getItem(position);
+            search = Hobby.getId()+"h";
+        }
+        if(spinner.getId() == R.id.priceSpinner)
+        {
+            Price Price = PriceAdapter.getItem(position);
+            search = Price.getId()+"p";
+        }
 
 //Here we use the Filtering Feature which we implemented in our Adapter class.
-        adapter.getFilter().filter(Long.toString(Hobby.getId()),new Filter.FilterListener() {
+        adapter.getFilter().filter(search,new Filter.FilterListener() {
             @Override
             public void onFilterComplete(int count) {
 

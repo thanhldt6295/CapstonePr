@@ -8,8 +8,9 @@ public class Recommend {
     private int id;
     private int hobbyID;
     private int image;
-    private String name;
+    private String address;
     private String description;
+    private int priceID;
 
     public int getId() {
         return id;
@@ -35,12 +36,12 @@ public class Recommend {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDescription() {
@@ -49,5 +50,13 @@ public class Recommend {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getPriceID() {
+        return priceID;
+    }
+
+    public void setPriceID(int priceID) {
+        this.priceID = priceID;
     }
 }

@@ -134,7 +134,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         player.setPlaybackEventListener(playbackEventListener);
 /** Start buffering **/
         if (!wasRestored) {
-            player.loadVideo(VIDEO_ID);
+            player.cueVideo(VIDEO_ID);
             //player.setFullscreen(true);
         }
     }
@@ -191,7 +191,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     private void Display(Promotional promo){
         VIDEO_ID = promo.getVideoLink();
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
-        youTubePlayerView.initialize(API_KEY, (YouTubePlayer.OnInitializedListener) this);
+        youTubePlayerView.initialize(API_KEY, this);
         name.setText(promo.getName());
         hour.setText(promo.getWorkHour());
         cap.setText(promo.getCapacity()+"");

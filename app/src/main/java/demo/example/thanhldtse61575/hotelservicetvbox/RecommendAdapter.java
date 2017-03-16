@@ -75,7 +75,7 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
         final Recommend item = getItem(position);
 
         viewHolder.imageView.setImageResource(item.getImage());
-        viewHolder.tvName.setText(item.getName());
+        viewHolder.tvName.setText(item.getAddress());
         viewHolder.tvDescript.setText(String.valueOf(item.getDescription()));
 
         return updateView;
@@ -104,15 +104,15 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
 
 //below checks the match for the hobId and adds to the filterlist
-            long hobId= Long.parseLong(constraint.toString());
+            //long hobId= Long.parseLong(constraint.toString());
             FilterResults results = new FilterResults();
 
-            if (hobId > 0) {
+            if (!constraint.toString().equals("0h")&&!constraint.toString().equals("0p")) {
                 ArrayList<Recommend> filterList = new ArrayList<Recommend>();
                 for (int i = 0; i < RecommendFilterList.size(); i++) {
-
-                    if ( (RecommendFilterList.get(i).getHobbyID() )== hobId) {
-
+                    String searchHobby = RecommendFilterList.get(i).getHobbyID()+"h";
+                    String searchPrice = RecommendFilterList.get(i).getPriceID()+"p";
+                    if (searchHobby.equals(constraint.toString())|searchPrice.equals(constraint.toString())) {
                         Recommend Recommend = RecommendFilterList.get(i);
                         filterList.add(Recommend);
                     }

@@ -58,7 +58,7 @@ public class RecommendDetailActivity extends AppCompatActivity {
         ImageView productImageView = (ImageView) findViewById(R.id.imageView);
         productImageView.setImageResource(rec.getImage());
         TextView productTitleTextView = (TextView) findViewById(R.id.recNameTV);
-        productTitleTextView.setText(rec.getName());
+        productTitleTextView.setText(rec.getAddress());
         TextView productDetailsTextView = (TextView) findViewById(R.id.recDescriptTV);
         productDetailsTextView.setText(rec.getDescription());
 
