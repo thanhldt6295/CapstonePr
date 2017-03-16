@@ -463,39 +463,39 @@ public class FoodyActivity extends AppCompatActivity {
             gridView = (GridView) rootView.findViewById(R.id.gridView);
             relativeLayout = (RelativeLayout) rootView.findViewById(R.id.relative);
             if(indexTab==1) {
-                PassData2Tabbed(getResources().getString(R.string.breakfast).toString());
+                PassData2Tabbed("APPETIZERS");
                 return rootView;
             }
             else if(indexTab==2){
-                PassData2Tabbed(getResources().getString(R.string.lunch).toString());
+                PassData2Tabbed("SEAFOODS");
                 return rootView;
             }
             else if(indexTab==3){
-                PassData2Tabbed(getResources().getString(R.string.dinner).toString());
+                PassData2Tabbed("MAIN COURSE");
                 return rootView;
             }
             else if(indexTab==4){
-                PassData2Tabbed(getResources().getString(R.string.dessert).toString());
+                PassData2Tabbed("VEGETABLES - SOUP");
                 return rootView;
             }
             else if(indexTab==5){
-                PassData2Tabbed(getResources().getString(R.string.coffee).toString());
+                PassData2Tabbed("RICE");
                 return rootView;
             }
             else if(indexTab==6){
-                PassData2Tabbed(getResources().getString(R.string.wine).toString());
+                PassData2Tabbed("HOT POT");
                 return rootView;
             }
             else if(indexTab==7){
-                PassData2Tabbed(getResources().getString(R.string.fruit).toString());
+                PassData2Tabbed("VEGETARIAN");
                 return rootView;
             }
             else if(indexTab==8){
-                PassData2Tabbed(getResources().getString(R.string.mojito).toString());
+                PassData2Tabbed("DESSERT");
                 return rootView;
             }
             else if(indexTab==9){
-                PassData2Tabbed(getResources().getString(R.string.other_drinks).toString());
+                PassData2Tabbed("COFFEE");
                 return rootView;
             }
             else {
@@ -548,23 +548,23 @@ public class FoodyActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return getResources().getString(R.string.breakfast);
+                    return getResources().getString(R.string.APPETIZERS);
                 case 1:
-                    return getResources().getString(R.string.lunch);
+                    return getResources().getString(R.string.SEAFOODS);
                 case 2:
-                    return getResources().getString(R.string.dinner);
+                    return getResources().getString(R.string.MAINCOURSE);
                 case 3:
-                    return getResources().getString(R.string.dessert);
+                    return getResources().getString(R.string.SOUP);
                 case 4:
-                    return getResources().getString(R.string.coffee);
+                    return getResources().getString(R.string.RICE);
                 case 5:
-                    return getResources().getString(R.string.wine);
+                    return getResources().getString(R.string.HOTPOT);
                 case 6:
-                    return getResources().getString(R.string.fruit);
+                    return getResources().getString(R.string.VEGETARIAN);
                 case 7:
-                    return getResources().getString(R.string.mojito);
+                    return getResources().getString(R.string.dessert);
                 case 8:
-                    return getResources().getString(R.string.other_drinks);
+                    return getResources().getString(R.string.coffee);
             }
             return null;
         }

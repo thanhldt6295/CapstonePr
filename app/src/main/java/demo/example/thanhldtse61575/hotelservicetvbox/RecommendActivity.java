@@ -261,19 +261,21 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String search = "0";
+        String search;
+        int posh = 0;
+        int posp = 0;
         Spinner spinner = (Spinner) parent;
         if(spinner.getId() == R.id.hobbySpinner)
         {
-            Hobby Hobby = HobbyAdapter.getItem(position);
-            search = Hobby.getId()+"h";
+            posh = position;
         }
-        if(spinner.getId() == R.id.priceSpinner)
+        else if(spinner.getId() == R.id.priceSpinner)
         {
-            Price Price = PriceAdapter.getItem(position);
-            search = Price.getId()+"p";
+            posp = position;
         }
-
+        Hobby Hobby = HobbyAdapter.getItem(posh);
+        Price Price = PriceAdapter.getItem(posp);
+        search = Hobby.getId()+"," + Price.getId();
 //Here we use the Filtering Feature which we implemented in our Adapter class.
         adapter.getFilter().filter(search,new Filter.FilterListener() {
             @Override

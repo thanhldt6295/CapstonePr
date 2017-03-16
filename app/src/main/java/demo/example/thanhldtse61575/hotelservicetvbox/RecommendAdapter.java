@@ -32,7 +32,7 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
 
     public RecommendAdapter(Context context, List data){
         RecommendList = data;
-        RecommendFilterList=data;
+        RecommendFilterList = data;
         mLayoutInflater = LayoutInflater.from(context);
         this.context = context;
     }
@@ -102,39 +102,49 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-
-//below checks the match for the hobId and adds to the filterlist
-            //long hobId= Long.parseLong(constraint.toString());
             FilterResults results = new FilterResults();
 
-            if (!constraint.toString().equals("0h")&&!constraint.toString().equals("0p")) {
-                ArrayList<Recommend> filterList = new ArrayList<Recommend>();
-                for (int i = 0; i < RecommendFilterList.size(); i++) {
-                    String searchHobby = RecommendFilterList.get(i).getHobbyID()+"h";
-                    String searchPrice = RecommendFilterList.get(i).getPriceID()+"p";
-                    if (searchHobby.equals(constraint.toString())|searchPrice.equals(constraint.toString())) {
-                        Recommend Recommend = RecommendFilterList.get(i);
-                        filterList.add(Recommend);
-                    }
-                }
-
-                results.count = filterList.size();
-                results.values = filterList;
-                setDataFromSharedPreferences(filterList);
-
-            } else {
-
+            if(constraint.toString().equals("0,0")) {
                 results.count = RecommendFilterList.size();
                 results.values = RecommendFilterList;
                 setDataFromSharedPreferences((ArrayList<Recommend>) RecommendFilterList);
+            }
+            else {
+                ArrayList<Recommend> filterList = new ArrayList<Recommend>();
+                String[] search = constraint.toString().split(",");
+                int h = Integer.parseInt(search[0]);
+                int p = Integer.parseInt(search[1]);
 
+                if( h != 0 && p!= 0) {
+                    for (Recommend r: RecommendFilterList) {
+                        if(r.getHobbyID() == h && r.getPriceID() == p) {
+                            filterList.add(r);
+                        }
+                    }
+                }
+                if(h == 0) {
+                    for (Recommend r : RecommendFilterList) {
+                        if (r.getPriceID() == p) {
+                            filterList.add(r);
+                        }
+                    }
+                }
+                if(p == 0) {
+                    for (Recommend r: RecommendFilterList) {
+                        if(r.getHobbyID() == h) {
+                            filterList.add(r);
+                        }
+                    }
+                }
+                results.count = filterList.size();
+                results.values = filterList;
+                setDataFromSharedPreferences(filterList);
             }
             return results;
         }
         //Publishes the matches found, i.e., the selected hobIds
         @Override
-        protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
+        protected void publishResults(CharSequence constraint, FilterResults results) {
 
             RecommendList = (ArrayList<Recommend>)results.values;
             notifyDataSetChanged();

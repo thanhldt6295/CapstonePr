@@ -99,6 +99,13 @@
     <string name="lunch">LUNCH</string>
     <string name="dinner">DINNER</string>
     <string name="dessert">DESSERT</string>
+    <string name="APPETIZERS">APPETIZERS</string>
+    <string name="SEAFOODS">SEAFOODS</string>
+    <string name="MAINCOURSE">MAIN COURSE</string>
+    <string name="RICE">RICE</string>
+    <string name="HOTPOT">HOT POT</string>
+    <string name="VEGETARIAN">VEGETARIAN</string>
+    <string name="SOUP">VEGETABLES - SOUP</string>
 
     <string name="coffee">COFFEE</string>
     <string name="fruit">FRUIT JUICE</string>

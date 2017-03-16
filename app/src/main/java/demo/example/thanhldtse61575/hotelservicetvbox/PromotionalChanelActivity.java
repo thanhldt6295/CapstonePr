@@ -19,7 +19,7 @@ import java.util.Date;
 public class PromotionalChanelActivity extends AppCompatActivity {
 
     int[] titles = {R.string.spa, R.string.gym, R.string.pool, R.string.tennis, R.string.golf};
-    int[] images = {R.drawable.hotelww, R.drawable.pool, R.drawable.hotelww, R.drawable.pool, R.drawable.card};
+    int[] images = {R.drawable.img_spa, R.drawable.img_gym, R.drawable.img_pool, R.drawable.img_tennis, R.drawable.img_golf};
     TextView roomid;
 
     @Override

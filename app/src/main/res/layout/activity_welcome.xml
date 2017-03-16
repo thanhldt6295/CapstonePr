@@ -42,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:background="@color/black_overlay"
+            android:background="#64eaeaea"
             android:orientation="horizontal">
 
             <Button
@@ -53,7 +53,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="@string/dummy_eng"
-                android:textSize="60dp" />
+                android:textSize="60dp"
+                android:textColor="#e2999999"/>
 
             <Button
                 android:id="@+id/dummy_btnViet2"
@@ -63,7 +64,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="TIẾNG VIỆT"
-                android:textSize="60dp" />
+                android:textSize="60dp"
+                android:textColor="#e2999999"/>
 
         </LinearLayout>
 
