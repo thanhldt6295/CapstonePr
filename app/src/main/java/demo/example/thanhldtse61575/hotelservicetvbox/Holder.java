@@ -1,5 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +23,18 @@ public class Holder extends RecyclerView.ViewHolder implements View.OnClickListe
         itemView.setOnClickListener(this);
         itemView.setClickable(true);
         itemView.setFocusable(true);
-        itemView.setFocusableInTouchMode(true);
+        itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    img.setColorFilter(Color.argb(50, 0, 0, 0));
+                    txt.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
+                } else {
+                    img.setColorFilter(Color.argb(0, 0, 0, 0));
+                    txt.setTypeface(Typeface.DEFAULT);
+                }
+            }
+        });
     }
 
     @Override

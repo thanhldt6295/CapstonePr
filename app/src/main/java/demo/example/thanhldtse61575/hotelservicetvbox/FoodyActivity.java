@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -312,6 +313,19 @@ public class FoodyActivity extends AppCompatActivity {
                     ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_itemdetails, null);
                     popup = new PopupWindow(container, 600, 600, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+                    popup.setOutsideTouchable(true);
+                    popup.getContentView().setFocusableInTouchMode(true);
+                    popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                popup.dismiss();
+                                return true;
+                            }
+                            return false;
+                        }
+                    });
 
                     Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
                     Button btnMinus = (Button) container.findViewById(R.id.btnMinus);

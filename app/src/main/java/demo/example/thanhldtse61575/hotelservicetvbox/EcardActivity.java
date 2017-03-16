@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,6 +94,20 @@ public class EcardActivity extends AppCompatActivity {
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_ecarditem, null);
                 popup = new PopupWindow(container, 1280, 800, true);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+                popup.setOutsideTouchable(true);
+                popup.getContentView().setFocusableInTouchMode(true);
+                popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            popup.dismiss();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
 
                 ImageView imageView = (ImageView) container.findViewById(R.id.thumbImage);
                 Button btnChoose = (Button) container.findViewById(R.id.btnChoose);
