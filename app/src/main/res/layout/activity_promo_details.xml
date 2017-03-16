@@ -65,7 +65,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/white"
                             android:layout_height="wrap_content"
-                            android:text="Working hour"
+                            android:text="@string/worktime"
                             android:textSize="@dimen/text_size_medium" />
 
                         <TextView
@@ -73,7 +73,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/white"
                             android:layout_height="wrap_content"
-                            android:text="Capacity"
+                            android:text="@string/capacity"
                             android:textSize="@dimen/text_size_medium"/>
                     </TableRow>
 

@@ -48,7 +48,7 @@ public class ExtraActivity extends AppCompatActivity {
         for (Service ac : acc) {
             String cagName = ac.getCategoryName().toString().toUpperCase().trim();
             ;
-            if (cagName.equals(getResources().getString(R.string.room_extras))) {
+            if (cagName.equals("ROOM EXTRAS")) {
                 accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
             }
         }

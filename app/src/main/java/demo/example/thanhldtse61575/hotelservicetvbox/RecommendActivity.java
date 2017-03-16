@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Filter;
 import android.widget.ListView;
@@ -29,6 +30,9 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 
 public class RecommendActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private int posh = 0;
+    private int posp = 0;
+    //private Button btnSearch;
     private List<Recommend> RecommendEntityList = new ArrayList<Recommend>();
     private List<Hobby> HobbyEntityList = new ArrayList<Hobby>();
     private List<Price> PriceEntityList = new ArrayList<Price>();
@@ -50,6 +54,8 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         abTitle.setText(getResources().getString(R.string.recommend));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+
+        //btnSearch = (Button) findViewById(R.id.btnSearch);
 
         HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
         PriceSpinner = (Spinner) findViewById(R.id.priceSpinner);
@@ -261,9 +267,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String search;
-        int posh = 0;
-        int posp = 0;
+        final String search;
         Spinner spinner = (Spinner) parent;
         if(spinner.getId() == R.id.hobbySpinner)
         {
@@ -283,6 +287,17 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
             }
         });
+//        btnSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                adapter.getFilter().filter(search,new Filter.FilterListener() {
+//                    @Override
+//                    public void onFilterComplete(int count) {
+//
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override

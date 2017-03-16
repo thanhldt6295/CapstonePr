@@ -192,7 +192,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         VIDEO_ID = promo.getVideoLink();
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
         youTubePlayerView.initialize(API_KEY, this);
-        name.setText(promo.getName());
+        name.setText(promo.getName().toUpperCase());
         hour.setText(promo.getWorkHour());
         cap.setText(promo.getCapacity()+"");
         btnOrder.setOnClickListener(new View.OnClickListener() {
