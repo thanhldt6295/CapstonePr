@@ -8,15 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by ThanhLDTSE61575 on 1/10/2017.
+ * Created by VULHSE61532 on 3/16/2017.
  */
-public class MainAdapter extends RecyclerView.Adapter<Holder> {
+
+public class RoomServicesAdapter extends RecyclerView.Adapter<Holder> {
 
     Context c;
     int[] titles;
     int[] images;
 
-    public MainAdapter(Context c, int[] titles, int[] images) {
+    public RoomServicesAdapter(Context c, int[] titles, int[] images) {
         this.c = c;
         this.titles = titles;
         this.images = images;
@@ -37,27 +38,16 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                switch (pos){
+                switch (pos) {
                     case 0:
-                        c.startActivity(new Intent(c, PromotionalChanelActivity.class));
+                        c.startActivity(new Intent(c, FoodyActivity.class));
                         break;
                     case 1:
-                        c.startActivity(new Intent(c, RoomServicesActivity.class));
+                        c.startActivity(new Intent(c, ExtraActivity.class));
                         break;
                     case 2:
-                        c.startActivity(new Intent(c, EcardActivity.class));
+                        c.startActivity(new Intent(c, RequestTicketActivity.class));
                         break;
-                    case 3:
-                        c.startActivity(new Intent(c, ViewBillActivity.class));
-                        break;
-                    case 4:
-                        c.startActivity(new Intent(c, SurveyActivity.class));
-                        break;
-                    case 5:
-                        c.startActivity(new Intent(c, RecommendActivity.class));
-                        break;
-                    case 6:
-                        c.startActivity(new Intent(c, AppsActivity.class));
                 }
             }
         });

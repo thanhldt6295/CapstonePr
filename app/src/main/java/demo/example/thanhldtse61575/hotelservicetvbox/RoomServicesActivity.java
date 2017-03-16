@@ -20,12 +20,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class RoomServicesActivity extends AppCompatActivity {
 
-    int[] titles = {R.string.promotional, R.string.service, R.string.ecard, R.string.bill,
-            R.string.survey, R.string.recommend, R.string.application};
-    int[] images = {R.drawable.img_hotel, R.drawable.img_roomservices, R.drawable.img_ecard,
-            R.drawable.img_billing, R.drawable.img_survey, R.drawable.img_youtube, R.drawable.img_app};
+    int[] titles = {R.string.food_drink, R.string.room_extras, R.string.request_ticket};
+    int[] images = {R.drawable.img_foodsandbeverages, R.drawable.img_roomextras, R.drawable.img_housekeeping};
     TextView roomid;
 
     @Override
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText(getResources().getString(R.string.app_name));
+        abTitle.setText(getResources().getString(R.string.service));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(MainActivity.this, date, myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+                new DatePickerDialog(RoomServicesActivity.this, date, myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
                         myCalen.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -87,38 +85,14 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        MainAdapter ma = new MainAdapter(this, titles, images);
-        rv.setAdapter(ma);
+        RoomServicesAdapter a = new RoomServicesAdapter(this, titles, images);
+        rv.setAdapter(a);
     }
+
 
     private String getRoomID() {
-
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
-
         return jsonPreferences;
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_pending, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.pending:
-                Intent i = new Intent(MainActivity.this, PendingActivity.class);
-                startActivity(i);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() { }
 }

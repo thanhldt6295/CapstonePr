@@ -41,7 +41,7 @@
 
     <!-- MainActivity -->
     <string name="application">APPLICATIONS</string>
-    <string name="promotional">PROMOTIONAL CHANEL</string>
+    <string name="promotional">PROMOTIONAL CHANNEL</string>
     <string name="service">ROOM SERVICES</string>
     <string name="request_ticket">REQUEST TICKET</string>
     <string name="shopping">VIRTUAL SHOPPING</string>
@@ -174,7 +174,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+
     <!-- DATA -->
     <string name="spahour">9AM - 10PM</string>
     <string name="gymhour">8AM - 10PM</string>
