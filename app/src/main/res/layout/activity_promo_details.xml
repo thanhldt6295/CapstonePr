@@ -17,7 +17,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <android.support.design.widget.CoordinatorLayout
@@ -36,7 +35,7 @@
                     android:layout_weight="4"
                     android:id="@+id/videoView"
                     android:layout_gravity="center"
-                    android:background="#fff"></com.google.android.youtube.player.YouTubePlayerView>
+                    android:background="@color/white"/>
 
                 <TableLayout
                     android:layout_width="match_parent"
