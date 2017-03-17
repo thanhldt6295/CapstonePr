@@ -5,58 +5,103 @@ package demo.example.thanhldtse61575.hotelservicetvbox.entity;
  */
 
 public class Recommend {
-    private int id;
-    private int hobbyID;
-    private int image;
-    private String address;
-    private String description;
-    private int priceID;
+    private int ID;
+    private int HobbyID;
+    private int PriceID;
+    private String LocationName;
+    private String HobbyName;
+    private String About;
+    private String Address;
+    private double X;
+    private double Y;
+    private String Description;
+    private int Image;
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getHobbyID() {
-        return hobbyID;
+        return HobbyID;
     }
 
     public void setHobbyID(int hobbyID) {
-        this.hobbyID = hobbyID;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        HobbyID = hobbyID;
     }
 
     public int getPriceID() {
-        return priceID;
+        return PriceID;
     }
 
     public void setPriceID(int priceID) {
-        this.priceID = priceID;
+        PriceID = priceID;
+    }
+
+    public String getLocationName() {
+        return LocationName;
+    }
+
+    public void setLocationName(String locationName) {
+        LocationName = locationName;
+    }
+
+    public String getHobbyName() {
+        return HobbyName;
+    }
+
+    public void setHobbyName(String hobbyName) {
+        HobbyName = hobbyName;
+    }
+
+    public String getAbout() {
+        return About;
+    }
+
+    public void setAbout(String about) {
+        About = about;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public double getX() {
+        return X;
+    }
+
+    public void setX(double x) {
+        X = x;
+    }
+
+    public double getY() {
+        return Y;
+    }
+
+    public void setY(double y) {
+        Y = y;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public int getImage() {
+        return Image;
+    }
+
+    public void setImage(int image) {
+        Image = image;
     }
 }

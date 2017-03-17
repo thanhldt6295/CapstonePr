@@ -26,7 +26,10 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import java.util.Locale;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
@@ -199,10 +202,64 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }
 
+        class GetHobbyFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final List<Hobby> acc = new Gson().fromJson(response, new TypeToken<List<Hobby>>() {
+                }.getType());
+
+                setHobbyList2Share(acc);
+            }
+        }
+
+        class GetPriceFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final List<Price> acc = new Gson().fromJson(response, new TypeToken<List<Price>>() {
+                }.getType());
+
+                setPriceList2Share(acc);
+            }
+        }
+
+        class GetRecommendFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
+                }.getType());
+
+                setRecommendList2Share(acc);
+            }
+        }
+
         new GetCustomerFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetCustNameByRoomID/" + roomid);
         new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
         new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
         new GetImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetECardLinks");
+        new GetHobbyFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetHobby");
+        new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
+        new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -341,6 +398,47 @@ public class WelcomeActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    private static final String HOBBY_TAG = "SharedHobby";
+    private static final String HOBBY_LIST = "HobbyList";
+
+    private void setHobbyList2Share(List<Hobby> list){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(list);
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(HOBBY_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(HOBBY_LIST, jsonCurProduct);
+        editor.commit();
+    }
+
+    private static final String PRICE_TAG = "SharedPrice";
+    private static final String PRICE_LIST = "PriceList";
+
+    private void setPriceList2Share(List<Price> list){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(list);
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PRICE_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(PRICE_LIST, jsonCurProduct);
+        editor.commit();
+    }
+
+    private static final String RECOMMEND_TAG = "SharedRecommend";
+    private static final String RECOMMEND_LIST = "RecommendList";
+
+    private void setRecommendList2Share(List<Recommend> list){
+        Gson gson = new Gson();
+        String jsonCurProduct = gson.toJson(list);
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(RECOMMEND_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(RECOMMEND_LIST, jsonCurProduct);
+        editor.commit();
+    }
 
 
     @Override
