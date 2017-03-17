@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.71"
             android:text="@string/delivery_time"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium"
@@ -26,14 +26,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1" />
+            android:layout_weight="0.32" />
 
         <TextView
             android:id="@+id/tvMinutes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="1.38"
             android:text="@string/minutes"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium"
