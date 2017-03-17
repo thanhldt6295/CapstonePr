@@ -72,7 +72,7 @@ public class RecommendDetailActivity extends AppCompatActivity {
         TextView hobby = (TextView) findViewById(R.id.hobbyTV);
         hobby.setText(rec.getDescription());
         TextView price = (TextView) findViewById(R.id.priceTV);
-        hobby.setText(rec.getDescription());
+        price.setText(rec.getDescription());
 
         // Datetime & Calendar
         final TextView txtDate;
