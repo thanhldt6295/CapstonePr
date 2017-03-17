@@ -14,7 +14,7 @@
     <string name="USD">VND</string>
     <string name="added">Added to Cart</string>
     <string name="attach">ATTACH</string>
-    <string name="sent">SENT</string>
+    <string name="sent">Your mail be sending..</string>
     <string name="cancelled">CANCELLED</string>
     <string name="attached">Attached Image</string>
     <string name="over">Can not order over 100!</string>

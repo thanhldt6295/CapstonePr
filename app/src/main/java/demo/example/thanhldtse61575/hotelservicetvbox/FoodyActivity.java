@@ -50,6 +50,7 @@ import com.squareup.picasso.Picasso;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -296,7 +297,7 @@ public class FoodyActivity extends AppCompatActivity {
             // Search follow categoryName
             final List<Service> serviceCagList = new ArrayList<Service>();
             for (Service ac : serviceList) {
-                String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+                String cagName = ac.getCategoryName().toString().toUpperCase().trim().replaceAll("\\s+$", "");
                 if (cagName.equals(cag)) {
                     serviceCagList.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                 }
@@ -384,7 +385,8 @@ public class FoodyActivity extends AppCompatActivity {
                             .fit()
                             .centerCrop().into(imgIcon);
                     item.setText(serviceCagList.get(position).getServiceName());
-                    price.setText(serviceCagList.get(position).getUnitPrice() + "");
+                    final DecimalFormat format = new DecimalFormat("###,###.#");
+                    price.setText(format.format(serviceCagList.get(position).getUnitPrice()) + " " + container.getResources().getString(R.string.USD));
                     description.setText(serviceCagList.get(position).getDescription());
 
                     btnMinus.setOnClickListener(new View.OnClickListener() {

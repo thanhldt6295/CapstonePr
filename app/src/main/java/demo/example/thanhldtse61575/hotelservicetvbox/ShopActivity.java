@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,6 +50,7 @@ import com.squareup.picasso.Picasso;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -299,7 +301,7 @@ public class ShopActivity extends AppCompatActivity {
             // Search follow categoryName
             final List<Service> serviceCagList = new ArrayList<Service>();
             for (Service ac : serviceList) {
-                String cagName = ac.getCategoryName().toString().toUpperCase().trim();
+                String cagName = ac.getCategoryName().toString().toUpperCase().trim().replaceAll("\\s+$", "");
                 if (cagName.equals(cag)) {
                     serviceCagList.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                 }
@@ -316,6 +318,19 @@ public class ShopActivity extends AppCompatActivity {
                     ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_itemdetails, null);
                     popup = new PopupWindow(container, 600, 600, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+                    popup.setOutsideTouchable(true);
+                    popup.getContentView().setFocusableInTouchMode(true);
+                    popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                popup.dismiss();
+                                return true;
+                            }
+                            return false;
+                        }
+                    });
 
                     Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
                     Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
@@ -335,7 +350,8 @@ public class ShopActivity extends AppCompatActivity {
                             .fit()
                             .centerCrop().into(imgIcon);
                     item.setText(serviceCagList.get(position).getServiceName());
-                    price.setText(serviceCagList.get(position).getUnitPrice() + "");
+                    final DecimalFormat format = new DecimalFormat("###,###.#");
+                    price.setText(format.format(serviceCagList.get(position).getUnitPrice()) + " " + container.getResources().getString(R.string.USD));
                     description.setText(serviceCagList.get(position).getDescription());
 
                     btnMinus.setOnClickListener(new View.OnClickListener() {

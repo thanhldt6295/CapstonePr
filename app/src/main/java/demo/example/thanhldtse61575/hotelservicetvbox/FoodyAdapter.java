@@ -1,27 +1,16 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
@@ -76,7 +65,8 @@ public class FoodyAdapter extends BaseAdapter{
                 .fit()
                 .centerCrop().into(holder.image);
         holder.name.setText(list.get(position).getServiceName());
-        holder.price.setText(list.get(position).getUnitPrice()+"");
+        final DecimalFormat format = new DecimalFormat("###,###.#");
+        holder.price.setText(format.format(list.get(position).getUnitPrice())+" "+ gridView.getResources().getString(R.string.USD));
         return gridView;
     }
 

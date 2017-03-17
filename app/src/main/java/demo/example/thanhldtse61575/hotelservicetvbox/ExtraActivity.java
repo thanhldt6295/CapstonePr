@@ -47,8 +47,7 @@ public class ExtraActivity extends AppCompatActivity {
         // Search follow categoryName
         final List<Service> accID = new ArrayList<Service>();
         for (Service ac : acc) {
-            String cagName = ac.getCategoryName().toString().toUpperCase().trim();
-            ;
+            String cagName = ac.getCategoryName().toString().toUpperCase().trim().replaceAll("\\s+$", "");
             if (cagName.equals("ROOM EXTRAS")) {
                 accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
             }

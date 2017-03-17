@@ -96,7 +96,7 @@
     <string name="USD">đồng</string>
     <string name="added">Đã thêm vào giỏ</string>
     <string name="attach">ĐÍNH KÈM</string>
-    <string name="sent">ĐÃ GỬI</string>
+    <string name="sent">Mail của quý khách đang được gửi..</string>
     <string name="cancelled">ĐÃ HỦY</string>
     <string name="error"></string>
     <string name="attached">Đã kèm ảnh</string>
