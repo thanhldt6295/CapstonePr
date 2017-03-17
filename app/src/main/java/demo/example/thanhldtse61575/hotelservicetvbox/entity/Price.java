@@ -5,22 +5,22 @@ package demo.example.thanhldtse61575.hotelservicetvbox.entity;
  */
 
 public class Price {
-    private int id;
-    private String price;
+    private int ID;
+    private String About;
 
     public int getId() {
-        return id;
+        return ID;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.ID = id;
     }
 
     public String getPrice() {
-        return price;
+        return About;
     }
 
     public void setPrice(String price) {
-        this.price = price;
+        this.About = price;
     }
 }

@@ -5,22 +5,22 @@ package demo.example.thanhldtse61575.hotelservicetvbox.entity;
  */
 
 public class Hobby {
-    private int id;
-    private String name;
+    private int ID;
+    private String Name;
 
     public int getId() {
-        return id;
+        return ID;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.ID = id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 }

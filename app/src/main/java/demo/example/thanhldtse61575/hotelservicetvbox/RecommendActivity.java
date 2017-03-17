@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +31,7 @@ import java.util.List;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class RecommendActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -208,7 +213,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         RecommendEntityList = new ArrayList<Recommend>();
 
         Recommend Recommend1 = new Recommend();
-        Recommend1.setId(1);
+        Recommend1.setID(1);
         Recommend1.setHobbyID(1);
         Recommend1.setPriceID(1);
         Recommend1.setImage(R.drawable.ocean1);
@@ -217,7 +222,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         RecommendEntityList.add(Recommend1);
 
         Recommend Recommend2 = new Recommend();
-        Recommend2.setId(2);
+        Recommend2.setID(2);
         Recommend2.setHobbyID(2);
         Recommend2.setPriceID(1);
         Recommend2.setImage(R.drawable.mountain1);
@@ -226,7 +231,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         RecommendEntityList.add(Recommend2);
 
         Recommend Recommend3 = new Recommend();
-        Recommend3.setId(3);
+        Recommend3.setID(3);
         Recommend3.setHobbyID(2);
         Recommend3.setPriceID(2);
         Recommend3.setImage(R.drawable.mountain2);
@@ -235,7 +240,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         RecommendEntityList.add(Recommend3);
 
         Recommend Recommend4 = new Recommend();
-        Recommend4.setId(4);
+        Recommend4.setID(4);
         Recommend4.setHobbyID(2);
         Recommend4.setPriceID(2);
         Recommend4.setImage(R.drawable.mountain3);
@@ -245,7 +250,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
         //ALL
         Recommend Recommend5 = new Recommend();
-        Recommend5.setId(5);
+        Recommend5.setID(5);
         Recommend5.setHobbyID(3);
         Recommend5.setPriceID(3);
         Recommend5.setImage(R.drawable.cntrside1);
@@ -254,7 +259,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         RecommendEntityList.add(Recommend5);
 
         Recommend Recommend6 = new Recommend();
-        Recommend6.setId(6);
+        Recommend6.setID(6);
         Recommend6.setHobbyID(1);
         Recommend6.setPriceID(3);
         Recommend6.setImage(R.drawable.ocean2);
@@ -312,4 +317,6 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
         return jsonPreferences;
     }
+
+
 }
