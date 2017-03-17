@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
@@ -55,12 +56,23 @@ public class RecommendDetailActivity extends AppCompatActivity {
         int index = getIntent().getExtras().getInt("position");
         Recommend rec = RecommendEntityList.get(index);
 
-        ImageView productImageView = (ImageView) findViewById(R.id.imageView);
-        productImageView.setImageResource(rec.getImage());
-        TextView productTitleTextView = (TextView) findViewById(R.id.recNameTV);
-        productTitleTextView.setText(rec.getAddress());
-        TextView productDetailsTextView = (TextView) findViewById(R.id.recDescriptTV);
-        productDetailsTextView.setText(rec.getDescription());
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        String url = rec.getImage();
+        Picasso.with(this)
+                .load(url)
+                .placeholder(R.drawable.loading)
+                .fit()
+                .centerCrop().into(imageView);
+        TextView locationName = (TextView) findViewById(R.id.recNameTV);
+        locationName.setText(rec.getLocationName());
+        TextView address = (TextView) findViewById(R.id.recAddressTV);
+        address.setText(rec.getAddress());
+        TextView description = (TextView) findViewById(R.id.recDescriptTV);
+        description.setText(rec.getDescription());
+        TextView hobby = (TextView) findViewById(R.id.hobbyTV);
+        hobby.setText(rec.getDescription());
+        TextView price = (TextView) findViewById(R.id.priceTV);
+        hobby.setText(rec.getDescription());
 
         // Datetime & Calendar
         final TextView txtDate;

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,9 +75,14 @@ public class RecommendAdapter extends BaseAdapter implements Filterable {
 
         final Recommend item = getItem(position);
 
-        viewHolder.imageView.setImageResource(item.getImage());
-        viewHolder.tvName.setText(item.getAddress());
-        viewHolder.tvDescript.setText(String.valueOf(item.getDescription()));
+        String url = RecommendFilterList.get(position).getImage();
+        Picasso.with(context)
+                .load(url)
+                .placeholder(R.drawable.loading)
+                .fit()
+                .centerCrop().into(viewHolder.imageView);
+        viewHolder.tvName.setText(item.getLocationName());
+        viewHolder.tvDescript.setText(String.valueOf(item.getAddress()));
 
         return updateView;
     }

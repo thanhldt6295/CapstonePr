@@ -39,6 +39,19 @@
     </TextView>
 
     <TextView
+        android:id="@+id/recAddressTV"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center_vertical"
+        android:text="BCD"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_weight="0.7"
+        android:layout_below="@+id/recNameTV"
+        android:textStyle="bold">
+    </TextView>
+
+    <TextView
         android:id="@+id/recDescriptTV"
         android:layout_height="wrap_content"
         android:textSize="20dp"
@@ -47,7 +60,34 @@
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_weight="0.7"
-        android:layout_below="@+id/recNameTV">
+        android:layout_below="@+id/priceTV"
+        android:textStyle="italic">
+    </TextView>
+
+    <TextView
+        android:id="@+id/hobbyTV"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center_vertical"
+        android:text="BCD"
+        android:textColor="#fff700"
+        android:layout_width="wrap_content"
+        android:layout_weight="0.7"
+        android:layout_below="@+id/recAddressTV"
+        android:textStyle="bold|italic">
+    </TextView>
+
+    <TextView
+        android:id="@+id/priceTV"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center_vertical"
+        android:text="BCD"
+        android:textColor="@color/red"
+        android:layout_width="wrap_content"
+        android:layout_weight="0.7"
+        android:layout_below="@+id/hobbyTV"
+        android:textStyle="bold|italic">
     </TextView>
 
     <include layout="@layout/layout_roombar" />

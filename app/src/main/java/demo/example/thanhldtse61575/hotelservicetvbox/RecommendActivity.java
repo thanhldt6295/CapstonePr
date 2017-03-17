@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +41,9 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     //private Button btnSearch;
     private List<Recommend> RecommendEntityList = new ArrayList<Recommend>();
     private List<Hobby> HobbyEntityList = new ArrayList<Hobby>();
+    private List<Hobby> HobbyList = new ArrayList<Hobby>();
     private List<Price> PriceEntityList = new ArrayList<Price>();
+    private List<Price> PriceList = new ArrayList<Price>();
     private ListView listView;
     private RecommendAdapter adapter;
     private HobbyAdapter HobbyAdapter;
@@ -75,7 +78,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         PriceSpinner.setAdapter(PriceAdapter);
         PriceSpinner.setOnItemSelectedListener(this);
 
-        adapter = new RecommendAdapter(this, loadDummyRecommend());
+        adapter = new RecommendAdapter(this, getRecommendList());
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -156,118 +159,32 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     }
 
     private List<Hobby> loadDummyHobby(){
-        HobbyEntityList = new ArrayList<Hobby>();
+        HobbyEntityList = getHobbyList();
 
         Hobby Hobby0 = new Hobby();
         Hobby0.setId(0);
         Hobby0.setName(getResources().getString(R.string.hobby));
-        HobbyEntityList.add(Hobby0);
+        HobbyList.add(Hobby0);
 
-        Hobby Hobby1 = new Hobby();
-        Hobby1.setId(1);
-        Hobby1.setName(getResources().getString(R.string.ocean));
-        HobbyEntityList.add(Hobby1);
+        for(Hobby h : HobbyEntityList){
+            HobbyList.add(h);
+        }
 
-        Hobby Hobby2 = new Hobby();
-        Hobby2.setId(2);
-        Hobby2.setName(getResources().getString(R.string.mountain));
-        HobbyEntityList.add(Hobby2);
-
-        Hobby Hobby3 = new Hobby();
-        Hobby3.setId(3);
-        Hobby3.setName(getResources().getString(R.string.countryside));
-        HobbyEntityList.add(Hobby3);
-
-        return HobbyEntityList;
+        return HobbyList;
     }
 
     private List<Price> loadDummyPrice(){
-        PriceEntityList = new ArrayList<Price>();
+        PriceEntityList = getPriceList();
 
         Price price = new Price();
         price.setId(0);
         price.setPrice(getResources().getString(R.string.money));
-        PriceEntityList.add(price);
+        PriceList.add(price);
 
-        Price price1 = new Price();
-        price1.setId(1);
-        price1.setPrice("3,000,000 - 5,000,000");
-        PriceEntityList.add(price1);
-
-        Price price2 = new Price();
-        price2.setId(2);
-        price2.setPrice("6,000,000 - 8,000,000");
-        PriceEntityList.add(price2);
-
-        Price price3 = new Price();
-        price3.setId(3);
-        price3.setPrice("over 10,000,000");
-        PriceEntityList.add(price3);
-
-        return PriceEntityList;
-    }
-
-
-    private List<Recommend> loadDummyRecommend(){
-
-        RecommendEntityList = new ArrayList<Recommend>();
-
-        Recommend Recommend1 = new Recommend();
-        Recommend1.setID(1);
-        Recommend1.setHobbyID(1);
-        Recommend1.setPriceID(1);
-        Recommend1.setImage(R.drawable.ocean1);
-        Recommend1.setAddress("ABC");
-        Recommend1.setDescription("Hello Ahihi");
-        RecommendEntityList.add(Recommend1);
-
-        Recommend Recommend2 = new Recommend();
-        Recommend2.setID(2);
-        Recommend2.setHobbyID(2);
-        Recommend2.setPriceID(1);
-        Recommend2.setImage(R.drawable.mountain1);
-        Recommend2.setAddress("BCD");
-        Recommend2.setDescription("2nd Cross");
-        RecommendEntityList.add(Recommend2);
-
-        Recommend Recommend3 = new Recommend();
-        Recommend3.setID(3);
-        Recommend3.setHobbyID(2);
-        Recommend3.setPriceID(2);
-        Recommend3.setImage(R.drawable.mountain2);
-        Recommend3.setAddress("Carlton");
-        Recommend3.setDescription("Church Street");
-        RecommendEntityList.add(Recommend3);
-
-        Recommend Recommend4 = new Recommend();
-        Recommend4.setID(4);
-        Recommend4.setHobbyID(2);
-        Recommend4.setPriceID(2);
-        Recommend4.setImage(R.drawable.mountain3);
-        Recommend4.setAddress("New");
-        Recommend4.setDescription("Vatanappilly");
-        RecommendEntityList.add(Recommend4);
-
-        //ALL
-        Recommend Recommend5 = new Recommend();
-        Recommend5.setID(5);
-        Recommend5.setHobbyID(3);
-        Recommend5.setPriceID(3);
-        Recommend5.setImage(R.drawable.cntrside1);
-        Recommend5.setAddress("ABCD");
-        Recommend5.setDescription("Hehe Ahihi");
-        RecommendEntityList.add(Recommend5);
-
-        Recommend Recommend6 = new Recommend();
-        Recommend6.setID(6);
-        Recommend6.setHobbyID(1);
-        Recommend6.setPriceID(3);
-        Recommend6.setImage(R.drawable.ocean2);
-        Recommend6.setAddress("BCD");
-        Recommend6.setDescription("thueydhs");
-        RecommendEntityList.add(Recommend6);
-
-        return RecommendEntityList;
+        for(Price p : PriceEntityList){
+            PriceList.add(p);
+        }
+        return PriceList;
     }
 
     @Override
@@ -318,5 +235,39 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         return jsonPreferences;
     }
 
+    private List<Hobby> getHobbyList(){
+        Gson gson = new Gson();
+        List<Hobby> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedHobby", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("HobbyList", "");
 
+        Type type = new TypeToken<List<Hobby>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
+
+    private List<Price> getPriceList(){
+        Gson gson = new Gson();
+        List<Price> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedPrice", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("PriceList", "");
+
+        Type type = new TypeToken<List<Price>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
+
+    private List<Recommend> getRecommendList(){
+        Gson gson = new Gson();
+        List<Recommend> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedRecommend", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("RecommendList", "");
+
+        Type type = new TypeToken<List<Recommend>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
 }

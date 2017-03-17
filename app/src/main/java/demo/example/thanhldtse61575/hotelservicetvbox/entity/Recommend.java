@@ -7,15 +7,15 @@ package demo.example.thanhldtse61575.hotelservicetvbox.entity;
 public class Recommend {
     private int ID;
     private int HobbyID;
-    private int PriceID;
     private String LocationName;
     private String HobbyName;
+    private int PriceID;
     private String About;
     private String Address;
     private double X;
     private double Y;
     private String Description;
-    private int Image;
+    private String Image;
 
     public int getID() {
         return ID;
@@ -97,11 +97,11 @@ public class Recommend {
         Description = description;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 }
