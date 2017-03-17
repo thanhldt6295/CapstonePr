@@ -36,7 +36,6 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 public class WelcomeActivity extends AppCompatActivity {
 
     TextView customerWel;
-    TextView customerWelV;
     Button dummyBtnEng;
     Button dummyBtnViet;
     public static final String mPath = "roomid.txt";
@@ -143,10 +142,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 final String acc = new Gson().fromJson(response, new TypeToken<String>() {
                 }.getType());
 
-                customerWel = (TextView) findViewById(R.id.fullscreen_content);
-                customerWelV = (TextView) findViewById(R.id.fullscreen_content2);
-                customerWel.setText("WELCOME " + acc.toString().toUpperCase().trim());
-                customerWelV.setText("XIN CHÀO " + acc.toString().toUpperCase().trim());
+                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
+                customerWel.setText(acc.toString().toUpperCase().trim());
                 setCust2Share(acc);
             }
         }
