@@ -81,8 +81,8 @@
     <string name="notifyqty">Xin quý khách vui lòng chọn số lượng 1 sản phẩm..</string>
     <string name="tennis">QUẦN VỢT</string>
     <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú..</string>
-    <string name="capacity">Sức chứa (người/phòng)</string>
-    <string name="worktime">Thời gian làm việc</string>
+    <string name="capacity">Sức chứa (người/phòng):</string>
+    <string name="worktime">Thời gian làm việc:</string>
     <string name="validate">Email không hợp lệ hoặc Tin nhắn bị trống hoặc Không có ảnh đính kèm!</string>
     <string name="minutes"> PHÚT SAU</string>
     <string name="action_settings">Cài đặt</string>

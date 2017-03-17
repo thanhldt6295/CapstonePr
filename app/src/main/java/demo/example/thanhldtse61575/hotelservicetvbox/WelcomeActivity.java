@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -277,10 +278,45 @@ public class WelcomeActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_btnEng).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_btnEng2).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_btnViet2).setOnTouchListener(mDelayHideTouchListener);
 
         dummyBtnEng = (Button)findViewById(R.id.dummy_btnEng2);
+        dummyBtnEng.setFocusable(true);
+        dummyBtnEng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    dummyBtnEng.setBackgroundColor(Color.parseColor("#DABCBCBC"));
+                    dummyBtnEng.setTextColor(Color.parseColor("#FFFFFFFF"));
+                    dummyBtnEng.setTypeface(Typeface.DEFAULT_BOLD);
+                }
+                else {
+                    dummyBtnEng.setBackgroundColor(Color.parseColor("#dcffffff"));
+                    dummyBtnEng.setTextColor(Color.parseColor("#c88b8b8b"));
+                    dummyBtnEng.setTypeface(Typeface.DEFAULT);
+                }
+            }
+        });
         dummyBtnViet = (Button)findViewById(R.id.dummy_btnViet2);
+        dummyBtnViet.setFocusable(true);
+        dummyBtnViet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    dummyBtnViet.setBackgroundColor(Color.parseColor("#DABCBCBC"));
+                    dummyBtnViet.setTextColor(Color.parseColor("#FFFFFFFF"));
+                    dummyBtnViet.setTypeface(Typeface.DEFAULT_BOLD);
+                }
+                else {
+                    dummyBtnViet.setBackgroundColor(Color.parseColor("#dcffffff"));
+                    dummyBtnViet.setTextColor(Color.parseColor("#c88b8b8b"));
+                    dummyBtnViet.setTypeface(Typeface.DEFAULT);
+                }
+            }
+        });
 
         dummyBtnEng.setOnClickListener(new View.OnClickListener() {
             @Override
