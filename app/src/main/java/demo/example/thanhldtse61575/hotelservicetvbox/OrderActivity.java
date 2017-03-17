@@ -3,6 +3,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,8 +43,34 @@ public class OrderActivity extends AppCompatActivity {
         cart = (List<CartItem>) getIntent().getSerializableExtra("storeItem");
 
         TextView total = (TextView) findViewById(R.id.txtCartTotal);
-        Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
-        Button btnClear = (Button) findViewById(R.id.btnClearOrder);
+        final Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
+        btnFinalize.setFocusable(true);
+        btnFinalize.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnFinalize.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnFinalize.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
+        final Button btnClear = (Button) findViewById(R.id.btnClearOrder);
+        btnClear.setFocusable(true);
+        btnClear.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnClear.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnClear.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         Spinner s = (Spinner) findViewById(R.id.spinner);
 
         if(cart!=null){

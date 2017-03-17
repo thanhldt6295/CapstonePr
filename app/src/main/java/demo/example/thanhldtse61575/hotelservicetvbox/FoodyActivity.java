@@ -327,9 +327,48 @@ public class FoodyActivity extends AppCompatActivity {
                         }
                     });
 
-                    Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
-                    Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
+                    final Button btnPlus = (Button) container.findViewById(R.id.btnPlus);
+                    btnPlus.setFocusable(true);
+                    btnPlus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if(hasFocus) {
+                                btnPlus.setTextColor(Color.parseColor("#E2FFE600"));
+                            }
+                            else {
+                                btnPlus.setTextColor(Color.parseColor("#FFFFFFFF"));
+                            }
+                        }
+                    });
+                    final Button btnMinus = (Button) container.findViewById(R.id.btnMinus);
+                    btnMinus.setFocusable(true);
+                    btnMinus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if(hasFocus) {
+                                btnMinus.setTextColor(Color.parseColor("#E2FFE600"));
+                            }
+                            else {
+                                btnMinus.setTextColor(Color.parseColor("#FFFFFFFF"));
+                            }
+                        }
+                    });
                     final Button btnOrder = (Button) container.findViewById(R.id.btnOrder);
+                    btnOrder.setFocusable(true);
+                    btnOrder.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if(hasFocus) {
+                                btnOrder.setTextColor(Color.parseColor("#E2FFE600"));
+                            }
+                            else {
+                                btnOrder.setTextColor(Color.parseColor("#FFFFFFFF"));
+                            }
+                        }
+                    });
                     ImageView imgIcon = (ImageView) container.findViewById(R.id.imageViewDetail);
                     TextView item = (TextView) container.findViewById(R.id.txtServiceName);
                     TextView price = (TextView) container.findViewById(R.id.txtUnitPrice);

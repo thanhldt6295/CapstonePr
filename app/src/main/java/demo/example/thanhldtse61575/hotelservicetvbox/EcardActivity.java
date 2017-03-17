@@ -82,6 +82,19 @@ public class EcardActivity extends AppCompatActivity {
         subject = (EditText) findViewById(R.id.txtSubject);
         message = (EditText) findViewById(R.id.txtMessage);
         btnSend = (Button) findViewById(R.id.btnSend);
+        btnSend.setFocusable(true);
+        btnSend.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnSend.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnSend.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         gridView = (GridView) findViewById(R.id.gridViewCard);
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_ecard);
         EcardAdapter adapter = new EcardAdapter(EcardActivity.this, list);

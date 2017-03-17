@@ -65,6 +65,19 @@ public class RequestTicketActivity extends AppCompatActivity {
 
         comment = (EditText) findViewById(R.id.txtComment);
         finalize = (Button) findViewById(R.id.btnFinalizeOrder);
+        finalize.setFocusable(true);
+        finalize.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    finalize.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    finalize.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         finalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

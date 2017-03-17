@@ -101,7 +101,20 @@ public class ExtraAdapter extends BaseAdapter {
 
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
 
-        Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
+        final Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
+        btnPlus.setFocusable(true);
+        btnPlus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnPlus.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnPlus.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +127,20 @@ public class ExtraAdapter extends BaseAdapter {
             }
         });
 
-        Button btnMinus = (Button) convertView.findViewById(R.id.btnMinus);
+        final Button btnMinus = (Button) convertView.findViewById(R.id.btnMinus);
+        btnMinus.setFocusable(true);
+        btnMinus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnMinus.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnMinus.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

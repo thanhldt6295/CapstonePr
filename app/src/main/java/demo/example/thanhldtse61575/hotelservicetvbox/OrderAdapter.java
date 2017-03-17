@@ -112,7 +112,20 @@ public class OrderAdapter extends BaseAdapter {
         float t = getTotal(cart);
         total.setText(format.format(t) +" "+ view.getResources().getString(R.string.USD));
 
-        Button btnPlus = (Button) view.findViewById(R.id.btnPlus);
+        final Button btnPlus = (Button) view.findViewById(R.id.btnPlus);
+        btnPlus.setFocusable(true);
+        btnPlus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnPlus.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnPlus.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +140,20 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
 
-        Button btnMinus = (Button) view.findViewById(R.id.btnMinus);
+        final Button btnMinus = (Button) view.findViewById(R.id.btnMinus);
+        btnMinus.setFocusable(true);
+        btnMinus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnMinus.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnMinus.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +168,20 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
 
-        Button btnDelete = (Button) view.findViewById(R.id.btnDelete);
+        final Button btnDelete = (Button) view.findViewById(R.id.btnDelete);
+        btnDelete.setFocusable(true);
+        btnDelete.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    btnDelete.setTextColor(Color.parseColor("#E2FFE600"));
+                }
+                else {
+                    btnDelete.setTextColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+        });
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
