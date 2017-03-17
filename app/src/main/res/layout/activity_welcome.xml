@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgr"
+    android:background="@drawable/welcome"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.WelcomeActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#64dfdfdf">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,9 +83,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="@string/dummy_eng"
-                android:textColor="#e2999999"
+                android:textColor="@color/black_overlay"
                 android:textSize="50dp"
-                android:background="#64eaeaea"/>
+                android:background="#e0ffffff"/>
 
             <LinearLayout
                 android:layout_width="100dp"
@@ -98,9 +99,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="TIẾNG VIỆT"
-                android:textColor="#e2999999"
+                android:textColor="@color/black_overlay"
                 android:textSize="50dp"
-                android:background="#64eaeaea"/>
+                android:background="#e0ffffff"/>
 
             <LinearLayout
                 android:layout_width="200dp"
