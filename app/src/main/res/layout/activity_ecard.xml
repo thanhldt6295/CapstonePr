@@ -83,7 +83,7 @@
                             android:id="@+id/txtMailRecv"
                             android:hint="abc@gmail.com"
                             android:textSize="@dimen/text_size_medium"
-                            android:textColor="#79aefd"/>
+                            android:textColor="@color/blue_sky"/>
 
                     </TableRow>
 
