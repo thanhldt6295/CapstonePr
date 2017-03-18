@@ -24,7 +24,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:background="@color/light_translucent">
+            android:background="@color/light_translucent"
+            android:id="@+id/layoutRequest">
 
             <Spinner
                 android:id="@+id/typeSpinner"

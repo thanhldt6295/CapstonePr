@@ -23,7 +23,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/dark_translucent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/layoutBill">
 
             <ListView
                 android:id="@+id/detailsListView"

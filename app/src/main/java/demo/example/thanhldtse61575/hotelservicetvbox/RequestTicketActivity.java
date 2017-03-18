@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,12 @@ public class RequestTicketActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.request_ticket));
+        LinearLayout layoutReq = (LinearLayout) findViewById(R.id.layoutRequest);
+        layoutReq.getBackground().setAlpha(80);
+        LinearLayout layoutTime = (LinearLayout) findViewById(R.id.layoutTime);
+        layoutTime.getBackground().setAlpha(80);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 

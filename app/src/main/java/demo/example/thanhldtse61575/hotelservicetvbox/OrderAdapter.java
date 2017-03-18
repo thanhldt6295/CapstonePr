@@ -113,6 +113,7 @@ public class OrderAdapter extends BaseAdapter {
         total.setText(format.format(t) +" "+ view.getResources().getString(R.string.USD));
 
         final Button btnPlus = (Button) view.findViewById(R.id.btnPlus);
+        btnPlus.getBackground().setAlpha(102);
         btnPlus.setFocusable(true);
         btnPlus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -141,6 +142,7 @@ public class OrderAdapter extends BaseAdapter {
         });
 
         final Button btnMinus = (Button) view.findViewById(R.id.btnMinus);
+        btnMinus.getBackground().setAlpha(102);
         btnMinus.setFocusable(true);
         btnMinus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 

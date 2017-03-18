@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -36,6 +37,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -56,6 +58,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.App;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.BagdeDrawable;
@@ -93,6 +96,8 @@ public class FoodyActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.food_drink));
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -151,6 +156,8 @@ public class FoodyActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        AppBarLayout layoutBar = (AppBarLayout) findViewById(R.id.appbar);
+        layoutBar.getBackground().setAlpha(102);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setTabTextColors(-100,-1);
         tabLayout.setupWithViewPager(mViewPager);
@@ -312,6 +319,9 @@ public class FoodyActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_itemdetails, null);
+                    LinearLayout layoutDetail = (LinearLayout) container.findViewById(R.id.layoutDetail);
+                    layoutDetail.getBackground().setAlpha(226);
+
                     popup = new PopupWindow(container, 600, 600, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
                     popup.setOutsideTouchable(true);
@@ -515,6 +525,8 @@ public class FoodyActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             int indexTab = getArguments().getInt(ARG_SECTION_NUMBER);
             View rootView = inflater.inflate(R.layout.fragment_order, container, false);
+            LinearLayout layoutFoody = (LinearLayout) rootView.findViewById(R.id.layoutFoody);
+            layoutFoody.getBackground().setAlpha(80);
             gridView = (GridView) rootView.findViewById(R.id.gridView);
             relativeLayout = (RelativeLayout) rootView.findViewById(R.id.relative);
             if(indexTab==1) {

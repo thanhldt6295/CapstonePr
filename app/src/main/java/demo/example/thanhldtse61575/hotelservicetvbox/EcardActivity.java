@@ -25,6 +25,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,6 +72,13 @@ public class EcardActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.ecard));
+
+        LinearLayout layoutEcard = (LinearLayout) findViewById(R.id.layoutEcard);
+        layoutEcard.getBackground().setAlpha(80);
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
+
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -105,6 +113,10 @@ public class EcardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_ecarditem, null);
+
+                RelativeLayout layoutImg = (RelativeLayout) container.findViewById(R.id.layoutImage);
+                layoutImg.getBackground().setAlpha(80);
+
                 popup = new PopupWindow(container, 1280, 800, true);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 

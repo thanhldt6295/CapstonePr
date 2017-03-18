@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,6 +38,12 @@ public class OrderActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.order));
+        LinearLayout layoutCart = (LinearLayout) findViewById(R.id.layoutCart);
+        layoutCart.getBackground().setAlpha(80);
+        LinearLayout layoutOrder = (LinearLayout) findViewById(R.id.layoutOrder);
+        layoutCart.getBackground().setAlpha(80);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 

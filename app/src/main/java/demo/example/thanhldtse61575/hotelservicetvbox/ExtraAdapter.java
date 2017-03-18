@@ -102,6 +102,7 @@ public class ExtraAdapter extends BaseAdapter {
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
 
         final Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
+        btnPlus.getBackground().setAlpha(102);
         btnPlus.setFocusable(true);
         btnPlus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -128,6 +129,7 @@ public class ExtraAdapter extends BaseAdapter {
         });
 
         final Button btnMinus = (Button) convertView.findViewById(R.id.btnMinus);
+        btnMinus.getBackground().setAlpha(102);
         btnMinus.setFocusable(true);
         btnMinus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 

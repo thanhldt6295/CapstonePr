@@ -20,6 +20,7 @@ public class Holder extends RecyclerView.ViewHolder implements View.OnClickListe
         super(itemView);
         img = (ImageView) itemView.findViewById(R.id.image);
         txt = (TextView) itemView.findViewById(R.id.title);
+        txt.getBackground().setAlpha(138);
         itemView.setOnClickListener(this);
         itemView.setClickable(true);
         itemView.setFocusable(true);

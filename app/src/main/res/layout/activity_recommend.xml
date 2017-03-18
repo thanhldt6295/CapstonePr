@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_below="@+id/hobbySpinner"
-            android:background="#30729f64" />
+            android:background="@color/gray_green" />
 
         <Space
             android:layout_width="wrap_content"

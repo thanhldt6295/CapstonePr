@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_details);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 

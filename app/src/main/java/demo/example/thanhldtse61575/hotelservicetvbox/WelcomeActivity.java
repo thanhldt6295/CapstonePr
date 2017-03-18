@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -133,9 +134,12 @@ public class WelcomeActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("Hotel Service TV Box");
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(51);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.ic_hotel);
-//            ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription("Hotel Service TV Box", bm , ContextCompat.getColor(WelcomeActivity.this, R.color.colorError));
+//            ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription("Hotel Service TV Box",
+//                    bm , ContextCompat.getColor(WelcomeActivity.this, R.color.gray_dark));
 //            setTaskDescription(taskDescription);
 //        }
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,6 +41,10 @@ public class ExtraActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.room_extras));
+        LinearLayout layoutTime = (LinearLayout) findViewById(R.id.layoutTime);
+        layoutTime.getBackground().setAlpha(80);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -69,8 +74,9 @@ public class ExtraActivity extends AppCompatActivity {
         });
         Spinner s = (Spinner) findViewById(R.id.timeSpinner);
 
+        ListView listView = (ListView) findViewById(R.id.extraListView);
+        listView.getBackground().setAlpha(80);
         if (accID.size() != 0) {
-            ListView listView = (ListView) findViewById(R.id.extraListView);
             ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize);
             listView.setAdapter(a);
         } else {

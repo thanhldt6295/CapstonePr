@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -60,14 +61,19 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.recommend));
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         //btnSearch = (Button) findViewById(R.id.btnSearch);
 
         HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
+        HobbySpinner.getBackground().setAlpha(80);
         PriceSpinner = (Spinner) findViewById(R.id.priceSpinner);
+        PriceSpinner.getBackground().setAlpha(80);
         listView = (ListView) findViewById(R.id.recListView);
+        listView.getBackground().setAlpha(48);
         HobbyAdapter = new HobbyAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyHobby());
         HobbyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         HobbySpinner.setAdapter(HobbyAdapter);
