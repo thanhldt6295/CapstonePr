@@ -26,7 +26,7 @@
                 android:id="@+id/hobbySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#806f7171"
+                android:background="@color/dark_translucent"
                 android:dropDownSelector="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
                 android:layout_weight="1"></Spinner>
@@ -35,7 +35,7 @@
                 android:id="@+id/priceSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#806f7171"
+                android:background="@color/dark_translucent"
                 android:dropDownSelector="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
                 android:layout_weight="1"></Spinner>

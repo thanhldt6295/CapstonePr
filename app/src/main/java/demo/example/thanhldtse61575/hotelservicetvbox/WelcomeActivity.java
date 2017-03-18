@@ -1,14 +1,20 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +23,8 @@ import android.util.DisplayMetrics;
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,6 +124,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     };
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +133,16 @@ public class WelcomeActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("Hotel Service TV Box");
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.ic_hotel);
+//            ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription("Hotel Service TV Box", bm , ContextCompat.getColor(WelcomeActivity.this, R.color.colorError));
+//            setTaskDescription(taskDescription);
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            Window window = getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(getResources().getColor(R.color.colorError));
+//        }
 
         mQuoteBank = new QuoteBank(this);
         mLines = mQuoteBank.readLine(mPath);

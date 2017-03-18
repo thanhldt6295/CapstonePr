@@ -75,7 +75,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="0.7"
                     android:text="BCD"
-                    android:textColor="#fff700"
+                    android:textColor="@color/yellow"
                     android:textSize="20dp"
                     android:textStyle="bold|italic"></TextView>
 

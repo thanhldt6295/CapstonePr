@@ -553,6 +553,10 @@ public class FoodyActivity extends AppCompatActivity {
                 PassData2Tabbed("COFFEE");
                 return rootView;
             }
+            else if(indexTab==10){
+                PassData2Tabbed("OTHER DRINKS");
+                return rootView;
+            }
             else {
                 return rootView;
             }
@@ -595,8 +599,8 @@ public class FoodyActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 9 total pages.
-            return 9;
+            // Show 10 total pages.
+            return 10;
         }
 
         @Override
@@ -620,6 +624,8 @@ public class FoodyActivity extends AppCompatActivity {
                     return getResources().getString(R.string.dessert);
                 case 8:
                     return getResources().getString(R.string.coffee);
+                case 9:
+                    return getResources().getString(R.string.other_drinks);
             }
             return null;
         }
