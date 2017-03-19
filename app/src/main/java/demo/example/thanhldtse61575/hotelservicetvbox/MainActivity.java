@@ -4,9 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     int[] titles = {R.string.promotional, R.string.service, R.string.ecard, R.string.bill,
             R.string.survey, R.string.recommend, R.string.application};
     int[] images = {R.drawable.img_promotional, R.drawable.img_roomservices, R.drawable.img_ecard,
-            R.drawable.img_billing, R.drawable.img_survey, R.drawable.img_recommend2, R.drawable.img_app};
+            R.drawable.img_billing, R.drawable.img_survey, R.drawable.img_recommend, R.drawable.img_app};
     TextView roomid;
 
     @Override

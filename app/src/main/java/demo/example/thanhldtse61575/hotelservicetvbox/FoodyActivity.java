@@ -1,9 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -58,7 +56,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.App;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.BagdeDrawable;
@@ -221,12 +218,56 @@ public class FoodyActivity extends AppCompatActivity {
             SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = sp.edit();
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.confirm_popup, null);
 
-            builder.setTitle(R.string.confirm_back);
-            builder.setMessage(R.string.confirm_back_question);
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
+//                layoutPopup.getBackground().setAlpha(126);
+//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
+//                layoutTitle.getBackground().setAlpha(200);
+//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
+//                layoutContent.getBackground().setAlpha(238);
+//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
+//                layoutBtn.getBackground().setAlpha(200);
+
+            popup = new PopupWindow(container, 600, 300, true);
+            popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+            popup.setOutsideTouchable(true);
+            popup.getContentView().setFocusableInTouchMode(true);
+            popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        popup.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            container.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popup.dismiss();
+                    return true;
+                }
+            });
+            TextView confirm = (TextView) container.findViewById(R.id.tvConfirm);
+            confirm.setText(container.getResources().getString(R.string.confirm_back));
+            TextView content = (TextView) container.findViewById(R.id.tvContent);
+            content.setText(container.getResources().getString(R.string.confirm_back_question));
+            Button cancel = (Button) container.findViewById(R.id.btnCancel);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popup.dismiss();
+                }
+            });
+            Button okyes = (Button) container.findViewById(R.id.btnOK);
+            okyes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     cart.clear();
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
@@ -234,12 +275,6 @@ public class FoodyActivity extends AppCompatActivity {
                     FoodyActivity.super.onBackPressed();
                 }
             });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //Nothing
-                }
-            });
-            builder.show();
         }
         if(cart.size()==0) {
             FoodyActivity.super.onBackPressed();

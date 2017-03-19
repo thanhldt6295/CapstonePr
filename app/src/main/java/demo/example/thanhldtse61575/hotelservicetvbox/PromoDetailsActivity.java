@@ -1,16 +1,22 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +45,9 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     public static final String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
     public static String VIDEO_ID = "";
 
+    private RelativeLayout relativeLayout;
+    private PopupWindow popup;
+    private LayoutInflater popupInflater;
     List<Promotional> promo = new ArrayList<>();
     TextView roomid;
     TextView name;
@@ -50,7 +59,6 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_details);
-        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
@@ -62,6 +70,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         hour = (TextView) findViewById(R.id.tvWorkHour);
         cap = (TextView) findViewById(R.id.tvCapacity);
         btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
+        relativeLayout = (RelativeLayout) findViewById(R.id.activity_promo_details);
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
@@ -201,20 +210,64 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(PromoDetailsActivity.this)
-                        .setTitle(R.string.confirm_service)
-                        .setMessage(R.string.confirm_question_do)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                popupInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
 
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                vToast.setTextColor(Color.WHITE);
-                                vToast.setTextSize(30);
-                                toast.show();
-                            }})
-                        .setNegativeButton(android.R.string.no, null).show();
+//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
+//                layoutPopup.getBackground().setAlpha(126);
+//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
+//                layoutTitle.getBackground().setAlpha(200);
+//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
+//                layoutContent.getBackground().setAlpha(238);
+//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
+//                layoutBtn.getBackground().setAlpha(200);
+
+                popup = new PopupWindow(container, 600, 300, true);
+                popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+                popup.setOutsideTouchable(true);
+                popup.getContentView().setFocusableInTouchMode(true);
+                popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            popup.dismiss();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popup.dismiss();
+                        return true;
+                    }
+                });
+                TextView confirm = (TextView) container.findViewById(R.id.tvConfirm);
+                confirm.setText(container.getResources().getString(R.string.confirm_service));
+                TextView content = (TextView) container.findViewById(R.id.tvContent);
+                content.setText(container.getResources().getString(R.string.confirm_question_do));
+                Button cancel = (Button) container.findViewById(R.id.btnCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                    }
+                });
+                Button okyes = (Button) container.findViewById(R.id.btnOK);
+                okyes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                        vToast.setTextColor(Color.WHITE);
+                        vToast.setTextSize(30);
+                        toast.show();
+                    }
+                });
             }
         });
     }

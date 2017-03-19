@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -44,6 +45,7 @@ public class PendingActivity extends AppCompatActivity {
             }.getType());
 
             TextView total = (TextView) findViewById(R.id.txtCartTotal);
+            RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_pending);
 
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
@@ -56,7 +58,7 @@ public class PendingActivity extends AppCompatActivity {
             }
             if(pending.size()!=0) {
                 ListView listView = (ListView) findViewById(R.id.detailsListView);
-                PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total);
+                PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total, relativeLayout);
                 listView.setAdapter(a);
             }
         }

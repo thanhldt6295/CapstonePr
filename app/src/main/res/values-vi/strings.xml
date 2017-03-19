@@ -65,8 +65,8 @@
     <string name="air_condition">MÁY LẠNH</string>
     <string name="refrigerator">TỦ LẠNH</string>
     <string name="television">TIVI</string>
-    <string name="cancel">Hủy</string>
-    <string name="yes">Có</string>
+    <string name="cancel">HỦY</string>
+    <string name="yes">CÓ</string>
     <string name="recommend">GỢI Ý</string>
     <string name="golf">GÔN</string>
     <string name="gym">TẬP THỂ HÌNH</string>
@@ -115,6 +115,8 @@
     <string name="money">TIỀN DẰN TÚI</string>
     <string name="search">TÌM KIẾM</string>
     <string name="title_activity_foody"></string>
+    <string name="confirm_cancel">Xác nhận hủy đơn hàng</string>
+    <string name="confirm_content">Quý khách có chắc chắn hủy đơn hàng này chứ?</string>
 
 
 </resources>

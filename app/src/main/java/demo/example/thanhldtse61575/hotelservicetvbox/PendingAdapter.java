@@ -1,19 +1,23 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,9 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class PendingAdapter extends BaseAdapter{
 
+    private RelativeLayout relativeLayout;
+    private PopupWindow popup;
+    private LayoutInflater popupInflater;
     private String str = "";
     private Context ctx;
     private ListView orderListView;
@@ -39,11 +46,12 @@ public class PendingAdapter extends BaseAdapter{
     private LayoutInflater layoutInflater;
     private TextView total;
 
-    public PendingAdapter(Context ctx, ListView orderListView, List<OrderDetail> cart, TextView total) {
+    public PendingAdapter(Context ctx, ListView orderListView, List<OrderDetail> cart, TextView total, RelativeLayout relativeLayout) {
         this.ctx = ctx;
         this.orderListView = orderListView;
         this.cart = cart;
         this.total = total;
+        this.relativeLayout = relativeLayout;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -102,36 +110,80 @@ public class PendingAdapter extends BaseAdapter{
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int a = cart.get(position).getOrderDetailID();
-                str = a + "";
-                new AlertDialog.Builder(ctx)
-                        .setTitle("Confirm Cancel")
-                        .setMessage("Are you sure?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                popupInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
 
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                class SendDataToServer extends AsyncTask<String, String, String> {
-                                    @Override
-                                    protected String doInBackground(String... params) {
-                                        CommonService commonService = new CommonService();
-                                        return commonService.getData(params[0]);
-                                    }
-                                }
-                                new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/DeletePending/" + str);
-                                cart.remove(position);
-                                if(cart.size() == 0){
-                                    total.setText("0 " + ctx.getResources().getString(R.string.USD));
-                                }
-                                notifyDataSetChanged();
-                                Toast toast = Toast.makeText(ctx, R.string.cancelled, Toast.LENGTH_SHORT);
-                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                vToast.setTextColor(Color.WHITE);
-                                vToast.setTextSize(20);
-                                vToast.setTypeface(null, Typeface.BOLD);
-                                toast.show();
-                            }})
-                        .setNegativeButton(android.R.string.no, null).show();
+//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
+//                layoutPopup.getBackground().setAlpha(126);
+//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
+//                layoutTitle.getBackground().setAlpha(200);
+//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
+//                layoutContent.getBackground().setAlpha(238);
+//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
+//                layoutBtn.getBackground().setAlpha(200);
+
+                popup = new PopupWindow(container, 600, 300, true);
+                popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+                popup.setOutsideTouchable(true);
+                popup.getContentView().setFocusableInTouchMode(true);
+                popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            popup.dismiss();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popup.dismiss();
+                        return true;
+                    }
+                });
+                TextView confirm = (TextView) container.findViewById(R.id.tvConfirm);
+                confirm.setText(container.getResources().getString(R.string.confirm_cancel));
+                TextView content = (TextView) container.findViewById(R.id.tvContent);
+                content.setText(container.getResources().getString(R.string.confirm_content));
+                Button cancel = (Button) container.findViewById(R.id.btnCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                    }
+                });
+                Button okyes = (Button) container.findViewById(R.id.btnOK);
+                okyes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int a = cart.get(position).getOrderDetailID();
+                        str = a + "";
+                        class SendDataToServer extends AsyncTask<String, String, String> {
+                            @Override
+                            protected String doInBackground(String... params) {
+                                CommonService commonService = new CommonService();
+                                return commonService.getData(params[0]);
+                            }
+                        }
+                        new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/DeletePending/" + str);
+                        cart.remove(position);
+                        if(cart.size() == 0){
+                            total.setText("0 " + ctx.getResources().getString(R.string.USD));
+                        }
+                        notifyDataSetChanged();
+                        popup.dismiss();
+                        Toast toast = Toast.makeText(ctx, R.string.cancelled, Toast.LENGTH_SHORT);
+                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                        vToast.setTextColor(Color.WHITE);
+                        vToast.setTextSize(20);
+                        vToast.setTypeface(null, Typeface.BOLD);
+                        toast.show();
+                    }
+                });
             }
         });
 

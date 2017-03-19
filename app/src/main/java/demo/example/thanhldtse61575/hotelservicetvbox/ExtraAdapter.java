@@ -7,14 +7,20 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +44,10 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class ExtraAdapter extends BaseAdapter {
 
+    private RelativeLayout relativeLayout;
+    private PopupWindow popup;
+    private LayoutInflater popupInflater;
+
     private List<CartItem> cart = new ArrayList<>();
     private List<CartItem> cart2 = new ArrayList<>();
     private int qty = 0;
@@ -50,12 +60,13 @@ public class ExtraAdapter extends BaseAdapter {
     private Spinner spin;
     private LayoutInflater layoutInflater;
 
-    ExtraAdapter(Context c, ListView exList, List<Service> list, Spinner spin, Button finalize){
+    ExtraAdapter(Context c, ListView exList, List<Service> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
         this.ctx = c;
         this.extraListView = exList;
         this.list = list;
         this.spin = spin;
         this.finalize = finalize;
+        this.relativeLayout = relativeLayout;
         layoutInflater = LayoutInflater.from(ctx);
     }
 
@@ -172,50 +183,92 @@ public class ExtraAdapter extends BaseAdapter {
                     }
                 }
                 if(cart2.size()!=0) {
-                    new AlertDialog.Builder(ctx)
-                            .setTitle(R.string.confirm_service)
-                            .setMessage(R.string.confirm_question_do)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    popupInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
 
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    final String returnList = new Gson().toJson(cart2);
-                                    final long time=60*Long.parseLong(spin.getSelectedItem().toString());
-                                    final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
-                                    final long time2Serv = calendar.getTimeInMillis()/1000 + time;
-                                    class SendDataToServer extends AsyncTask<String, String, String> {
+//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
+//                layoutPopup.getBackground().setAlpha(126);
+//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
+//                layoutTitle.getBackground().setAlpha(200);
+//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
+//                layoutContent.getBackground().setAlpha(238);
+//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
+//                layoutBtn.getBackground().setAlpha(200);
 
-                                        @Override
-                                        protected String doInBackground(String... params) {
-                                            CommonService commonService = new CommonService();
+                    popup = new PopupWindow(container, 600, 300, true);
+                    popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
-                                            List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
-                                            ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
+                    popup.setOutsideTouchable(true);
+                    popup.getContentView().setFocusableInTouchMode(true);
+                    popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                                            return commonService.sendData(params[0], toServer)+"";
-                                        }
+                            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                popup.dismiss();
+                                return true;
+                            }
+                            return false;
+                        }
+                    });
+                    container.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            popup.dismiss();
+                            return true;
+                        }
+                    });
+                    TextView confirm = (TextView) container.findViewById(R.id.tvConfirm);
+                    confirm.setText(container.getResources().getString(R.string.confirm_service));
+                    TextView content = (TextView) container.findViewById(R.id.tvContent);
+                    content.setText(container.getResources().getString(R.string.confirm_question_do));
+                    Button cancel = (Button) container.findViewById(R.id.btnCancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popup.dismiss();
+                        }
+                    });
+                    Button okyes = (Button) container.findViewById(R.id.btnOK);
+                    okyes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final String returnList = new Gson().toJson(cart2);
+                            final long time=60*Long.parseLong(spin.getSelectedItem().toString());
+                            final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
+                            final long time2Serv = calendar.getTimeInMillis()/1000 + time;
+                            class SendDataToServer extends AsyncTask<String, String, String> {
 
-                                        protected void onPostExecute(String response) {
-                                            if(response.equals("200")){
-                                                cart.clear();
-                                                cart2.clear();
-                                                notifyDataSetChanged();
+                                @Override
+                                protected String doInBackground(String... params) {
+                                    CommonService commonService = new CommonService();
 
-                                                Toast toast = Toast.makeText(ctx, R.string.confirm_request_wait, Toast.LENGTH_SHORT);
-                                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                                vToast.setTextColor(Color.WHITE);
-                                                vToast.setTextSize(30);
-                                                toast.show();
-                                            }
-                                            else{
-                                                Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }
-                                    new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/RequestsApi/SendRequest", time2Serv+"" , returnList+"", getDataFromSharedPreferences());
+                                    List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
+                                    ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
+
+                                    return commonService.sendData(params[0], toServer)+"";
                                 }
-                            })
-                            .setNegativeButton(android.R.string.no, null).show();
+
+                                protected void onPostExecute(String response) {
+                                    if(response.equals("200")){
+                                        cart.clear();
+                                        cart2.clear();
+                                        notifyDataSetChanged();
+                                        popup.dismiss();
+                                        Toast toast = Toast.makeText(ctx, R.string.confirm_request_wait, Toast.LENGTH_SHORT);
+                                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                        vToast.setTextColor(Color.WHITE);
+                                        vToast.setTextSize(30);
+                                        toast.show();
+                                    }
+                                    else{
+                                        Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                            new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/RequestsApi/SendRequest", time2Serv+"" , returnList+"", getRoomID());
+                        }
+                    });
                 } else{
                     Toast toast = Toast.makeText(ctx, R.string.notifyqty, Toast.LENGTH_SHORT);
                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -229,7 +282,7 @@ public class ExtraAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = ctx.getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
