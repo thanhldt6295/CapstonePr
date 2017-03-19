@@ -186,15 +186,6 @@ public class ExtraAdapter extends BaseAdapter {
                     popupInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
 
-//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
-//                layoutPopup.getBackground().setAlpha(126);
-//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
-//                layoutTitle.getBackground().setAlpha(200);
-//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
-//                layoutContent.getBackground().setAlpha(238);
-//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
-//                layoutBtn.getBackground().setAlpha(200);
-
                     popup = new PopupWindow(container, 600, 300, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 

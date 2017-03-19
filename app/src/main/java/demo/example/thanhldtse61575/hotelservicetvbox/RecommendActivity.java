@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Filter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,7 +31,6 @@ import java.util.List;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class RecommendActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -61,8 +58,6 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.recommend));
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 

@@ -59,8 +59,6 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_details);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -212,15 +210,6 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
             public void onClick(View v) {
                 popupInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
-
-//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
-//                layoutPopup.getBackground().setAlpha(126);
-//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
-//                layoutTitle.getBackground().setAlpha(200);
-//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
-//                layoutContent.getBackground().setAlpha(238);
-//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
-//                layoutBtn.getBackground().setAlpha(200);
 
                 popup = new PopupWindow(container, 600, 300, true);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);

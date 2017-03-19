@@ -33,7 +33,7 @@
                 android:layout_width="500dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@color/light_translucent"
+                android:background="#50797878"
                 android:id="@+id/layoutRec">
 
                 <ImageView

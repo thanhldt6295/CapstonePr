@@ -93,8 +93,6 @@ public class FoodyActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.food_drink));
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -220,15 +218,6 @@ public class FoodyActivity extends AppCompatActivity {
 
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.confirm_popup, null);
-
-//                LinearLayout layoutPopup = (LinearLayout) container.findViewById(R.id.layoutPopup);
-//                layoutPopup.getBackground().setAlpha(126);
-//                LinearLayout layoutTitle = (LinearLayout) container.findViewById(R.id.layoutTitle);
-//                layoutTitle.getBackground().setAlpha(200);
-//                LinearLayout layoutContent = (LinearLayout) container.findViewById(R.id.layoutContent);
-//                layoutContent.getBackground().setAlpha(238);
-//                LinearLayout layoutBtn = (LinearLayout) container.findViewById(R.id.layoutBtn);
-//                layoutBtn.getBackground().setAlpha(200);
 
             popup = new PopupWindow(container, 600, 300, true);
             popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);

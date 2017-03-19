@@ -10,7 +10,6 @@ import android.view.View;
 
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -56,10 +55,6 @@ public class RecommendDetailActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.recommend));
-        LinearLayout layoutRec = (LinearLayout) findViewById(R.id.layoutRec);
-        layoutRec.getBackground().setAlpha(80);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-        layout.getBackground().setAlpha(102);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
