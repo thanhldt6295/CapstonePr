@@ -28,7 +28,7 @@ public class Holder extends RecyclerView.ViewHolder implements View.OnClickListe
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    img.setColorFilter(Color.argb(50, 0, 0, 0));
+                    img.setColorFilter(Color.argb(66, 6, 66, 26));
                     txt.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
                 } else {
                     img.setColorFilter(Color.argb(0, 0, 0, 0));
