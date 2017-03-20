@@ -29,7 +29,7 @@ public class QuoteBank {
         List<String> mLines = new ArrayList<>();
 
         AssetManager am = mContext.getAssets();
-        //FileInputStream fileInputStream = new FileInputStream(new File(Environment.getExternalStorageDirectory()+"/ARoomID", path));
+//        FileInputStream fileInputStream = new FileInputStream(new File(Environment.getExternalStorageDirectory()+"/ARoomID", path));
 
         try {
             InputStream is = am.open(path);

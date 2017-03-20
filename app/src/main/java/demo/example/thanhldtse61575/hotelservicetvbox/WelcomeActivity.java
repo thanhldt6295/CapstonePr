@@ -139,7 +139,6 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     };
 
-    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
