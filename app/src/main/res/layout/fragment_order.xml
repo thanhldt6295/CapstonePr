@@ -16,8 +16,7 @@
             android:orientation="vertical"
             android:background="@color/light_translucent"
             android:layout_weight="0.95"
-            android:layout_height="wrap_content"
-            android:id="@+id/layoutFoody">
+            android:layout_height="wrap_content">
 
             <GridView
                 android:id="@+id/gridView"

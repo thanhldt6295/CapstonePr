@@ -20,7 +20,6 @@ public class Holder extends RecyclerView.ViewHolder implements View.OnClickListe
         super(itemView);
         img = (ImageView) itemView.findViewById(R.id.image);
         txt = (TextView) itemView.findViewById(R.id.title);
-        txt.getBackground().setAlpha(138);
         itemView.setOnClickListener(this);
         itemView.setClickable(true);
         itemView.setFocusable(true);
@@ -28,7 +27,7 @@ public class Holder extends RecyclerView.ViewHolder implements View.OnClickListe
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    img.setColorFilter(Color.argb(66, 6, 66, 26));
+                    img.setColorFilter(Color.argb(50, 0, 0, 0));
                     txt.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
                 } else {
                     img.setColorFilter(Color.argb(0, 0, 0, 0));

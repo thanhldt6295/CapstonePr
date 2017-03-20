@@ -1,22 +1,15 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -39,18 +31,13 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     public static final String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
     public static String VIDEO_ID = "";
 
-    private RelativeLayout relativeLayout;
-    private PopupWindow popup;
-    private LayoutInflater popupInflater;
     List<Promotional> promo = new ArrayList<>();
     TextView roomid;
     TextView name;
@@ -62,6 +49,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promo_details);
+        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
@@ -71,7 +59,6 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         hour = (TextView) findViewById(R.id.tvWorkHour);
         cap = (TextView) findViewById(R.id.tvCapacity);
         btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
-        relativeLayout = (RelativeLayout) findViewById(R.id.activity_promo_details);
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
@@ -201,7 +188,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         return list;
     }
 
-    private void Display(final Promotional promo){
+    private void Display(Promotional promo){
         VIDEO_ID = promo.getVideoLink();
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
         youTubePlayerView.initialize(API_KEY, this);
@@ -211,82 +198,20 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
+                new AlertDialog.Builder(PromoDetailsActivity.this)
+                        .setTitle(R.string.confirm_service)
+                        .setMessage(R.string.confirm_question_do)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                popup = new PopupWindow(container, 600, 300, true);
-                popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
-
-                popup.setOutsideTouchable(true);
-                popup.getContentView().setFocusableInTouchMode(true);
-                popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                        if (keyCode == KeyEvent.KEYCODE_BACK) {
-                            popup.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                container.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popup.dismiss();
-                        return true;
-                    }
-                });
-                TextView confirm = (TextView) container.findViewById(R.id.tvConfirm);
-                confirm.setText(container.getResources().getString(R.string.confirm_service));
-                TextView content = (TextView) container.findViewById(R.id.tvContent);
-                content.setText(container.getResources().getString(R.string.confirm_question_do));
-                Button cancel = (Button) container.findViewById(R.id.btnCancel);
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popup.dismiss();
-                    }
-                });
-                Button okyes = (Button) container.findViewById(R.id.btnOK);
-                okyes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final List<CartItem> list = new ArrayList<CartItem>();
-                        list.add(new CartItem(promo.getID(),name.getText().toString(),0,0,"","",1,""));
-                        final String returnList = new Gson().toJson(list);
-                        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
-                        final long time2Serv = calendar.getTimeInMillis()/1000 + 900;
-                        class SendDataToServer extends AsyncTask<String, String, String> {
-
-                            @Override
-                            protected String doInBackground(String... params) {
-                                CommonService commonService = new CommonService();
-
-                                List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
-                                ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
-
-                                return commonService.sendData(params[0], toServer)+"";
-                            }
-
-                            protected void onPostExecute(String response) {
-                                if(response.equals("200")){
-                                    list.clear();
-                                    popup.dismiss();
-                                    Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_promotional), Toast.LENGTH_SHORT);
-                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                    vToast.setTextColor(Color.WHITE);
-                                    vToast.setTextSize(30);
-                                    toast.show();
-                                }
-                                else{
-                                    Toast.makeText(PromoDetailsActivity.this, response, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-                        new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/RequestsApi/SendRequest", time2Serv+"" , returnList+"", getRoomID());
-                    }
-                });
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
+                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                vToast.setTextColor(Color.WHITE);
+                                vToast.setTextSize(30);
+                                toast.show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
     }

@@ -9,9 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -45,7 +43,6 @@ public class PendingActivity extends AppCompatActivity {
             }.getType());
 
             TextView total = (TextView) findViewById(R.id.txtCartTotal);
-            RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_pending);
 
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
@@ -58,7 +55,7 @@ public class PendingActivity extends AppCompatActivity {
             }
             if(pending.size()!=0) {
                 ListView listView = (ListView) findViewById(R.id.detailsListView);
-                PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total, relativeLayout);
+                PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total);
                 listView.setAdapter(a);
             }
         }
@@ -72,11 +69,9 @@ public class PendingActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.pending));
-        LinearLayout layoutPend = (LinearLayout) findViewById(R.id.layoutPend);
-        layoutPend.getBackground().setAlpha(80);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-        layout.getBackground().setAlpha(102);
+
         String roomid = getRoomID();
+
         roomidTV = (TextView) findViewById(R.id.roomid);
         roomidTV.setText(getResources().getString(R.string.roomid) + " " + roomid);
 

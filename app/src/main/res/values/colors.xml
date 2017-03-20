@@ -3,27 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FFFFFF</color>
-    <!--<color name="colorError">#aaaaaa</color>-->
 
-    <color name="dark_translucent">#404140</color> <!--50: 0.32: 80-->
-    <color name="light_translucent">#797878</color>
-
+    <color name="black_overlay">#66000000</color>
+    <color name="dark_translucent">#504b4e4b</color>
+    <color name="light_translucent">#50797878</color>
     <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color> <!--back_overlay: #66: 40%: 102 opacity-->
+    <color name="black">#000000</color>
     <color name="red">#FF0000</color>
-    <color name="yellow">#fff700</color>
-    <color name="pink">#ed56a4</color>
-
-    <color name="green">#31e46a</color>
-    <color name="green_dark">#299876</color>
-
-    <color name="blue">#00a9e6</color>
-    <color name="blue_sky">#79aefd</color>
-
-    <color name="gray_dark">#484848</color>
-    <color name="gray">#a0a0a0</color>
-    <color name="gray_light">#e6d3d3</color>
-    <color name="gray_green">#729f64</color>
-
-    <color name="actionbar_color">#90606060</color>
 </resources>

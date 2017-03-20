@@ -65,8 +65,8 @@
     <string name="air_condition">MÁY LẠNH</string>
     <string name="refrigerator">TỦ LẠNH</string>
     <string name="television">TIVI</string>
-    <string name="cancel">HỦY</string>
-    <string name="yes">CÓ</string>
+    <string name="cancel">Hủy</string>
+    <string name="yes">Có</string>
     <string name="recommend">GỢI Ý</string>
     <string name="golf">GÔN</string>
     <string name="gym">TẬP THỂ HÌNH</string>
@@ -81,8 +81,8 @@
     <string name="notifyqty">Xin quý khách vui lòng chọn số lượng 1 sản phẩm..</string>
     <string name="tennis">QUẦN VỢT</string>
     <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú..</string>
-    <string name="capacity">Sức chứa (người/phòng):</string>
-    <string name="worktime">Thời gian làm việc:</string>
+    <string name="capacity">Sức chứa (người/phòng)</string>
+    <string name="worktime">Thời gian làm việc</string>
     <string name="validate">Email không hợp lệ hoặc Tin nhắn bị trống hoặc Không có ảnh đính kèm!</string>
     <string name="minutes"> PHÚT SAU</string>
     <string name="action_settings">Cài đặt</string>
@@ -115,9 +115,6 @@
     <string name="money">TIỀN DẰN TÚI</string>
     <string name="search">TÌM KIẾM</string>
     <string name="title_activity_foody"></string>
-    <string name="confirm_cancel">Xác nhận hủy đơn hàng</string>
-    <string name="confirm_content">Quý khách có chắc chắn hủy đơn hàng này chứ?</string>
-    <string name="confirm_promotional">Quý khách đã đặt chỗ thành công. Chúng tôi sẽ liên hệ với quý khách để xác nhận một lần nữa. Xin cảm ơn.</string>
 
 
 </resources>
