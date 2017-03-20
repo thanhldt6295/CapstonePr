@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/backgr"
+    android:background="@drawable/background"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.AppsActivity">
 
     <include layout="@layout/layout_roombar"/>

@@ -9,8 +9,8 @@
     <string name="comment">COMMENT</string>
     <string name="delivery_time">DELIVERY TIME</string>
     <string name="minutes"> MINUTES LATER</string>
-    <string name="cancel">Cancel</string>
-    <string name="yes">Yes</string>
+    <string name="cancel">CANCEL</string>
+    <string name="yes">YES</string>
     <string name="USD">VND</string>
     <string name="added">Added to Cart</string>
     <string name="attach">ATTACH</string>
@@ -25,9 +25,12 @@
     <string name="confirm_order">Confirm Order</string>
     <string name="confirm_clear">Confirm Clear</string>
     <string name="confirm_back">Confirm Back</string>
+    <string name="confirm_cancel">Confirm Cancel</string>
+    <string name="confirm_content">Are you sure?</string>
     <string name="confirm_question_do">Do you really want to whatever?</string>
     <string name="confirm_request_wait">Please wait... We will serve you soon. Please enjoy! Thank you!</string>
     <string name="confirm_order_accepted">Your order has been accepted. Please enjoy! Thank you!</string>
+    <string name="confirm_promotional">Your booking has been accepted. We will contact with you to confirm again. Please enjoy! Thank you!</string>
     <string name="confirm_back_question">This action will clear all your cart. Are you sure?</string>
     <string name="notitynull">There is not service!</string>
     <string name="notifyqty">Please choose quantity!</string>
@@ -59,8 +62,8 @@
     <string name="pool">POOL</string>
     <string name="tennis">TENNIS COURT</string>
     <string name="golf">GOLF</string>
-    <string name="worktime">Working hour</string>
-    <string name="capacity">Capacity</string>
+    <string name="worktime">Working hour:</string>
+    <string name="capacity">Capacity:</string>
 
     <!-- RoomServicesActivity -->
     <string name="food_drink">FOODS AND BEVERAGES</string>

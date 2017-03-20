@@ -12,6 +12,12 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -54,7 +60,22 @@ public class RecommendDetailActivity extends AppCompatActivity {
 
         List<Recommend> RecommendEntityList = getDetails();
         int index = getIntent().getExtras().getInt("position");
-        Recommend rec = RecommendEntityList.get(index);
+        final Recommend rec = RecommendEntityList.get(index);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng fpt = new LatLng(10.8528718, 106.6294349);
+                googleMap.addMarker(new MarkerOptions().position(fpt)
+                        .title(rec.getLocationName()));
+                LatLng sydney = new LatLng(rec.getX(), rec.getY());
+                googleMap.addMarker(new MarkerOptions().position(sydney)
+                        .title(rec.getLocationName()));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            }
+        });
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         String url = rec.getImage();

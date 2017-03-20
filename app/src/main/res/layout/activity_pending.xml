@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/backgr"
+    android:background="@drawable/background"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.PendingActivity">
 
     <LinearLayout
@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/light_translucent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/layoutPend">
 
             <ListView
                 android:id="@+id/detailsListView"

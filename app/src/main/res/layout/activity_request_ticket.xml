@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/backgr"
+    android:background="@drawable/background"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.RequestTicketActivity">
 
     <LinearLayout
@@ -24,14 +24,14 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:background="@color/light_translucent">
+            android:background="#50797878"
+            android:id="@+id/layoutRequest">
 
             <Spinner
                 android:id="@+id/typeSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-                <!--android:background="#649c9a9a"-->
 
             <Space
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:text="@string/comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:textStyle="bold|italic"
                 android:textSize="@dimen/text_size_medium"
                 android:textColor="@color/white"/>
 
@@ -53,7 +53,8 @@
                 android:hint="@string/comment_hint"
                 android:id="@+id/txtComment"
                 android:layout_weight="1"
-                android:textSize="@dimen/text_size_medium"/>
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

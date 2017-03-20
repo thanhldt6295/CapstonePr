@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,9 +70,11 @@ public class ExtraActivity extends AppCompatActivity {
         });
         Spinner s = (Spinner) findViewById(R.id.timeSpinner);
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_extra);
+        ListView listView = (ListView) findViewById(R.id.extraListView);
+        listView.getBackground().setAlpha(80);
         if (accID.size() != 0) {
-            ListView listView = (ListView) findViewById(R.id.extraListView);
-            ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize);
+            ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize, relativeLayout);
             listView.setAdapter(a);
         } else {
             Toast.makeText(ExtraActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();

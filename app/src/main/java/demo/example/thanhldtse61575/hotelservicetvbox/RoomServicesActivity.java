@@ -95,4 +95,24 @@ public class RoomServicesActivity extends AppCompatActivity {
         String jsonPreferences = sharedPref.getString("RoomID", "");
         return jsonPreferences;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_pending, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.pending:
+                Intent i = new Intent(RoomServicesActivity.this, PendingActivity.class);
+                startActivity(i);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

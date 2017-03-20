@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "demo.example.thanhldtse61575.hotelservicetvbox"
@@ -33,4 +33,6 @@ dependencies {
     compile files('libs/mail.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/activation.jar')
+    compile 'com.google.android.gms:play-services-maps:9.8.0'
+    compile 'com.google.android.gms:play-services-location:9.8.0'
 }

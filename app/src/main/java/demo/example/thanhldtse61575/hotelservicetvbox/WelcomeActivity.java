@@ -1,14 +1,27 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,13 +29,18 @@ import android.util.DisplayMetrics;
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,6 +62,12 @@ public class WelcomeActivity extends AppCompatActivity {
     public static final String mPath = "roomid.txt";
     private QuoteBank mQuoteBank;
     private List<String> mLines;
+
+    private static final int PERMISSION_CALLBACK_CONSTANT = 100;
+    private static final int REQUEST_PERMISSION_SETTING = 101;
+
+    String[] permissionsRequired;
+
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -119,16 +143,35 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        String[] permission ={  Manifest.permission.INTERNET,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.CHANGE_WIFI_STATE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION};
+
+
+        verify(permission);
+
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("Hotel Service TV Box");
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        layout.getBackground().setAlpha(51);
 
         mQuoteBank = new QuoteBank(this);
-        mLines = mQuoteBank.readLine(mPath);
+        try {
+            mLines = mQuoteBank.readLine(mPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         String roomid = "";
         for (final String string : mLines) {
-            setRoomID2Share(string);
+            setRoomID2Share(string.trim().replaceAll("\\s+$", ""));
             roomid = string;
         }
 
@@ -277,10 +320,45 @@ public class WelcomeActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_btnEng).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_btnEng2).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_btnViet2).setOnTouchListener(mDelayHideTouchListener);
 
         dummyBtnEng = (Button)findViewById(R.id.dummy_btnEng2);
+        dummyBtnEng.setFocusable(true);
+        dummyBtnEng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    dummyBtnEng.setBackgroundColor(Color.parseColor("#DABCBCBC"));
+                    dummyBtnEng.setTextColor(Color.parseColor("#FFFFFFFF"));
+                    dummyBtnEng.setTypeface(Typeface.DEFAULT_BOLD);
+                }
+                else {
+                    dummyBtnEng.setBackgroundColor(Color.parseColor("#dcffffff"));
+                    dummyBtnEng.setTextColor(Color.parseColor("#c88b8b8b"));
+                    dummyBtnEng.setTypeface(Typeface.DEFAULT);
+                }
+            }
+        });
         dummyBtnViet = (Button)findViewById(R.id.dummy_btnViet2);
+        dummyBtnViet.setFocusable(true);
+        dummyBtnViet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    dummyBtnViet.setBackgroundColor(Color.parseColor("#DABCBCBC"));
+                    dummyBtnViet.setTextColor(Color.parseColor("#FFFFFFFF"));
+                    dummyBtnViet.setTypeface(Typeface.DEFAULT_BOLD);
+                }
+                else {
+                    dummyBtnViet.setBackgroundColor(Color.parseColor("#dcffffff"));
+                    dummyBtnViet.setTextColor(Color.parseColor("#c88b8b8b"));
+                    dummyBtnViet.setTypeface(Typeface.DEFAULT);
+                }
+            }
+        });
 
         dummyBtnEng.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,6 +388,130 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    //Begin Check Permission
+
+    public boolean verify(final String[] PERMISSIONS) {
+
+        if (underAPI23()) return true;
+
+        permissionsRequired = PERMISSIONS;
+        List<String> pendingPermission = new ArrayList<>();
+
+        for (int i = 0; i < PERMISSIONS.length; i++) {
+            int check = ContextCompat.checkSelfPermission(WelcomeActivity.this, PERMISSIONS[i]);
+            if (check != PackageManager.PERMISSION_GRANTED) {
+                pendingPermission.add(PERMISSIONS[i]);
+            }
+        }
+
+        int denyPermissionLength = pendingPermission.size();
+        final String[] denyPermission = new String[denyPermissionLength];
+        for (int i = 0; i < denyPermissionLength; i++) {
+            denyPermission[i] = pendingPermission.get(i);
+        }
+
+        if (denyPermissionLength > 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+            builder.setTitle("Need Multiple Permissions");
+            builder.setMessage("We needs more Permissions");
+            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    ActivityCompat.requestPermissions(WelcomeActivity.this, denyPermission, PERMISSION_CALLBACK_CONSTANT);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean underAPI23() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == PERMISSION_CALLBACK_CONSTANT) {
+            //check if all permissions are granted
+            boolean allgranted = false;
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    allgranted = true;
+                } else {
+                    allgranted = false;
+                    break;
+                }
+            }
+
+            if(allgranted){
+                proceedAfterPermission();
+            } else {
+                List<String> pendingPermission = new ArrayList<>();
+
+                for (int i = 0; i < permissions.length; i++) {
+                    int check = ContextCompat.checkSelfPermission(getBaseContext(), permissions[i]);
+                    if (check != PackageManager.PERMISSION_GRANTED) {
+                        pendingPermission.add(permissions[i]);
+                    }
+                }
+
+                int denyPermissionLength = pendingPermission.size();
+                final String[] denyPermission = new String[denyPermissionLength];
+                for (int i = 0; i < denyPermissionLength; i++) {
+                    denyPermission[i] = pendingPermission.get(i);
+                }
+
+                if (denyPermissionLength > 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+                    builder.setTitle("Need Multiple Permissions");
+                    builder.setMessage("Need more permision");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            ActivityCompat.requestPermissions(WelcomeActivity.this, denyPermission, PERMISSION_CALLBACK_CONSTANT);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                }
+            }
+        }
+    }
+
+    private void proceedAfterPermission() {
+        Toast.makeText(getBaseContext(), "We got All Permissions", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_PERMISSION_SETTING) {
+            if (ActivityCompat.checkSelfPermission(WelcomeActivity.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED) {
+                //Got Permission
+                proceedAfterPermission();
+            }
+        }
+    }
+
+    //End check Permission
+
 
     public void setLocale(String lang) {
 

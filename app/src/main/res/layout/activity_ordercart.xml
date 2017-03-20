@@ -4,7 +4,7 @@
     android:id="@+id/activity_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgr"
+    android:background="@drawable/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/light_translucent">
+            android:background="#50797878"
+            android:id="@+id/layoutCart">
 
             <ListView
                 android:id="@+id/orderListView"
@@ -42,8 +43,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_translucent"
-            android:orientation="horizontal">
+            android:background="#50797878"
+            android:orientation="horizontal"
+            android:id="@+id/layoutOrder">
 
             <TextView
                 android:id="@+id/tvDeliveryTime"
@@ -61,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"  />
+                android:layout_weight="0.44"  />
 
             <TextView
                 android:id="@+id/tvMinutes"

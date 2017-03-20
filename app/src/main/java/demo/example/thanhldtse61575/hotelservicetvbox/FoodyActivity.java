@@ -1,9 +1,7 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -36,6 +35,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -151,6 +151,8 @@ public class FoodyActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        AppBarLayout layoutBar = (AppBarLayout) findViewById(R.id.appbar);
+        layoutBar.getBackground().setAlpha(102);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setTabTextColors(-100,-1);
         tabLayout.setupWithViewPager(mViewPager);
@@ -214,12 +216,47 @@ public class FoodyActivity extends AppCompatActivity {
             SharedPreferences sp = getSharedPreferences("cart", Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = sp.edit();
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.confirm_popup, null);
 
-            builder.setTitle(R.string.confirm_back);
-            builder.setMessage(R.string.confirm_back_question);
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+            popup = new PopupWindow(container, 600, 300, true);
+            popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+            popup.setOutsideTouchable(true);
+            popup.getContentView().setFocusableInTouchMode(true);
+            popup.getContentView().setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        popup.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            container.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popup.dismiss();
+                    return true;
+                }
+            });
+            TextView confirm = (TextView) container.findViewById(R.id.tvConfirm);
+            confirm.setText(container.getResources().getString(R.string.confirm_back));
+            TextView content = (TextView) container.findViewById(R.id.tvContent);
+            content.setText(container.getResources().getString(R.string.confirm_back_question));
+            Button cancel = (Button) container.findViewById(R.id.btnCancel);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popup.dismiss();
+                }
+            });
+            Button okyes = (Button) container.findViewById(R.id.btnOK);
+            okyes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     cart.clear();
                     String str = gson.toJson(cart);
                     editor.putString("cartinfo", str);
@@ -227,12 +264,6 @@ public class FoodyActivity extends AppCompatActivity {
                     FoodyActivity.super.onBackPressed();
                 }
             });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //Nothing
-                }
-            });
-            builder.show();
         }
         if(cart.size()==0) {
             FoodyActivity.super.onBackPressed();
@@ -312,6 +343,9 @@ public class FoodyActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.layout_itemdetails, null);
+                    LinearLayout layoutDetail = (LinearLayout) container.findViewById(R.id.layoutDetail);
+                    layoutDetail.getBackground().setAlpha(226);
+
                     popup = new PopupWindow(container, 600, 600, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
                     popup.setOutsideTouchable(true);
@@ -515,6 +549,8 @@ public class FoodyActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             int indexTab = getArguments().getInt(ARG_SECTION_NUMBER);
             View rootView = inflater.inflate(R.layout.fragment_order, container, false);
+            LinearLayout layoutFoody = (LinearLayout) rootView.findViewById(R.id.layoutFoody);
+            layoutFoody.getBackground().setAlpha(80);
             gridView = (GridView) rootView.findViewById(R.id.gridView);
             relativeLayout = (RelativeLayout) rootView.findViewById(R.id.relative);
             if(indexTab==1) {
@@ -551,6 +587,10 @@ public class FoodyActivity extends AppCompatActivity {
             }
             else if(indexTab==9){
                 PassData2Tabbed("COFFEE");
+                return rootView;
+            }
+            else if(indexTab==10){
+                PassData2Tabbed("OTHER DRINKS");
                 return rootView;
             }
             else {
@@ -595,8 +635,8 @@ public class FoodyActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 9 total pages.
-            return 9;
+            // Show 10 total pages.
+            return 10;
         }
 
         @Override
@@ -620,6 +660,8 @@ public class FoodyActivity extends AppCompatActivity {
                     return getResources().getString(R.string.dessert);
                 case 8:
                     return getResources().getString(R.string.coffee);
+                case 9:
+                    return getResources().getString(R.string.other_drinks);
             }
             return null;
         }

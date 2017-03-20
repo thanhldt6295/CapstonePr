@@ -24,7 +24,7 @@
             android:textSize="@dimen/text_size_large"
             android:textColor="@color/white"
             android:gravity="center"
-            android:background="#8a000000"
+            android:background="@color/black"
             android:id="@+id/title" />
     </RelativeLayout>
 

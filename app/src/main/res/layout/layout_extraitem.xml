@@ -27,7 +27,8 @@
             android:gravity="center|start"
             android:text="REQUEST NAME"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="italic"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/black_overlay"
+                android:background="@color/black"
                 android:minHeight="0dp"
                 android:text="-"
                 android:textColor="@color/white"
@@ -58,14 +59,16 @@
                 android:text="0"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_large"/>
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:maxLength="2"/>
 
             <Button
                 android:id="@+id/btnPlus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/black_overlay"
+                android:background="@color/black"
                 android:minHeight="0dp"
                 android:text="+"
                 android:textColor="@color/white"

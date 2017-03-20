@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -73,9 +74,11 @@ public class OrderActivity extends AppCompatActivity {
         });
         Spinner s = (Spinner) findViewById(R.id.spinner);
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_order);
+
         if(cart!=null){
             ListView listView = (ListView) findViewById(R.id.orderListView);
-            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear, s);
+            OrderAdapter a = new OrderAdapter(this, listView, cart, total, btnFinalize, btnClear, s, relativeLayout);
             listView.setAdapter(a);
         }
 

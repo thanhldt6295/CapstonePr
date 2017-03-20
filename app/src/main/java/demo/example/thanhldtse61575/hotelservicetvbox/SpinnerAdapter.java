@@ -2,6 +2,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,8 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
         view.setTextColor(Color.CYAN);
         view.setText(spinner[position]);
         view.setTextSize(30);
+        view.setTypeface(Typeface.DEFAULT_BOLD);
+        view.setBackgroundColor(Color.parseColor("#82b9b9b9"));
 
         return view;
     }

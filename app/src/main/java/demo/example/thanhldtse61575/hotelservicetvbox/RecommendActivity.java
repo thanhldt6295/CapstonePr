@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +31,6 @@ import java.util.List;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 public class RecommendActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -66,8 +64,11 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         //btnSearch = (Button) findViewById(R.id.btnSearch);
 
         HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
+        HobbySpinner.getBackground().setAlpha(80);
         PriceSpinner = (Spinner) findViewById(R.id.priceSpinner);
+        PriceSpinner.getBackground().setAlpha(80);
         listView = (ListView) findViewById(R.id.recListView);
+        listView.getBackground().setAlpha(48);
         HobbyAdapter = new HobbyAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyHobby());
         HobbyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         HobbySpinner.setAdapter(HobbyAdapter);
