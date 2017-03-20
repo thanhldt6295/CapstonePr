@@ -1,11 +1,9 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -86,7 +84,6 @@ public class OrderAdapter extends BaseAdapter {
         return position;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -198,7 +195,7 @@ public class OrderAdapter extends BaseAdapter {
             public void onClick(View v) {
                 cart.remove(position);
                 float t3 = getTotal(cart);
-                total.setText(format.format(t3) + view.getResources());
+                total.setText(format.format(t3) + " "+ view.getResources().getString(R.string.USD));
                 if(cart.size() == 0){
                     total.setText("0 "+ view.getResources().getString(R.string.USD));
                 }

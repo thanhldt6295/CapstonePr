@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#7effffff"
+        android:background="@drawable/background"
         android:id="@+id/layoutPopup">
 
         <LinearLayout
             android:id="@+id/layoutTitle"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#c8299876">
+            android:background="#7c299876">
 
             <TextView
                 android:id="@+id/tvConfirm"
@@ -39,7 +39,7 @@
             android:id="@+id/layoutContent"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="#ee31e46a">
+            android:background="#7731e46a">
 
             <TextView
                 android:id="@+id/tvContent"
