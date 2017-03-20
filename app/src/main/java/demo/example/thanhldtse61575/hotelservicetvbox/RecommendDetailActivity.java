@@ -67,6 +67,9 @@ public class RecommendDetailActivity extends AppCompatActivity {
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+                LatLng fpt = new LatLng(10.8528718, 106.6294349);
+                googleMap.addMarker(new MarkerOptions().position(fpt)
+                        .title(rec.getLocationName()));
                 LatLng sydney = new LatLng(rec.getX(), rec.getY());
                 googleMap.addMarker(new MarkerOptions().position(sydney)
                         .title(rec.getLocationName()));

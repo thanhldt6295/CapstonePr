@@ -68,9 +68,6 @@ public class RequestTicketActivity extends AppCompatActivity {
         SpinnerAdapter timeAdapter = new SpinnerAdapter(this, android.R.layout.simple_spinner_item, timeSpinnerArray);
         timeSpinner.setAdapter(timeAdapter);
 
-        final List<Service> acc = getServiceList();
-        final List<CartItem> accID = new ArrayList<CartItem>();
-
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_request_ticket);
         comment = (EditText) findViewById(R.id.txtComment);
         finalize = (Button) findViewById(R.id.btnFinalizeOrder);
@@ -141,13 +138,9 @@ public class RequestTicketActivity extends AppCompatActivity {
                     okyes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            for (Service ac : acc) {
-                                String cagName = ac.getCategoryName().toString().toUpperCase().trim();;
-                                if (cagName.equals(typeSpinner.getSelectedItem().toString())) {
-                                    accID.add(new CartItem(ac.getServiceID(), typeSpinner.getSelectedItem().toString(), ac.getCategoryID(), ac.getUnitPrice(), ac.getDescription(), ac.getImage(), 1, comment.getText().toString()));
-                                }
-                            }
-                            final String returnList = new Gson().toJson(accID);
+                            final List<CartItem> list = new ArrayList<CartItem>();
+                            list.add(new CartItem(0, typeSpinner.getSelectedItem().toString(), 0, 0, "", "", 1, comment.getText().toString()));
+                            final String returnList = new Gson().toJson(list);
                             final long time=60*Long.parseLong(timeSpinner.getSelectedItem().toString());
                             final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
                             final long time2Serv = calendar.getTimeInMillis()/1000 + time;
@@ -165,8 +158,7 @@ public class RequestTicketActivity extends AppCompatActivity {
 
                                 protected void onPostExecute(String response) {
                                     if(response.equals("200")){
-                                        acc.clear();
-                                        accID.clear();
+                                        list.clear();
                                         comment.setText("");
                                         popup.dismiss();
                                         Toast toast = Toast.makeText(RequestTicketActivity.this, R.string.confirm_request_wait, Toast.LENGTH_SHORT);

@@ -117,6 +117,7 @@
     <string name="title_activity_foody"></string>
     <string name="confirm_cancel">Xác nhận hủy đơn hàng</string>
     <string name="confirm_content">Quý khách có chắc chắn hủy đơn hàng này chứ?</string>
+    <string name="confirm_promotional">Quý khách đã đặt chỗ thành công. Chúng tôi sẽ liên hệ với quý khách để xác nhận một lần nữa. Xin cảm ơn.</string>
 
 
 </resources>

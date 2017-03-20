@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -164,10 +165,14 @@ public class WelcomeActivity extends AppCompatActivity {
         layout.getBackground().setAlpha(51);
 
         mQuoteBank = new QuoteBank(this);
-        mLines = mQuoteBank.readLine(mPath);
+        try {
+            mLines = mQuoteBank.readLine(mPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         String roomid = "";
         for (final String string : mLines) {
-            setRoomID2Share(string);
+            setRoomID2Share(string.trim().replaceAll("\\s+$", ""));
             roomid = string;
         }
 

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -38,7 +39,9 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
@@ -198,7 +201,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         return list;
     }
 
-    private void Display(Promotional promo){
+    private void Display(final Promotional promo){
         VIDEO_ID = promo.getVideoLink();
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
         youTubePlayerView.initialize(API_KEY, this);
@@ -249,12 +252,39 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                 okyes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        popup.dismiss();
-                        Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_order_accepted), Toast.LENGTH_SHORT);
-                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                        vToast.setTextColor(Color.WHITE);
-                        vToast.setTextSize(30);
-                        toast.show();
+                        final List<CartItem> list = new ArrayList<CartItem>();
+                        list.add(new CartItem(promo.getID(),name.getText().toString(),0,0,"","",1,""));
+                        final String returnList = new Gson().toJson(list);
+                        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
+                        final long time2Serv = calendar.getTimeInMillis()/1000 + 900;
+                        class SendDataToServer extends AsyncTask<String, String, String> {
+
+                            @Override
+                            protected String doInBackground(String... params) {
+                                CommonService commonService = new CommonService();
+
+                                List<CartItem> acc = new Gson().fromJson(params[2], new TypeToken<List<CartItem>>() {}.getType());
+                                ToServer toServer = new ToServer( Double.parseDouble(params[1]), acc , Integer.parseInt(params[3]));
+
+                                return commonService.sendData(params[0], toServer)+"";
+                            }
+
+                            protected void onPostExecute(String response) {
+                                if(response.equals("200")){
+                                    list.clear();
+                                    popup.dismiss();
+                                    Toast toast = Toast.makeText(PromoDetailsActivity.this, getResources().getString(R.string.confirm_promotional), Toast.LENGTH_SHORT);
+                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                    vToast.setTextColor(Color.WHITE);
+                                    vToast.setTextSize(30);
+                                    toast.show();
+                                }
+                                else{
+                                    Toast.makeText(PromoDetailsActivity.this, response, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                        new SendDataToServer().execute("http://capstoneserver2017.azurewebsites.net/api/RequestsApi/SendRequest", time2Serv+"" , returnList+"", getRoomID());
                     }
                 });
             }
