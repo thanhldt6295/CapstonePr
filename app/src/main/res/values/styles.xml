@@ -43,8 +43,8 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionBarSize">30dip</item>
-        <item name="android:actionBarSize">30dip</item>
+        <item name="actionBarSize">60dip</item>
+        <item name="android:actionBarSize">60dip</item>
     </style>
 
 </resources>

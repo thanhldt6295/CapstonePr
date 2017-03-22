@@ -2,6 +2,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -91,5 +92,10 @@ public class PromotionalChanelActivity extends AppCompatActivity {
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.startActivity(new Intent(PromotionalChanelActivity.this, MainActivity.class));
     }
 }

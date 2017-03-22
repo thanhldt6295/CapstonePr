@@ -20,18 +20,22 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class ViewBillActivity extends AppCompatActivity {
 
     List<OrderDetail> details = new ArrayList<>();
     List<OrderDetail> done = new ArrayList<>();
+    Order bill;
     TextView roomid;
 
     class GetDataFromServer extends AsyncTask<String, Void, String> {
@@ -48,7 +52,13 @@ public class ViewBillActivity extends AppCompatActivity {
             }.getType());
 
             TextView total = (TextView) findViewById(R.id.txtCartTotal);
-
+            bill = getOrder();
+            final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
+            final long usedTime = calendar.getTimeInMillis()/1000 - bill.getStartTime();
+            final float ritsu = usedTime/(24*60*60);
+            int dayNum = Math.round(ritsu);
+            done.add(new OrderDetail(0,bill.getOrderID(),0,"Room Order",0,"",bill.getUnitPrice(),"",
+                    "",dayNum,"",bill.getStartTime(), bill.getEndTime(),"",""));
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
                 if (stt.equals("DONE")) {
@@ -131,6 +141,19 @@ public class ViewBillActivity extends AppCompatActivity {
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
+    }
+
+    private Order getOrder(){
+
+        Gson gson = new Gson();
+        Order bill;
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedBill", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("BillTotal", "");
+
+        Type type = new TypeToken<Order>() {}.getType();
+        bill = gson.fromJson(jsonPreferences, type);
+
+        return bill;
     }
 
     @Override

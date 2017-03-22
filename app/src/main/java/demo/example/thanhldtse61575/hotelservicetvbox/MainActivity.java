@@ -22,9 +22,9 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    int[] titles = {R.string.promotional, R.string.service, R.string.ecard, R.string.bill, R.string.survey, R.string.recommend, R.string.application};
+    int[] titles = {R.string.promotional, R.string.service, R.string.ecard, R.string.bill, R.string.recommend, R.string.tivistream, R.string.survey, R.string.application};
     int[] images = {R.drawable.img_promotional, R.drawable.img_roomservices, R.drawable.img_ecard,
-            R.drawable.img_billing, R.drawable.img_survey, R.drawable.img_recommend, R.drawable.img_app};
+            R.drawable.img_billing, R.drawable.img_recommend, R.drawable.img_tivistream, R.drawable.img_survey, R.drawable.img_app};
     TextView roomid;
 
     @Override
@@ -117,5 +117,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
     }
 }

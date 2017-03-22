@@ -91,7 +91,7 @@ public class PendingAdapter extends BaseAdapter{
            .centerCrop().into(image);
 
         name.setText(cart.get(position).getServiceName());
-        DecimalFormat format = new DecimalFormat("###,###.#");
+        DecimalFormat format = new DecimalFormat("###,###,###.#");
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) +" "+ ctx.getResources().getString(R.string.USD));
         quantity.setText(cart.get(position).getQuantity()+"");
 

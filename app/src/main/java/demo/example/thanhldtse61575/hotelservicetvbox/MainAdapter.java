@@ -2,6 +2,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,19 +46,23 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                         c.startActivity(new Intent(c, RoomServicesActivity.class));
                         break;
                     case 2:
-                        c.startActivity(new Intent(c, EcardActivity.class));
+                        c.startActivity(new Intent(c, EcardsActivity.class));
                         break;
                     case 3:
                         c.startActivity(new Intent(c, ViewBillActivity.class));
                         break;
                     case 4:
-                        c.startActivity(new Intent(c, SurveyActivity.class));
-                        break;
-                    case 5:
                         c.startActivity(new Intent(c, Recommend_New_Activity.class));
                         break;
+                    case 5:
+                        OpenApps("com.media.its.mytvnet");
+                        break;
                     case 6:
+                        c.startActivity(new Intent(c, SurveyActivity.class));
+                        break;
+                    case 7:
                         c.startActivity(new Intent(c, AppsActivity.class));
+                        break;
                 }
             }
         });
@@ -66,5 +71,12 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
     @Override
     public int getItemCount() {
         return titles.length;
+    }
+
+    public void OpenApps (String appID){
+        final PackageManager manager = c.getPackageManager();
+        Intent i = manager.getLaunchIntentForPackage(appID);
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        c.startActivity(i);
     }
 }

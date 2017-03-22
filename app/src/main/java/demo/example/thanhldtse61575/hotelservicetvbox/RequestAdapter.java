@@ -6,18 +6,19 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
-
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -27,7 +28,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,30 +39,31 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 /**
- * Created by ThanhLDTSE61575 on 2/27/2017.
+ * Created by ThanhLDTSE61575 on 3/1/2017.
  */
 
-public class ExtraAdapter extends BaseAdapter {
+public class RequestAdapter extends BaseAdapter {
+
+    private int q = 0;
 
     private RelativeLayout relativeLayout;
     private PopupWindow popup;
     private LayoutInflater popupInflater;
 
-    private List<CartItem> cart = new ArrayList<>();
-    private List<CartItem> cart2 = new ArrayList<>();
-    private int qty = 0;
     private String[] arraySpinner;
+    private List<CartItem> cart = new ArrayList<>();
+    private List<CartItem> temp = new ArrayList<>();
 
     private Context ctx;
-    private ListView extraListView;
+    private ListView listView;
     private List<Service> list;
-    private Button finalize;
     private Spinner spin;
+    private Button finalize;
     private LayoutInflater layoutInflater;
 
-    ExtraAdapter(Context c, ListView exList, List<Service> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
+    RequestAdapter(Context c, ListView listView, List<Service> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
         this.ctx = c;
-        this.extraListView = exList;
+        this.listView = listView;
         this.list = list;
         this.spin = spin;
         this.finalize = finalize;
@@ -85,12 +86,13 @@ public class ExtraAdapter extends BaseAdapter {
         return position;
     }
 
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        temp.clear();
         cart.clear();
-        cart2.clear();
 
-        convertView = layoutInflater.inflate(R.layout.layout_extraitem, null);
+        convertView = layoutInflater.inflate(R.layout.layout_requestitem, null);
 
         this.arraySpinner = new String[] {
                 "15", "30", "45", "60", "100"
@@ -99,91 +101,65 @@ public class ExtraAdapter extends BaseAdapter {
                 android.R.layout.simple_spinner_item, arraySpinner);
         spin.setAdapter(adapter);
 
-        ImageView image = (ImageView) convertView.findViewById(R.id.imageViewDetail);
+        for (Service sv: list) {
+            temp.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
+                    0, sv.getDescription(), sv.getImage(), 0, ""));
+        }
 
-        String url = list.get(position).getImage();
-        Picasso.with(ctx)
-                .load(url)
-                .placeholder(R.drawable.loading)
-                .fit()
-                .centerCrop().into(image);
         TextView name = (TextView) convertView.findViewById(R.id.txtRequestName);
         name.setText(list.get(position).getServiceName());
-
-        final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
-
-        final Button btnPlus = (Button) convertView.findViewById(R.id.btnPlus);
-        btnPlus.getBackground().setAlpha(102);
-        btnPlus.setFocusable(true);
-        btnPlus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        final EditText comment = (EditText) convertView.findViewById(R.id.txtComment);
+        comment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                temp.get(position).setComment(s.toString().trim());
+            }
 
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
-                    btnPlus.setTextColor(Color.parseColor("#E2FFE600"));
-                }
-                else {
-                    btnPlus.setTextColor(Color.parseColor("#FFFFFFFF"));
-                }
-            }
-        });
-        btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int n = Integer.parseInt(quantity.getText().toString());
-                if (n < 10) {
-                    qty = n + 1;
-                    quantity.setText(qty+"");
-                    cart.get(position).setQuantity(qty);
-                }
-            }
-        });
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        final Button btnMinus = (Button) convertView.findViewById(R.id.btnMinus);
-        btnMinus.getBackground().setAlpha(102);
-        btnMinus.setFocusable(true);
-        btnMinus.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                // TODO Auto-generated method stub
+            }
 
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
-                    btnMinus.setTextColor(Color.parseColor("#E2FFE600"));
-                }
-                else {
-                    btnMinus.setTextColor(Color.parseColor("#FFFFFFFF"));
-                }
+            public void afterTextChanged(Editable s) {
+                temp.get(position).setComment(s.toString().trim());
             }
         });
-        btnMinus.setOnClickListener(new View.OnClickListener() {
+        final CheckBox check = (CheckBox) convertView.findViewById(R.id.chkBox);
+        check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int n = Integer.parseInt(quantity.getText().toString());
-                if (n > 0) {
-                    qty = n - 1;
-                    quantity.setText(qty+"");
-                    cart.get(position).setQuantity(qty);
+                CheckBox cb = (CheckBox) v;
+                if(cb.isChecked()){
+                    check.setChecked(true);
+                    temp.get(position).setQuantity(1);
+                } else {
+                    check.setChecked(false);
+                    temp.get(position).setQuantity(0);
                 }
             }
         });
-
-        for (Service sv: list) {
-            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                    qty, ""));
-        }
 
         finalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cart2.clear();
-                for (CartItem ci: cart){
-                    int q = ci.getQuantity();
-                    if(q!=0){
-                        cart2.add(new CartItem(ci.getServiceID(), ci.getServiceName(), ci.getCategoryID(),
+                cart.clear();
+                q=0;
+                for (CartItem ci: temp){
+                    if(ci.getQuantity()!=0){
+                        cart.add(new CartItem(ci.getServiceID(), ci.getServiceName(), ci.getCategoryID(),
                                 ci.getUnitPrice(), ci.getDescription(), ci.getImage(), ci.getQuantity(), ci.getComment()));
+                    } else if(!ci.getComment().toString().equals("")){
+                        Toast toast = Toast.makeText(ctx, R.string.notifychoose, Toast.LENGTH_SHORT);
+                        TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                        vToast.setTextColor(Color.RED);
+                        vToast.setTextSize(30);
+                        toast.show();
+                        q=1;
                     }
                 }
-                if(cart2.size()!=0) {
+                if(cart.size()!=0&&q==0) {
                     popupInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
 
@@ -225,7 +201,7 @@ public class ExtraAdapter extends BaseAdapter {
                     okyes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            final String returnList = new Gson().toJson(cart2);
+                            final String returnList = new Gson().toJson(cart);
                             final long time=60*Long.parseLong(spin.getSelectedItem().toString());
                             final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
                             final long time2Serv = calendar.getTimeInMillis()/1000 + time;
@@ -243,8 +219,8 @@ public class ExtraAdapter extends BaseAdapter {
 
                                 protected void onPostExecute(String response) {
                                     if(response.equals("200")){
+                                        temp.clear();
                                         cart.clear();
-                                        cart2.clear();
                                         notifyDataSetChanged();
                                         popup.dismiss();
                                         Toast toast = Toast.makeText(ctx, R.string.confirm_request_wait, Toast.LENGTH_SHORT);
@@ -262,7 +238,7 @@ public class ExtraAdapter extends BaseAdapter {
                         }
                     });
                 } else{
-                    Toast toast = Toast.makeText(ctx, R.string.notifyqty, Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ctx, R.string.notifychoose, Toast.LENGTH_SHORT);
                     TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                     vToast.setTextColor(Color.RED);
                     vToast.setTextSize(30);
@@ -271,7 +247,7 @@ public class ExtraAdapter extends BaseAdapter {
             }
         });
 
-        return convertView;
+        return  convertView;
     }
 
     private String getRoomID(){

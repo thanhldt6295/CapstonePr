@@ -419,7 +419,7 @@ public class FoodyActivity extends AppCompatActivity {
                             .fit()
                             .centerCrop().into(imgIcon);
                     item.setText(serviceCagList.get(position).getServiceName());
-                    final DecimalFormat format = new DecimalFormat("###,###.#");
+                    final DecimalFormat format = new DecimalFormat("###,###,###.#");
                     price.setText(format.format(serviceCagList.get(position).getUnitPrice()) + " " + container.getResources().getString(R.string.USD));
                     description.setText(serviceCagList.get(position).getDescription());
 

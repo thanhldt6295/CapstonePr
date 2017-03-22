@@ -61,7 +61,7 @@ public class ViewBillAdapter extends BaseAdapter {
 
         serviceName.setText(getItem(position).getServiceName());
         category.setText(getItem(position).getCategoryName());
-        DecimalFormat format = new DecimalFormat("###,###.#");
+        DecimalFormat format = new DecimalFormat("###,###,###.#");
         unitPrice.setText(format.format(getItem(position).getUnitPrice()) +" "+ c.getResources().getString(R.string.USD));
         quantity.setText(getItem(position).getQuantity() + "");
         itemTotal.setText(format.format(getItem(position).getUnitPrice() * getItem(position).getQuantity()) +" "+ c.getResources().getString(R.string.USD));

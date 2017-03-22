@@ -65,7 +65,7 @@ public class FoodyAdapter extends BaseAdapter{
                 .fit()
                 .centerCrop().into(holder.image);
         holder.name.setText(list.get(position).getServiceName());
-        final DecimalFormat format = new DecimalFormat("###,###.#");
+        final DecimalFormat format = new DecimalFormat("###,###,###.#");
         holder.price.setText(format.format(list.get(position).getUnitPrice())+" "+ gridView.getResources().getString(R.string.USD));
         return gridView;
     }

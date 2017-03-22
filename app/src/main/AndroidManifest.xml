@@ -82,6 +82,10 @@
             android:value="AIzaSyCHK59BlhWwpmAnBRVy0mLqv2SgIQMd60s" />
 
         <activity
+            android:name=".EcardsActivity"
+            android:label="@string/title_activity_ecards"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".Recommend_New_Activity"
             android:label="@string/title_activity_recommend__new_"
             android:theme="@style/AppTheme"></activity>

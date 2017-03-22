@@ -108,7 +108,7 @@ public class OrderAdapter extends BaseAdapter {
         TextView name = (TextView) view.findViewById(R.id.txtServiceName);
         name.setText(cart.get(position).getServiceName());
         TextView unitPrice = (TextView) view.findViewById(R.id.txtUnitPrice);
-        final DecimalFormat format = new DecimalFormat("###,###.#");
+        final DecimalFormat format = new DecimalFormat("###,###,###.#");
         unitPrice.setText(format.format(cart.get(position).getUnitPrice()) +" "+ view.getResources().getString(R.string.USD));
 
         final EditText quantity = (EditText) view.findViewById(R.id.txtQuantity);

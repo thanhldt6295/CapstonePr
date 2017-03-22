@@ -40,6 +40,7 @@ public class RecommendImageAdapter extends RecyclerView.Adapter<Image_Holder> {
         final RecommendImage recommend = recommendImageList.get(position);
         Picasso.with(c)
                 .load(recommend.getLink())
+                .placeholder(R.drawable.loading)
                 .into(image_holder.img);
     }
 

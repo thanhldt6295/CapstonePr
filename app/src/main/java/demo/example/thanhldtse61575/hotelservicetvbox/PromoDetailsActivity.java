@@ -2,6 +2,7 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -45,18 +46,23 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    public static final String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
-    public static String VIDEO_ID = "";
+    private String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
+    private String VIDEO_ID = "";
 
     private RelativeLayout relativeLayout;
     private PopupWindow popup;
     private LayoutInflater popupInflater;
-    List<Promotional> promo = new ArrayList<>();
-    TextView roomid;
+    private List<Promotional> promoList = new ArrayList<>();
+
+    YouTubePlayerView youTubePlayerView;
     TextView name;
     TextView hour;
     TextView cap;
     FloatingActionButton btnOrder;
+    Button btnBack;
+    Button btnNext;
+
+    TextView roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +71,23 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        promo = getPromoList();
+        promoList = getPromoList();
 
+        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
         name = (TextView) findViewById(R.id.tvPromoName);
         hour = (TextView) findViewById(R.id.tvWorkHour);
         cap = (TextView) findViewById(R.id.tvCapacity);
         btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_promo_details);
+        btnBack = (Button) findViewById(R.id.btnBack);
+        btnNext = (Button) findViewById(R.id.btnNext);
 
         Bundle extra = getIntent().getExtras();
         int type = extra.getInt("type");
-        int count = promo.size();
+        int count = promoList.size();
         for(int i = 0; i < count; i++){
             if(type==i){
-                Display(promo.get(i));
+                Display(promoList.get(i),type);
             }
         }
 
@@ -141,14 +150,14 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         Toast.makeText(this, "Failured to Initialize!", Toast.LENGTH_LONG).show();
     }
     @Override
-    public void onInitializationSuccess(Provider provider, YouTubePlayer player, boolean wasRestored) {
+    public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
 /** add listeners to YouTubePlayer instance **/
         player.setPlayerStateChangeListener(playerStateChangeListener);
         player.setPlaybackEventListener(playbackEventListener);
+
 /** Start buffering **/
         if (!wasRestored) {
             player.cueVideo(VIDEO_ID);
-            //player.setFullscreen(true);
         }
     }
     private PlaybackEventListener playbackEventListener = new PlaybackEventListener() {
@@ -201,13 +210,32 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         return list;
     }
 
-    private void Display(final Promotional promo){
+    private void Display(final Promotional promo, final int index){
         VIDEO_ID = promo.getVideoLink();
-        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.videoView);
         youTubePlayerView.initialize(API_KEY, this);
         name.setText(promo.getName().toUpperCase());
         hour.setText(promo.getWorkHour());
         cap.setText(promo.getCapacity()+"");
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(index > 0){
+                    Intent i = new Intent(PromoDetailsActivity.this, PromoDetailsActivity.class);
+                    i.putExtra("type", index-1);
+                    startActivity(i);
+                }
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(index < promoList.size()-1){
+                    Intent i = new Intent(PromoDetailsActivity.this, PromoDetailsActivity.class);
+                    i.putExtra("type", index+1);
+                    startActivity(i);
+                }
+            }
+        });
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -289,5 +317,10 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.startActivity(new Intent(PromoDetailsActivity.this, PromotionalChanelActivity.class));
     }
 }

@@ -29,21 +29,46 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.google.android.youtube.player.YouTubePlayerView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="4"
-                    android:id="@+id/videoView"
-                    android:layout_gravity="center"
-                    android:background="@color/white"/>
+                    android:layout_height="546dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnBack"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/previous"
+                        android:textColor="@color/yellow"
+                        android:textStyle="bold|italic" />
+
+                    <com.google.android.youtube.player.YouTubePlayerView
+                        android:id="@+id/videoView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@color/white" />
+
+                    <Button
+                        android:id="@+id/btnNext"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/next"
+                        android:textColor="@color/yellow"
+                        android:textStyle="bold|italic" />
+
+                </LinearLayout>
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:paddingLeft="64dp"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
 
                     <TableRow
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <TextView

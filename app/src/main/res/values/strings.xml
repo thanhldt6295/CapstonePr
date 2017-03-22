@@ -34,7 +34,7 @@
     <string name="confirm_back_question">This action will clear all your cart. Are you sure?</string>
     <string name="notitynull">There is not service!</string>
     <string name="notifyqty">Please choose quantity!</string>
-    <string name="notifychoose">Please comment!</string>
+    <string name="notifychoose">Please comment and check!</string>
     <string name="error"></string>
 
     <!-- WelcomeActivity -->
@@ -55,6 +55,7 @@
     <string name="order">YOUR ORDER</string>
     <string name="pending">PENDING</string>
     <string name="recommend">RECOMMEND</string>
+    <string name="tivistream">TIVI STREAMING</string>
 
     <!-- PromotionalChanelActivity -->
     <string name="spa">SPA</string>
@@ -64,6 +65,8 @@
     <string name="golf">GOLF</string>
     <string name="worktime">Working hour:</string>
     <string name="capacity">Capacity:</string>
+    <string name="previous">- \nPrevious</string>
+    <string name="next">+ \nNext</string>
 
     <!-- RoomServicesActivity -->
     <string name="food_drink">FOODS AND BEVERAGES</string>
@@ -88,12 +91,13 @@
     <!-- EcardActivity -->
     <string name="send">SEND</string>
     <string name="yourname">YOUR NAME: </string>
-    <string name="message">MESSAGE: </string>
+    <string name="message">has given you a voucher in our hotel with discount 20%.</string>
     <string name="receiver">RECEIVER MAIL: </string>
     <string name="subject">SUBJECT: </string>
     <string name="validateMail">Invalid Email!</string>
     <string name="validMessage">Please type some message!</string>
     <string name="validImage">Please attach an image!</string>
+    <string name="dear">Dear</string>
 
     <!-- MenuList -->
     <string name="food">FOODS</string>
@@ -196,5 +200,6 @@
     <string name="mountain">MOUNTAIN</string>
     <string name="countryside">COUNTRYSIDE</string>
     <string name="money">MONEY</string>
+    <string name="title_activity_ecards">EcardsActivity</string>
     <string name="title_activity_recommend__new_">Recommend_New_Activity</string>
 </resources>

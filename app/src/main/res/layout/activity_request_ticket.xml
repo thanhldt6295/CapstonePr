@@ -27,34 +27,15 @@
             android:background="#50797878"
             android:id="@+id/layoutRequest">
 
-            <Spinner
-                android:id="@+id/typeSpinner"
+            <ListView
+                android:id="@+id/maintenanceListView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:text="@string/comment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold|italic"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/white"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:hint="@string/comment_hint"
-                android:id="@+id/txtComment"
                 android:layout_weight="1"
-                android:textSize="@dimen/text_size_medium"
-                android:textStyle="bold"/>
+                android:padding="@dimen/activity_vertical_margin"
+                android:divider="#00ffffff"
+                android:dividerHeight="30dp"
+                android:scrollbars="vertical" />
 
         </LinearLayout>
 

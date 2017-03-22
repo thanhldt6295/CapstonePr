@@ -18,7 +18,7 @@
     <string name="lunch">BỮA TRƯA</string>
     <string name="mojito">BẠC HÀ</string>
     <string name="personal">ĐỒ CÁ NHÂN</string>
-    <string name="promotional">KÊNH QUẢNG CÁO</string>
+    <string name="promotional">KHÁCH SẠN CỦA CHÚNG TÔI</string>
     <string name="service">DỊCH VỤ PHÒNG</string>
     <string name="shopping">MUA SẮM TRỰC TUYẾN</string>
     <string name="souvenir">QUÀ LƯU NIỆM</string>
@@ -70,9 +70,9 @@
     <string name="recommend">GỢI Ý</string>
     <string name="golf">GÔN</string>
     <string name="gym">TẬP THỂ HÌNH</string>
-    <string name="message">TIN NHẮN: </string>
+    <string name="message">đã gửi tặng bạn một voucher khuyến mãi 20% của khách sạn chúng tôi.</string>
     <string name="pool">HỒ BƠI</string>
-    <string name="receiver">NGƯỜI NHẬN: </string>
+    <string name="receiver">EMAIL NGƯỜI NHẬN: </string>
     <string name="send">GỬI</string>
     <string name="spa">CHĂM SÓC SẮC ĐẸP</string>
     <string name="subject">TIÊU ĐỀ: </string>
@@ -80,7 +80,7 @@
     <string name="notitynull">Không có dịch vụ..</string>
     <string name="notifyqty">Xin quý khách vui lòng chọn số lượng 1 sản phẩm..</string>
     <string name="tennis">QUẦN VỢT</string>
-    <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú..</string>
+    <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú, rồi đánh dấu chọn ngay tại dịch vụ cần.</string>
     <string name="capacity">Sức chứa (người/phòng):</string>
     <string name="worktime">Thời gian làm việc:</string>
     <string name="validate">Email không hợp lệ hoặc Tin nhắn bị trống hoặc Không có ảnh đính kèm!</string>
@@ -118,6 +118,10 @@
     <string name="confirm_cancel">Xác nhận hủy đơn hàng</string>
     <string name="confirm_content">Quý khách có chắc chắn hủy đơn hàng này chứ?</string>
     <string name="confirm_promotional">Quý khách đã đặt chỗ thành công. Chúng tôi sẽ liên hệ với quý khách để xác nhận một lần nữa. Xin cảm ơn.</string>
+    <string name="dear">Thân chào</string>
+    <string name="tivistream">XEM TIVI</string>
+    <string name="previous">Trang trước</string>
+    <string name="next">Trang kế</string>
 
 
 </resources>
