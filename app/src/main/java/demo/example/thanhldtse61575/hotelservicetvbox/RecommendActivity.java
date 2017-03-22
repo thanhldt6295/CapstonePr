@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,91 +52,109 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     private Spinner PriceSpinner;
     TextView roomid;
 
+    int[] titles = {R.string.promotional, R.string.service, R.string.ecard, R.string.bill, R.string.survey, R.string.recommend, R.string.application};
+    int[] images = {R.drawable.img_promotional, R.drawable.img_roomservices, R.drawable.img_ecard,
+            R.drawable.img_billing, R.drawable.img_survey, R.drawable.img_recommend, R.drawable.img_app};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.layout_actionbar);
-        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText(getResources().getString(R.string.recommend));
-        roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        //btnSearch = (Button) findViewById(R.id.btnSearch);
+//        RecyclerView rv = (RecyclerView) findViewById(R.id.friends_to_invite);
+//        rv.setHasFixedSize(true);
+//        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        RecommendListAdapter ma = new RecommendListAdapter(this, titles, images);
+//        rv.setAdapter(ma);
+//
+//        RecyclerView rvs = (RecyclerView) findViewById(R.id.in_app_friends);
+//        rvs.setHasFixedSize(true);
+//        rvs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        MainAdapter mas = new MainAdapter(this, titles, images);
+//        rvs.setAdapter(mas);
+//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getSupportActionBar().setCustomView(R.layout.layout_actionbar);
+//        TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+//        abTitle.setText(getResources().getString(R.string.recommend));
+//        roomid = (TextView) findViewById(R.id.roomid);
+//        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+//
+//        //btnSearch = (Button) findViewById(R.id.btnSearch);
+//
+//        HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
+//        HobbySpinner.getBackground().setAlpha(80);
+//        PriceSpinner = (Spinner) findViewById(R.id.priceSpinner);
+//        PriceSpinner.getBackground().setAlpha(80);
+//        listView = (ListView) findViewById(R.id.recListView);
+//        listView.getBackground().setAlpha(48);
+//        HobbyAdapter = new HobbyAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyHobby());
+//        HobbyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        HobbySpinner.setAdapter(HobbyAdapter);
+//        HobbySpinner.setOnItemSelectedListener(this);
+//
+//        PriceAdapter = new PriceAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyPrice());
+//        PriceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        PriceSpinner.setAdapter(PriceAdapter);
+//        PriceSpinner.setOnItemSelectedListener(this);
+//
+//        adapter = new RecommendAdapter(this, getRecommendList());
+//        listView.setAdapter(adapter);
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(RecommendActivity.this,RecommendDetailActivity.class);
+//                intent.putExtra("position", position);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // Datetime & Calendar
+//        final TextView txtDate;
+//        txtDate = (TextView) findViewById(R.id.txtDate);
+//
+//        Thread t = new Thread() {
+//
+//            @Override
+//            public void run() {
+//                try {
+//                    while (!isInterrupted()) {
+//                        Thread.sleep(1000);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                String currentDateTimeString = DateFormat.getTimeInstance().format(new Date()) + "  "
+//                                        + DateFormat.getDateInstance().format(new Date());
+//                                txtDate.setText(currentDateTimeString);
+//                            }
+//                        });
+//                    }
+//                } catch (InterruptedException e) {
+//                }
+//            }
+//        };
+//
+//        t.start();
+//
+//        final Calendar myCalen = Calendar.getInstance();
+//        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                myCalen.set(Calendar.YEAR, year);
+//                myCalen.set(Calendar.MONTH, monthOfYear);
+//                myCalen.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//            }
+//        };
+//
+//        txtDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new DatePickerDialog(RecommendActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
+//                        myCalen.get(Calendar.DAY_OF_MONTH)).show();
+//            }
+//        });
 
-        HobbySpinner = (Spinner)findViewById(R.id.hobbySpinner);
-        HobbySpinner.getBackground().setAlpha(80);
-        PriceSpinner = (Spinner) findViewById(R.id.priceSpinner);
-        PriceSpinner.getBackground().setAlpha(80);
-        listView = (ListView) findViewById(R.id.recListView);
-        listView.getBackground().setAlpha(48);
-        HobbyAdapter = new HobbyAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyHobby());
-        HobbyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        HobbySpinner.setAdapter(HobbyAdapter);
-        HobbySpinner.setOnItemSelectedListener(this);
-
-        PriceAdapter = new PriceAdapter(this,android.R.layout.simple_spinner_dropdown_item, loadDummyPrice());
-        PriceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        PriceSpinner.setAdapter(PriceAdapter);
-        PriceSpinner.setOnItemSelectedListener(this);
-
-        adapter = new RecommendAdapter(this, getRecommendList());
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(RecommendActivity.this,RecommendDetailActivity.class);
-                intent.putExtra("position", position);
-                startActivity(intent);
-            }
-        });
-
-        // Datetime & Calendar
-        final TextView txtDate;
-        txtDate = (TextView) findViewById(R.id.txtDate);
-
-        Thread t = new Thread() {
-
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
-                        Thread.sleep(1000);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                String currentDateTimeString = DateFormat.getTimeInstance().format(new Date()) + "  "
-                                        + DateFormat.getDateInstance().format(new Date());
-                                txtDate.setText(currentDateTimeString);
-                            }
-                        });
-                    }
-                } catch (InterruptedException e) {
-                }
-            }
-        };
-
-        t.start();
-
-        final Calendar myCalen = Calendar.getInstance();
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalen.set(Calendar.YEAR, year);
-                myCalen.set(Calendar.MONTH, monthOfYear);
-                myCalen.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            }
-        };
-
-        txtDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(RecommendActivity.this,date,myCalen.get(Calendar.YEAR), myCalen.get(Calendar.MONTH),
-                        myCalen.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
     }
 
     @Override
@@ -192,14 +212,14 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         final String search;
         Spinner spinner = (Spinner) parent;
-        if(spinner.getId() == R.id.hobbySpinner)
-        {
-            posh = position;
-        }
-        else if(spinner.getId() == R.id.priceSpinner)
-        {
-            posp = position;
-        }
+//        if(spinner.getId() == R.id.hobbySpinner)
+//        {
+//            posh = position;
+//        }
+//        else if(spinner.getId() == R.id.priceSpinner)
+//        {
+//            posp = position;
+//        }
         Hobby Hobby = HobbyAdapter.getItem(posh);
         Price Price = PriceAdapter.getItem(posp);
         search = Hobby.getId()+"," + Price.getId();

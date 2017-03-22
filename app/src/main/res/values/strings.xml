@@ -196,4 +196,5 @@
     <string name="mountain">MOUNTAIN</string>
     <string name="countryside">COUNTRYSIDE</string>
     <string name="money">MONEY</string>
+    <string name="title_activity_recommend__new_">Recommend_New_Activity</string>
 </resources>

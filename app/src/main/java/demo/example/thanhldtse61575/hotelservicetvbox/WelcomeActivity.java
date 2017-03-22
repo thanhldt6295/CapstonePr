@@ -144,24 +144,23 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        String[] permission ={  Manifest.permission.INTERNET,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.CHANGE_WIFI_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION};
+//        String[] permission ={  Manifest.permission.INTERNET,
+//                Manifest.permission.ACCESS_NETWORK_STATE,
+//                Manifest.permission.ACCESS_WIFI_STATE,
+//                Manifest.permission.CHANGE_WIFI_STATE,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.ACCESS_COARSE_LOCATION,
+//                Manifest.permission.ACCESS_FINE_LOCATION};
+//
+//
+//        verify(permission);
 
-
-        verify(permission);
-
+        setDefaultPosition2Share();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText("Hotel Service TV Box");
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-        layout.getBackground().setAlpha(51);
 
         mQuoteBank = new QuoteBank(this);
         try {
@@ -188,7 +187,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 final String acc = new Gson().fromJson(response, new TypeToken<String>() {
                 }.getType());
 
-                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
+                customerWel = (TextView) findViewById(R.id.fullscreen_content);
                 customerWel.setText(acc.toString().toUpperCase().trim());
                 setCust2Share(acc);
             }
@@ -289,10 +288,27 @@ public class WelcomeActivity extends AppCompatActivity {
 
             protected void onPostExecute(String response) {
                 //parse json sang list service
-                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
-                }.getType());
+//                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
+//                }.getType());
 
-                setRecommendList2Share(acc);
+                setRecommendList2Share(response);
+            }
+        }
+
+        class GetRecommendImageFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+//                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
+//                }.getType());
+
+                setRecommendImageList2Share(response);
             }
         }
 
@@ -303,6 +319,7 @@ public class WelcomeActivity extends AppCompatActivity {
         new GetHobbyFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetHobby");
         new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
         new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
+        new GetRecommendImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetRecommendLinks");
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -320,10 +337,10 @@ public class WelcomeActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_btnEng2).setOnTouchListener(mDelayHideTouchListener);
-        findViewById(R.id.dummy_btnViet2).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_btnEng).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.dummy_btnViet).setOnTouchListener(mDelayHideTouchListener);
 
-        dummyBtnEng = (Button)findViewById(R.id.dummy_btnEng2);
+        dummyBtnEng = (Button)findViewById(R.id.dummy_btnEng);
         dummyBtnEng.setFocusable(true);
         dummyBtnEng.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -341,7 +358,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 }
             }
         });
-        dummyBtnViet = (Button)findViewById(R.id.dummy_btnViet2);
+        dummyBtnViet = (Button)findViewById(R.id.dummy_btnViet);
         dummyBtnViet.setFocusable(true);
         dummyBtnViet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -391,124 +408,124 @@ public class WelcomeActivity extends AppCompatActivity {
 
     //Begin Check Permission
 
-    public boolean verify(final String[] PERMISSIONS) {
-
-        if (underAPI23()) return true;
-
-        permissionsRequired = PERMISSIONS;
-        List<String> pendingPermission = new ArrayList<>();
-
-        for (int i = 0; i < PERMISSIONS.length; i++) {
-            int check = ContextCompat.checkSelfPermission(WelcomeActivity.this, PERMISSIONS[i]);
-            if (check != PackageManager.PERMISSION_GRANTED) {
-                pendingPermission.add(PERMISSIONS[i]);
-            }
-        }
-
-        int denyPermissionLength = pendingPermission.size();
-        final String[] denyPermission = new String[denyPermissionLength];
-        for (int i = 0; i < denyPermissionLength; i++) {
-            denyPermission[i] = pendingPermission.get(i);
-        }
-
-        if (denyPermissionLength > 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
-            builder.setTitle("Need Multiple Permissions");
-            builder.setMessage("We needs more Permissions");
-            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                    ActivityCompat.requestPermissions(WelcomeActivity.this, denyPermission, PERMISSION_CALLBACK_CONSTANT);
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public static boolean underAPI23() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == PERMISSION_CALLBACK_CONSTANT) {
-            //check if all permissions are granted
-            boolean allgranted = false;
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    allgranted = true;
-                } else {
-                    allgranted = false;
-                    break;
-                }
-            }
-
-            if(allgranted){
-                proceedAfterPermission();
-            } else {
-                List<String> pendingPermission = new ArrayList<>();
-
-                for (int i = 0; i < permissions.length; i++) {
-                    int check = ContextCompat.checkSelfPermission(getBaseContext(), permissions[i]);
-                    if (check != PackageManager.PERMISSION_GRANTED) {
-                        pendingPermission.add(permissions[i]);
-                    }
-                }
-
-                int denyPermissionLength = pendingPermission.size();
-                final String[] denyPermission = new String[denyPermissionLength];
-                for (int i = 0; i < denyPermissionLength; i++) {
-                    denyPermission[i] = pendingPermission.get(i);
-                }
-
-                if (denyPermissionLength > 0) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
-                    builder.setTitle("Need Multiple Permissions");
-                    builder.setMessage("Need more permision");
-                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            ActivityCompat.requestPermissions(WelcomeActivity.this, denyPermission, PERMISSION_CALLBACK_CONSTANT);
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
-                }
-            }
-        }
-    }
-
-    private void proceedAfterPermission() {
-        Toast.makeText(getBaseContext(), "We got All Permissions", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_PERMISSION_SETTING) {
-            if (ActivityCompat.checkSelfPermission(WelcomeActivity.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED) {
-                //Got Permission
-                proceedAfterPermission();
-            }
-        }
-    }
+//    public boolean verify(final String[] PERMISSIONS) {
+//
+//        if (underAPI23()) return true;
+//
+//        permissionsRequired = PERMISSIONS;
+//        List<String> pendingPermission = new ArrayList<>();
+//
+//        for (int i = 0; i < PERMISSIONS.length; i++) {
+//            int check = ContextCompat.checkSelfPermission(WelcomeActivity.this, PERMISSIONS[i]);
+//            if (check != PackageManager.PERMISSION_GRANTED) {
+//                pendingPermission.add(PERMISSIONS[i]);
+//            }
+//        }
+//
+//        int denyPermissionLength = pendingPermission.size();
+//        final String[] denyPermission = new String[denyPermissionLength];
+//        for (int i = 0; i < denyPermissionLength; i++) {
+//            denyPermission[i] = pendingPermission.get(i);
+//        }
+//
+//        if (denyPermissionLength > 0) {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+//            builder.setTitle("Need Multiple Permissions");
+//            builder.setMessage("We needs more Permissions");
+//            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.cancel();
+//                    ActivityCompat.requestPermissions(WelcomeActivity.this, denyPermission, PERMISSION_CALLBACK_CONSTANT);
+//                }
+//            });
+//            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.cancel();
+//                }
+//            });
+//            builder.show();
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+//
+//    public static boolean underAPI23() {
+//        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if(requestCode == PERMISSION_CALLBACK_CONSTANT) {
+//            //check if all permissions are granted
+//            boolean allgranted = false;
+//            for (int i = 0; i < grantResults.length; i++) {
+//                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+//                    allgranted = true;
+//                } else {
+//                    allgranted = false;
+//                    break;
+//                }
+//            }
+//
+//            if(allgranted){
+//                proceedAfterPermission();
+//            } else {
+//                List<String> pendingPermission = new ArrayList<>();
+//
+//                for (int i = 0; i < permissions.length; i++) {
+//                    int check = ContextCompat.checkSelfPermission(getBaseContext(), permissions[i]);
+//                    if (check != PackageManager.PERMISSION_GRANTED) {
+//                        pendingPermission.add(permissions[i]);
+//                    }
+//                }
+//
+//                int denyPermissionLength = pendingPermission.size();
+//                final String[] denyPermission = new String[denyPermissionLength];
+//                for (int i = 0; i < denyPermissionLength; i++) {
+//                    denyPermission[i] = pendingPermission.get(i);
+//                }
+//
+//                if (denyPermissionLength > 0) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+//                    builder.setTitle("Need Multiple Permissions");
+//                    builder.setMessage("Need more permision");
+//                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                            ActivityCompat.requestPermissions(WelcomeActivity.this, denyPermission, PERMISSION_CALLBACK_CONSTANT);
+//                        }
+//                    });
+//                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//                    builder.show();
+//                }
+//            }
+//        }
+//    }
+//
+//    private void proceedAfterPermission() {
+//        Toast.makeText(getBaseContext(), "We got All Permissions", Toast.LENGTH_LONG).show();
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_PERMISSION_SETTING) {
+//            if (ActivityCompat.checkSelfPermission(WelcomeActivity.this, permissionsRequired[0]) == PackageManager.PERMISSION_GRANTED) {
+//                //Got Permission
+//                proceedAfterPermission();
+//            }
+//        }
+//    }
 
     //End check Permission
 
@@ -631,14 +648,35 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final String RECOMMEND_TAG = "SharedRecommend";
     private static final String RECOMMEND_LIST = "RecommendList";
 
-    private void setRecommendList2Share(List<Recommend> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
+    private void setRecommendList2Share(String Recommend_list){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(RECOMMEND_TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(RECOMMEND_LIST, jsonCurProduct);
+        editor.putString(RECOMMEND_LIST, Recommend_list);
+        editor.commit();
+    }
+
+    private static final String ImageShare_TAG = "SharedImageList";
+    private static final String ImageShare_LIST = "ImageShareList";
+
+    private void setRecommendImageList2Share(String image_list){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ImageShare_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(ImageShare_LIST, image_list);
+        editor.commit();
+    }
+
+    private static final String SHARE_RE = "SharePosition";
+    private static final String RE_TAG = "PositionName";
+
+    private void setDefaultPosition2Share(){
+        SharedPreferences sharedPref = getSharedPreferences(SHARE_RE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(RE_TAG, 0+"");
         editor.commit();
     }
 

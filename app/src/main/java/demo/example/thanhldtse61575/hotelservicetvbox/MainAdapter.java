@@ -54,7 +54,7 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                         c.startActivity(new Intent(c, SurveyActivity.class));
                         break;
                     case 5:
-                        c.startActivity(new Intent(c, RecommendActivity.class));
+                        c.startActivity(new Intent(c, Recommend_New_Activity.class));
                         break;
                     case 6:
                         c.startActivity(new Intent(c, AppsActivity.class));

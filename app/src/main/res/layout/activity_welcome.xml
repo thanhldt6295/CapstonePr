@@ -2,128 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/welcome"
+    android:background="@drawable/background"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.WelcomeActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#82ffffff"
-        android:id="@+id/layout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="450dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/fullscreen_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:keepScreenOn="true"
-                    android:text="          WELCOME"
-                    android:textColor="@color/blue"
-                    android:textSize="50sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/fullscreen_content2"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:gravity="center_horizontal"
-                    android:keepScreenOn="true"
-                    android:text="          XIN CHÀO"
-                    android:textColor="@color/blue"
-                    android:textSize="50sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/fullscreen_content3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:keepScreenOn="true"
-                android:textColor="@color/pink"
-                android:textSize="62sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="200dp"
-                android:layout_height="match_parent"></LinearLayout>
-
-            <Button
-                android:id="@+id/dummy_btnEng2"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="@string/dummy_eng"
-                android:textColor="@color/gray"
-                android:textSize="50dp"
-                android:background="@color/white"
-                android:alpha="0.86"/>
-
-            <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="match_parent"></LinearLayout>
-
-            <Button
-                android:id="@+id/dummy_btnViet2"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="TIẾNG VIỆT"
-                android:textColor="@color/gray"
-                android:textSize="50dp"
-                android:background="@color/white"
-                android:alpha="0.86"/>
-
-            <LinearLayout
-                android:layout_width="200dp"
-                android:layout_height="match_parent"></LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"></LinearLayout>
-    </LinearLayout>
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text="@string/dummy_content"
+        android:textColor="#33b5e5"
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:visibility="invisible">
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
@@ -131,11 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black"
-            android:alpha="0.4"
+            android:background="#66000000"
             android:orientation="horizontal"
-            tools:ignore="UselessParent"
-            android:visibility="invisible">
+            tools:ignore="UselessParent">
 
             <Button
                 android:id="@+id/dummy_btnEng"
@@ -144,8 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/dummy_eng"
-                android:textStyle="bold"
-                android:visibility="invisible"/>
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/dummy_btnViet"
@@ -153,9 +51,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TIẾNG VIỆT"
-                android:textStyle="bold"
-                android:visibility="invisible"/>
+                android:text="@string/dummy_viet"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </FrameLayout>
