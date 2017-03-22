@@ -254,9 +254,9 @@ public class RecommendActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Information";
+                    return getResources().getString(R.string.information);
                 case 1:
-                    return "Gallery";
+                    return getResources().getString(R.string.gallery);
             }
             return null;
         }

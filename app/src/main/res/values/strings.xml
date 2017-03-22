@@ -42,6 +42,8 @@
     <string name="dummy_viet">TIẾNG VIỆT</string>
     <string name="dummy_content">WELCOME TO OUR HOTEL</string>
     <string name="dummy_content2">XIN CHÀO QUÝ KHÁCH</string>
+    <string name="information">INFORMATION</string>
+    <string name="gallery">GALLERY</string>
 
     <!-- MainActivity -->
     <string name="application">APPLICATIONS</string>

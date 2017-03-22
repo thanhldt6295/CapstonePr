@@ -122,6 +122,8 @@
     <string name="tivistream">XEM TIVI</string>
     <string name="previous">Trang trước</string>
     <string name="next">Trang kế</string>
+    <string name="information">THÔNG TIN</string>
+    <string name="gallery">HÌNH ẢNH</string>
 
 
 </resources>
