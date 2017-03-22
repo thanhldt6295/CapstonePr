@@ -157,6 +157,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         verify(permission);
 
+        setDefaultPosition2Share();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
@@ -298,6 +299,23 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }
 
+        class GetRecommendImageFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+//                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
+//                }.getType());
+
+                setRecommendImageList2Share(response);
+            }
+        }
+
         new GetCustomerFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetOrderInfo/" + roomid);
         new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
         new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
@@ -305,6 +323,7 @@ public class WelcomeActivity extends AppCompatActivity {
         new GetHobbyFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetHobby");
         new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
         new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
+        new GetRecommendImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetRecommendLinks");
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -644,6 +663,19 @@ public class WelcomeActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    private static final String ImageShare_TAG = "SharedImageList";
+    private static final String ImageShare_LIST = "ImageShareList";
+
+    private void setRecommendImageList2Share(String image_list){
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ImageShare_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(ImageShare_LIST, image_list);
+        editor.commit();
+    }
+
+
     private static final String SHARE_BILL = "SharedBill";
     private static final String TOTAL_BILL = "BillTotal";
 
@@ -655,6 +687,17 @@ public class WelcomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(TOTAL_BILL, jsonCurProduct);
+        editor.commit();
+    }
+
+    private static final String SHARE_RE = "SharePosition";
+    private static final String RE_TAG = "PositionName";
+
+    private void setDefaultPosition2Share(){
+        SharedPreferences sharedPref = getSharedPreferences(SHARE_RE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(RE_TAG, 0+"");
         editor.commit();
     }
 
