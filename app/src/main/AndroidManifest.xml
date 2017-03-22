@@ -54,8 +54,6 @@
         <activity
             android:name=".SurveyActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".RecommendActivity" />
-        <activity android:name=".RecommendDetailActivity" />
         <activity android:name=".PromoDetailsActivity" />
         <activity
             android:name=".EcardActivity"
@@ -86,7 +84,7 @@
             android:label="@string/title_activity_ecards"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Recommend_New_Activity"
+            android:name=".RecommendActivity"
             android:label="@string/title_activity_recommend__new_"
             android:theme="@style/AppTheme"></activity>
     </application>

@@ -52,7 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<Holder> {
                         c.startActivity(new Intent(c, ViewBillActivity.class));
                         break;
                     case 4:
-                        c.startActivity(new Intent(c, Recommend_New_Activity.class));
+                        c.startActivity(new Intent(c, RecommendActivity.class));
                         break;
                     case 5:
                         OpenApps("com.media.its.mytvnet");

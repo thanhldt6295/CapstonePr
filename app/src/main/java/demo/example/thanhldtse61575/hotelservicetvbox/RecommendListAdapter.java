@@ -29,7 +29,6 @@ public class RecommendListAdapter extends RecyclerView.Adapter<Recommend_Holder>
         this.recommendList = recommendList;
     }
 
-
     @Override
     public Recommend_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -53,7 +52,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<Recommend_Holder>
             public void onItemClick(View view, int pos) {
 
                 setRecommend2Share(position);
-                c.startActivity(new Intent(c, Recommend_New_Activity.class));
+                c.startActivity(new Intent(c, RecommendActivity.class));
             }
         });
     }
