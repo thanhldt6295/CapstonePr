@@ -49,6 +49,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.RecommendImage;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
@@ -177,153 +178,231 @@ public class WelcomeActivity extends AppCompatActivity {
             roomid = string;
         }
 
-        class GetCustomerFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final Order acc = new Gson().fromJson(response, new TypeToken<Order>() {
-                }.getType());
-
-                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
-                customerWel.setText(acc.getCustName().toString().toUpperCase().trim());
-                setCust2Share(acc.getCustName());
-                setOrder2Share(acc);
-            }
-        }
-
-        class GetServiceFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
-                }.getType());
-
-                setServiceList2Share(acc);
-            }
-        }
-
-        class GetPromoFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final List<Promotional> acc = new Gson().fromJson(response, new TypeToken<List<Promotional>>() {
-                }.getType());
-
-                setPromoList2Share(acc);
-            }
-        }
-
-        class GetImageFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final List<String> acc = new Gson().fromJson(response, new TypeToken<List<String>>() {
-                }.getType());
-
-                setImageList2Share(acc);
-            }
-        }
-
-        class GetHobbyFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final List<Hobby> acc = new Gson().fromJson(response, new TypeToken<List<Hobby>>() {
-                }.getType());
-
-                setHobbyList2Share(acc);
-            }
-        }
-
-        class GetPriceFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final List<Price> acc = new Gson().fromJson(response, new TypeToken<List<Price>>() {
-                }.getType());
-
-                setPriceList2Share(acc);
-            }
-        }
-
-        class GetRecommendFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
-                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
-                }.getType());
-
-                setRecommendList2Share(acc);
-            }
-        }
-
-        class GetRecommendImageFromServer extends AsyncTask<String, Void, String> {
-
-            protected String doInBackground(String... params) {
-                CommonService commonService = new CommonService();
-                String returnva = commonService.getData(params[0]);
-                return returnva;
-            }
-
-            protected void onPostExecute(String response) {
-                //parse json sang list service
+//        class GetCustomerFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+//                final Order acc = new Gson().fromJson(response, new TypeToken<Order>() {
+//                }.getType());
+//
+//                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
+//                customerWel.setText(acc.getCustName().toString().toUpperCase().trim());
+//                setCust2Share(acc.getCustName());
+//                setOrder2Share(acc);
+//            }
+//        }
+//
+//        class GetServiceFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+//                final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+//                }.getType());
+//
+//                setServiceList2Share(acc);
+//            }
+//        }
+//
+//        class GetPromoFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+//                final List<Promotional> acc = new Gson().fromJson(response, new TypeToken<List<Promotional>>() {
+//                }.getType());
+//
+//                setPromoList2Share(acc);
+//            }
+//        }
+//
+//        class GetImageFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+//                final List<String> acc = new Gson().fromJson(response, new TypeToken<List<String>>() {
+//                }.getType());
+//
+//                setImageList2Share(acc);
+//            }
+//        }
+//
+//        class GetHobbyFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+//                final List<Hobby> acc = new Gson().fromJson(response, new TypeToken<List<Hobby>>() {
+//                }.getType());
+//
+//                setHobbyList2Share(acc);
+//            }
+//        }
+//
+//        class GetPriceFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+//                final List<Price> acc = new Gson().fromJson(response, new TypeToken<List<Price>>() {
+//                }.getType());
+//
+//                setPriceList2Share(acc);
+//            }
+//        }
+//
+//        class GetRecommendFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
 //                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
 //                }.getType());
+//
+//                setRecommendList2Share(acc);
+//            }
+//        }
+//
+//        class GetRecommendImageFromServer extends AsyncTask<String, Void, String> {
+//
+//            protected String doInBackground(String... params) {
+//                CommonService commonService = new CommonService();
+//                String returnva = commonService.getData(params[0]);
+//                return returnva;
+//            }
+//
+//            protected void onPostExecute(String response) {
+//                //parse json sang list service
+////                final List<Recommend> acc = new Gson().fromJson(response, new TypeToken<List<Recommend>>() {
+////                }.getType());
+//
+//                setRecommendImageList2Share(response);
+//            }
+//        }
 
-                setRecommendImageList2Share(response);
+        class LoadAllDataFromServer extends AsyncTask<String, Void, List<String>> {
+
+            @Override
+            protected List<String> doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String Domain = "http://capstoneserver2017.azurewebsites.net/api";
+                List<String> return_values = new ArrayList<>();
+
+                //0-OrderInfo
+                String GetOrderInfo = "/OrdersApi/GetOrderInfo/" + params[0];
+                String return_OrderInfo = commonService.getData(Domain+GetOrderInfo);
+                return_values.add(return_OrderInfo);
+
+                //1-AllService
+                String GetAllService = "/ServicesApi/GetAllService";
+                String return_AllService = commonService.getData(Domain+GetAllService);
+                return_values.add(return_AllService);
+
+                //2-Promos
+                String GetPromos ="/PromotionalsApi/GetPromos";
+                String return_Promos = commonService.getData(Domain+GetPromos);
+                return_values.add(return_Promos);
+
+                //3-ECardLinks
+                String GetECardLinks = "/ImagesApi/GetECardLinks";
+                String return_ECardLinks = commonService.getData(Domain+GetECardLinks);
+                return_values.add(return_ECardLinks);
+
+                //4-Recommend
+                String GetRecommend = "/RecommendsApi/GetRecommend";
+                String return_Recommend = commonService.getData(Domain+GetRecommend);
+                return_values.add(return_Recommend);
+
+                //5-RecommendImageLinks
+                String GetRecommendImageLinks = "/ImagesApi/GetRecommendLinks";
+                String return_RecommendImageLinks = commonService.getData(Domain+GetRecommendImageLinks);
+                return_values.add(return_RecommendImageLinks);
+
+                return return_values;
+            }
+
+            protected void onPostExecute(List<String> response) {
+                //0-OrderInfo
+                final Order acc_0 = new Gson().fromJson(response.get(0), new TypeToken<Order>() {}.getType());
+                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
+                customerWel.setText(acc_0.getCustName().toString().toUpperCase().trim());
+                setCust2Share(acc_0.getCustName());
+                setOrder2Share(acc_0);
+
+                //1-AllService
+                //List<Service> acc_1 = new Gson().fromJson(response.get(1), new TypeToken<List<Service>>() {}.getType());
+                String listService = response.get(1);
+                setServiceList2Share(listService);
+
+                //2-Promos
+                //List<Promotional> acc_2 = new Gson().fromJson(response.get(2), new TypeToken<List<Promotional>>() {}.getType());
+                String listPromotional = response.get(2);
+                setPromoList2Share(listPromotional);
+
+                //3-ECardLinks
+                //List<String> acc_3 = new Gson().fromJson(response.get(3), new TypeToken<List<String>>() {}.getType());
+                String stringImage = response.get(3);
+                setImageList2Share(stringImage);
+
+                //4-Recommend
+                //List<Recommend> acc_4 = new Gson().fromJson(response.get(4), new TypeToken<List<Recommend>>() {}.getType());
+                String listRecommend = response.get(4);
+                setRecommendList2Share(listRecommend);
+
+                //5-RecommendImageLinks
+                //List<RecommendImage> acc_5 = new Gson().fromJson(response.get(5), new TypeToken<List<RecommendImage>>() {}.getType());
+                String listRecommendImage = response.get(5);
+                setRecommendImageList2Share(listRecommendImage);
             }
         }
 
-        new GetCustomerFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetOrderInfo/" + roomid);
-        new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
-        new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
-        new GetImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetECardLinks");
-        new GetHobbyFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetHobby");
-        new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
-        new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
-        new GetRecommendImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetRecommendLinks");
+//        new GetCustomerFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetOrderInfo/" + roomid);
+//        new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
+//        new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
+//        new GetImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetECardLinks");
+//        new GetHobbyFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetHobby");
+//        new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
+//        new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
+//        new GetRecommendImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetRecommendLinks");
+
+        new LoadAllDataFromServer().execute(roomid);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -582,42 +661,33 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final String ShSERVICE_TAG = "SharedService";
     private static final String SVLIST_TAG = "ServiceList";
 
-    private void setServiceList2Share(List<Service> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
+    private void setServiceList2Share(String listService){
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShSERVICE_TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(SVLIST_TAG, jsonCurProduct);
+        editor.putString(SVLIST_TAG, listService);
         editor.commit();
     }
 
     private static final String ShPROMO_TAG = "SharedPromo";
     private static final String PRLIST_TAG = "PromoList";
 
-    private void setPromoList2Share(List<Promotional> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
+    private void setPromoList2Share(String listPromotional){
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShPROMO_TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(PRLIST_TAG, jsonCurProduct);
+        editor.putString(PRLIST_TAG, listPromotional);
         editor.commit();
     }
 
     private static final String ShIMAGE_TAG = "SharedImage";
     private static final String IMGLIST_TAG = "ImageList";
 
-    private void setImageList2Share(List<String> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
+    private void setImageList2Share(String stringImage){
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShIMAGE_TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(IMGLIST_TAG, jsonCurProduct);
+        editor.putString(IMGLIST_TAG, stringImage);
         editor.commit();
     }
 
@@ -652,14 +722,11 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final String RECOMMEND_TAG = "SharedRecommend";
     private static final String RECOMMEND_LIST = "RecommendList";
 
-    private void setRecommendList2Share(List<Recommend> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
+    private void setRecommendList2Share(String listRecommend){
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(RECOMMEND_TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(RECOMMEND_LIST, jsonCurProduct);
+        editor.putString(RECOMMEND_LIST, listRecommend);
         editor.commit();
     }
 
