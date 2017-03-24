@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Hobby;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
@@ -249,23 +248,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //            }
 //        }
 //
-//        class GetHobbyFromServer extends AsyncTask<String, Void, String> {
-//
-//            protected String doInBackground(String... params) {
-//                CommonService commonService = new CommonService();
-//                String returnva = commonService.getData(params[0]);
-//                return returnva;
-//            }
-//
-//            protected void onPostExecute(String response) {
-//                //parse json sang list service
-//                final List<Hobby> acc = new Gson().fromJson(response, new TypeToken<List<Hobby>>() {
-//                }.getType());
-//
-//                setHobbyList2Share(acc);
-//            }
-//        }
-//
 //        class GetPriceFromServer extends AsyncTask<String, Void, String> {
 //
 //            protected String doInBackground(String... params) {
@@ -397,7 +379,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //        new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
 //        new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
 //        new GetImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetECardLinks");
-//        new GetHobbyFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetHobby");
 //        new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
 //        new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
 //        new GetRecommendImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetRecommendLinks");
@@ -688,20 +669,6 @@ public class WelcomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(IMGLIST_TAG, stringImage);
-        editor.commit();
-    }
-
-    private static final String HOBBY_TAG = "SharedHobby";
-    private static final String HOBBY_LIST = "HobbyList";
-
-    private void setHobbyList2Share(List<Hobby> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(HOBBY_TAG, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        editor.putString(HOBBY_LIST, jsonCurProduct);
         editor.commit();
     }
 

@@ -38,6 +38,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -224,6 +225,11 @@ public class EcardsActivity extends AppCompatActivity {
                     .load(imageLink)
                     .placeholder(R.drawable.loading)
                     .into(imageView);
+//            Glide.with(getActivity())
+//                    .load(imageLink)
+//                    .placeholder(R.drawable.loading)
+//                    .centerCrop()
+//                    .into(imageView);
             btnSend.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {

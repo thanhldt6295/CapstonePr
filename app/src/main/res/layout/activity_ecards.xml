@@ -5,8 +5,8 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7492ed"
     android:fitsSystemWindows="true"
-    android:background="@drawable/background"
     tools:context="demo.example.thanhldtse61575.hotelservicetvbox.EcardsActivity">
 
     <LinearLayout

@@ -56,9 +56,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".PromoDetailsActivity" />
         <activity
-            android:name=".EcardActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name=".FoodyActivity"
             android:label="@string/title_activity_foody"
             android:theme="@style/AppTheme"

@@ -521,6 +521,7 @@ public class FoodyActivity extends AppCompatActivity {
                                         }
                                     }
                                     getActivity().invalidateOptionsMenu();
+                                    popup.dismiss();
 
                                 case MotionEvent.ACTION_CANCEL: {
                                     Button view = (Button) v;
