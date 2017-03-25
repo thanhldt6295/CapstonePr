@@ -3,6 +3,8 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +40,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<Recommend_Holder>
     }
 
     @Override
-    public void onBindViewHolder(Recommend_Holder recommend_holder, final int position) {
+    public void onBindViewHolder(final Recommend_Holder recommend_holder, final int position) {
         final Recommend recommend = recommendList.get(position);
         Picasso.with(c)
                 .load(recommend.getImage())
@@ -50,9 +52,10 @@ public class RecommendListAdapter extends RecyclerView.Adapter<Recommend_Holder>
         recommend_holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-
                 setRecommend2Share(position);
                 c.startActivity(new Intent(c, RecommendActivity.class));
+                recommend_holder.img.setColorFilter(Color.argb(66, 6, 66, 26));
+                recommend_holder.txt.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
             }
         });
     }
