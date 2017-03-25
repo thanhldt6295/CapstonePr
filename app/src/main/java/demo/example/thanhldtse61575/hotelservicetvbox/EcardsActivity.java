@@ -59,6 +59,8 @@ import java.util.List;
 
 public class EcardsActivity extends AppCompatActivity {
 
+    private static int count=0;
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -247,7 +249,7 @@ public class EcardsActivity extends AppCompatActivity {
                                 vToast.setTextColor(Color.RED);
                                 vToast.setTextSize(30);
                                 toast.show();
-                            } else {
+                            } else if(count<10){
                                 new EcardsActivity.Download().execute(imageLink,"haha.png");
                                 Toast toast = Toast.makeText(getActivity(), R.string.sent, Toast.LENGTH_SHORT);
                                 TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -255,6 +257,15 @@ public class EcardsActivity extends AppCompatActivity {
                                 vToast.setTextSize(20);
                                 vToast.setTypeface(null, Typeface.BOLD);
                                 toast.show();
+                                count = count + 1;
+                            } else if(count>=10){
+                                Toast toast = Toast.makeText(getActivity(), R.string.prevent, Toast.LENGTH_SHORT);
+                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                vToast.setTextColor(Color.RED);
+                                vToast.setTextSize(20);
+                                vToast.setTypeface(null, Typeface.BOLD);
+                                toast.show();
+                                btnSend.setEnabled(false);
                             }
 
                         case MotionEvent.ACTION_CANCEL: {
