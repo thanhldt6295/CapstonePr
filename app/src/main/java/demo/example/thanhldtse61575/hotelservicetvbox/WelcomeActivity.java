@@ -341,13 +341,6 @@ public class WelcomeActivity extends AppCompatActivity {
             }
 
             protected void onPostExecute(List<String> response) {
-                //0-OrderInfo
-                final Order acc_0 = new Gson().fromJson(response.get(0), new TypeToken<Order>() {}.getType());
-                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
-                customerWel.setText(acc_0.getCustName().toString().toUpperCase().trim());
-                setCust2Share(acc_0.getCustName());
-                setOrder2Share(acc_0);
-
                 //1-AllService
                 //List<Service> acc_1 = new Gson().fromJson(response.get(1), new TypeToken<List<Service>>() {}.getType());
                 String listService = response.get(1);
@@ -372,6 +365,14 @@ public class WelcomeActivity extends AppCompatActivity {
                 //List<RecommendImage> acc_5 = new Gson().fromJson(response.get(5), new TypeToken<List<RecommendImage>>() {}.getType());
                 String listRecommendImage = response.get(5);
                 setRecommendImageList2Share(listRecommendImage);
+
+
+                //0-OrderInfo
+                final Order acc_0 = new Gson().fromJson(response.get(0), new TypeToken<Order>() {}.getType());
+                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
+                customerWel.setText(acc_0.getCustName().toString().toUpperCase().trim());
+                setCust2Share(acc_0.getCustName());
+                setOrder2Share(acc_0);
             }
         }
 
