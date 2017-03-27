@@ -30,10 +30,6 @@ public class ViewBillAdapter extends BaseAdapter {
         layoutInflater = LayoutInflater.from(c);
     }
 
-    public ViewBillAdapter(Context c) {
-        this.c = c;
-    }
-
     @Override
     public int getCount() {
         return details.size();
@@ -63,7 +59,14 @@ public class ViewBillAdapter extends BaseAdapter {
         category.setText(getItem(position).getCategoryName());
         DecimalFormat format = new DecimalFormat("###,###,###.#");
         unitPrice.setText(format.format(getItem(position).getUnitPrice()) +" "+ c.getResources().getString(R.string.USD));
-        quantity.setText(getItem(position).getQuantity() + "");
+
+        if(getItem(position).getServiceName().equals(c.getResources().getString(R.string.room_order))){
+            if(getItem(position).getQuantity()==1) quantity.setText(getItem(position).getQuantity() + " " + c.getResources().getString(R.string.day));
+            else quantity.setText(getItem(position).getQuantity() + " " + c.getResources().getString(R.string.days));
+        } else {
+            quantity.setText(getItem(position).getQuantity() + "");
+        }
+
         itemTotal.setText(format.format(getItem(position).getUnitPrice() * getItem(position).getQuantity()) +" "+ c.getResources().getString(R.string.USD));
 
         float t = 0;

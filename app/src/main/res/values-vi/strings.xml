@@ -125,6 +125,9 @@
     <string name="information">THÔNG TIN</string>
     <string name="gallery">HÌNH ẢNH</string>
     <string name="input">Nhập Email</string>
+    <string name="day">ngày</string>
+    <string name="days">ngày</string>
+    <string name="room_order">ĐẶT PHÒNG</string>
 
 
 </resources>

@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Locale;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Price;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.RecommendImage;
@@ -248,23 +247,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //            }
 //        }
 //
-//        class GetPriceFromServer extends AsyncTask<String, Void, String> {
-//
-//            protected String doInBackground(String... params) {
-//                CommonService commonService = new CommonService();
-//                String returnva = commonService.getData(params[0]);
-//                return returnva;
-//            }
-//
-//            protected void onPostExecute(String response) {
-//                //parse json sang list service
-//                final List<Price> acc = new Gson().fromJson(response, new TypeToken<List<Price>>() {
-//                }.getType());
-//
-//                setPriceList2Share(acc);
-//            }
-//        }
-//
 //        class GetRecommendFromServer extends AsyncTask<String, Void, String> {
 //
 //            protected String doInBackground(String... params) {
@@ -380,7 +362,6 @@ public class WelcomeActivity extends AppCompatActivity {
 //        new GetServiceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ServicesApi/GetAllService");
 //        new GetPromoFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/PromotionalsApi/GetPromos");
 //        new GetImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetECardLinks");
-//        new GetPriceFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetPrice");
 //        new GetRecommendFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/RecommendsApi/GetRecommend");
 //        new GetRecommendImageFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/ImagesApi/GetRecommendLinks");
 
@@ -670,20 +651,6 @@ public class WelcomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(IMGLIST_TAG, stringImage);
-        editor.commit();
-    }
-
-    private static final String PRICE_TAG = "SharedPrice";
-    private static final String PRICE_LIST = "PriceList";
-
-    private void setPriceList2Share(List<Price> list){
-        Gson gson = new Gson();
-        String jsonCurProduct = gson.toJson(list);
-
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PRICE_TAG, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        editor.putString(PRICE_LIST, jsonCurProduct);
         editor.commit();
     }
 

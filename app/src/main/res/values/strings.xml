@@ -19,7 +19,10 @@
     <string name="attached">Attached Image</string>
     <string name="over">Can not order over 100!</string>
     <string name="search">SEARCH</string>
-    <string name="prevent">Sorry. Only send 9 times for voucher.</string>
+    <string name="prevent">Sorry. Only send 9 times for voucher on 1 day.</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="room_order">ROOM ORDER</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>

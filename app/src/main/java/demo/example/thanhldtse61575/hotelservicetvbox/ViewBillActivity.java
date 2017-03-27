@@ -57,15 +57,17 @@ public class ViewBillActivity extends AppCompatActivity {
             final long usedTime = calendar.getTimeInMillis()/1000 - bill.getStartTime();
             final float ritsu = usedTime/(24*60*60);
             int dayNum = Math.round(ritsu);
-            done.add(new OrderDetail(0,bill.getOrderID(),0,"Room Order",0,"",bill.getUnitPrice(),"",
-                    "",dayNum,"",bill.getStartTime(), bill.getEndTime(),"",""));
+            if(dayNum==0) dayNum = 1;
+            done.add(new OrderDetail(0,bill.getOrderID(),0,getResources().getString(R.string.room_order),
+                    bill.getRoomID(),bill.getRoomID()+"",bill.getUnitPrice(),"", "",dayNum,"",
+                    bill.getStartTime(),bill.getEndTime(),"",""));
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
                 if (stt.equals("DONE")) {
-                    done.add(new OrderDetail(od.getOrderDetailID(),od.getOrderID(),
-                            od.getServiceID(),od.getServiceName(),od.getCategoryID(),
-                            od.getCategoryName(),od.getUnitPrice(),od.getDescription(),od.getImage(),
-                            od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
+                    done.add(new OrderDetail(od.getOrderDetailID(), od.getOrderID(), od.getServiceID(),
+                            od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getUnitPrice(),
+                            od.getDescription(), od.getImage(), od.getQuantity(), od.getNote(), od.getOrderTime(),
+                            od.getDeliverTime(),od.getStaffID(),od.getStatus()));
                 }
             }
 
