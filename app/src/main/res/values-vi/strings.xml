@@ -127,6 +127,7 @@
     <string name="input">Nhập Email</string>
     <string name="day">ngày</string>
     <string name="days">ngày</string>
+    <string name="prevent">Xin lỗi quý khách. Chúng tôi giới hạn chỉ có thể gửi 9 voucher/ngày.</string>
     <string name="room_order">ĐẶT PHÒNG</string>
 
 
