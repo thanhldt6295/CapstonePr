@@ -25,11 +25,29 @@
             android:layout_weight="1"
             android:id="@+id/layoutPend">
 
-            <ListView
-                android:id="@+id/detailsListView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/detailsListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/clickorder"
+                    android:id="@+id/btnOrder"
+                    android:visibility="invisible"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="60dp"
+                    android:background="@drawable/buttonstyles"/>
+
+            </RelativeLayout>
 
             <Space
                 android:layout_width="match_parent"

@@ -19,8 +19,10 @@ public class Order implements Serializable{
     private double Discount;
     private double  Total;
     private double UnitPrice;
+    private String RTypName;
 
-    public Order(int orderID, int roomID, String custName, String custIDNum, long startTime, long endTime, double subTotal, double discount, double total, double roomUPrice){
+    public Order(int orderID, int roomID, String custName, String custIDNum, long startTime, long endTime,
+                 double subTotal, double discount, double total, double roomUPrice, String RTypName){
         this.OrderID = orderID;
         this.RoomID = roomID;
         this.CustName = custName;
@@ -31,6 +33,7 @@ public class Order implements Serializable{
         this.Discount = discount;
         this.Total = total;
         this.UnitPrice = roomUPrice;
+        this.RTypName = RTypName;
     }
 
     public int getOrderID() {
@@ -111,5 +114,13 @@ public class Order implements Serializable{
 
     public void setUnitPrice(double unitPrice) {
         UnitPrice = unitPrice;
+    }
+
+    public String getRTypName() {
+        return RTypName;
+    }
+
+    public void setRTypName(String RTypName) {
+        this.RTypName = RTypName;
     }
 }

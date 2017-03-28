@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Input email"
+                android:hint="@string/input"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/blue_sky"
                 android:textColorHint="@color/gray_light"

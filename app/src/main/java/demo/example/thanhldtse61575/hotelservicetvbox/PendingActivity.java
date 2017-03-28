@@ -2,17 +2,22 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +32,7 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class PendingActivity extends AppCompatActivity {
 
+    Button btnOrder;
     List<OrderDetail> details = new ArrayList<>();
     List<OrderDetail> pending = new ArrayList<>();
     TextView roomidTV;
@@ -60,6 +66,14 @@ public class PendingActivity extends AppCompatActivity {
                 ListView listView = (ListView) findViewById(R.id.detailsListView);
                 PendingAdapter a = new PendingAdapter(PendingActivity.this, listView, pending, total, relativeLayout);
                 listView.setAdapter(a);
+            }else {
+                Toast toast = Toast.makeText(PendingActivity.this, R.string.notitynull, Toast.LENGTH_SHORT);
+                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                vToast.setTextColor(Color.WHITE);
+                vToast.setTextSize(20);
+                vToast.setTypeface(null, Typeface.BOLD);
+                toast.show();
+                btnOrder.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -73,11 +87,21 @@ public class PendingActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.pending));
 
+        btnOrder = (Button) findViewById(R.id.btnOrder);
+
         String roomid = getRoomID();
         roomidTV = (TextView) findViewById(R.id.roomid);
         roomidTV.setText(getResources().getString(R.string.roomid) + " " + roomid);
 
         new GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/GetOrderDetailByRoomID/" + roomid);
+
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PendingActivity.this, FoodyActivity.class);
+                startActivity(i);
+            }
+        });
 
         // Datetime & Calendar
         final TextView txtDate;

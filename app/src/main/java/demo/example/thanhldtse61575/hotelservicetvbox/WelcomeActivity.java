@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Ecards;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
@@ -334,7 +335,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 setPromoList2Share(listPromotional);
 
                 //3-ECardLinks
-                //List<String> acc_3 = new Gson().fromJson(response.get(3), new TypeToken<List<String>>() {}.getType());
+                //List<Ecards> acc_3 = new Gson().fromJson(response.get(3), new TypeToken<List<Ecards>>() {}.getType());
                 String stringImage = response.get(3);
                 setImageList2Share(stringImage);
 
@@ -643,8 +644,8 @@ public class WelcomeActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    private static final String ShIMAGE_TAG = "SharedImage";
-    private static final String IMGLIST_TAG = "ImageList";
+    private static final String ShIMAGE_TAG = "SharedEcard";
+    private static final String IMGLIST_TAG = "EcardList";
 
     private void setImageList2Share(String stringImage){
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShIMAGE_TAG, Context.MODE_PRIVATE);

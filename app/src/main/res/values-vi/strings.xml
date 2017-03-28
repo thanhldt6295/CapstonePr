@@ -77,7 +77,7 @@
     <string name="spa">CHĂM SÓC SẮC ĐẸP</string>
     <string name="subject">TIÊU ĐỀ: </string>
     <string name="yourname">TÊN CỦA BẠN: </string>
-    <string name="notitynull">Không có dịch vụ..</string>
+    <string name="notitynull">Không có dịch vụ đang chờ..</string>
     <string name="notifyqty">Xin quý khách vui lòng chọn số lượng 1 sản phẩm..</string>
     <string name="tennis">QUẦN VỢT</string>
     <string name="notifychoose">Xin quý khách vui lòng để lại ghi chú, rồi đánh dấu chọn ngay tại dịch vụ cần.</string>
@@ -118,7 +118,6 @@
     <string name="confirm_cancel">Xác nhận hủy đơn hàng</string>
     <string name="confirm_content">Quý khách có chắc chắn hủy đơn hàng này chứ?</string>
     <string name="confirm_promotional">Quý khách đã đặt chỗ thành công. Chúng tôi sẽ liên hệ với quý khách để xác nhận một lần nữa. Xin cảm ơn.</string>
-    <string name="dear">Thân chào</string>
     <string name="tivistream">XEM TIVI</string>
     <string name="previous">Trang trước</string>
     <string name="next">Trang kế</string>
@@ -129,6 +128,8 @@
     <string name="days">ngày</string>
     <string name="prevent">Xin lỗi quý khách. Chúng tôi giới hạn chỉ có thể gửi 9 voucher/ngày.</string>
     <string name="room_order">ĐẶT PHÒNG</string>
+    <string name="clickorder">VUI LÒNG \nNHẤN VÀO ĐÂY ĐỂ GỌI MÓN</string>
+    <string name="validName">Vui lòng nhập tên người nhận!</string>
 
 
 </resources>

@@ -23,6 +23,7 @@
     <string name="day">day</string>
     <string name="days">days</string>
     <string name="room_order">ROOM ORDER</string>
+    <string name="clickorder">CLICK TO ORDER</string>
 
     <!-- Dialog Notify-->
     <string name="confirm_service">Confirm Service</string>
@@ -36,7 +37,7 @@
     <string name="confirm_order_accepted">Your order has been accepted. Please enjoy! Thank you!</string>
     <string name="confirm_promotional">Your booking has been accepted. We will contact with you to confirm again. Please enjoy! Thank you!</string>
     <string name="confirm_back_question">This action will clear all your cart. Are you sure?</string>
-    <string name="notitynull">There is not service!</string>
+    <string name="notitynull">There is not pending!</string>
     <string name="notifyqty">Please choose quantity!</string>
     <string name="notifychoose">Please comment and check!</string>
     <string name="error"></string>
@@ -71,8 +72,8 @@
     <string name="golf">GOLF</string>
     <string name="worktime">Working hour:</string>
     <string name="capacity">Capacity:</string>
-    <string name="previous">- \nPrevious</string>
-    <string name="next">+ \nNext</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 
     <!-- RoomServicesActivity -->
     <string name="food_drink">FOODS AND BEVERAGES</string>
@@ -101,7 +102,7 @@
     <string name="receiver">RECEIVER MAIL: </string>
     <string name="subject">SUBJECT: </string>
     <string name="validateMail">Invalid Email!</string>
-    <string name="validMessage">Please type some message!</string>
+    <string name="validName">Please input receiver name or nickname!</string>
     <string name="validImage">Please attach an image!</string>
     <string name="dear">Dear</string>
     <string name="input">Input Email</string>

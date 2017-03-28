@@ -57,9 +57,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Ecards;
+
 public class EcardsActivity extends AppCompatActivity {
 
-    private static int count=0;
+    private static int count = 0;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -69,18 +71,19 @@ public class EcardsActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private static String dear;
-    private static String mess;
-    private static List<String> list = new ArrayList<>();
+    private static String dear = "";
+    private static String mess = "";
+    private static List<Ecards> list = new ArrayList<>();
     private static String sender = "";
 
     private static EditText receiver;
-    private static String name;
+    private static String name = "";
     private static EditText revMail;
-    private static String mail;
+    private static String mail = "";
 
     private static Button btnSend;
     private static ImageView imageView;
+    private static TextView tvMessage;
     TextView roomid;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -102,9 +105,8 @@ public class EcardsActivity extends AppCompatActivity {
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
         dear = getResources().getString(R.string.dear);
-        mess = getResources().getString(R.string.message);
-        list = getImageList();
         sender = getCustName();
+        list = getImageList();
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -163,13 +165,13 @@ public class EcardsActivity extends AppCompatActivity {
 
     }
 
-    private List<String> getImageList(){
+    private List<Ecards> getImageList(){
         Gson gson = new Gson();
-        List<String> list = new ArrayList<>();
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedImage", Context.MODE_PRIVATE);
-        String jsonPreferences = sharedPref.getString("ImageList", "");
+        List<Ecards> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedEcard", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("EcardList", "");
 
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<List<Ecards>>() {}.getType();
         list = gson.fromJson(jsonPreferences, type);
 
         return list;
@@ -222,7 +224,7 @@ public class EcardsActivity extends AppCompatActivity {
         }
 
         public void PassData2Fragment(int pos){
-            final String imageLink = list.get(pos); /*"https://www.safarihotelsnamibia.com/wp-content/uploads/2014/11/Safari-Court-Hotel-Pool.jpg"*/
+            final String imageLink = list.get(pos).getImage(); /*"https://www.safarihotelsnamibia.com/wp-content/uploads/2014/11/Safari-Court-Hotel-Pool.jpg"*/
             Picasso.with(getActivity())
                     .load(imageLink)
                     .placeholder(R.drawable.loading)
@@ -232,6 +234,8 @@ public class EcardsActivity extends AppCompatActivity {
 //                    .placeholder(R.drawable.loading)
 //                    .centerCrop()
 //                    .into(imageView);
+            mess = list.get(pos).getMessage();
+            tvMessage.setText(mess);
             btnSend.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -245,6 +249,12 @@ public class EcardsActivity extends AppCompatActivity {
                         case MotionEvent.ACTION_UP:
                             if(!isEmailValid(mail)){
                                 Toast toast = Toast.makeText(getActivity(), R.string.validateMail, Toast.LENGTH_SHORT);
+                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                vToast.setTextColor(Color.RED);
+                                vToast.setTextSize(30);
+                                toast.show();
+                            } else if (name.equals("")){
+                                Toast toast = Toast.makeText(getActivity(), R.string.validName, Toast.LENGTH_SHORT);
                                 TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                 vToast.setTextColor(Color.RED);
                                 vToast.setTextSize(30);
@@ -325,6 +335,7 @@ public class EcardsActivity extends AppCompatActivity {
             });
             btnSend = (Button) rootView.findViewById(R.id.btnSend);
             imageView = (ImageView) rootView.findViewById(R.id.image);
+            tvMessage = (TextView) rootView.findViewById(R.id.tvContent);
             TextView tvYourName = (TextView) rootView.findViewById(R.id.tvYourName);
             tvYourName.setText(sender);
             for(int i = 0; i < list.size(); i++){

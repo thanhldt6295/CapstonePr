@@ -59,7 +59,7 @@ public class ViewBillActivity extends AppCompatActivity {
             int dayNum = Math.round(ritsu);
             if(dayNum==0) dayNum = 1;
             done.add(new OrderDetail(0,bill.getOrderID(),0,getResources().getString(R.string.room_order),
-                    bill.getRoomID(),bill.getRoomID()+"",bill.getUnitPrice(),"", "",dayNum,"",
+                    bill.getRoomID(),bill.getRTypName().toUpperCase(),bill.getUnitPrice(),"", "",dayNum,"",
                     bill.getStartTime(),bill.getEndTime(),"",""));
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
