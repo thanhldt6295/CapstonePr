@@ -7,14 +7,12 @@ package demo.example.thanhldtse61575.hotelservicetvbox.entity;
 public class RecommendImage {
     public int ID;
     public String Link;
-    public int CategoryID;
-    public int SecondID;
+    public int RecommendID;
 
-    public RecommendImage(int ID, String link, int categoryID, int secondID) {
+    public RecommendImage(int ID, String link, int recommendID) {
         this.ID = ID;
         Link = link;
-        CategoryID = categoryID;
-        SecondID = secondID;
+        RecommendID = recommendID;
     }
 
     public int getID() {
@@ -33,19 +31,11 @@ public class RecommendImage {
         Link = link;
     }
 
-    public int getCategoryID() {
-        return CategoryID;
+    public int getRecommendID() {
+        return RecommendID;
     }
 
-    public void setCategoryID(int categoryID) {
-        CategoryID = categoryID;
-    }
-
-    public int getSecondID() {
-        return SecondID;
-    }
-
-    public void setSecondID(int secondID) {
-        SecondID = secondID;
+    public void setRecommendID(int recommendID) {
+        RecommendID = recommendID;
     }
 }

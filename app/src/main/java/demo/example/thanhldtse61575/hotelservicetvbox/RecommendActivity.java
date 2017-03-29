@@ -212,7 +212,7 @@ public class RecommendActivity extends AppCompatActivity {
                 View rootView = inflater.inflate(R.layout.fragment_recommend_galary, container, false);
                 List<RecommendImage> list = new ArrayList<>();
                 for (RecommendImage ri: recommendImagesList) {
-                    if(ri.getSecondID() == recommend.getID()) list.add(ri);
+                    if(ri.getRecommendID() == recommend.getID()) list.add(ri);
                 }
                 RecyclerView rvi = (RecyclerView) rootView.findViewById(R.id.image_list);
                 rvi.setHasFixedSize(true);
