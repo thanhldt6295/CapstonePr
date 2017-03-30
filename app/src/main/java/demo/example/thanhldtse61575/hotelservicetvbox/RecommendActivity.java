@@ -201,12 +201,6 @@ public class RecommendActivity extends AppCompatActivity {
                 TextView description = (TextView) rootView.findViewById(R.id.recDescriptTV);
                 description.setText(recommend.getDescription());
 
-                TextView hobby = (TextView) rootView.findViewById(R.id.hobbyTV);
-                hobby.setText(recommend.getDescription());
-
-                TextView price = (TextView) rootView.findViewById(R.id.priceTV);
-                price.setText(recommend.getDescription());
-
                 return rootView;
             }else if( indexTab == 2){
                 View rootView = inflater.inflate(R.layout.fragment_recommend_galary, container, false);
