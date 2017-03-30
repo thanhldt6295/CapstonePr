@@ -23,29 +23,31 @@
             android:layout_height="match_parent"
             android:background="#80797878"
             android:layout_weight="1"
-            android:id="@+id/layoutPend">
+            android:id="@+id/layoutPend"
+            android:weightSum="1">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="500dp"
+                android:layout_weight="0.78">
 
                 <ListView
                     android:id="@+id/detailsListView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <Button
+                    android:id="@+id/btnOrder"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/buttonstyles"
                     android:gravity="center"
                     android:text="@string/clickorder"
-                    android:id="@+id/btnOrder"
-                    android:visibility="invisible"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="60dp"
-                    android:background="@drawable/buttonstyles"/>
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
 
             </RelativeLayout>
 
