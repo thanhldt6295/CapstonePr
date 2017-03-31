@@ -352,10 +352,15 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 //0-OrderInfo
                 final Order acc_0 = new Gson().fromJson(response.get(0), new TypeToken<Order>() {}.getType());
-                customerWel = (TextView) findViewById(R.id.fullscreen_content3);
-                customerWel.setText(acc_0.getCustName().toString().toUpperCase().trim());
-                setCust2Share(acc_0.getCustName());
-                setOrder2Share(acc_0);
+                if(acc_0 != null) {
+                    customerWel = (TextView) findViewById(R.id.fullscreen_content3);
+                    customerWel.setText(acc_0.getCustName().toString().toUpperCase().trim());
+                    setCust2Share(acc_0.getCustName());
+                    setOrder2Share(acc_0);
+                } else {
+                    dummyBtnEng.setEnabled(false);
+                    dummyBtnViet.setEnabled(false);
+                }
             }
         }
 
