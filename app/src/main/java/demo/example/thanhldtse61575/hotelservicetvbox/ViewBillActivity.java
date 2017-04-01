@@ -35,6 +35,7 @@ public class ViewBillActivity extends AppCompatActivity {
 
     List<OrderDetail> details = new ArrayList<>();
     List<OrderDetail> done = new ArrayList<>();
+    List<OrderDetail> temp = new ArrayList<>();
     Order bill;
     TextView roomid;
 
@@ -71,9 +72,26 @@ public class ViewBillActivity extends AppCompatActivity {
                 }
             }
 
-            if(done.size()!=0) {
+            for(int i = 0; i < done.size()-1; i++){
+                for (int j = i+1; j < done.size(); j++) {
+                    if ((done.get(i).getServiceName().equals(done.get(j).getServiceName())) && (!done.get(i).getServiceName().equals(""))) {
+                        done.get(i).setQuantity(done.get(i).getQuantity() + done.get(j).getQuantity());
+                        done.get(j).setServiceName("");
+                    }
+                }
+            }
+
+            for(OrderDetail od: done){
+                if(!od.getServiceName().equals(""))
+                    temp.add(new OrderDetail(od.getOrderDetailID(), od.getOrderID(), od.getServiceID(),
+                        od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getUnitPrice(),
+                        od.getDescription(), od.getImage(), od.getQuantity(), od.getNote(), od.getOrderTime(),
+                        od.getDeliverTime(),od.getStaffID(),od.getStatus()));
+            }
+
+            if(temp.size()!=0) {
                 ListView listView = (ListView) findViewById(R.id.detailsListView);
-                ViewBillAdapter a = new ViewBillAdapter(ViewBillActivity.this, done, total);
+                ViewBillAdapter a = new ViewBillAdapter(ViewBillActivity.this, temp, total);
                 listView.setAdapter(a);
             }
         }
