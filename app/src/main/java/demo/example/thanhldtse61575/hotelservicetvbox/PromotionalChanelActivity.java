@@ -14,14 +14,21 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
 
 public class PromotionalChanelActivity extends AppCompatActivity {
 
-    int[] titles = {R.string.spa, R.string.gym, R.string.pool, R.string.tennis, R.string.golf};
-    int[] images = {R.drawable.img_spa, R.drawable.img_gym, R.drawable.img_pool, R.drawable.img_tennis, R.drawable.img_golf};
+    List<Promotional> promo = new ArrayList<>();
     TextView roomid;
 
     @Override
@@ -33,7 +40,9 @@ public class PromotionalChanelActivity extends AppCompatActivity {
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         abTitle.setText(getResources().getString(R.string.promotional));
         roomid = (TextView) findViewById(R.id.roomid);
-        roomid.setText(getResources().getString(R.string.roomid) + " " + getDataFromSharedPreferences());
+        roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+
+        promo = getPromoList();
 
         // Datetime & Calendar
         final TextView txtDate;
@@ -82,16 +91,28 @@ public class PromotionalChanelActivity extends AppCompatActivity {
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_menu);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        PromotionalChanelAdapter ma = new PromotionalChanelAdapter(this, titles, images);
+        PromotionalChanelAdapter ma = new PromotionalChanelAdapter(this, promo);
         rv.setAdapter(ma);
     }
 
-    private String getDataFromSharedPreferences(){
+    private String getRoomID(){
 
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("ShareRoom", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("RoomID", "");
 
         return jsonPreferences;
+    }
+
+    private List<Promotional> getPromoList(){
+        Gson gson = new Gson();
+        List<Promotional> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedPromo", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("PromoList", "");
+
+        Type type = new TypeToken<List<Promotional>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
     }
 
     @Override

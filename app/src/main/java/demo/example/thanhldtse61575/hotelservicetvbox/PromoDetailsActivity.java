@@ -58,6 +58,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     TextView name;
     TextView hour;
     TextView cap;
+    TextView descript;
     FloatingActionButton btnOrder;
     Button btnBack;
     Button btnNext;
@@ -77,6 +78,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         name = (TextView) findViewById(R.id.tvPromoName);
         hour = (TextView) findViewById(R.id.tvWorkHour);
         cap = (TextView) findViewById(R.id.tvCapacity);
+        descript = (TextView) findViewById(R.id.tvDescription);
         btnOrder = (FloatingActionButton) findViewById(R.id.btnBooking);
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_promo_details);
         btnBack = (Button) findViewById(R.id.btnBack);
@@ -216,6 +218,7 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
         name.setText(promo.getName().toUpperCase());
         hour.setText(promo.getWorkHour());
         cap.setText(promo.getCapacity()+"");
+        descript.setText(promo.getDescription());
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

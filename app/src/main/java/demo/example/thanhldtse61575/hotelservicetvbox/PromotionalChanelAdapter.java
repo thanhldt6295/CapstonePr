@@ -7,19 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
+
 /**
  * Created by ThanhLDTSE61575 on 1/11/2017.
  */
 public class PromotionalChanelAdapter extends RecyclerView.Adapter<Holder> {
 
     Context c;
-    int[] titles;
-    int[] images;
+    List<Promotional> promo;
 
-    public PromotionalChanelAdapter(Context c, int[] titles, int[] images) {
+    public PromotionalChanelAdapter(Context c, List<Promotional> promo) {
         this.c = c;
-        this.titles = titles;
-        this.images = images;
+        this.promo = promo;
     }
 
     @Override
@@ -32,8 +36,12 @@ public class PromotionalChanelAdapter extends RecyclerView.Adapter<Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        holder.img.setImageResource(images[position]);
-        holder.txt.setText(titles[position]);
+        Picasso.with(c)
+                .load(promo.get(position).getImage())
+                .placeholder(R.drawable.loading)
+                .fit()
+                .centerCrop().into(holder.img);
+        holder.txt.setText(promo.get(position).getName());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
@@ -46,6 +54,6 @@ public class PromotionalChanelAdapter extends RecyclerView.Adapter<Holder> {
 
     @Override
     public int getItemCount() {
-        return titles.length;
+        return promo.size();
     }
 }

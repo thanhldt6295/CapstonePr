@@ -130,6 +130,7 @@
     <string name="room_order">ĐẶT PHÒNG</string>
     <string name="clickorder">VUI LÒNG \nNHẤN VÀO ĐÂY ĐỂ GỌI MÓN</string>
     <string name="validName">Vui lòng nhập tên người nhận!</string>
+    <string name="description">Liên lạc:</string>
 
 
 </resources>

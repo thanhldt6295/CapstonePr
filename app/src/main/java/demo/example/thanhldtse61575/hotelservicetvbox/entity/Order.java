@@ -20,9 +20,11 @@ public class Order implements Serializable{
     private double  Total;
     private double UnitPrice;
     private String RTypName;
+    private int Voucher;
+    private int UsedVoucher;
 
     public Order(int orderID, int roomID, String custName, String custIDNum, long startTime, long endTime,
-                 double subTotal, double discount, double total, double roomUPrice, String RTypName){
+                 double subTotal, double discount, double total, double roomUPrice, String RTypName, int Voucher, int UsedVoucher){
         this.OrderID = orderID;
         this.RoomID = roomID;
         this.CustName = custName;
@@ -34,6 +36,8 @@ public class Order implements Serializable{
         this.Total = total;
         this.UnitPrice = roomUPrice;
         this.RTypName = RTypName;
+        this.Voucher = Voucher;
+        this.UsedVoucher = UsedVoucher;
     }
 
     public int getOrderID() {
@@ -122,5 +126,21 @@ public class Order implements Serializable{
 
     public void setRTypName(String RTypName) {
         this.RTypName = RTypName;
+    }
+
+    public int getVoucher() {
+        return Voucher;
+    }
+
+    public void setVoucher(int voucher) {
+        Voucher = voucher;
+    }
+
+    public int getUsedVoucher() {
+        return UsedVoucher;
+    }
+
+    public void setUsedVoucher(int usedVoucher) {
+        UsedVoucher = usedVoucher;
     }
 }

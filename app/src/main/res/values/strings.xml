@@ -72,6 +72,7 @@
     <string name="golf">GOLF</string>
     <string name="worktime">Working hour:</string>
     <string name="capacity">Capacity:</string>
+    <string name="description">Description:</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
 
