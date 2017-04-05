@@ -58,10 +58,13 @@ import java.util.Date;
 import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Ecards;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
 
 public class EcardsActivity extends AppCompatActivity {
 
     private static int count = 0;
+    private static double total = 0;
+    //private static int voucher = 0;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -107,6 +110,8 @@ public class EcardsActivity extends AppCompatActivity {
         dear = getResources().getString(R.string.dear);
         sender = getCustName();
         list = getImageList();
+        total = getOrder().getSubTotal();
+        //voucher = getOrder().getVoucher();
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -198,6 +203,19 @@ public class EcardsActivity extends AppCompatActivity {
                 .matches();
     }
 
+    private Order getOrder(){
+
+        Gson gson = new Gson();
+        Order bill;
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedBill", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("BillTotal", "");
+
+        Type type = new TypeToken<Order>() {}.getType();
+        bill = gson.fromJson(jsonPreferences, type);
+
+        return bill;
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -260,6 +278,7 @@ public class EcardsActivity extends AppCompatActivity {
                                 vToast.setTextSize(30);
                                 toast.show();
                             } else if(count<10){
+                                //http://localhost:3781/api/ECardsApi/UpdateVoucher/501
                                 new EcardsActivity.Download().execute(imageLink,"haha.png");
                                 Toast toast = Toast.makeText(getActivity(), R.string.sent, Toast.LENGTH_SHORT);
                                 TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -276,6 +295,9 @@ public class EcardsActivity extends AppCompatActivity {
                                 vToast.setTypeface(null, Typeface.BOLD);
                                 toast.show();
                                 btnSend.setEnabled(false);
+                                if(total>500000&&total<1000000) count = count - 1;
+                                if(total>1000000&&total<2000000) count = count - 3;
+                                if(total>2000000) count = count - 5;
                             }
 
                         case MotionEvent.ACTION_CANCEL: {
@@ -427,6 +449,7 @@ public class EcardsActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String feed) {
+            //
         }
     }
 
