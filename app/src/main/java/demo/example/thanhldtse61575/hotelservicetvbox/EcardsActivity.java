@@ -254,6 +254,42 @@ public class EcardsActivity extends AppCompatActivity {
 //                    .into(imageView);
             mess = list.get(pos).getMessage();
             tvMessage.setText(mess);
+            revMail.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    mail = s.toString().trim().replaceAll("\\s+$", "");
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    mail = s.toString().trim().replaceAll("\\s+$", "");
+                }
+            });
+            revMail.setText(mail);
+            receiver.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    name = s.toString().trim().replaceAll("\\s+$", "");
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    name = s.toString().trim().replaceAll("\\s+$", "");
+                }
+            });
+            receiver.setText(name);
             btnSend.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -288,16 +324,18 @@ public class EcardsActivity extends AppCompatActivity {
                                 toast.show();
                                 count = count + 1;
                             } else if(count>=10){
-                                Toast toast = Toast.makeText(getActivity(), R.string.prevent, Toast.LENGTH_SHORT);
-                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                vToast.setTextColor(Color.RED);
-                                vToast.setTextSize(20);
-                                vToast.setTypeface(null, Typeface.BOLD);
-                                toast.show();
-                                btnSend.setEnabled(false);
                                 if(total>500000&&total<1000000) count = count - 1;
-                                if(total>1000000&&total<2000000) count = count - 3;
-                                if(total>2000000) count = count - 5;
+                                else if(total>1000000&&total<2000000) count = count - 3;
+                                else if(total>2000000) count = count - 5;
+                                else {
+                                    Toast toast = Toast.makeText(getActivity(), R.string.prevent, Toast.LENGTH_SHORT);
+                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                    vToast.setTextColor(Color.RED);
+                                    vToast.setTextSize(20);
+                                    vToast.setTypeface(null, Typeface.BOLD);
+                                    toast.show();
+                                    btnSend.setEnabled(false);
+                                }
                             }
 
                         case MotionEvent.ACTION_CANCEL: {
@@ -318,43 +356,7 @@ public class EcardsActivity extends AppCompatActivity {
             int indexTab = getArguments().getInt(ARG_SECTION_NUMBER);
             final View rootView = inflater.inflate(R.layout.fragment_ecards, container, false);
             revMail = (EditText) rootView.findViewById(R.id.txtMailRecv);
-            revMail.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    mail = s.toString().trim().replaceAll("\\s+$", "");
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                    mail = s.toString().trim().replaceAll("\\s+$", "");
-                }
-            });
             receiver = (EditText) rootView.findViewById(R.id.txtRecvName);
-            receiver.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    name = s.toString().trim().replaceAll("\\s+$", "");
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                    name = s.toString().trim().replaceAll("\\s+$", "");
-                }
-            });
             btnSend = (Button) rootView.findViewById(R.id.btnSend);
             imageView = (ImageView) rootView.findViewById(R.id.image);
             tvMessage = (TextView) rootView.findViewById(R.id.tvContent);
@@ -421,7 +423,7 @@ public class EcardsActivity extends AppCompatActivity {
         protected void onPostExecute(String feed) {
             //new SendEmail().execute(reciver mail, subject, body,feed);
             new EcardsActivity.SendEmail().execute(mail,
-                    "Hotel Service TV Box", dear + " " + name + ",\n\n"
+                    "Hotel Foody TV Box", dear + " " + name + ",\n\n"
                             + sender + " " + mess + "\n\nWelcome!" , feed);
         }
     }

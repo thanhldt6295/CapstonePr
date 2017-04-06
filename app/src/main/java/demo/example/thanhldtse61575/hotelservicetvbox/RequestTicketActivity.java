@@ -4,16 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,23 +17,14 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Request;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Foody;
 
 public class RequestTicketActivity extends AppCompatActivity {
 
@@ -77,11 +63,11 @@ public class RequestTicketActivity extends AppCompatActivity {
         });
         Spinner s = (Spinner) findViewById(R.id.timeSpinner);
 
-        List<Service> list = new ArrayList<>();
-        list.add(new Service(0, getResources().getString(R.string.housekeeping),0,"",0,"",""));
-        list.add(new Service(0, getResources().getString(R.string.laundry),0,"",0,"",""));
-        list.add(new Service(0, getResources().getString(R.string.maintenance),0,"",0,"",""));
-        list.add(new Service(0, getResources().getString(R.string.front_desk),0,"",0,"",""));
+        List<Foody> list = new ArrayList<>();
+        list.add(new Foody(0, getResources().getString(R.string.housekeeping),0,"",0,"",""));
+        list.add(new Foody(0, getResources().getString(R.string.laundry),0,"",0,"",""));
+        list.add(new Foody(0, getResources().getString(R.string.maintenance),0,"",0,"",""));
+        list.add(new Foody(0, getResources().getString(R.string.front_desk),0,"",0,"",""));
 
         ListView listView = (ListView) findViewById(R.id.maintenanceListView);
         RequestAdapter a = new RequestAdapter(RequestTicketActivity.this, listView, list, s, btnFinalize, relativeLayout);

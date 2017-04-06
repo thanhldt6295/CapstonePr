@@ -2,9 +2,6 @@ package demo.example.thanhldtse61575.hotelservicetvbox;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,10 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -29,8 +23,6 @@ import android.util.DisplayMetrics;
 
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,12 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Ecards;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Promotional;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Recommend;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.RecommendImage;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -161,7 +148,7 @@ public class WelcomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("Hotel Service TV Box");
+        abTitle.setText("Hotel Foody TV Box");
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         layout.getBackground().setAlpha(51);
 
@@ -207,7 +194,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //
 //            protected void onPostExecute(String response) {
 //                //parse json sang list service
-//                final List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {
+//                final List<Foody> acc = new Gson().fromJson(response, new TypeToken<List<Foody>>() {
 //                }.getType());
 //
 //                setServiceList2Share(acc);
@@ -320,12 +307,17 @@ public class WelcomeActivity extends AppCompatActivity {
                 String return_RecommendImageLinks = commonService.getData(Domain+GetRecommendImageLinks);
                 return_values.add(return_RecommendImageLinks);
 
+                //6-ExtraItem
+                String GetExtraItem = "/RequestsApi/GetExtra";
+                String return_ExtraItem = commonService.getData(Domain+GetExtraItem);
+                return_values.add(return_ExtraItem);
+
                 return return_values;
             }
 
             protected void onPostExecute(List<String> response) {
                 //1-AllService
-                //List<Service> acc_1 = new Gson().fromJson(response.get(1), new TypeToken<List<Service>>() {}.getType());
+                //List<Foody> acc_1 = new Gson().fromJson(response.get(1), new TypeToken<List<Foody>>() {}.getType());
                 String listService = response.get(1);
                 setServiceList2Share(listService);
 
@@ -349,6 +341,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 String listRecommendImage = response.get(5);
                 setRecommendImageList2Share(listRecommendImage);
 
+                String listExtraItem = response.get(6);
+                setExtraList2Share(listExtraItem);
 
                 //0-OrderInfo
                 final Order acc_0 = new Gson().fromJson(response.get(0), new TypeToken<Order>() {}.getType());
@@ -706,6 +700,17 @@ public class WelcomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString(RE_TAG, 0+"");
+        editor.commit();
+    }
+
+    private static final String ShEXTRA_TAG = "SharedExtra";
+    private static final String EXTRALIST_TAG = "ExtraList";
+
+    private void setExtraList2Share(String listExtra){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ShEXTRA_TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(EXTRALIST_TAG, listExtra);
         editor.commit();
     }
 

@@ -26,7 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.ExtraItem;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Foody;
 
 public class ExtraActivity extends AppCompatActivity {
 
@@ -44,15 +45,15 @@ public class ExtraActivity extends AppCompatActivity {
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
 
-        final List<Service> acc = getServiceList();
+        final List<ExtraItem> acc = getExtraList();
         // Search follow categoryName
-        final List<Service> accID = new ArrayList<Service>();
-        for (Service ac : acc) {
-            String cagName = ac.getCategoryName().toString().toUpperCase().trim().replaceAll("\\s+$", "");
-            if (cagName.equals("ROOM EXTRAS")) {
-                accID.add(new Service(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
-            }
-        }
+//        final List<Foody> accID = new ArrayList<Foody>();
+//        for (Foody ac : acc) {
+//            String cagName = ac.getCategoryName().toString().toUpperCase().trim().replaceAll("\\s+$", "");
+//            if (cagName.equals("ROOM EXTRAS")) {
+//                accID.add(new Foody(ac.getServiceID(), ac.getServiceName(), ac.getCategoryID(), ac.getCategoryName(), ac.getUnitPrice(), ac.getDescription(), ac.getImage()));
+//            }
+//        }
 
         final Button btnFinalize = (Button) findViewById(R.id.btnFinalizeOrder);
         btnFinalize.setFocusable(true);
@@ -73,8 +74,8 @@ public class ExtraActivity extends AppCompatActivity {
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_extra);
         ListView listView = (ListView) findViewById(R.id.extraListView);
         listView.getBackground().setAlpha(80);
-        if (accID.size() != 0) {
-            ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, accID, s, btnFinalize, relativeLayout);
+        if (acc.size() != 0) {
+            ExtraAdapter a = new ExtraAdapter(ExtraActivity.this, listView, acc, s, btnFinalize, relativeLayout);
             listView.setAdapter(a);
         } else {
             Toast.makeText(ExtraActivity.this, R.string.notitynull, Toast.LENGTH_SHORT).show();
@@ -134,13 +135,25 @@ public class ExtraActivity extends AppCompatActivity {
         return jsonPreferences;
     }
 
-    private List<Service> getServiceList(){
+    private List<Foody> getServiceList(){
         Gson gson = new Gson();
-        List<Service> list = new ArrayList<>();
+        List<Foody> list = new ArrayList<>();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedService", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("ServiceList", "");
 
-        Type type = new TypeToken<List<Service>>() {}.getType();
+        Type type = new TypeToken<List<Foody>>() {}.getType();
+        list = gson.fromJson(jsonPreferences, type);
+
+        return list;
+    }
+
+    private List<ExtraItem> getExtraList(){
+        Gson gson = new Gson();
+        List<ExtraItem> list = new ArrayList<>();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedExtra", Context.MODE_PRIVATE);
+        String jsonPreferences = sharedPref.getString("ExtraList", "");
+
+        Type type = new TypeToken<List<ExtraItem>>() {}.getType();
         list = gson.fromJson(jsonPreferences, type);
 
         return list;

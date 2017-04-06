@@ -11,18 +11,18 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Foody;
 
 /**
  * Created by ThanhLDTSE61575 on 3/10/2017.
  */
 
 public class FoodyAdapter extends BaseAdapter{
-    private List<Service> list;
+    private List<Foody> list;
     private Context context;
     private LayoutInflater inflater;
 
-    FoodyAdapter(Context context, List<Service> list){
+    FoodyAdapter(Context context, List<Foody> list){
         this.context=context;
         this.list = list;
     }

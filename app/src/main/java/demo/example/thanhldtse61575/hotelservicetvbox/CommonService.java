@@ -113,8 +113,8 @@ public class CommonService {
     }
 
     //getData form server, output is JSON
-    //using like this:  List<Service> acc = new Gson().fromJson(response, new TypeToken<List<Service>>() {}.getType()); for pare to obejct
-    //Service: class
+    //using like this:  List<Foody> acc = new Gson().fromJson(response, new TypeToken<List<Foody>>() {}.getType()); for pare to obejct
+    //Foody: class
     //response: input JSON
     public String getData(String link){
         HttpURLConnection urlConnection = null;

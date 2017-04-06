@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by ThanhLDTSE61575 on 2/7/2017.
  */
 
-public class Service implements Serializable{
+public class Foody implements Serializable{
     private int ServiceID;
     private String ServiceName;
     private int CategoryID;
@@ -15,7 +15,7 @@ public class Service implements Serializable{
     private String Description;
     private String Image;
 
-    public Service(int ServiceID, String ServiceName, int CategoryID, String CategoryName, double UnitPrice, String Description, String Image){
+    public Foody(int ServiceID, String ServiceName, int CategoryID, String CategoryName, double UnitPrice, String Description, String Image){
         this.ServiceID = ServiceID;
         this.ServiceName = ServiceName;
         this.CategoryID = CategoryID;

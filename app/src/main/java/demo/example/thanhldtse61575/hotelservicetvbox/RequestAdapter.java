@@ -1,8 +1,6 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -14,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,7 +32,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Foody;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 /**
@@ -56,12 +53,12 @@ public class RequestAdapter extends BaseAdapter {
 
     private Context ctx;
     private ListView listView;
-    private List<Service> list;
+    private List<Foody> list;
     private Spinner spin;
     private Button finalize;
     private LayoutInflater layoutInflater;
 
-    RequestAdapter(Context c, ListView listView, List<Service> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
+    RequestAdapter(Context c, ListView listView, List<Foody> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
         this.ctx = c;
         this.listView = listView;
         this.list = list;
@@ -101,7 +98,7 @@ public class RequestAdapter extends BaseAdapter {
                 android.R.layout.simple_spinner_item, arraySpinner);
         spin.setAdapter(adapter);
 
-        for (Service sv: list) {
+        for (Foody sv: list) {
             temp.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
                     0, sv.getDescription(), sv.getImage(), 0, ""));
         }

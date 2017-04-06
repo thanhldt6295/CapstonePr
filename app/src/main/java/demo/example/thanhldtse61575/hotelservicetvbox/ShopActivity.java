@@ -58,7 +58,7 @@ import java.util.List;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.BagdeDrawable;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Foody;
 
 /**
  * Created by ThanhLDTSE61575 on 3/11/2017.
@@ -79,7 +79,7 @@ public class ShopActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private static List<Service> serviceList = new ArrayList<>();
+    private static List<Foody> serviceList = new ArrayList<>();
     private static List<CartItem> cart = new ArrayList<>();
     private static GridView gridView;
     private static RelativeLayout relativeLayout;
@@ -259,13 +259,13 @@ public class ShopActivity extends AppCompatActivity {
         return jsonPreferences;
     }
 
-    private List<Service> getServiceList(){
+    private List<Foody> getServiceList(){
         Gson gson = new Gson();
-        List<Service> list = new ArrayList<>();
+        List<Foody> list = new ArrayList<>();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedService", Context.MODE_PRIVATE);
         String jsonPreferences = sharedPref.getString("ServiceList", "");
 
-        Type type = new TypeToken<List<Service>>() {}.getType();
+        Type type = new TypeToken<List<Foody>>() {}.getType();
         list = gson.fromJson(jsonPreferences, type);
 
         return list;
@@ -299,11 +299,11 @@ public class ShopActivity extends AppCompatActivity {
 
         public void PassData2Tabbed(String cag){
             // Search follow categoryName
-            final List<Service> serviceCagList = new ArrayList<Service>();
-            for (Service ac : serviceList) {
+            final List<Foody> serviceCagList = new ArrayList<Foody>();
+            for (Foody ac : serviceList) {
                 String cagName = ac.getCategoryName().toString().toUpperCase().trim().replaceAll("\\s+$", "");
                 if (cagName.equals(cag)) {
-                    serviceCagList.add(new Service(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
+                    serviceCagList.add(new Foody(ac.getServiceID(),ac.getServiceName(),ac.getCategoryID(),ac.getCategoryName(),ac.getUnitPrice(),ac.getDescription(),ac.getImage()));
                 }
             }
             if(serviceCagList.size()==0){
@@ -386,7 +386,7 @@ public class ShopActivity extends AppCompatActivity {
                                     break;
                                 }
                                 case MotionEvent.ACTION_UP:
-                                    Service sv = serviceCagList.get(position);
+                                    Foody sv = serviceCagList.get(position);
                                     if (cart.size() == 0) {
                                         if(Integer.parseInt(quantty.getText().toString())>100){
                                             btnOrder.setEnabled(false);

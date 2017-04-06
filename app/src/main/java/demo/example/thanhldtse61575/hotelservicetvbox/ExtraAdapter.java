@@ -1,8 +1,6 @@
 package demo.example.thanhldtse61575.hotelservicetvbox;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -17,7 +15,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -35,7 +32,8 @@ import java.util.List;
 import java.util.TimeZone;
 
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
-import demo.example.thanhldtse61575.hotelservicetvbox.entity.Service;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.ExtraItem;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.Foody;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 /**
@@ -55,12 +53,12 @@ public class ExtraAdapter extends BaseAdapter {
 
     private Context ctx;
     private ListView extraListView;
-    private List<Service> list;
+    private List<ExtraItem> list;
     private Button finalize;
     private Spinner spin;
     private LayoutInflater layoutInflater;
 
-    ExtraAdapter(Context c, ListView exList, List<Service> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
+    ExtraAdapter(Context c, ListView exList, List<ExtraItem> list, Spinner spin, Button finalize, RelativeLayout relativeLayout){
         this.ctx = c;
         this.extraListView = exList;
         this.list = list;
@@ -108,7 +106,7 @@ public class ExtraAdapter extends BaseAdapter {
                 .fit()
                 .centerCrop().into(image);
         TextView name = (TextView) convertView.findViewById(R.id.txtRequestName);
-        name.setText(list.get(position).getServiceName());
+        name.setText(list.get(position).getExtraName());
 
         final EditText quantity = (EditText) convertView.findViewById(R.id.txtQuantity);
 
@@ -166,10 +164,8 @@ public class ExtraAdapter extends BaseAdapter {
             }
         });
 
-        for (Service sv: list) {
-            cart.add(new CartItem(sv.getServiceID(), sv.getServiceName(), sv.getCategoryID(),
-                    sv.getUnitPrice(), sv.getDescription(), sv.getImage(),
-                    qty, ""));
+        for (ExtraItem sv: list) {
+            cart.add(new CartItem(sv.getExtraID(), sv.getExtraName(), 0, 0, sv.getDescription(), sv.getImage(), qty, ""));
         }
 
         finalize.setOnClickListener(new View.OnClickListener() {
