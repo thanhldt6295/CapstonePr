@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"></LinearLayout>
+            android:layout_height="86dp"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"></LinearLayout>
+            android:layout_height="50dp"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

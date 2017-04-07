@@ -48,7 +48,7 @@
     <string name="finalize">XÁC NHẬN</string>
     <string name="comment">GHI CHÚ</string>
     <string name="confirm_request_wait">Xin quý khách vui lòng chờ trong giây lát. Chúng tôi sẽ phục vụ quý khách ngay. Hãy tận hưởng nhé! Chân thành cảm ơn.</string>
-    <string name="confirm_question_do">Quý khách thực sự muốn chứ?</string>
+    <string name="confirm_question_do">Quý khách có chắc chắn muốn thực hiện thao tác này không?</string>
     <string name="confirm_service">Xác nhận dịch vụ</string>
     <string name="confirm_clear">Xác nhận xóa hết</string>
     <string name="confirm_order">Xác nhận đơn hàng</string>
@@ -131,6 +131,7 @@
     <string name="clickorder">VUI LÒNG \nNHẤN VÀO ĐÂY ĐỂ GỌI MÓN</string>
     <string name="validName">Vui lòng nhập tên người nhận!</string>
     <string name="description">Liên lạc:</string>
+    <string name="inputname">Nhập Tên Người Nhận</string>
 
 
 </resources>

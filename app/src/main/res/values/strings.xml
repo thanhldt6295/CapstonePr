@@ -32,12 +32,12 @@
     <string name="confirm_back">Confirm Back</string>
     <string name="confirm_cancel">Confirm Cancel</string>
     <string name="confirm_content">Are you sure?</string>
-    <string name="confirm_question_do">Do you really want to whatever?</string>
-    <string name="confirm_request_wait">Please wait... We will serve you soon. Please enjoy! Thank you!</string>
-    <string name="confirm_order_accepted">Your order has been accepted. Please enjoy! Thank you!</string>
-    <string name="confirm_promotional">Your booking has been accepted. We will contact with you to confirm again. Please enjoy! Thank you!</string>
-    <string name="confirm_back_question">This action will clear all your cart. Are you sure?</string>
-    <string name="notitynull">There is not pending!</string>
+    <string name="confirm_question_do">Are you sure you want to perform this action?</string>
+    <string name="confirm_request_wait">Please wait. We will serve you soon. Thank you!</string>
+    <string name="confirm_order_accepted">Your order has been accepted. Thank you!</string>
+    <string name="confirm_promotional">Your booking has been accepted. We will contact with you to confirm again. Thank you!</string>
+    <string name="confirm_back_question">This action will clear all your cart. Are you sure you want to perform this action?</string>
+    <string name="notitynull">There is no pending request!</string>
     <string name="notifyqty">Please choose quantity!</string>
     <string name="notifychoose">Please comment and check!</string>
     <string name="error"></string>
@@ -107,6 +107,7 @@
     <string name="validImage">Please attach an image!</string>
     <string name="dear">Dear</string>
     <string name="input">Input Email</string>
+    <string name="inputname">Input Receiver Name</string>
 
     <!-- MenuList -->
     <string name="food">FOODS</string>

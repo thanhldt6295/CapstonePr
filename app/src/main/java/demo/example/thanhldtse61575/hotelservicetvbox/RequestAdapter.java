@@ -160,7 +160,7 @@ public class RequestAdapter extends BaseAdapter {
                     popupInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     ViewGroup container = (ViewGroup) popupInflater.inflate(R.layout.confirm_popup, null);
 
-                    popup = new PopupWindow(container, 600, 300, true);
+                    popup = new PopupWindow(container, 886, 486, true);
                     popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
 
                     popup.setOutsideTouchable(true);
@@ -188,6 +188,7 @@ public class RequestAdapter extends BaseAdapter {
                     TextView content = (TextView) container.findViewById(R.id.tvContent);
                     content.setText(container.getResources().getString(R.string.confirm_question_do));
                     Button cancel = (Button) container.findViewById(R.id.btnCancel);
+                    cancel.getBackground().setAlpha(100);
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -195,6 +196,7 @@ public class RequestAdapter extends BaseAdapter {
                         }
                     });
                     Button okyes = (Button) container.findViewById(R.id.btnOK);
+                    okyes.getBackground().setAlpha(100);
                     okyes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

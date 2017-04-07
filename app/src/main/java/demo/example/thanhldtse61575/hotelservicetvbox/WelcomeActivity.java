@@ -148,7 +148,7 @@ public class WelcomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
         TextView abTitle=(TextView)findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        abTitle.setText("Hotel Foody TV Box");
+        abTitle.setText(getResources().getString(R.string.app_name));
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         layout.getBackground().setAlpha(51);
 
