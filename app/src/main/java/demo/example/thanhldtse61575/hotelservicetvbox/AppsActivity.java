@@ -19,6 +19,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.GridView;
@@ -43,6 +45,8 @@ public class AppsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_apps);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.layout_actionbar);
@@ -50,6 +54,11 @@ public class AppsActivity extends AppCompatActivity {
         abTitle.setText(getResources().getString(R.string.application));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         list.add(new App("Youtube","","com.google.android.youtube",R.drawable.icon_utube));
         list.add(new App("Facebook","","com.facebook.katana",R.drawable.icon_fb));
@@ -59,35 +68,6 @@ public class AppsActivity extends AppCompatActivity {
         list.add(new App("Settings","","",R.drawable.icon_setting));
         list.add(new App("Gmail","","com.google.android.gm",R.drawable.icon_gmail));
         list.add(new App("TV","","com.media.its.mytvnet",R.drawable.icon_tivi));
-
-//        String networkSSID = "test";
-//        String networkPass = "pass";
-//
-//        WifiConfiguration conf = new WifiConfiguration();
-//        conf.SSID = "\"" + networkSSID + "\"";   // Please note the quotes. String should contain ssid in quotes
-//
-//        conf.wepKeys[0] = "\"" + networkPass + "\"";
-//        conf.wepTxKeyIndex = 0;
-//        conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-//        conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-//
-//        conf.preSharedKey = "\""+ networkPass +"\"";
-//
-//        conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-//
-//        WifiManager wifiManager = (WifiManager)this.getSystemService(this.WIFI_SERVICE);
-//        wifiManager.addNetwork(conf);
-//
-//        List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
-//        for( WifiConfiguration i : list ) {
-//            if(i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
-//                wifiManager.disconnect();
-//                wifiManager.enableNetwork(i.networkId, true);
-//                wifiManager.reconnect();
-//
-//                break;
-//            }
-//        }
 
         gridView = (GridView) findViewById(R.id.gridViewApps);
         AppsAdapter adapter = new AppsAdapter(this, list);
@@ -102,31 +82,6 @@ public class AppsActivity extends AppCompatActivity {
                 }
             }
         });
-
-//
-//        iBtnCHplay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-//                try {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-//                } catch (android.content.ActivityNotFoundException anfe) {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-//                }
-//            }
-//        });
-//
-
-//        final String appPackageName = "com.google.android.youtube"; // getPackageName() from Context or Activity object
-//        try {
-//            //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-//            PackageManager manager = getPackageManager();
-//            Intent i = manager.getLaunchIntentForPackage(appPackageName);
-//            i.addCategory(Intent.CATEGORY_LAUNCHER);
-//            startActivity(i);
-//        } catch (android.content.ActivityNotFoundException anfe) {
-//            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-//        }
 
         // Datetime & Calendar
         final TextView txtDate;

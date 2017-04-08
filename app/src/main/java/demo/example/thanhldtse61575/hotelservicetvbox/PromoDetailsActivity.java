@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.PopupWindow;
@@ -68,9 +70,16 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_promo_details);
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         promoList = getPromoList();
 
@@ -217,8 +226,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
     private void Display(final Promotional promo, final int index){
         VIDEO_ID = promo.getVideoLink();
         youTubePlayerView.initialize(API_KEY, this);
-        name.setText(promo.getName().toUpperCase());
-        hour.setText(promo.getWorkHour());
+        name.setText(promo.getName().toUpperCase().trim());
+        hour.setText(promo.getWorkHour().trim());
         cap.setText(promo.getCapacity()+"");
         descript.setText(promo.getDescription());
         btnBack.setOnClickListener(new View.OnClickListener() {
