@@ -60,14 +60,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.CartItem;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Ecards;
 import demo.example.thanhldtse61575.hotelservicetvbox.entity.Order;
+import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class EcardsActivity extends AppCompatActivity {
 
-    private static int count = 0;
-    private static double total = 0;
-    //private static int voucher = 0;
+    private static int voucher = 0;
+    private static int usedvoucher = 0;
+    private static String room = "";
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -90,7 +92,8 @@ public class EcardsActivity extends AppCompatActivity {
     private static Button btnSend;
     private static ImageView imageView;
     private static TextView tvMessage;
-    TextView roomid;
+
+    private static TextView roomid;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -98,6 +101,24 @@ public class EcardsActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private static ViewPager mViewPager;
+
+    class GetOrderFromServer extends AsyncTask<String, Void, String> {
+
+            protected String doInBackground(String... params) {
+                CommonService commonService = new CommonService();
+                String returnva = commonService.getData(params[0]);
+                return returnva;
+            }
+
+            protected void onPostExecute(String response) {
+                //parse json sang list service
+                final Order acc = new Gson().fromJson(response, new TypeToken<Order>() {
+                }.getType());
+
+                voucher = acc.getVoucher();
+                usedvoucher = acc.getUsedVoucher();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +132,7 @@ public class EcardsActivity extends AppCompatActivity {
         abTitle.setText(getResources().getString(R.string.ecard));
         roomid = (TextView) findViewById(R.id.roomid);
         roomid.setText(getResources().getString(R.string.roomid) + " " + getRoomID());
+        room = getRoomID();
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -126,8 +148,8 @@ public class EcardsActivity extends AppCompatActivity {
         dear = getResources().getString(R.string.dear);
         sender = getCustName();
         list = getImageList();
-        total = getOrder().getSubTotal();
-        //voucher = getOrder().getVoucher();
+
+        new GetOrderFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetOrderInfo/" + room);
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -219,18 +241,18 @@ public class EcardsActivity extends AppCompatActivity {
                 .matches();
     }
 
-    private Order getOrder(){
-
-        Gson gson = new Gson();
-        Order bill;
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedBill", Context.MODE_PRIVATE);
-        String jsonPreferences = sharedPref.getString("BillTotal", "");
-
-        Type type = new TypeToken<Order>() {}.getType();
-        bill = gson.fromJson(jsonPreferences, type);
-
-        return bill;
-    }
+//    private Order getOrder(){
+//
+//        Gson gson = new Gson();
+//        Order bill;
+//        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("SharedBill", Context.MODE_PRIVATE);
+//        String jsonPreferences = sharedPref.getString("BillTotal", "");
+//
+//        Type type = new TypeToken<Order>() {}.getType();
+//        bill = gson.fromJson(jsonPreferences, type);
+//
+//        return bill;
+//    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -329,8 +351,7 @@ public class EcardsActivity extends AppCompatActivity {
                                 vToast.setTextColor(Color.RED);
                                 vToast.setTextSize(30);
                                 toast.show();
-                            } else if(count<10){
-                                //http://localhost:3781/api/ECardsApi/UpdateVoucher/501
+                            } else if(usedvoucher < voucher){
                                 new EcardsActivity.Download().execute(imageLink,"haha.png");
                                 Toast toast = Toast.makeText(getActivity(), R.string.sent, Toast.LENGTH_SHORT);
                                 TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -338,20 +359,15 @@ public class EcardsActivity extends AppCompatActivity {
                                 vToast.setTextSize(20);
                                 vToast.setTypeface(null, Typeface.BOLD);
                                 toast.show();
-                                count = count + 1;
-                            } else if(count>=10){
-                                if(total>500000&&total<1000000) count = count - 1;
-                                else if(total>1000000&&total<2000000) count = count - 3;
-                                else if(total>2000000) count = count - 5;
-                                else {
-                                    Toast toast = Toast.makeText(getActivity(), R.string.prevent, Toast.LENGTH_SHORT);
-                                    TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
-                                    vToast.setTextColor(Color.RED);
-                                    vToast.setTextSize(20);
-                                    vToast.setTypeface(null, Typeface.BOLD);
-                                    toast.show();
-                                    btnSend.setEnabled(false);
-                                }
+                                usedvoucher = usedvoucher + 1;
+                            } else if(usedvoucher >= voucher){
+                                Toast toast = Toast.makeText(getActivity(), R.string.prevent, Toast.LENGTH_SHORT);
+                                TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
+                                vToast.setTextColor(Color.RED);
+                                vToast.setTextSize(20);
+                                vToast.setTypeface(null, Typeface.BOLD);
+                                toast.show();
+                                btnSend.setEnabled(false);
                             }
 
                         case MotionEvent.ACTION_CANCEL: {
@@ -439,7 +455,7 @@ public class EcardsActivity extends AppCompatActivity {
         protected void onPostExecute(String feed) {
             //new SendEmail().execute(reciver mail, subject, body,feed);
             new EcardsActivity.SendEmail().execute(mail,
-                    "Hotel Foody TV Box", dear + " " + name + ",\n\n"
+                    "[Hotel Service TV Box] Gift Voucher", dear + " " + name + ",\n\n"
                             + sender + " " + mess + "\n\nWelcome!" , feed);
         }
     }
@@ -467,7 +483,21 @@ public class EcardsActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String feed) {
-            //
+            new UpdateToServer().execute("http://capstoneserver2017.azurewebsites.net/api/ECardsApi/UpdateVoucher/"+ room);
+        }
+    }
+
+    static class UpdateToServer extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            CommonService commonService = new CommonService();
+            String returnva = commonService.getData(params[0]);
+            return returnva;
+        }
+
+        protected void onPostExecute(String response) {
+                // Nothing
         }
     }
 
