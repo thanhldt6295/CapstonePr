@@ -48,6 +48,7 @@ public class WelcomeActivity extends AppCompatActivity {
     TextView customerWel;
     Button dummyBtnEng;
     Button dummyBtnViet;
+    TextView reload;
     public static final String mPath = "roomid.txt";
     private QuoteBank mQuoteBank;
     private List<String> mLines;
@@ -449,6 +450,16 @@ public class WelcomeActivity extends AppCompatActivity {
                 toast.show();
                 setLocale("vi");
                 setLang2Share("vi");
+            }
+        });
+
+        reload = (TextView) findViewById(R.id.fullscreen_content3);
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }

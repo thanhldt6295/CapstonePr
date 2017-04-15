@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -353,13 +354,15 @@ public class EcardsActivity extends AppCompatActivity {
                                 toast.show();
                             } else if(usedvoucher < voucher){
                                 new EcardsActivity.Download().execute(imageLink,"haha.png");
-                                Toast toast = Toast.makeText(getActivity(), R.string.sent, Toast.LENGTH_SHORT);
+                                usedvoucher = usedvoucher + 1;
+                                int notify = voucher - usedvoucher;
+                                Toast toast = Toast.makeText(getActivity(), getResources().getString(R.string.sent)+getResources().getString(R.string.residual)+" "+notify, Toast.LENGTH_LONG);
                                 TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);
                                 vToast.setTextColor(Color.WHITE);
-                                vToast.setTextSize(20);
+                                vToast.setTextSize(30);
                                 vToast.setTypeface(null, Typeface.BOLD);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
-                                usedvoucher = usedvoucher + 1;
                             } else if(usedvoucher >= voucher){
                                 Toast toast = Toast.makeText(getActivity(), R.string.prevent, Toast.LENGTH_SHORT);
                                 TextView vToast = (TextView) toast.getView().findViewById(android.R.id.message);

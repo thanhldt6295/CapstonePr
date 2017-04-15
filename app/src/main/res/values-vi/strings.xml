@@ -132,6 +132,7 @@
     <string name="validName">Vui lòng nhập tên người nhận!</string>
     <string name="description">Liên lạc:</string>
     <string name="inputname">Nhập Tên Người Nhận</string>
+    <string name="residual">Số voucher còn lại của bạn là</string>
 
 
 </resources>

@@ -170,7 +170,8 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
 
 /** Start buffering **/
         if (!wasRestored) {
-            player.cueVideo(VIDEO_ID);
+            player.loadVideo(VIDEO_ID);
+            player.setFullscreen(true);
         }
     }
     private PlaybackEventListener playbackEventListener = new PlaybackEventListener() {
