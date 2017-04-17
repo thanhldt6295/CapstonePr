@@ -11,7 +11,7 @@ public class OrderDetail {
     private String ServiceName;
     private int categoryID;
     private String categoryName;
-    private double unitPrice;
+    private double Price;
     private String Description;
     private String Image;
     private int Quantity;
@@ -22,15 +22,15 @@ public class OrderDetail {
     private String Status;
 
     public OrderDetail(int orderDetailID, int orderID, int serviceID, String serviceName, int categoryID, String categoryName,
-                       double unitPrice, String description, String image, int quantity, String comment, long orderTime,
-                       long deliveryTime, String staffID,  String status) {
+                       double Price, String description, String image, int quantity, String comment, long orderTime,
+                       long deliveryTime, String staffID, String status) {
         this.OrderDetailID = orderDetailID;
         this.OrderID = orderID;
         this.ServiceID = serviceID;
         this.ServiceName = serviceName;
         this.categoryID = categoryID;
         this.categoryName = categoryName;
-        this.unitPrice = unitPrice;
+        this.Price = Price;
         this.Description = description;
         this.Image = image;
         this.Quantity = quantity;
@@ -89,12 +89,12 @@ public class OrderDetail {
         this.categoryName = categoryName;
     }
 
-    public double getUnitPrice() {
-        return unitPrice;
+    public double getPrice() {
+        return Price;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setPrice(double price) {
+        this.Price = price;
     }
 
     public String getDescription() {

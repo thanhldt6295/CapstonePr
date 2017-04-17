@@ -12,10 +12,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,13 +60,13 @@ public class ViewBillActivity extends AppCompatActivity {
             int dayNum = Math.round(ritsu);
             if(dayNum==0) dayNum = 1;
             done.add(new OrderDetail(0,bill.getOrderID(),0,getResources().getString(R.string.room_order),
-                    bill.getRoomID(),bill.getRTypName().toUpperCase(),bill.getUnitPrice(),"", "",dayNum,"",
+                    bill.getRoomID(),bill.getRTypName().toUpperCase(),bill.getSubTotal(),"", "",dayNum,"",
                     bill.getStartTime(),bill.getEndTime(),"",""));
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
                 if (stt.equals("DONE")) {
                     done.add(new OrderDetail(od.getOrderDetailID(), od.getOrderID(), od.getServiceID(),
-                            od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getUnitPrice(),
+                            od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getPrice(),
                             od.getDescription(), od.getImage(), od.getQuantity(), od.getNote(), od.getOrderTime(),
                             od.getDeliverTime(),od.getStaffID(),od.getStatus()));
                 }
@@ -78,6 +76,7 @@ public class ViewBillActivity extends AppCompatActivity {
                 for (int j = i+1; j < done.size(); j++) {
                     if ((done.get(i).getServiceName().equals(done.get(j).getServiceName())) && (!done.get(i).getServiceName().equals(""))) {
                         done.get(i).setQuantity(done.get(i).getQuantity() + done.get(j).getQuantity());
+                        done.get(i).setPrice(done.get(i).getPrice() + done.get(j).getPrice());
                         done.get(j).setServiceName("");
                     }
                 }
@@ -86,7 +85,7 @@ public class ViewBillActivity extends AppCompatActivity {
             for(OrderDetail od: done){
                 if(!od.getServiceName().equals(""))
                     temp.add(new OrderDetail(od.getOrderDetailID(), od.getOrderID(), od.getServiceID(),
-                        od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getUnitPrice(),
+                        od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getPrice(),
                         od.getDescription(), od.getImage(), od.getQuantity(), od.getNote(), od.getOrderTime(),
                         od.getDeliverTime(),od.getStaffID(),od.getStatus()));
             }

@@ -11,11 +11,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,7 +58,7 @@ public class PendingActivity extends AppCompatActivity {
                 if (stt.equals("PENDING")) {
                     pending.add(new OrderDetail(od.getOrderDetailID(),od.getOrderID(),
                             od.getServiceID(),od.getServiceName(),od.getCategoryID(),
-                            od.getCategoryName(),od.getUnitPrice(),od.getDescription(),od.getImage(),
+                            od.getCategoryName(),od.getPrice(),od.getDescription(),od.getImage(),
                             od.getQuantity(),od.getNote(),od.getOrderTime(),od.getDeliverTime(),od.getStaffID(),od.getStatus()));
                 }
             }

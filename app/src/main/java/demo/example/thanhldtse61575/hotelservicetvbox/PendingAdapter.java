@@ -92,7 +92,7 @@ public class PendingAdapter extends BaseAdapter{
 
         name.setText(cart.get(position).getServiceName());
         DecimalFormat format = new DecimalFormat("###,###,###.#");
-        unitPrice.setText(format.format(cart.get(position).getUnitPrice()) +" "+ ctx.getResources().getString(R.string.USD));
+        unitPrice.setText(format.format(cart.get(position).getPrice()/cart.get(position).getQuantity()) +" "+ ctx.getResources().getString(R.string.USD));
         quantity.setText(cart.get(position).getQuantity()+"");
 
         SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -181,7 +181,7 @@ public class PendingAdapter extends BaseAdapter{
 
         float t = 0;
         for (int i = 0; i < cart.size(); i++){
-            t += cart.get(i).getQuantity() * cart.get(i).getUnitPrice();
+            t += cart.get(i).getPrice();
         }
         total.setText(format.format(t) +" "+ ctx.getResources().getString(R.string.USD));
 
