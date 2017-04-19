@@ -33,11 +33,29 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.OrderDetail;
 
 public class ViewBillActivity extends AppCompatActivity {
 
+    private static double roomprice = 0;
     List<OrderDetail> details = new ArrayList<>();
     List<OrderDetail> done = new ArrayList<>();
     List<OrderDetail> temp = new ArrayList<>();
     Order bill;
     TextView roomid;
+
+    class GetOrderFromServer extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... params) {
+            CommonService commonService = new CommonService();
+            String returnva = commonService.getData(params[0]);
+            return returnva;
+        }
+
+        protected void onPostExecute(String response) {
+            //parse json sang list service
+            final Order acc = new Gson().fromJson(response, new TypeToken<Order>() {
+            }.getType());
+
+            roomprice = acc.getSubTotal();
+        }
+    }
 
     class GetDataFromServer extends AsyncTask<String, Void, String> {
 
@@ -60,7 +78,7 @@ public class ViewBillActivity extends AppCompatActivity {
             int dayNum = Math.round(ritsu);
             if(dayNum==0) dayNum = 1;
             done.add(new OrderDetail(0,bill.getOrderID(),0,getResources().getString(R.string.room_order),
-                    bill.getRoomID(),bill.getRTypName().toUpperCase(),bill.getSubTotal(),"", "",dayNum,"",
+                    bill.getRoomID(),bill.getRTypName().toUpperCase(),roomprice,"", "",dayNum,"",
                     bill.getStartTime(),bill.getEndTime(),"",""));
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
@@ -116,6 +134,7 @@ public class ViewBillActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
+        new ViewBillActivity.GetOrderFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrdersApi/GetOrderInfo/" + getRoomID());
         new ViewBillActivity.GetDataFromServer().execute("http://capstoneserver2017.azurewebsites.net/api/OrderDetailsApi/GetOrderDetailByRoomID/" + getRoomID());
 
         // Datetime & Calendar

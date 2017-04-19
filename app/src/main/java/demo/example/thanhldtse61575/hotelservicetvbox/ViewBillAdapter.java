@@ -71,7 +71,7 @@ public class ViewBillAdapter extends BaseAdapter {
 
         float t = 0;
         for (int i = 0; i < details.size(); i++){
-            t += details.get(i).getQuantity() *details.get(i).getPrice();
+            t += details.get(i).getPrice();
         }
         total.setText(format.format(t) +" "+ c.getResources().getString(R.string.USD));
 
