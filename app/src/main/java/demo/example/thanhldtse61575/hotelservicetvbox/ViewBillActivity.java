@@ -64,7 +64,7 @@ public class ViewBillActivity extends AppCompatActivity {
                     bill.getStartTime(),bill.getEndTime(),"",""));
             for (OrderDetail od: details) {
                 String stt = od.getStatus().toString().toUpperCase().trim();
-                if (stt.equals("DONE")) {
+                if (stt.equals("DONE") | stt.equals("ONGOING")) {
                     done.add(new OrderDetail(od.getOrderDetailID(), od.getOrderID(), od.getServiceID(),
                             od.getServiceName(), od.getCategoryID(), od.getCategoryName(),od.getPrice(),
                             od.getDescription(), od.getImage(), od.getQuantity(), od.getNote(), od.getOrderTime(),
