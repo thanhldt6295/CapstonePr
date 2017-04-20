@@ -48,6 +48,8 @@ import demo.example.thanhldtse61575.hotelservicetvbox.entity.ToServer;
 
 public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
+    private boolean isFullscreen;
+    private YouTubePlayer ytb;
     private String API_KEY = "AIzaSyBW3RfFWMGi3ah-Ji1K8ODKZtcg6bBbww0";
     private String VIDEO_ID = "";
 
@@ -167,11 +169,12 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
 /** add listeners to YouTubePlayer instance **/
         player.setPlayerStateChangeListener(playerStateChangeListener);
         player.setPlaybackEventListener(playbackEventListener);
-
+        ytb = player;
 /** Start buffering **/
         if (!wasRestored) {
-            player.loadVideo(VIDEO_ID);
-            player.setFullscreen(true);
+            ytb.loadVideo(VIDEO_ID);
+            ytb.setFullscreen(true);
+            isFullscreen = true;
         }
     }
     private PlaybackEventListener playbackEventListener = new PlaybackEventListener() {
@@ -338,6 +341,11 @@ public class PromoDetailsActivity extends YouTubeBaseActivity implements YouTube
 
     @Override
     public void onBackPressed() {
-        this.startActivity(new Intent(PromoDetailsActivity.this, PromotionalChanelActivity.class));
+        if (isFullscreen == true) {
+            isFullscreen = false;
+            ytb.setFullscreen(false);
+        } else {
+            this.startActivity(new Intent(PromoDetailsActivity.this, PromotionalChanelActivity.class));
+        }
     }
 }
