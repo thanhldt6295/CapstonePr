@@ -68,12 +68,12 @@ public class AppsActivity extends AppCompatActivity {
         list.add(new App("Settings","","",R.drawable.icon_setting));
         list.add(new App("Gmail","","com.google.android.gm",R.drawable.icon_gmail));
         list.add(new App("TV","","com.media.its.mytvnet",R.drawable.icon_tivi));
-        list.add(new App("Fat Bat Journey","","com.ifunsoft.fatbat",R.drawable.fat));
+        list.add(new App("Fat Bat","","com.ifunsoft.fatbat",R.drawable.fat));
         list.add(new App("Caro Online","","com.joybox.carozone",R.drawable.caro));
-        list.add(new App("Co tuong Online","","com.joybox.cotuong",R.drawable.cotuong));
-        list.add(new App("Candy Crush Saga","","com.king.candycrushsaga",R.drawable.candy));
+        list.add(new App("Co Tuong","","com.joybox.cotuong",R.drawable.cotuong));
+        list.add(new App("Candy Arange","","com.joybox.candyarrange",R.drawable.candy));
         list.add(new App("Angry Birds","","com.rovio.angrybirds",R.drawable.angry));
-        list.add(new App("Plants vs. Zombies ","","com.ea.game.pvzfree_row",R.drawable.plants));
+        list.add(new App("Plants & Zombies ","","com.ea.game.pvzfree_row",R.drawable.plants));
         list.add(new App("Fruit Ninja","","com.halfbrick.fruitninjafree",R.drawable.fruit));
         list.add(new App("Asphalt 8","","com.gameloft.android.ANMP.GloftA8HM",R.drawable.asphalt));
 

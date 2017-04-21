@@ -41,7 +41,7 @@ public class PromotionalChanelAdapter extends RecyclerView.Adapter<Holder> {
                 .placeholder(R.drawable.loading)
                 .fit()
                 .centerCrop().into(holder.img);
-        holder.txt.setText(promo.get(position).getName());
+        holder.txt.setText(promo.get(position).getName().toUpperCase().trim());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
