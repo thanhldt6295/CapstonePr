@@ -73,9 +73,7 @@ public class AppsActivity extends AppCompatActivity {
         list.add(new App("Co Tuong","","com.joybox.cotuong",R.drawable.cotuong));
         list.add(new App("Candy Arange","","com.joybox.candyarrange",R.drawable.candy));
         list.add(new App("Angry Birds","","com.rovio.angrybirds",R.drawable.angry));
-        list.add(new App("Plants & Zombies ","","com.ea.game.pvzfree_row",R.drawable.plants));
         list.add(new App("Fruit Ninja","","com.halfbrick.fruitninjafree",R.drawable.fruit));
-        list.add(new App("Asphalt 8","","com.gameloft.android.ANMP.GloftA8HM",R.drawable.asphalt));
 
         gridView = (GridView) findViewById(R.id.gridViewApps);
         AppsAdapter adapter = new AppsAdapter(this, list);
