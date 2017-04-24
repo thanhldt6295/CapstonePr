@@ -74,7 +74,7 @@ public class ViewBillActivity extends AppCompatActivity {
             bill = getOrder();
             final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
             final long usedTime = calendar.getTimeInMillis()/1000 - bill.getStartTime();
-            final float ritsu = usedTime/(24*60*60);
+            final float ritsu = (float) usedTime/(24*60*60);
             int dayNum = Math.round(ritsu);
             if(dayNum==0) dayNum = 1;
             done.add(new OrderDetail(0,bill.getOrderID(),0,getResources().getString(R.string.room_order),

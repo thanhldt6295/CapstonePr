@@ -191,12 +191,12 @@ public class RecommendActivity extends AppCompatActivity {
                 mapFragment.getMapAsync(new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        LatLng fpt = new LatLng(10.8528718, 106.6294349);
-                        googleMap.addMarker(new MarkerOptions().position(fpt)
-                                .title(recommend.getLocationName()));
                         LatLng sydney = new LatLng(recommend.getX(), recommend.getY());
                         googleMap.addMarker(new MarkerOptions().position(sydney)
                                 .title(recommend.getLocationName()));
+                        LatLng fpt = new LatLng(12.2033760, 109.2139280); //vinperl
+                        googleMap.addMarker(new MarkerOptions().position(fpt)
+                                .title("Vinpearland"));
                         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                     }
                 });
