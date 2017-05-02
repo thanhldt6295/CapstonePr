@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:orientation="vertical"
-        android:background="#50797878"
+        android:background="#50080808"
         android:id="@+id/layoutRec">
 
 
@@ -87,7 +87,7 @@
                 map:cameraTargetLat="12.2033760"
                 map:cameraTargetLng="109.2139280"
                 map:cameraTilt="90"
-                map:cameraZoom="19"
+                map:cameraZoom="11"
                 map:mapType="normal"
                 map:uiCompass="true"
                 map:uiRotateGestures="true"
