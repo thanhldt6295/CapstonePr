@@ -23,7 +23,11 @@
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:orientation="vertical"
+<<<<<<< HEAD
         android:background="#50080808"
+=======
+        android:background="#8a464545"
+>>>>>>> origin/master
         android:id="@+id/layoutRec">
 
 
